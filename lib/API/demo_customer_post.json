@@ -1,0 +1,63 @@
+{
+    "Series": 75,
+    "CardName": "ABCCHEMICALEXPORTSPVTLTD",
+    "CardType": "cCustomer",
+    "CardForeignName": "Testing",
+    "GroupCode": 103,
+    "Currency": "##",
+    "FederalTaxID": "100338468000003",
+    "SalesPersonCode": 44,
+    "Phone1": null,
+    "Cellular": null,
+    "EmailAddress": null,
+    "Website": null,
+    "U_ARADDR": null,
+    "U_TRPAPPST": "Approved",
+    "Active": "tYES",
+    "BPAddresses": [
+        {
+            "AddressName": "ABCCHEMICALEXPORTSPVTLTD",
+            "AddressType": "bo_BillTo",
+            "AddressName2": "PHYSICALADDRESS:U2058,P.O.BOX8330",
+            "AddressName3": "SAIFZONE,SHARJAH",
+            "BuildingFloorRoom": "",
+            "Street": null,
+            "Block": null,
+            "ZipCode": null,
+            "City": null,
+            "Country": "AE",
+            "State": null,
+            "U_SCCode": null
+        },
+        {
+            "AddressName": "ABCCHEMICALEXPORTSPVTLTD",
+            "AddressType": "bo_ShipTo",
+            "AddressName2": "PHYSICALADDRESS:U2058,P.O.BOX8330",
+            "AddressName3": "SAIFZONE,SHARJAH",
+            "BuildingFloorRoom": "",
+            "Street": null,
+            "Block": null,
+            "ZipCode": null,
+            "City": null,
+            "Country": "AE",
+            "State": null,
+            "U_SCCode": null
+        }
+    ],
+    "ContactEmployees": [
+        {
+            "Title": null,
+            "FirstName": "ARYAANTHADANI",
+            "MiddleName": null,
+            "LastName": null,
+            "Name": "ARYAANTHADANI",
+            "Position": "PROCURMENTOFFICER",
+            "Address": null,
+            "Phone1": "+971586536028",
+            "MobilePhone": null,
+            "E_Mail": null,
+            "DateOfBirth": null,
+            "Active": "tYES"
+        }
+    ]
+}

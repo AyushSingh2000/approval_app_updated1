@@ -161,3 +161,32 @@ class _addressState extends State<address> {
     });
   }
 }
+
+Future<bool> showConfirmationDialog(BuildContext context) async {
+  bool confirmed = await showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Confirmation'),
+        content: Text('Do you want to proceed?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .pop(true); // Return true when "Yes" is pressed
+            },
+            child: Text('Yes'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .pop(false); // Return false when "No" is pressed
+            },
+            child: Text('No'),
+          ),
+        ],
+      );
+    },
+  );
+  return confirmed;
+}

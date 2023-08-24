@@ -1,3 +1,4 @@
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,31 +50,45 @@ class _CustomerPageState extends State<CustomerPage> {
 
             return Column(
               children: [
-                DropdownButtonFormField<String>(
-                  hint: Text(
-                    'Select Series',
-                    style: TextStyle(color: Colors.black),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  height: 60,
+                  child: TextDropdownFormField(
+                    decoration: InputDecoration(
+                      // enabled: false,
+                      labelText: customerController.BPSeriesList.isEmpty
+                          ? 'No Series Found'
+                          : 'Select Series',
+                      fillColor: Colors.grey[200],
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9)),
+                      // hintText: 'Select State',
+                      filled: true,
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      contentPadding:
+                          const EdgeInsets.only(left: 12, right: 12, top: 20),
+                      isCollapsed: true,
+                    ),
+                    options: customerController.BPSeriesList,
+                    onChanged: (dynamic newValue) {
+                      customerController.Series.value = customerController
+                          .BPSeriesMapData[newValue!]
+                          .toString();
+                      print(customerController.Series.value);
+                    },
                   ),
-                  decoration: InputDecoration(
-                    filled: true, //<-- SEE HERE
-                    fillColor: const Color.fromARGB(255, 225, 225, 225),
-                    labelText: 'Series',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                  ),
-                  onChanged: (newValue) {
-                    customerController.Series.value = customerController
-                        .BPSeriesMapData[newValue!]
-                        .toString();
-                    print(customerController.Series.value);
-                  },
-                  items: customerController.BPSeriesList.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
                 ),
+
 //series
 //                 const SizedBox(height: 16.0),
 //
@@ -97,29 +112,42 @@ class _CustomerPageState extends State<CustomerPage> {
                 ), //name
                 const SizedBox(height: 16.0),
 
-                DropdownButtonFormField<String>(
-                  hint: Text(
-                    'Select Card Type',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  decoration: InputDecoration(
-                    filled: true, //<-- SEE HERE
-                    fillColor: const Color.fromARGB(255, 225, 225, 225),
-                    labelText: 'Card type',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                  ),
-                  onChanged: (newValue) {
-                    customerController.Cardtype.value = list1_1[newValue]!;
-                  },
-                  items: list1.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
                 //cardtype
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  height: 60,
+                  child: TextDropdownFormField(
+                    decoration: InputDecoration(
+                      // enabled: false,
+                      labelText: list1.isEmpty
+                          ? 'No Card type Found'
+                          : 'Select Card type',
+                      fillColor: Colors.grey[200],
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9)),
+                      // hintText: 'Select State',
+                      filled: true,
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      contentPadding:
+                          const EdgeInsets.only(left: 12, right: 12, top: 20),
+                      isCollapsed: true,
+                    ),
+                    options: list1,
+                    onChanged: (dynamic newValue) {
+                      customerController.Cardtype.value = list1_1[newValue]!;
+                    },
+                  ),
+                ),
                 const SizedBox(height: 16.0),
 
                 CustomTextField(
@@ -128,55 +156,105 @@ class _CustomerPageState extends State<CustomerPage> {
                 ), //foreign name
                 const SizedBox(height: 16.0),
 
-                DropdownButtonFormField<String>(
-                  hint: const Text(
-                    'Select Group',
-                    style: TextStyle(color: Colors.black),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  height: 60,
+                  child: TextDropdownFormField(
+                    decoration: InputDecoration(
+                      // enabled: false,
+                      labelText: customerController.BPGroupCodeList.isEmpty
+                          ? 'No Group Found'
+                          : 'Select Group',
+                      fillColor: Colors.grey[200],
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9)),
+                      // hintText: 'Select State',
+                      filled: true,
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      contentPadding:
+                          const EdgeInsets.only(left: 12, right: 12, top: 20),
+                      isCollapsed: true,
+                    ),
+                    options: customerController.BPGroupCodeList,
+                    onChanged: (dynamic newValue) {
+                      customerController.GroupCode.value =
+                          customerController.BPGroupCodeMapData[newValue];
+                    },
                   ),
-                  decoration: InputDecoration(
-                    filled: true, //<-- SEE HERE
-                    fillColor: const Color.fromARGB(255, 225, 225, 225),
-                    labelText: 'Group',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                  ),
-                  onChanged: (newValue) {
-                    customerController.GroupCode.value =
-                        customerController.BPGroupCodeMapData[newValue];
-                  },
-                  items: customerController.BPGroupCodeList.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
                 ), //group
 
                 const SizedBox(height: 16.0),
 
-                DropdownButtonFormField<String>(
-                  hint: Text(
-                    'All Currencies',
-                    style: TextStyle(color: Colors.black),
+                // DropdownButtonFormField<String>(
+                //   hint: const Text(
+                //     'All Currencies',
+                //     style: TextStyle(color: Colors.black),
+                //   ),
+                //   decoration: InputDecoration(
+                //     filled: true, //<-- SEE HERE
+                //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+                //     labelText: 'Currency',
+                //     border: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(12)),
+                //   ),
+                //   onChanged: (newValue) {
+                //     customerController.Currencies.value =
+                //         customerController.BPCurrenciesMapData[newValue];
+                //   },
+                //   items:
+                //       customerController.BPCurrenciesList.map((String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   }).toList(),
+                // ),
+
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  height: 60,
+                  child: TextDropdownFormField(
+                    decoration: InputDecoration(
+                      // enabled: false,
+                      labelText: customerController.BPCurrenciesList.isEmpty
+                          ? 'No Currency Found'
+                          : customerController.BPCurrenciesList[0],
+                      fillColor: Colors.grey[200],
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9)),
+                      // hintText: 'Select State',
+                      filled: true,
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      contentPadding:
+                          const EdgeInsets.only(left: 12, right: 12, top: 20),
+                      isCollapsed: true,
+                    ),
+                    options: customerController.BPCurrenciesList,
+                    onChanged: (dynamic newValue) {
+                      customerController.Currencies.value =
+                          customerController.BPCurrenciesMapData[newValue];
+                    },
                   ),
-                  decoration: InputDecoration(
-                    filled: true, //<-- SEE HERE
-                    fillColor: const Color.fromARGB(255, 225, 225, 225),
-                    labelText: 'Currency',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                  ),
-                  onChanged: (newValue) {
-                    customerController.Currencies.value =
-                        customerController.BPCurrenciesMapData[newValue];
-                  },
-                  items:
-                      customerController.BPCurrenciesList.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
                 ),
                 const SizedBox(height: 16.0),
 
@@ -187,29 +265,41 @@ class _CustomerPageState extends State<CustomerPage> {
                 ), //federal tax id
                 const SizedBox(height: 16.0),
 
-                DropdownButtonFormField<String>(
-                  hint: Text(
-                    'Select Employee',
-                    style: TextStyle(color: Colors.black),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  height: 60,
+                  child: TextDropdownFormField(
+                    decoration: InputDecoration(
+                      // enabled: false,
+                      labelText: customerController.BPSaleEmployeesList.isEmpty
+                          ? 'No Employee Found'
+                          : 'Select Employee',
+                      fillColor: Colors.grey[200],
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9)),
+                      // hintText: 'Select State',
+                      filled: true,
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      contentPadding:
+                          const EdgeInsets.only(left: 12, right: 12, top: 20),
+                      isCollapsed: true,
+                    ),
+                    options: customerController.BPSaleEmployeesList,
+                    onChanged: (dynamic newValue) {
+                      customerController.SaleEmployeesCode.value =
+                          customerController.BPSaleEmployeesMapData[newValue];
+                    },
                   ),
-                  decoration: InputDecoration(
-                    filled: true, //<-- SEE HERE
-                    fillColor: const Color.fromARGB(255, 225, 225, 225),
-                    labelText: 'Sales Employee',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                  ),
-                  onChanged: (newValue) {
-                    customerController.SaleEmployeesCode.value =
-                        customerController.BPSaleEmployeesMapData[newValue];
-                  },
-                  items: customerController.BPSaleEmployeesList.map(
-                      (String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
                 ),
                 const SizedBox(height: 16.0),
 
@@ -231,6 +321,7 @@ class _CustomerPageState extends State<CustomerPage> {
                       hintText: 'Telephone No.',
                       hintStyle: TextStyle(fontWeight: FontWeight.normal),
                       border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
                         borderSide: BorderSide(),
                       ),
                     ),
@@ -256,6 +347,7 @@ class _CustomerPageState extends State<CustomerPage> {
                       hintText: 'Phone Number',
                       hintStyle: TextStyle(fontWeight: FontWeight.normal),
                       border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
                         borderSide: BorderSide(),
                       ),
                     ),
@@ -339,7 +431,7 @@ class _CustomerPageState extends State<CustomerPage> {
                 // ),
                 // const SizedBox(height: 16.0),
 
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -355,7 +447,7 @@ class _CustomerPageState extends State<CustomerPage> {
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
-                                builder: (context) => CustomerPage_2()));
+                                builder: (context) => const CustomerPage_2()));
                         // Get.to(() => const CustomerPage_2());
                       },
                     )

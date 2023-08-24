@@ -1,3 +1,4 @@
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,30 +58,69 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
 
               return Column(
                 children: [
-                  DropdownButtonFormField<String>(
-                    hint: const Text(
-                      'Item Series',
-                      style: TextStyle(color: Colors.black),
+                  // DropdownButtonFormField<String>(
+                  //   hint: const Text(
+                  //     'Item Series',
+                  //     style: TextStyle(color: Colors.black),
+                  //   ),
+                  //   decoration: InputDecoration(
+                  //     filled: true,
+                  //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+                  //     labelText: 'Item series',
+                  //     border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(12)),
+                  //   ),
+                  //   onChanged: (newValue) {
+                  //     itemsController.Item_Series.value = itemsController
+                  //         .itemSeriesMapData[newValue]
+                  //         .toString();
+                  //   },
+                  //   items: itemsController.itemSeriesList.map((String value) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: value,
+                  //       child: Text(value),
+                  //     );
+                  //   }).toList(),
+                  // ),
+
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    height: 60,
+                    child: TextDropdownFormField(
+                      decoration: InputDecoration(
+                        // enabled: false,
+                        labelText: itemsController.itemSeriesList.isEmpty
+                            ? 'No Item series Found'
+                            : 'Select Item series',
+                        fillColor: Colors.grey[200],
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(9)),
+                        // hintText: 'Select State',
+                        filled: true,
+                        hintStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        contentPadding:
+                            const EdgeInsets.only(left: 12, right: 12, top: 20),
+                        isCollapsed: true,
+                      ),
+                      options: itemsController.itemSeriesList,
+                      onChanged: (dynamic newValue) {
+                        itemsController.Item_Series.value = itemsController
+                            .itemSeriesMapData[newValue]
+                            .toString();
+                      },
                     ),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color.fromARGB(255, 225, 225, 225),
-                      labelText: 'Item series',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    onChanged: (newValue) {
-                      itemsController.Item_Series.value = itemsController
-                          .itemSeriesMapData[newValue]
-                          .toString();
-                    },
-                    items: itemsController.itemSeriesList.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
                   ),
+
                   const SizedBox(height: 16),
                   CustomTextField(
                       hintText: 'Item Name',
@@ -99,29 +139,67 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                   const SizedBox(
                     height: 16,
                   ),
-                  DropdownButtonFormField<String>(
-                    hint: const Text(
-                      'Select Group',
-                      style: TextStyle(color: Colors.black),
+                  // DropdownButtonFormField<String>(
+                  //   hint: const Text(
+                  //     'Select Group',
+                  //     style: TextStyle(color: Colors.black),
+                  //   ),
+                  //   decoration: InputDecoration(
+                  //     filled: true, //<-- SEE HERE
+                  //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+                  //     labelText: 'Item Group *',
+                  //     border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(12)),
+                  //   ),
+                  //   onChanged: (newValue) {
+                  //     itemsController.Item_Group_Code.value =
+                  //         itemsController.itemGroupMapData[newValue];
+                  //   },
+                  //   items: itemsController.itemGroupList.map((String value) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: value,
+                  //       child: Text(value),
+                  //     );
+                  //   }).toList(),
+                  // ),
+
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    height: 60,
+                    child: TextDropdownFormField(
+                      decoration: InputDecoration(
+                        // enabled: false,
+                        labelText: itemsController.itemGroupList.isEmpty
+                            ? 'No Group Found'
+                            : 'Select Group',
+                        fillColor: Colors.grey[200],
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(9)),
+                        // hintText: 'Select State',
+                        filled: true,
+                        hintStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        contentPadding:
+                            const EdgeInsets.only(left: 12, right: 12, top: 20),
+                        isCollapsed: true,
+                      ),
+                      options: itemsController.itemGroupList,
+                      onChanged: (dynamic newValue) {
+                        itemsController.Item_Group_Code.value =
+                            itemsController.itemGroupMapData[newValue];
+                      },
                     ),
-                    decoration: InputDecoration(
-                      filled: true, //<-- SEE HERE
-                      fillColor: const Color.fromARGB(255, 225, 225, 225),
-                      labelText: 'Item Group *',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    onChanged: (newValue) {
-                      itemsController.Item_Group_Code.value =
-                          itemsController.itemGroupMapData[newValue];
-                    },
-                    items: itemsController.itemGroupList.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
                   ),
+
                   CheckboxListTile(
                     title: const Text('Inventory Item'),
                     value: itemsController.Inventory_Item.value,
@@ -146,109 +224,260 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                   const SizedBox(
                     height: 16,
                   ),
-                  DropdownButtonFormField<String>(
-                    hint: const Text(
-                      'select UoM',
-                      style: TextStyle(color: Colors.black),
+                  // DropdownButtonFormField<String>(
+                  //   hint: const Text(
+                  //     'select UoM',
+                  //     style: TextStyle(color: Colors.black),
+                  //   ),
+                  //   decoration: InputDecoration(
+                  //     filled: true, //<-- SEE HERE
+                  //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+                  //     labelText: 'UOM *',
+                  //     border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(12)),
+                  //   ),
+                  //   onChanged: (newValue) {
+                  //     itemsController.UoM_code.value =
+                  //         itemsController.UoMMapData[newValue!];
+                  //   },
+                  //   items: itemsController.UoMList.map((String value) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: value,
+                  //       child: Text(value),
+                  //     );
+                  //   }).toList(),
+                  // ),
+
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    height: 60,
+                    child: TextDropdownFormField(
+                      decoration: InputDecoration(
+                        // enabled: false,
+                        labelText: itemsController.UoMList.isEmpty
+                            ? 'No UOM Found'
+                            : 'Select UOM',
+                        fillColor: Colors.grey[200],
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(9)),
+                        // hintText: 'Select State',
+                        filled: true,
+                        hintStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        contentPadding:
+                            const EdgeInsets.only(left: 12, right: 12, top: 20),
+                        isCollapsed: true,
+                      ),
+                      options: itemsController.UoMList,
+                      onChanged: (dynamic newValue) {
+                        itemsController.UoM_code.value =
+                            itemsController.UoMMapData[newValue!];
+                      },
                     ),
-                    decoration: InputDecoration(
-                      filled: true, //<-- SEE HERE
-                      fillColor: const Color.fromARGB(255, 225, 225, 225),
-                      labelText: 'UOM *',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    onChanged: (newValue) {
-                      itemsController.UoM_code.value =
-                          itemsController.UoMMapData[newValue!];
-                    },
-                    items: itemsController.UoMList.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  DropdownButtonFormField<String>(
-                    hint: const Text(
-                      'Select items',
-                      style: TextStyle(color: Colors.black),
+                  // DropdownButtonFormField<String>(
+                  //   hint: const Text(
+                  //     'Select items',
+                  //     style: TextStyle(color: Colors.black),
+                  //   ),
+                  //   decoration: InputDecoration(
+                  //     filled: true, //<-- SEE HERE
+                  //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+                  //     labelText: 'Purchasing UoM',
+                  //     border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(12)),
+                  //   ),
+                  //   onChanged: (newValue) {
+                  //     itemsController.Purchasing_UoM.value = itemsController
+                  //         .PurchasingUoMMapData[newValue!]
+                  //         .toString();
+                  //   },
+                  //   items:
+                  //       itemsController.PurchasingUoMList.map((String value) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: value,
+                  //       child: Text(value),
+                  //     );
+                  //   }).toList(),
+                  // ),
+
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    height: 60,
+                    child: TextDropdownFormField(
+                      decoration: InputDecoration(
+                        // enabled: false,
+                        labelText: itemsController.PurchasingUoMList.isEmpty
+                            ? 'No Purchasing UOM Found'
+                            : 'Select Purchasing UOM',
+                        fillColor: Colors.grey[200],
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(9)),
+                        // hintText: 'Select State',
+                        filled: true,
+                        hintStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        contentPadding:
+                            const EdgeInsets.only(left: 12, right: 12, top: 20),
+                        isCollapsed: true,
+                      ),
+                      options: itemsController.PurchasingUoMList,
+                      onChanged: (dynamic newValue) {
+                        itemsController.Purchasing_UoM.value = itemsController
+                            .PurchasingUoMMapData[newValue!]
+                            .toString();
+                      },
                     ),
-                    decoration: InputDecoration(
-                      filled: true, //<-- SEE HERE
-                      fillColor: const Color.fromARGB(255, 225, 225, 225),
-                      labelText: 'Purchasing UoM',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    onChanged: (newValue) {
-                      itemsController.Purchasing_UoM.value = itemsController
-                          .PurchasingUoMMapData[newValue!]
-                          .toString();
-                    },
-                    items:
-                        itemsController.PurchasingUoMList.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  DropdownButtonFormField<String>(
-                    hint: const Text(
-                      'select items',
-                      style: TextStyle(color: Colors.black),
+                  // DropdownButtonFormField<String>(
+                  //   hint: const Text(
+                  //     'select items',
+                  //     style: TextStyle(color: Colors.black),
+                  //   ),
+                  //   decoration: InputDecoration(
+                  //     filled: true, //<-- SEE HERE
+                  //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+                  //     labelText: 'Sales UoM',
+                  //     border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(12)),
+                  //   ),
+                  //   onChanged: (newValue) {
+                  //     itemsController.Sales_UoM.value =
+                  //         itemsController.SalesUoMMapData[newValue!].toString();
+                  //   },
+                  //   items: itemsController.SalesUoMList.map((String value) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: value,
+                  //       child: Text(value),
+                  //     );
+                  //   }).toList(),
+                  // ),
+
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    height: 60,
+                    child: TextDropdownFormField(
+                      decoration: InputDecoration(
+                        // enabled: false,
+                        labelText: itemsController.SalesUoMList.isEmpty
+                            ? 'No Sales UOM Found'
+                            : 'Select Sales UOM',
+                        fillColor: Colors.grey[200],
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(9)),
+                        // hintText: 'Select State',
+                        filled: true,
+                        hintStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        contentPadding:
+                            const EdgeInsets.only(left: 12, right: 12, top: 20),
+                        isCollapsed: true,
+                      ),
+                      options: itemsController.SalesUoMList,
+                      onChanged: (dynamic newValue) {
+                        itemsController.Sales_UoM.value = itemsController
+                            .SalesUoMMapData[newValue!]
+                            .toString();
+                      },
                     ),
-                    decoration: InputDecoration(
-                      filled: true, //<-- SEE HERE
-                      fillColor: const Color.fromARGB(255, 225, 225, 225),
-                      labelText: 'Sales UoM',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    onChanged: (newValue) {
-                      itemsController.Sales_UoM.value =
-                          itemsController.SalesUoMMapData[newValue!].toString();
-                    },
-                    items: itemsController.SalesUoMList.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  DropdownButtonFormField<String>(
-                    hint: const Text(
-                      'select items',
-                      style: TextStyle(color: Colors.black),
+                  // DropdownButtonFormField<String>(
+                  //   hint: const Text(
+                  //     'select items',
+                  //     style: TextStyle(color: Colors.black),
+                  //   ),
+                  //   decoration: InputDecoration(
+                  //     filled: true, //<-- SEE HERE
+                  //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+                  //     labelText: 'Inventory UoM',
+                  //     border: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.circular(12)),
+                  //   ),
+                  //   onChanged: (newValue) {
+                  //     itemsController.Inventory_UoM.value = itemsController
+                  //         .InventoryUoMMapData[newValue!]
+                  //         .toString();
+                  //   },
+                  //   items: itemsController.InventoryUoMList.map((String value) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: value,
+                  //       child: Text(value),
+                  //     );
+                  //   }).toList(),
+                  // ),
+
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    height: 60,
+                    child: TextDropdownFormField(
+                      decoration: InputDecoration(
+                        // enabled: false,
+                        labelText: itemsController.InventoryUoMList.isEmpty
+                            ? 'No Inventory UOM Found'
+                            : 'Select Inventory UOM',
+                        fillColor: Colors.grey[200],
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(9)),
+                        // hintText: 'Select State',
+                        filled: true,
+                        hintStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        contentPadding:
+                            const EdgeInsets.only(left: 12, right: 12, top: 20),
+                        isCollapsed: true,
+                      ),
+                      options: itemsController.InventoryUoMList,
+                      onChanged: (dynamic newValue) {
+                        itemsController.Inventory_UoM.value = itemsController
+                            .InventoryUoMMapData[newValue!]
+                            .toString();
+                      },
                     ),
-                    decoration: InputDecoration(
-                      filled: true, //<-- SEE HERE
-                      fillColor: const Color.fromARGB(255, 225, 225, 225),
-                      labelText: 'Inventory UoM',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12)),
-                    ),
-                    onChanged: (newValue) {
-                      itemsController.Inventory_UoM.value = itemsController
-                          .InventoryUoMMapData[newValue!]
-                          .toString();
-                    },
-                    items: itemsController.InventoryUoMList.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
                   ),
                   const SizedBox(
                     height: 16,

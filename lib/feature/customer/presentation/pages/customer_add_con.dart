@@ -140,6 +140,7 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
                     hintText: 'Telephone No.',
                     hintStyle: TextStyle(fontWeight: FontWeight.normal),
                     border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
                       borderSide: BorderSide(),
                     ),
                   ),
@@ -165,6 +166,7 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
                     hintText: 'Phone Number',
                     hintStyle: TextStyle(fontWeight: FontWeight.normal),
                     border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
                       borderSide: BorderSide(),
                     ),
                   ),

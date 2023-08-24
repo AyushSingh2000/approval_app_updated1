@@ -17,4 +17,5 @@ class AppColors {
   static const Color statusColorLPG = Color(0xFFF7941E);
 
   static const Color primary = Color(0xFFFEF7E5);
+  static const Color mainblue =  Color.fromARGB(255, 33, 79, 243);
 }

@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:new_app/feature/items/data/datasource/item_data_source_impl.dart';
 import 'package:new_app/feature/items/data/model/item_series.dart';
@@ -229,69 +228,70 @@ class ItemsController extends GetxController {
     try {
       // dynamic data
 
-      // ItemModel itemModel = ItemModel(
-      //   Series: Item_Series.value,
-      //   ItemName: Item_Name.value,
-      //   ForeignName: Foreign_Name.value,
-      //   ItemsGroupCode: Item_Group_Code.value,
-      //   ItemType: Item_Type.value,
-      //   PurchaseItem: Purchase_Item.value==true?"tYES":"tNO",
-      //   SalesItem: Sales_Item.value==true?"tYES":"tNO",
-      //   InventoryItem: Inventory_Item.value==true?"tYES":"tNO",
-      //   UoMGroupEntry: UoM_code.value,
-      //   InventoryUoMEntry: Inventory_UoM_code.value,
-      //   DefaultSalesUoMEntry: Sales_UoM_code.value,
-      //   DefaultPurchasingUoMEntry: Purchasing_UoM_code.value,
-      //   SupplierCatalogNo: Mfr_Catalog_No.value,
-      //   Manufacturer: -1,
-      //   ManageSerialNumbers: Manage_Item_by.value,
-      //   ManageBatchNumbers: Manage_Item_by.value,
-      //   SRIAndBatchManageMethod: Management_Method.value,
-      //   CostAccountingMethod: Valuation_Method.value,
-      //   SWW: Additional_Identifier.value,
-      //   U_TRPHSC: HS_Code.value,
-      //   MaxInventory: int.parse(Max_Inventory.value).toDouble(),
-      //   MinInventory: int.parse(Min_Inventory.value).toDouble(),
-      //   U_TRPAPPST: Status.value,
-      //   U_VSPPC: Classification_No.value,
-      //   ProcurementMethod: Procurement_Method.value,
-      //   U_TRPITMGP: DG_Type.value,
-      // );
       ItemModel itemModel = ItemModel(
-        Series: "68",
-        ItemName: "2-Ethyl Hexanol_TEST",
-        ForeignName: "null",
-        ItemsGroupCode: 105,
-        ItemType: "itItems",
-        PurchaseItem: "tYES",
-        SalesItem: "tYES",
-        InventoryItem: "tYES",
-        UoMGroupEntry: 933,
-        InventoryUoMEntry: 340,
-        DefaultSalesUoMEntry: 340,
-        DefaultPurchasingUoMEntry: 340,
-        SupplierCatalogNo: "null",
+        Series: Item_Series.value,
+        ItemName: Item_Name.value,
+        ForeignName: Foreign_Name.value,
+        ItemsGroupCode: Item_Group_Code.value,
+        ItemType: Item_Type.value,
+        PurchaseItem: Purchase_Item.value == true ? "tYES" : "tNO",
+        SalesItem: Sales_Item.value == true ? "tYES" : "tNO",
+        InventoryItem: Inventory_Item.value == true ? "tYES" : "tNO",
+        UoMGroupEntry: UoM_code.value,
+        InventoryUoMEntry: Inventory_UoM_code.value,
+        DefaultSalesUoMEntry: Sales_UoM_code.value,
+        DefaultPurchasingUoMEntry: Purchasing_UoM_code.value,
+        SupplierCatalogNo: Mfr_Catalog_No.value,
         Manufacturer: -1,
-        ManageSerialNumbers: "tYES",
-        ManageBatchNumbers: "tNO",
-        SRIAndBatchManageMethod: "bomm_OnEveryTransaction",
-        CostAccountingMethod: "bis_SNB",
-        SWW: "Commodity",
-        U_TRPHSC: "null",
-        MaxInventory: 0.0,
-        MinInventory: 0.0,
-        U_TRPAPPST: "Approved",
-        U_VSPPC: "null",
-        ProcurementMethod: "B",
-        U_TRPITMGP: "DG",
+        ManageSerialNumbers: Manage_Item_by.value,
+        ManageBatchNumbers: Manage_Item_by.value,
+        SRIAndBatchManageMethod: Management_Method.value,
+        CostAccountingMethod: Valuation_Method.value,
+        SWW: Additional_Identifier.value,
+        U_TRPHSC: HS_Code.value,
+        MaxInventory: int.parse(Max_Inventory.value).toDouble(),
+        MinInventory: int.parse(Min_Inventory.value).toDouble(),
+        U_TRPAPPST: Status.value,
+        U_VSPPC: Classification_No.value,
+        ProcurementMethod: Procurement_Method.value,
+        U_TRPITMGP: DG_Type.value,
       );
+
+      // ItemModel itemModel = ItemModel(
+      //   Series: "68",
+      //   ItemName: "2-Ethyl Hexanol_TEST",
+      //   ForeignName: "null",
+      //   ItemsGroupCode: 105,
+      //   ItemType: "itItems",
+      //   PurchaseItem: "tYES",
+      //   SalesItem: "tYES",
+      //   InventoryItem: "tYES",
+      //   UoMGroupEntry: 933,
+      //   InventoryUoMEntry: 340,
+      //   DefaultSalesUoMEntry: 340,
+      //   DefaultPurchasingUoMEntry: 340,
+      //   SupplierCatalogNo: "null",
+      //   Manufacturer: -1,
+      //   ManageSerialNumbers: "tYES",
+      //   ManageBatchNumbers: "tNO",
+      //   SRIAndBatchManageMethod: "bomm_OnEveryTransaction",
+      //   CostAccountingMethod: "bis_SNB",
+      //   SWW: "Commodity",
+      //   U_TRPHSC: "null",
+      //   MaxInventory: 0.0,
+      //   MinInventory: 0.0,
+      //   U_TRPAPPST: "Un-Approved",
+      //   U_VSPPC: "null",
+      //   ProcurementMethod: "B",
+      //   U_TRPITMGP: "DG",
+      // );
 
       var res = await itemDataSourceImpl.postItemMaster(itemModel);
       print('qwertrsasdfgg${res}');
 
       res.fold((failure) {
         cardCode.value = '';
-        print(failure.statusCode);
+        print('qwertyuio${failure.message}');
       }, (r) {
         print("Success");
         cardCode.value = r.substring(0, r.indexOf('@'));

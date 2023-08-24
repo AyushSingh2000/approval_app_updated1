@@ -40,7 +40,7 @@ class ApprovedItemController extends GetxController {
       filteredData.assignAll(GetItemApprovalStatusList);
     } else {
       for (var item in GetItemApprovalStatusList) {
-        if (item.itemmasterDetails[0].ItemCode!
+        if (item.itemmasterDetails[0].ItemName!
             .toLowerCase()
             .contains(query.toLowerCase())) {
           filteredData.add(item);
@@ -58,7 +58,7 @@ class ApprovedItemController extends GetxController {
       filteredData_unApproved.assignAll(GetItemApprovalStatusList);
     } else {
       for (var item in GetItemApprovalStatusList) {
-        if (item.itemmasterDetails[0].ItemCode!
+        if (item.itemmasterDetails[0].ItemName!
             .toLowerCase()
             .contains(query.toLowerCase())) {
           filteredData_unApproved.add(item);

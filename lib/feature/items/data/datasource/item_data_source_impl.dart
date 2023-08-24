@@ -14,9 +14,9 @@ import '../model/original_item.dart';
 const DEBUG = true;
 
 class ItemDataSourceImpl implements ItemDataSourceRepository {
-  
   @override
   Future<Either<Failure, String>> postItemMaster(ItemModel itemModel) async {
+    String temp = "Error";
     try {
       print(itemModel.toJson());
       var response = await http.post(
@@ -24,30 +24,36 @@ class ItemDataSourceImpl implements ItemDataSourceRepository {
         body: itemModel.toJson(),
       );
 
+      print(response.body);
       if (response.statusCode == 200 || response.statusCode == 202) {
         final Map<String, dynamic> responseData = jsonDecode(response.body);
-        print(response.body);
-        // itemsController.catalog_status.value =
-        //     responseData['Status'].toString();
-        // print('hello${itemsController.catalog_status.value}');
+        print(response.statusCode);
+        if (responseData["Status"].toString() == "failure") {
+          if (responseData["Message"]["error"]["message"].toString().isEmpty) {
+            temp = responseData["Message"].toString();
+          } else {
+            temp = responseData["Message"]["error"]["message"].toString();
+          }
+        }
+        if (response.statusCode == 500 &&
+            responseData["Error"].toString().isNotEmpty) {
+          temp = responseData["Error"].toString();
+        }
 
         if (responseData.containsKey('CardCode')) {
           final String cardCode = responseData['CardCode'] as String;
           final String statuscode = responseData['Status'] as String;
           print('CardCode: $cardCode');
-          return Right(cardCode+"@"+statuscode);
+          return Right(cardCode + "@" + "success");
         } else {
-          return Left(Failure(
-            statusCode: 500,
-            message: 'Response does not contain CardCode',
-          ));
+          return Right("" + '@' + temp);
         }
       }
-
-      return Left(Failure(statusCode: response.statusCode, message: 'Error'));
+      return Left(
+          Failure(statusCode: response.statusCode, message: temp.toString()));
     } catch (e) {
       print(e);
-      return Left(Failure(statusCode: 500, message: 'Error'));
+      return Left(Failure(statusCode: 500, message: temp.toString()));
     }
   }
 

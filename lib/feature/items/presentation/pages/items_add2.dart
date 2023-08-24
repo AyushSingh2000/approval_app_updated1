@@ -193,7 +193,7 @@ class _Items2State extends State<Items2> {
                                 _showDialog(context,
                                     itemsController.catalog_status.value);
 
-                                Future.delayed(Duration(seconds: 1), () {
+                                Future.delayed(Duration(seconds: 2), () {
                                   Navigator.push(
                                       context,
                                       CupertinoPageRoute(
@@ -205,8 +205,11 @@ class _Items2State extends State<Items2> {
                                   _showDialog(
                                       context, 'Fill all required fields');
                                 } else {
+                                  print(
+                                      'qwertyrewettrerte${itemsController.catalog_status.value}');
                                   _showDialog(context,
                                       itemsController.catalog_status.value);
+                                  itemsController.catalog_status.value = '';
                                 }
                               }
                             },
@@ -230,14 +233,21 @@ void _showDialog(BuildContext context, String text1) {
               BorderRadius.circular(15.0), // Adjust the value as needed
         ),
         backgroundColor: const Color.fromARGB(255, 233, 233, 233),
-        title: const Text('Attention'),
-        content: Text(text1),
+        title: const Text(
+          'Attention',
+          textAlign: TextAlign.center,
+        ),
+        content: Text(
+          text1,
+          style: TextStyle(fontSize: 13),
+          textAlign: TextAlign.center,
+        ),
       );
     },
   );
 
   // Automatically close the dialog after 2 seconds
-  Future.delayed(Duration(seconds: 1), () {
-    Navigator.of(context).pop();
-  });
+  // Future.delayed(Duration(seconds: 2), () {
+  //   Navigator.of(context).pop();
+  // });
 }

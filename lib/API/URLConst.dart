@@ -57,4 +57,7 @@ class URLConst {
 
   static const postBPCatalogURL =
       "https://202.65.143.242:4300/TEKROI_C360/MasterData/BPCatalogNumber.xsjs?DBName=TESTACAE01";
+
+  static const getShipToCounty =
+      "http://202.65.143.242:8000/TEKROI_C360/SetUpMasters/ShipToCounty.xsjs?DBName=TESTACAE01";
 }

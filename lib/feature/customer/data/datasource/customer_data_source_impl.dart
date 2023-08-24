@@ -290,4 +290,35 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
       return data;
     }
   }
+
+  Future<Map<String, String>> getBPCounty() async{
+    Map<String, String> data = {};
+
+    try{
+      String URL = URLConst.getShipToCounty;
+      var response = await http.get(Uri.parse(URL));
+
+      if(response.statusCode == 200 || response.statusCode == 202){
+        final jsonResponse = jsonDecode(response.body);
+        var resData = jsonResponse['ShipToCounty'];
+
+        resData.forEach((k, v){
+            data[v['Name']] = v['Code'];
+        });
+        print("From Ship to County: ");
+        print(data);
+        return data;
+      }
+      if (DEBUG) {
+        print("Error in Future<Map<String,int>> getBPCounty() \n Response code: ${response.statusCode}");
+      }
+      return data;
+    }catch(e){
+      if (DEBUG) print("Error in Future<Map<String,int>> getBPCounty() \n $e");
+
+      return data;
+    }
+
+    return data;
+  }
 }

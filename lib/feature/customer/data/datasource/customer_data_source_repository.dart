@@ -11,6 +11,7 @@ abstract class CustomerDataSourceRepository {
   Future<Map<String, int>> getBPSaleEmployees();
   Future<Map<String, String>> getBPCountries();
   Future<Map<String, String>> getBPStates();
+  Future<Map<String, String>> getBPCounty();
   // Future<List<dynamic>> getApprovalStatusData();
 
   Future<Either<Failure, PostResponseType>> postBP_master(

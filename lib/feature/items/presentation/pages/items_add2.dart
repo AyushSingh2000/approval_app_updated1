@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,30 +52,66 @@ class _Items2State extends State<Items2> {
                 .WhseList
                 .map((element) => element.toString())
                 .toList();
-            return DropdownButtonFormField<String>(
-              hint: const Text(
-                'select items',
-                style: TextStyle(color: Colors.black),
+            // return DropdownButtonFormField<String>(
+            //   hint: const Text(
+            //     'select items',
+            //     style: TextStyle(color: Colors.black),
+            //   ),
+            //   isExpanded: true,
+            //   decoration: InputDecoration(
+            //     filled: true, //<-- SEE HERE
+            //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+            //     labelText: 'Whse Name',
+            //     border:
+            //         OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            //   ),
+            //   onChanged: (newValue) {
+            //     itemsController.Whse_Name.value = newValue!;
+            //     // itemsController.Whse_Code.value =
+            //     //     itemsController.WhseMapData[newValue!];
+            //   },
+            //   items: WhseList.map((String value) {
+            //     return DropdownMenuItem<String>(
+            //       value: value,
+            //       child: Text(value),
+            //     );
+            //   }).toList(),
+            // );
+
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 0),
+              height: 60,
+              child: TextDropdownFormField(
+                decoration: InputDecoration(
+                  // enabled: false,
+                  labelText: WhseList.isEmpty
+                      ? 'No Whse name Found'
+                      : 'Select Whse name',
+                  fillColor: Colors.grey[200],
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black.withOpacity(0.6),
+                    ),
+                  ),
+
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(9)),
+                  // hintText: 'Select State',
+                  filled: true,
+                  hintStyle: const TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                  contentPadding:
+                      const EdgeInsets.only(left: 12, right: 12, top: 20),
+                  isCollapsed: true,
+                ),
+                options: WhseList,
+                onChanged: (dynamic newValue) {
+                  itemsController.Whse_Name.value = newValue!;
+                },
               ),
-              isExpanded: true,
-              decoration: InputDecoration(
-                filled: true, //<-- SEE HERE
-                fillColor: const Color.fromARGB(255, 225, 225, 225),
-                labelText: 'Whse Name',
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-              onChanged: (newValue) {
-                itemsController.Whse_Name.value = newValue!;
-                // itemsController.Whse_Code.value =
-                //     itemsController.WhseMapData[newValue!];
-              },
-              items: WhseList.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
             );
           }),
           // dropdownform(dropdown: 'Whse Code', dropdownitems: demo),

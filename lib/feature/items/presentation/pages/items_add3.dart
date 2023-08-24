@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,30 +53,67 @@ class _Items3State extends State<Items3> {
                     .BPdataList
                     .map((element) => element.toString())
                     .toList();
-                return DropdownButtonFormField<String>(
-                  isExpanded: true,
-                  hint: const Text(
-                    'select items',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  decoration: InputDecoration(
-                    filled: true, //<-- SEE HERE
+                // return DropdownButtonFormField<String>(
+                //   isExpanded: true,
+                //   hint: const Text(
+                //     'select items',
+                //     style: TextStyle(color: Colors.black),
+                //   ),
+                //   decoration: InputDecoration(
+                //     filled: true, //<-- SEE HERE
 
-                    fillColor: const Color.fromARGB(255, 225, 225, 225),
-                    labelText: 'BP Name',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                  ),
-                  onChanged: (newValue) {
-                    itemsController.BP_Name.value = newValue!;
+                //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+                //     labelText: 'BP Name',
+                //     border: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(12)),
+                //   ),
+                //   onChanged: (newValue) {
+                //     itemsController.BP_Name.value = newValue!;
+                //     itemsController.BP_Code.value = newValue;
+                //   },
+                //   items: BPdataList.map((String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   }).toList(),
+                // );
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  height: 60,
+                  child: TextDropdownFormField(
+                    
+                    decoration: InputDecoration(
+                      // enabled: false,
+                      labelText: BPdataList.isEmpty
+                          ? 'No Items Found'
+                          : 'Select Items',
+                      fillColor: Colors.grey[200],
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9)),
+                      // hintText: 'Select State',
+                      filled: true,
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      contentPadding:
+                          const EdgeInsets.only(left: 12, right: 12, top: 20),
+                      isCollapsed: true,
+                    ),
+                    options: BPdataList,
+                    onChanged: (dynamic newValue) {
+                      itemsController.BP_Name.value = newValue!;
                     itemsController.BP_Code.value = newValue;
-                  },
-                  items: BPdataList.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
+                    },
+                  ),
                 );
               },
             ),
@@ -173,9 +211,7 @@ class _Items3State extends State<Items3> {
                                     _showDialog(
                                         context, 'fill all required fields');
                                   } else {
-                                    _showDialog(
-                                        context,
-                                        'error');
+                                    _showDialog(context, 'error');
                                   }
                                 }
                                 // Get.to(() => const Items4());

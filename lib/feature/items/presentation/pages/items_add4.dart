@@ -1,3 +1,4 @@
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,28 +50,63 @@ class _Items4State extends State<Items4> {
                   .itemNumberList
                   .map((element) => element.toString())
                   .toList();
-              return DropdownButtonFormField<String>(
-                isExpanded: true,
-                hint: const Text(
-                  'select options',
-                  style: TextStyle(color: Colors.black),
+              // return DropdownButtonFormField<String>(
+              //   isExpanded: true,
+              //   hint: const Text(
+              //     'select options',
+              //     style: TextStyle(color: Colors.black),
+              //   ),
+              //   decoration: InputDecoration(
+              //     filled: true, //<-- SEE HERE
+              //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+              //     labelText: 'Item name',
+              //     border: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(12)),
+              //   ),
+              //   onChanged: (newValue) {
+              //     itemsController.Item_Name_alt.value = newValue!;
+              //   },
+              //   items: itemNumberList.map((String value) {
+              //     return DropdownMenuItem<String>(
+              //       value: value,
+              //       child: Text(value),
+              //     );
+              //   }).toList(),
+              // );
+              return Container(
+                margin: const EdgeInsets.symmetric(vertical: 0),
+                height: 60,
+                child: TextDropdownFormField(
+                  decoration: InputDecoration(
+                    // enabled: false,
+                    labelText: itemNumberList.isEmpty
+                        ? 'No Item Name Found'
+                        : 'Select Item Name',
+                    fillColor: Colors.grey[200],
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.black.withOpacity(0.6),
+                      ),
+                    ),
+
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(9)),
+                    // hintText: 'Select State',
+                    filled: true,
+                    hintStyle: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                    contentPadding:
+                        const EdgeInsets.only(left: 12, right: 12, top: 20),
+                    isCollapsed: true,
+                  ),
+                  options: itemNumberList,
+                  onChanged: (dynamic newValue) {
+                    itemsController.Item_Name_alt.value = newValue!;
+                  },
                 ),
-                decoration: InputDecoration(
-                  filled: true, //<-- SEE HERE
-                  fillColor: const Color.fromARGB(255, 225, 225, 225),
-                  labelText: 'Item name',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                ),
-                onChanged: (newValue) {
-                  itemsController.Item_Name_alt.value = newValue!;
-                },
-                items: itemNumberList.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
               );
             }),
             const SizedBox(

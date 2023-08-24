@@ -271,7 +271,10 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   child: Obx(
                                       () => loginController.loginLoading.value
-                                          ? const CircularProgressIndicator()
+                                          ? const CircularProgressIndicator(
+                                              strokeWidth: 1,
+                                              color: Colors.white,
+                                            )
                                           : const Text(
                                               'Sign In',
                                               style: TextStyle(

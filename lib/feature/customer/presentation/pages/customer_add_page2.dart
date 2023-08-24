@@ -6,6 +6,7 @@ import 'package:new_app/feature/customer/controller/customer_controller.dart';
 import 'package:new_app/feature/customer/presentation/pages/customer_add_con.dart';
 import 'package:new_app/feature/customer/presentation/pages/customer_add_page3.dart';
 import 'package:new_app/feature/customer/presentation/pages/customer_edit_con.dart';
+import 'package:new_app/feature/customer/presentation/widgets/add_contact.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 
 class CustomerPage_2 extends StatefulWidget {
@@ -69,6 +70,15 @@ class _CustomerPage_2State extends State<CustomerPage_2> {
                                   Get.to(() => CustomerEditPage(index));
                                 },
                                 icon: const Icon(Icons.edit)),
+                            IconButton(
+                                constraints: BoxConstraints(),
+                                padding: EdgeInsets.zero,
+                                onPressed: () async {
+                                  bool isyes =
+                                      await showConfirmationDialog(context);
+                                  if (isyes == true) ct.removeAt(index);
+                                },
+                                icon: Icon(Icons.delete))
                           ],
                         ),
                       ),

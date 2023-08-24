@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:new_app/feature/customer/presentation/pages/customer_add_page1.dart';
 
 class SupplierPage extends StatefulWidget {
   const SupplierPage({super.key});
@@ -12,10 +14,18 @@ class _SupplierPageState extends State<SupplierPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Supplier BP'),
+        title: Text('Supplier list'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(() => CustomerPage());
+            },
+            icon: Icon(Icons.add),
+          )
+        ],
       ),
-      body: Center(
-        child: Text("Supplier Page"),
+      body: const Center(
+        child: Text('Supplier list'),
       ),
     );
   }

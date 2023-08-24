@@ -1,5 +1,6 @@
 import 'package:country_state_picker/components/index.dart';
 import 'package:country_state_picker/country_state_picker.dart';
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,6 +11,7 @@ import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
 import 'package:quickalert/quickalert.dart';
 
+import '../../../../ui/color/appColor.dart';
 import '../../../approved_bp/controller/approved_bp_controller.dart';
 import '../../../login/controller/login_controller.dart';
 import '../../data/model/BP_post_1.dart';
@@ -91,8 +93,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
       ZipCode: customerController.Adrs_Zip_Code.value,
       City: customerController.Adrs_City.value,
       Country: customerController.Adrs_Country.value,
-      // State: customerController.Adrs_State.value,
-      State: "",
+      State: customerController.Adrs_State.value,
       U_SCCode: customerController.Adrs_Ship_To_County.value,
     );
     customerController.addresslist.add(addresslist1);
@@ -108,8 +109,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
         ZipCode: customerController.Adrs_Zip_Code.value,
         City: customerController.Adrs_City.value,
         Country: customerController.Adrs_Country.value,
-        // State: customerController.Adrs_State.value,
-        State: "",
+        State: customerController.Adrs_State.value,
         U_SCCode: customerController.Adrs_Ship_To_County.value,
       );
       customerController.addresslist.add(addresslist2);
@@ -125,7 +125,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
         ZipCode: customerController.Adrs_s2_Zip_Code.value,
         City: customerController.Adrs_s2_City.value,
         Country: customerController.Adrs_s2_Country.value,
-        State: "",
+        State: customerController.Adrs_s2_State.value,
         U_SCCode: customerController.Adrs_s2_Ship_To_County.value,
       );
       customerController.addresslist.add(addresslist2);
@@ -188,56 +188,79 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                           customerController.Adrs_City.value = p0,
                     ),
                     const SizedBox(height: 16.0),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 0),
+                      height: 60,
+                      child: TextDropdownFormField(
+                        decoration: InputDecoration(
+                          // enabled: false,
+                          labelText: 'Choose Country',
+                          fillColor: Colors.grey[200],
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
 
-                    DropdownButtonFormField<String>(
-                      hint: const Text(
-                        'Select Country',
-                        style: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(9)),
+                          // hintText: 'Select Country',
+                          filled: true,
+                          hintStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                          contentPadding: const EdgeInsets.only(
+                              left: 12, right: 12, top: 20),
+                          isCollapsed: true,
+                        ),
+                        options: bpcountryList,
+                        onChanged: (dynamic newValue) {
+                          customerController.createBPCountryStateMap(newValue!);
+                          print(newValue);
+                          customerController.Adrs_Country.value =
+                              customerController.BPCountriesMapData[newValue];
+                        },
                       ),
-                      decoration: InputDecoration(
-                        filled: true, //<-- SEE HERE
-                        fillColor: const Color.fromARGB(255, 225, 225, 225),
-                        labelText: 'Country',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      onChanged: (newValue) {
-                        customerController.createBPCountryStateMap(newValue!);
-                        print(newValue);
-                        customerController.Adrs_Country.value =
-                            customerController.BPCountriesMapData[newValue];
-                      },
-                      items: bpcountryList.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
                     ),
 
                     const SizedBox(height: 16.0),
-                    DropdownButtonFormField<String>(
-                      hint: Text(
-                        bpstateList.isEmpty ? 'No State Found' : 'Select State',
-                        style: TextStyle(color: Colors.black),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 0),
+                      height: 60,
+                      child: TextDropdownFormField(
+                        decoration: InputDecoration(
+                          // enabled: false,
+                          labelText: bpstateList.isEmpty
+                              ? 'No State Found'
+                              : 'Select State',
+                          fillColor: Colors.grey[200],
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
+
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(9)),
+                          // hintText: 'Select State',
+                          filled: true,
+                          hintStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                          contentPadding: const EdgeInsets.only(
+                              left: 12, right: 12, top: 20),
+                          isCollapsed: true,
+                        ),
+                        options: bpstateList,
+                        onChanged: (dynamic newValue) {
+                          customerController.Adrs_State.value =
+                              customerController.BPStatesMaptempData[newValue];
+                        },
                       ),
-                      decoration: InputDecoration(
-                        filled: true, //<-- SEE HERE
-                        fillColor: const Color.fromARGB(255, 225, 225, 225),
-                        labelText: 'State',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      onChanged: (newValue) {
-                        customerController.Adrs_State.value =
-                            customerController.BPStatesMaptempData[newValue];
-                      },
-                      items: bpstateList.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
                     ),
                     const SizedBox(height: 16.0),
 
@@ -248,36 +271,41 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                           customerController.Adrs_Zip_Code.value = p0,
                     ), //Zip Code
                     const SizedBox(height: 16.0),
-
-                    DropdownButtonFormField<String>(
-                        hint: const Text(
-                          'Select County',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 0),
+                      height: 60,
+                      child: TextDropdownFormField(
                         decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 225, 225, 225),
-                          labelText: 'County',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                        ),
-                        items: bpcountyList.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          customerController.Adrs_Ship_To_County.value =
-                              customerController
-                                  .BPCountyMapData[value]; //.value or not?
-                        }),
+                          // enabled: false,
+                          labelText: 'Select County',
+                          fillColor: Colors.grey[200],
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
 
-                    // CustomTextField(
-                    //   hintText: 'Ship to country',
-                    //   onChanged: (p0) =>
-                    //       customerController.Adrs_Ship_To_County.value = p0,
-                    // ), //Ship To County
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(9)),
+                          // hintText: 'Select Country',
+                          filled: true,
+                          hintStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                          contentPadding: const EdgeInsets.only(
+                              left: 12, right: 12, top: 20),
+                          isCollapsed: true,
+                        ),
+                        options: bpcountryList,
+                        onChanged: (dynamic newValue) {
+                          customerController.Adrs_Ship_To_County.value =
+                              customerController.BPCountyMapData[newValue];
+                        },
+                      ),
+                    ),
+
                     const SizedBox(height: 16.0),
 
                     CustomTextField(

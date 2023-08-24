@@ -27,6 +27,9 @@ class CustomerController extends GetxController {
   var BPStatesMapData = {}.obs;
   var BPStatesList = <String>[].obs;
 
+  var BPCountyMapData = {}.obs;
+  var BPCountyList = <String>[].obs;
+
   var GetBPApprovalStatusList = <GetBpApprovalStatusModal>[].obs;
 
 //all fields data
@@ -96,6 +99,7 @@ class CustomerController extends GetxController {
     await getBPSaleEmployees();
     await getBPCountries();
     await getBPStates();
+    await getBPCounty();
     // await getApprovalStatusData();
     initialDataLoading.value = false;
   }
@@ -164,6 +168,15 @@ class CustomerController extends GetxController {
 
     // print(data);
     // print(BPStatesList);
+  }
+
+  Future<void> getBPCounty() async {
+    final data = await customerDataSourceImpl.getBPCounty();
+    BPCountyMapData.value = data;
+    BPCountyList.value = data.keys.toList();
+
+    // print(BPCountyMapData.value);
+    print(BPCountyList.value);
   }
 
   Future<PostResponseType> postCustomerData() async {

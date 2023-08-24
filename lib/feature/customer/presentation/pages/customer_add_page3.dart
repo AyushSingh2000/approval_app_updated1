@@ -152,6 +152,8 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                     (element) => element.toString()).toList();
                 final bpstateList = customerController.BPStatesList.map(
                     (element) => element.toString()).toList();
+                final bpcountyList = customerController.BPCountyList.map(
+                        (element) => element.toString()).toList();
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -245,11 +247,34 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                     ), //Zip Code
                     const SizedBox(height: 16.0),
 
-                    CustomTextField(
-                      hintText: 'Ship to country',
-                      onChanged: (p0) =>
-                          customerController.Adrs_Ship_To_County.value = p0,
-                    ), //Ship To County
+                    DropdownButtonFormField<String>(
+                        hint: const Text(
+                          'Select County',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 225, 225, 225),
+                          labelText: 'County',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                        ),
+                        items: bpcountyList.map((String value){
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (value){
+                          customerController.Adrs_Ship_To_County.value =
+                          customerController.BPCountyMapData[value]; //.value or not?
+                        }),
+
+                    // CustomTextField(
+                    //   hintText: 'Ship to country',
+                    //   onChanged: (p0) =>
+                    //       customerController.Adrs_Ship_To_County.value = p0,
+                    // ), //Ship To County
                     const SizedBox(height: 16.0),
 
                     CustomTextField(

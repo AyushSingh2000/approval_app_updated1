@@ -257,8 +257,10 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
   }
 
   @override
-  Future<Map<String, String>> getBPStates() async {
+  Future<List<dynamic>> getBPStates() async {
     Map<String, String> data = {};
+    Map<String, dynamic> temp = {};
+    List<dynamic> fullData = [];
 
     try {
       String URL = URLConst.baseURL + URLConst.getBPStatesURL;
@@ -266,54 +268,68 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
       var response = await http.get(
         Uri.parse(URL),
       );
+      print('|||||||||||||||${response.body}');
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);
         var resData = jsonResponse['Currencies'];
+        Map<String, dynamic> tempdata = jsonResponse['Currencies'];
+
+        // temp={
+        //
+        // }
 
         resData.forEach((k, v) {
           data[v['Name']] = v['Code'];
         });
         print(data);
 
-        return data;
+        tempdata.keys.forEach((key) {
+          fullData.add(tempdata[key]);
+        });
+
+        print('|||||||////////////////${fullData}');
+
+        // return data;
+        return fullData;
       }
 
       if (DEBUG)
         print(
             "Error in Future<Map<String,int>> getBPSeries() \n Response code: ${response.statusCode}");
 
-      return data;
+      return fullData;
     } catch (e) {
       if (DEBUG) print("Error in Future<Map<String,int>> getBPSeries() \n $e");
 
-      return data;
+      return fullData;
     }
   }
 
-  Future<Map<String, String>> getBPCounty() async{
+  Future<Map<String, String>> getBPCounty() async {
     Map<String, String> data = {};
 
-    try{
+    try {
       String URL = URLConst.getShipToCounty;
       var response = await http.get(Uri.parse(URL));
 
-      if(response.statusCode == 200 || response.statusCode == 202){
+      if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);
         var resData = jsonResponse['ShipToCounty'];
 
-        resData.forEach((k, v){
-            data[v['Name']] = v['Code'];
+        resData.forEach((k, v) {
+          data[v['Name']] = v['Code'];
         });
         print("From Ship to County: ");
         print(data);
         return data;
       }
       if (DEBUG) {
-        print("Error in Future<Map<String,int>> getBPCounty() \n Response code: ${response.statusCode}");
+        print(
+            "Error in Future<Map<String,int>> getBPCounty() \n Response code: ${response.statusCode}");
       }
       return data;
-    }catch(e){
+    } catch (e) {
       if (DEBUG) print("Error in Future<Map<String,int>> getBPCounty() \n $e");
 
       return data;

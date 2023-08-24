@@ -10,7 +10,7 @@ abstract class CustomerDataSourceRepository {
   Future<Map<String, String>> getBPCurrencies();
   Future<Map<String, int>> getBPSaleEmployees();
   Future<Map<String, String>> getBPCountries();
-  Future<Map<String, String>> getBPStates();
+  Future<List<dynamic>> getBPStates();
   Future<Map<String, String>> getBPCounty();
   // Future<List<dynamic>> getApprovalStatusData();
 

@@ -150,10 +150,10 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
               Obx(() {
                 final bpcountryList = customerController.BPCountriesList.map(
                     (element) => element.toString()).toList();
-                final bpstateList = customerController.BPStatesList.map(
+                final bpstateList = customerController.BPStatestempList.map(
                     (element) => element.toString()).toList();
                 final bpcountyList = customerController.BPCountyList.map(
-                        (element) => element.toString()).toList();
+                    (element) => element.toString()).toList();
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -202,6 +202,8 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                             borderRadius: BorderRadius.circular(12)),
                       ),
                       onChanged: (newValue) {
+                        customerController.createBPCountryStateMap(newValue!);
+                        print(newValue);
                         customerController.Adrs_Country.value =
                             customerController.BPCountriesMapData[newValue];
                       },
@@ -215,8 +217,8 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
 
                     const SizedBox(height: 16.0),
                     DropdownButtonFormField<String>(
-                      hint: const Text(
-                        'Select State',
+                      hint: Text(
+                        bpstateList.isEmpty ? 'No State Found' : 'Select State',
                         style: TextStyle(color: Colors.black),
                       ),
                       decoration: InputDecoration(
@@ -228,7 +230,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                       ),
                       onChanged: (newValue) {
                         customerController.Adrs_State.value =
-                            customerController.BPStatesMapData[newValue];
+                            customerController.BPStatesMaptempData[newValue];
                       },
                       items: bpstateList.map((String value) {
                         return DropdownMenuItem<String>(
@@ -236,7 +238,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                           child: Text(value),
                         );
                       }).toList(),
-                    ), //State
+                    ),
                     const SizedBox(height: 16.0),
 
                     CustomTextField(
@@ -259,15 +261,16 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12)),
                         ),
-                        items: bpcountyList.map((String value){
+                        items: bpcountyList.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
                           );
                         }).toList(),
-                        onChanged: (value){
+                        onChanged: (value) {
                           customerController.Adrs_Ship_To_County.value =
-                          customerController.BPCountyMapData[value]; //.value or not?
+                              customerController
+                                  .BPCountyMapData[value]; //.value or not?
                         }),
 
                     // CustomTextField(
@@ -306,7 +309,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                 Obx(() {
                   final bpcountryList = customerController.BPCountriesList.map(
                       (element) => element.toString()).toList();
-                  final bpstateList = customerController.BPStatesList.map(
+                  final bpstateList = customerController.BPStatestempList.map(
                       (element) => element.toString()).toList();
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -343,21 +346,6 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                       ),
                       const SizedBox(height: 16.0),
 
-                      CountryStatePicker(
-                        countryLabel: const Label(title: "País"),
-                        stateLabel: const Label(title: "Estado"),
-                        onCountryChanged: (ct) {
-                          print(ct);
-                        },
-                        onStateChanged: (st) {
-                          print(st);
-                        },
-                        // A little Spanish hint
-                        countryHintText: "Elige País",
-                        stateHintText: "Elige Estado",
-                        noStateFoundText: "Ningún Estado",
-                      ),
-
                       DropdownButtonFormField<String>(
                         hint: Text(
                           'Select Country',
@@ -371,7 +359,9 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                               borderRadius: BorderRadius.circular(12)),
                         ),
                         onChanged: (newValue) {
-                          customerController.Adrs_s2_Country.value = newValue!;
+                          customerController.createBPCountryStateMap(newValue!);
+                          customerController.Adrs_s2_Country.value =
+                              customerController.BPCountriesMapData[newValue];
                         },
                         items: bpcountryList.map((String value) {
                           return DropdownMenuItem<String>(
@@ -384,7 +374,9 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                       const SizedBox(height: 16.0),
                       DropdownButtonFormField<String>(
                         hint: Text(
-                          'Select State',
+                          bpstateList.isEmpty
+                              ? 'No State Found'
+                              : 'Select State',
                           style: TextStyle(color: Colors.black),
                         ),
                         decoration: InputDecoration(
@@ -395,7 +387,8 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                               borderRadius: BorderRadius.circular(12)),
                         ),
                         onChanged: (newValue) {
-                          customerController.Adrs_s2_State.value = newValue!;
+                          customerController.Adrs_s2_State.value =
+                              customerController.BPStatesMaptempData[newValue];
                         },
                         items: bpstateList.map((String value) {
                           return DropdownMenuItem<String>(

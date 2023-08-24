@@ -21,11 +21,23 @@ class CustomerController extends GetxController {
   var BPSaleEmployeesMapData = {}.obs;
   var BPSaleEmployeesList = <String>[].obs;
 
+  ///handeling country and state relations
+
   var BPCountriesMapData = {}.obs;
   var BPCountriesList = <String>[].obs;
 
+  var BPStatesMaptempData = {}.obs;
   var BPStatesMapData = {}.obs;
+
   var BPStatesList = <String>[].obs;
+  var BPStatestempList = <String>[].obs;
+
+  var BPStatesFullList = <dynamic>[].obs;
+
+  var BPStateCodeMapData = {}.obs;
+  var BPCountryStateNameMapData = {}.obs;
+
+  ///------------------------------------
 
   var BPCountyMapData = {}.obs;
   var BPCountyList = <String>[].obs;
@@ -100,21 +112,30 @@ class CustomerController extends GetxController {
     await getBPCountries();
     await getBPStates();
     await getBPCounty();
+    BPStatestempList.assignAll(BPStatesList);
+    BPStatesMaptempData.assignAll(BPStatesMapData);
     // await getApprovalStatusData();
     initialDataLoading.value = false;
   }
 
-  // Future<void> getApprovalStatusData() async {
-  //   final data = await customerDataSourceImpl.getApprovalStatusData();
-  //   print('//|||||||||||||||||||${data}');
-  //   final List<GetBpApprovalStatusModal> approvalStatusList = data
-  //       .map((item) => GetBpApprovalStatusModal(bpmasterDetails: [item]))
-  //       .toList();
-  //
-  //   // Assign the approvalStatusList to GetBPApprovalStatusList
-  //   GetBPApprovalStatusList.assignAll(approvalStatusList);
-  //   // print(GetBPApprovalStatusList[0].bpmasterDetails[0].CardCode);
-  // }
+  Future<void> createBPCountryStateMap(String country) async {
+    BPStatestempList.clear();
+    BPStatesMaptempData.clear();
+    if (country.isEmpty) {
+      BPStatestempList.assignAll(BPStatesList);
+      BPStatesMaptempData.assignAll(BPStatesMapData);
+    } else {
+      for (var item in BPStatesFullList) {
+        print(item);
+        // if(item.)
+        if (item["CountryNm"].toLowerCase().contains(country.toLowerCase())) {
+          BPStatestempList.add(item["Name"]);
+          BPStatesMaptempData[item["Name"]] = item["Code"];
+        }
+      }
+    }
+    print(BPStatesMaptempData);
+  }
 
   Future<void> getBPSeries() async {
     final data = await customerDataSourceImpl.getBPSeries();
@@ -163,11 +184,15 @@ class CustomerController extends GetxController {
 
   Future<void> getBPStates() async {
     final data = await customerDataSourceImpl.getBPStates();
-    BPStatesMapData.value = data;
-    BPStatesList.value = data.keys.toList();
-
-    // print(data);
-    // print(BPStatesList);
+    BPStatesFullList.assignAll(data);
+    print('${BPStatesFullList}');
+    Map<String, String> newBPStatesMapData = {};
+    BPStatesFullList.forEach((element) {
+      BPStatesList.add(element["Name"]);
+      newBPStatesMapData[element["Name"]] = element["Code"];
+    });
+    BPStatesMapData.assignAll(newBPStatesMapData);
+    print(BPStatesMapData);
   }
 
   Future<void> getBPCounty() async {

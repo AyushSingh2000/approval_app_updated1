@@ -30,10 +30,9 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
   //   ac.searchToggle.refresh();
   //   super.dispose();
   // }
-
-  @override
-  List<String> sort = ['name', 'cardcode'];
+  List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
+  @override
   Widget build(BuildContext context) {
     ApprovedBpController ac = Get.put(ApprovedBpController());
     ac.filteredData.assignAll(ac.GetBPApprovalStatusList);
@@ -104,16 +103,51 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
                             children: [
                               Text('sort by'),
                               DropdownButton<String>(
-                                value: selectedValue == ''
+                                value: ac.selectedValue_approved.value == ''
                                     ? sort[0]
-                                    : selectedValue,
+                                    : ac.selectedValue_approved.value,
                                 onChanged: (newValue) {
-                                  setState(() {
-                                    selectedValue = newValue!;
-                                    ac.filteredData.sort((a, b) => a
-                                        .bpmasterDetails[0].CardName!
-                                        .compareTo(
-                                            b.bpmasterDetails[0].CardName!));
+                                  ac.selectedValue_approved.value = newValue!;
+                                  print(ac.selectedValue_approved.value);
+                                  ac.filteredData.sort((a, b) {
+                                    var aValue, bValue;
+
+                                    // Determine which field to sort by based on selectedValue
+                                    switch (ac.selectedValue_approved.value) {
+                                      case 'CardName':
+                                        aValue = a.bpmasterDetails[0].CardName;
+                                        bValue = b.bpmasterDetails[0].CardName;
+                                        break;
+                                      case 'CardCode':
+                                        aValue = a.bpmasterDetails[0].CardCode;
+                                        bValue = b.bpmasterDetails[0].CardCode;
+
+                                        break;
+                                      case 'GroupName':
+                                        aValue = a.bpmasterDetails[0].GroupName;
+                                        bValue = b.bpmasterDetails[0].GroupName;
+                                        break;
+                                      case 'RequestedBy':
+                                        aValue =
+                                            a.bpmasterDetails[0].RequestedBy;
+                                        bValue =
+                                            b.bpmasterDetails[0].RequestedBy;
+                                        break;
+                                      default:
+                                        aValue = a.bpmasterDetails[0]
+                                            .CardCode; // Default to CardName if none selected
+                                        bValue = b.bpmasterDetails[0].CardCode;
+                                    }
+
+                                    // For other fields, sort in ascending order
+                                    final comparisonResult =
+                                        aValue != null && bValue != null
+                                            ? aValue
+                                                .toString()
+                                                .compareTo(bValue.toString())
+                                            : 0;
+
+                                    return comparisonResult;
                                   });
                                 },
                                 icon: Icon(Icons.sort),

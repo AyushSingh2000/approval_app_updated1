@@ -22,6 +22,9 @@ class ApprovedBpController extends GetxController {
   var searchToggle = false.obs;
   var sortToggle = false.obs;
 
+  final RxString selectedValue = ''.obs;
+  final RxString selectedValue_approved = ''.obs;
+
   @override
   void onInit() async {
     super.onInit();
@@ -44,13 +47,34 @@ class ApprovedBpController extends GetxController {
       filteredData.assignAll(GetBPApprovalStatusList);
     } else {
       for (var item in GetBPApprovalStatusList) {
-        if (item.bpmasterDetails[0].CardName!
-            .toLowerCase()
-            .contains(query.toLowerCase())) {
+        if (_itemMatchesQuery(item, query)) {
           filteredData.add(item);
         }
       }
     }
+  }
+
+  bool _itemMatchesQuery(GetBpApprovalStatusModal item, String query) {
+    for (var i = 0; i < item.bpmasterDetails.length; i++) {
+      var details = item.bpmasterDetails[i];
+      if (details.CardCode != null &&
+          details.CardCode!.toLowerCase().contains(query.toLowerCase())) {
+        return true;
+      }
+      if (details.CardName != null &&
+          details.CardName!.toLowerCase().contains(query.toLowerCase())) {
+        return true;
+      }
+      if (details.GroupName != null &&
+          details.GroupName!.toLowerCase().contains(query.toLowerCase())) {
+        return true;
+      }
+      if (details.RequestedBy != null &&
+          details.RequestedBy.toLowerCase().contains(query.toLowerCase())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   void filterData_UN(String query) {

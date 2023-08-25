@@ -17,7 +17,7 @@ class CustomerEditPage extends StatefulWidget {
 }
 
 class _CustomerEditPageState extends State<CustomerEditPage> {
-  List<String> list3 = ['yes', 'no'];
+  List<String> list3 = ['tYES', 'tNO'];
 
   @override
   Widget build(BuildContext context) {

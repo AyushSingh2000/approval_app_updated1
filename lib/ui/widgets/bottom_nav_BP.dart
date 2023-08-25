@@ -50,7 +50,7 @@ Widget BottomNavBP(int currentIndex) {
           case 2:
             Get.to(Customer_add());
           case 3:
-            Get.to(SupplierPage());
+            Get.to(Supplier_Add());
         }
       },
     ),

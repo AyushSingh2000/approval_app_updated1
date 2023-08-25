@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
 
+import '../../../approved_item/controller/approved_item_controller.dart';
 import '../../controller/items_controller.dart';
 
 class Items4 extends StatefulWidget {
@@ -17,6 +18,8 @@ class Items4 extends StatefulWidget {
 
 class _Items4State extends State<Items4> {
   int count = 0;
+  ApprovedItemController ac =
+      Get.put<ApprovedItemController>(ApprovedItemController());
   InputDecoration buildTextFieldDecoration(String labelText,
       {bool hasDropdown = false}) {
     return InputDecoration(
@@ -188,6 +191,7 @@ class _Items4State extends State<Items4> {
                                   Navigator.popUntil(context, (route) {
                                     return count++ == 3;
                                   });
+                                  ac.getApprovalStatusData();
                                 } else {
                                   if (itemsController.Item_Name_alt.value ==
                                       '') {

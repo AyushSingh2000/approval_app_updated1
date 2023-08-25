@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/feature/customer/presentation/pages/customer_add_page1.dart';
+import 'package:new_app/feature/supplier/presentation/pages/supplier_add_page1.dart';
 
-class SupplierPage extends StatefulWidget {
-  const SupplierPage({super.key});
+class Supplier_Add extends StatefulWidget {
+  const Supplier_Add({super.key});
 
   @override
-  State<SupplierPage> createState() => _SupplierPageState();
+  State<Supplier_Add> createState() => _Supplier_AddState();
 }
 
-class _SupplierPageState extends State<SupplierPage> {
+class _Supplier_AddState extends State<Supplier_Add> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +19,7 @@ class _SupplierPageState extends State<SupplierPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(() => CustomerPage());
+              Get.to(() => SupplierPage());
             },
             icon: Icon(Icons.add),
           )

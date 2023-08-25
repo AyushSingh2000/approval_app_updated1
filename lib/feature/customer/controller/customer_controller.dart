@@ -234,6 +234,8 @@ class CustomerController extends GetxController {
         ContactEmployees: contactemployee,
       );
 
+      print(contactemployee..toJson());
+
       // BP_PostModel_test bp_postModel = BP_PostModel_test(
       //   Series: "75",
       //   CardName: "ABC CHEMICAL EXPORTS PVT LTD",

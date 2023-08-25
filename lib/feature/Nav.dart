@@ -117,7 +117,7 @@ class _NavScreenState extends State<NavScreen> {
                       case 2:
                         return Customer_add();
                       case 3:
-                        return const SupplierPage();
+                        return const Supplier_Add();
                       default:
                         return const Center(child: Text("Work in Progress"));
                     }

@@ -83,6 +83,7 @@ class CustomerController extends GetxController {
   var Adrs_Zip_Code = ''.obs;
   var Adrs_Ship_To_County = ''.obs;
   var Adrs_AddressID = ''.obs;
+  var database = <String>[].obs;
 
 //address ship to
   var Adrs_s2_Address_Type = 'bo_ShipTo'.obs;

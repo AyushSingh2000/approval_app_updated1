@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  LoginController loginController = Get.put(LoginController());
+  LoginController loginController = Get.put(LoginController(), permanent: true);
 
   List<String> database = [
     'TESTAC0718',

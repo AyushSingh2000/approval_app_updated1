@@ -127,7 +127,6 @@ class CustomerController extends GetxController {
     } else {
       for (var item in BPStatesFullList) {
         print(item);
-        // if(item.)
         if (item["CountryNm"].toLowerCase().contains(country.toLowerCase())) {
           BPStatestempList.add(item["Name"]);
           BPStatesMaptempData[item["Name"]] = item["Code"];

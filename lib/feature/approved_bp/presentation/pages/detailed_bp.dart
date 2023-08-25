@@ -294,236 +294,214 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                   const EdgeInsets.symmetric(
                                                       vertical: 0,
                                                       horizontal: 20),
-                                              child: ListView(
-                                                children: [
-                                                  DetailsCard(
-                                                    title: "Billing Address",
-                                                    subtitleData: [
-                                                      {
-                                                        'subtitle':
-                                                            'Address Type',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .AdresType ??
-                                                            "-"
-                                                      },
-                                                      {
-                                                        'subtitle': 'Building',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .Building ??
-                                                            "-"
-                                                      },
-                                                      {
-                                                        'subtitle': 'Block',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .Block ??
-                                                            "-"
-                                                      },
-                                                      {
-                                                        'subtitle': 'Street',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .Street ??
-                                                            "-"
-                                                      },
-                                                      {
-                                                        'subtitle': 'City',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .City ??
-                                                            "-"
-                                                      },
-                                                      {
-                                                        'subtitle': 'Country',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .CountryNm ??
-                                                            "-"
-                                                      },
-                                                      {
-                                                        'subtitle': 'State',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .State ??
-                                                            "-"
-                                                      },
-                                                      {
-                                                        'subtitle': 'Zip Code',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .ZipCode ??
-                                                            "-"
-                                                      },
-                                                      {
-                                                        'subtitle':
-                                                            'Ship to County',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .County ??
-                                                            "-"
-                                                      },
-                                                      {
-                                                        'subtitle': 'Address',
-                                                        'text': ac
-                                                                .GetBPDetailsList[
-                                                                    0]
-                                                                .CustomerAddress?[
-                                                                    0]
-                                                                .Address ??
-                                                            "-"
-                                                      },
-                                                    ],
-                                                  ),
-                                                  ac.GetBPDetailsList.length ==
-                                                          2
-                                                      ? DetailsCard(
-                                                          title:
-                                                              "Shipping Address",
-                                                          subtitleData: [
-                                                            {
-                                                              'subtitle':
-                                                                  'Address Type',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .AdresType ??
-                                                                  "-"
-                                                            },
-                                                            {
-                                                              'subtitle':
-                                                                  'Building',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .Building ??
-                                                                  "-"
-                                                            },
-                                                            {
-                                                              'subtitle':
-                                                                  'Block',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .Block ??
-                                                                  "-"
-                                                            },
-                                                            {
-                                                              'subtitle':
-                                                                  'Street',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .Street ??
-                                                                  "-"
-                                                            },
-                                                            {
-                                                              'subtitle':
-                                                                  'City',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .City ??
-                                                                  "-"
-                                                            },
-                                                            {
-                                                              'subtitle':
-                                                                  'Country',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .Country ??
-                                                                  "-"
-                                                            },
-                                                            {
-                                                              'subtitle':
-                                                                  'State',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .State ??
-                                                                  "-"
-                                                            },
-                                                            {
-                                                              'subtitle':
-                                                                  'Zip Code',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .ZipCode ??
-                                                                  "-"
-                                                            },
-                                                            {
-                                                              'subtitle':
-                                                                  'Ship to County',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .County ??
-                                                                  "-"
-                                                            },
-                                                            {
-                                                              'subtitle':
-                                                                  'Address',
-                                                              'text': ac
-                                                                      .GetBPDetailsList[
-                                                                          0]
-                                                                      .CustomerAddress?[
-                                                                          1]
-                                                                      .Address ??
-                                                                  "-"
-                                                            },
+                                              child:
+                                                  ac
+                                                              .GetBPDetailsList[
+                                                                  0]
+                                                              .CustomerAddress
+                                                              ?.length ==
+                                                          0
+                                                      ? SizedBox()
+                                                      : ListView(
+                                                          children: [
+                                                            DetailsCard(
+                                                              title:
+                                                                  "Billing Address",
+                                                              subtitleData: [
+                                                                {
+                                                                  'subtitle':
+                                                                      'Address Type',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .AdresType ??
+                                                                      "-"
+                                                                },
+                                                                {
+                                                                  'subtitle':
+                                                                      'Building',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .Building ??
+                                                                      "-"
+                                                                },
+                                                                {
+                                                                  'subtitle':
+                                                                      'Block',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .Block ??
+                                                                      "-"
+                                                                },
+                                                                {
+                                                                  'subtitle':
+                                                                      'Street',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .Street ??
+                                                                      "-"
+                                                                },
+                                                                {
+                                                                  'subtitle':
+                                                                      'City',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .City ??
+                                                                      "-"
+                                                                },
+                                                                {
+                                                                  'subtitle':
+                                                                      'Country',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .CountryNm ??
+                                                                      "-"
+                                                                },
+                                                                {
+                                                                  'subtitle':
+                                                                      'State',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .State ??
+                                                                      "-"
+                                                                },
+                                                                {
+                                                                  'subtitle':
+                                                                      'Zip Code',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .ZipCode ??
+                                                                      "-"
+                                                                },
+                                                                {
+                                                                  'subtitle':
+                                                                      'Ship to County',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .County ??
+                                                                      "-"
+                                                                },
+                                                                {
+                                                                  'subtitle':
+                                                                      'Address',
+                                                                  'text': ac
+                                                                          .GetBPDetailsList[
+                                                                              0]
+                                                                          .CustomerAddress?[
+                                                                              0]
+                                                                          .Address ??
+                                                                      "-"
+                                                                },
+                                                              ],
+                                                            ),
+                                                            ac.GetBPDetailsList[0].CustomerAddress!
+                                                                        .length >
+                                                                    1
+                                                                ? DetailsCard(
+                                                                    title:
+                                                                        "Shipping Address",
+                                                                    subtitleData: [
+                                                                      {
+                                                                        'subtitle':
+                                                                            'Address Type',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].AdresType ??
+                                                                                "-"
+                                                                      },
+                                                                      {
+                                                                        'subtitle':
+                                                                            'Building',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].Building ??
+                                                                                "-"
+                                                                      },
+                                                                      {
+                                                                        'subtitle':
+                                                                            'Block',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].Block ??
+                                                                                "-"
+                                                                      },
+                                                                      {
+                                                                        'subtitle':
+                                                                            'Street',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].Street ??
+                                                                                "-"
+                                                                      },
+                                                                      {
+                                                                        'subtitle':
+                                                                            'City',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].City ??
+                                                                                "-"
+                                                                      },
+                                                                      {
+                                                                        'subtitle':
+                                                                            'Country',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].Country ??
+                                                                                "-"
+                                                                      },
+                                                                      {
+                                                                        'subtitle':
+                                                                            'State',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].State ??
+                                                                                "-"
+                                                                      },
+                                                                      {
+                                                                        'subtitle':
+                                                                            'Zip Code',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].ZipCode ??
+                                                                                "-"
+                                                                      },
+                                                                      {
+                                                                        'subtitle':
+                                                                            'Ship to County',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].County ??
+                                                                                "-"
+                                                                      },
+                                                                      {
+                                                                        'subtitle':
+                                                                            'Address',
+                                                                        'text':
+                                                                            ac.GetBPDetailsList[0].CustomerAddress?[1].Address ??
+                                                                                "-"
+                                                                      },
+                                                                    ],
+                                                                  )
+                                                                : SizedBox()
                                                           ],
-                                                        )
-                                                      : SizedBox()
-                                                ],
-                                              ),
+                                                        ),
                                             )
                                           : SizedBox(),
                                     ],

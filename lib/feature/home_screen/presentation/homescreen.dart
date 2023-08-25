@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
-import '../../../ui/Buttons/buttonBS.dart';
 import '../../Nav.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -91,40 +91,62 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ButtonBS(
-                // prefixIcon: CupertinoIcons.cube_box,
-                // prefixIconColor: Colors.white,
-                // suffixIcon: CupertinoIcons.arrow_right_circle_fill,
-                // suffixIconColor: Colors.white,
-                title: 'Item Master',
-                backgroundColor: const Color.fromARGB(255, 228, 228, 228),
-                textColor: const Color.fromARGB(255, 33, 79, 243),
-                fontWeight: FontWeight.w500,
-                paddingAll: 16,
-                borderRadius: 10,
-                fontSize: 16,
-                onPressed: () {
-                  // Get.to(ApprovedItemScreen());
-                  Get.to(const NavScreen(
-                    index: 1,
-                  ));
-                },
+              Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      color: const Color.fromARGB(255, 225, 225, 225),
+                    ),
+                    child: IconButton(
+                        onPressed: () {
+                          Get.to(const NavScreen(index: 0));
+                        },
+                        icon: const Icon(
+                          CupertinoIcons.person_fill,
+                          color: AppColors.mainblue,
+                        )),
+                  ),
+                  const Text('Customer'),
+                ],
               ),
-              ButtonBS(
-                // prefixIcon: CupertinoIcons.profile_circled,
-                // prefixIconColor: Colors.white,
-                // suffixIcon: CupertinoIcons.arrow_right_circle_fill,
-                // suffixIconColor: Colors.white,
-                title: 'BP Master',
-                backgroundColor: const Color.fromARGB(255, 33, 79, 243),
-                textColor: Colors.white,
-                fontWeight: FontWeight.w500,
-                paddingAll: 16,
-                borderRadius: 10,
-                fontSize: 16,
-                onPressed: () {
-                  Get.to(const NavScreen(index: 0));
-                },
+              Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      color: const Color.fromARGB(255, 225, 225, 225),
+                    ),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          CupertinoIcons.arrow_right_arrow_left,
+                          color: AppColors.mainblue,
+                        )),
+                  ),
+                  const Text('Supplier'),
+                ],
+              ),
+              Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      color: const Color.fromARGB(255, 225, 225, 225),
+                    ),
+                    child: IconButton(
+                        onPressed: () {
+                          Get.to(const NavScreen(
+                            index: 1,
+                          ));
+                        },
+                        icon: const Icon(
+                          CupertinoIcons.cube_box,
+                          color: AppColors.mainblue,
+                        )),
+                  ),
+                  const Text('Items'),
+                ],
               ),
             ],
           ), // Add some spacing between the buttons
@@ -137,3 +159,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+//customer
+// Get.to(const NavScreen(index: 0));
+
+//items
+// Get.to(const NavScreen(
+//                     index: 1,
+//                   ));

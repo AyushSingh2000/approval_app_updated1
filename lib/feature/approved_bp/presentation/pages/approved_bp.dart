@@ -40,12 +40,25 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
     ac.filteredData.refresh();
     ac.searchToggle.value = false;
     ac.searchToggle.refresh();
+    ac.sortToggle.value = false;
+    ac.sortToggle.refresh();
+
     print(ac.GetBPApprovalStatusList.length);
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
           title: Text('Approved BP List'),
           actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: GestureDetector(
+                  onTap: () {
+                    ac.sortToggle.value = !ac.sortToggle.value;
+                    ac.sortToggle.refresh();
+                  },
+                  child: Container(
+                      height: 30, width: 25, child: Icon(Icons.sort))),
+            ),
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: GestureDetector(
@@ -80,41 +93,46 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
                           ),
                         )
                       : SizedBox(),
-                  Container(
-                    margin: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: const Color.fromARGB(255, 226, 226, 226)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text('sort by'),
-                        DropdownButton<String>(
-                          value: selectedValue == '' ? sort[0] : selectedValue,
-                          onChanged: (newValue) {
-                            setState(() {
-                              selectedValue = newValue!;
-                              ac.GetBPApprovalStatusList.sort((a, b) => a
-                                  .bpmasterDetails[0].CardName!
-                                  .compareTo(b.bpmasterDetails[0].CardName!));
-                            });
-                          },
-                          icon: Icon(Icons.sort),
-                          borderRadius: BorderRadius.circular(12),
-                          dropdownColor:
-                              const Color.fromARGB(255, 230, 230, 230),
-                          items: sort
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          hint: Text('Select an option'),
-                        ),
-                      ],
-                    ),
-                  ),
+                  ac.sortToggle == true
+                      ? Container(
+                          margin: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: const Color.fromARGB(255, 226, 226, 226)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text('sort by'),
+                              DropdownButton<String>(
+                                value: selectedValue == ''
+                                    ? sort[0]
+                                    : selectedValue,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    selectedValue = newValue!;
+                                    ac.filteredData.sort((a, b) => a
+                                        .bpmasterDetails[0].CardName!
+                                        .compareTo(
+                                            b.bpmasterDetails[0].CardName!));
+                                  });
+                                },
+                                icon: Icon(Icons.sort),
+                                borderRadius: BorderRadius.circular(12),
+                                dropdownColor:
+                                    const Color.fromARGB(255, 230, 230, 230),
+                                items: sort.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: Text('Select an option'),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox(),
                   Expanded(
                     child: ListView.builder(
                         physics: BouncingScrollPhysics(),

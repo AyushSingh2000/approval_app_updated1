@@ -14,7 +14,7 @@ class LoginController extends GetxController {
   var companyDB = "";
   var username = "";
   var password = "";
-
+  var databaseList = <String>[].obs;
   var loginLoading = false.obs;
 
   void toggleVisiblity() {
@@ -49,8 +49,13 @@ class LoginController extends GetxController {
           PostResponseType(postResponseEnum: PostResponseEnum.success);
       loginResponseModel = res;
 
+      for(CompanyList list in res.companyList!){
+        databaseList.value.add(list.databaseList!);
+      }
+
       if (DEBUG) {
-        // print('Response \n ${res.toJson()}');
+        print("From login Controller");
+        print(databaseList);
       }
     });
 

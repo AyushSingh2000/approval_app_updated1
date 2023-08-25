@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:new_app/feature/approved_bp/controller/approved_bp_controller.dart';
+import 'package:new_app/feature/customer/presentation/widgets/add_contact.dart';
 import 'package:new_app/ui/widgets/card.dart';
 
 import '../../../../ui/TextField/customTextField.dart';
@@ -31,18 +32,33 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
   // }
 
   @override
+  List<String> sort = ['name', 'cardcode'];
+  String selectedValue = '';
   Widget build(BuildContext context) {
     ApprovedBpController ac = Get.put(ApprovedBpController());
     ac.filteredData.assignAll(ac.GetBPApprovalStatusList);
     ac.filteredData.refresh();
     ac.searchToggle.value = false;
     ac.searchToggle.refresh();
+    ac.sortToggle.value = false;
+    ac.sortToggle.refresh();
+
     print(ac.GetBPApprovalStatusList.length);
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
           title: Text('Approved BP List'),
           actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: GestureDetector(
+                  onTap: () {
+                    ac.sortToggle.value = !ac.sortToggle.value;
+                    ac.sortToggle.refresh();
+                  },
+                  child: Container(
+                      height: 30, width: 25, child: Icon(Icons.sort))),
+            ),
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: GestureDetector(
@@ -74,6 +90,46 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
                                 onChanged: (query) {
                                   ac.filterData(query);
                                 }),
+                          ),
+                        )
+                      : SizedBox(),
+                  ac.sortToggle == true
+                      ? Container(
+                          margin: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: const Color.fromARGB(255, 226, 226, 226)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text('sort by'),
+                              DropdownButton<String>(
+                                value: selectedValue == ''
+                                    ? sort[0]
+                                    : selectedValue,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    selectedValue = newValue!;
+                                    ac.filteredData.sort((a, b) => a
+                                        .bpmasterDetails[0].CardName!
+                                        .compareTo(
+                                            b.bpmasterDetails[0].CardName!));
+                                  });
+                                },
+                                icon: Icon(Icons.sort),
+                                borderRadius: BorderRadius.circular(12),
+                                dropdownColor:
+                                    const Color.fromARGB(255, 230, 230, 230),
+                                items: sort.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: Text('Select an option'),
+                              ),
+                            ],
                           ),
                         )
                       : SizedBox(),

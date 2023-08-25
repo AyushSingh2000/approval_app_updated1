@@ -20,6 +20,7 @@ class ApprovedBpController extends GetxController {
   var detailsDataLoading = false.obs;
 
   var searchToggle = false.obs;
+  var sortToggle = false.obs;
 
   @override
   void onInit() async {

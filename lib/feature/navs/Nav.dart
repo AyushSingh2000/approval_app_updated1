@@ -7,7 +7,9 @@ import '../customer/approved_bp/presentation/pages/approved_bp.dart';
 import '../customer/rejected_bp/presentation/pages/rejected_bp.dart';
 import '../customer/unapproved_bp/presentation/pages/unapproved_bp.dart';
 import '../item/approved_item/presentation/pages/approved_item.dart';
+import '../item/blank_item/presentation/pages/blank_item.dart';
 import '../item/createItem/presentation/pages/items.dart';
+import '../item/rejected_item/presentation/pages/rejected_item.dart';
 import '../item/unapproved_item/presentation/pages/unapproved_item.dart';
 import '../login/controller/login_controller.dart';
 import '../supplier/approved_supplier/presentation/pages/approved_supplier.dart';
@@ -113,6 +115,11 @@ class _NavScreenState extends State<NavScreen> {
                         BottomNavigationBarItem(
                           icon: Icon(Icons.home_outlined),
                           activeIcon: Icon(Icons.home),
+                          label: 'Blank',
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.home_outlined),
+                          activeIcon: Icon(Icons.home),
                           label: 'UnApproved',
                         ),
                         BottomNavigationBarItem(
@@ -175,11 +182,13 @@ class _NavScreenState extends State<NavScreen> {
                     : (context) {
                         switch (lc.pageNumber.value) {
                           case 0:
-                            return const UnApprovedItemScreen();
+                            return const BlankItemScreen();
                           case 1:
-                            return const ApprovedItemScreen();
+                            return const UnApprovedItemScreen();
                           case 2:
-                            return ItemsPage();
+                            return ApprovedItemScreen();
+                          case 3:
+                            return RejectedItemScreen();
                           default:
                             return const Center(
                                 child: Text("Work in Progress"));

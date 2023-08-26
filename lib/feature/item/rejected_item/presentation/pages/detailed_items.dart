@@ -4,23 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../ui/widgets/detailed_card.dart';
-import '../../controller/approved_item_controller.dart';
+import '../../controller/rejected_item_controller.dart';
 
-class DetailedApprovedItemScreen extends StatefulWidget {
+class DetailedRejectedItemScreen extends StatefulWidget {
   final String name;
   final String code;
-  const DetailedApprovedItemScreen(
+  const DetailedRejectedItemScreen(
       {required this.name, required this.code, Key? key})
       : super(key: key);
 
   @override
-  State<DetailedApprovedItemScreen> createState() =>
-      _DetailedApprovedItemScreenState();
+  State<DetailedRejectedItemScreen> createState() =>
+      _DetailedRejectedItemScreenState();
 }
 
-class _DetailedApprovedItemScreenState
-    extends State<DetailedApprovedItemScreen> {
-  ApprovedItemController ac = Get.put(ApprovedItemController());
+class _DetailedRejectedItemScreenState
+    extends State<DetailedRejectedItemScreen> {
+  RejectedItemController ac = Get.put(RejectedItemController());
   @override
   void dispose() {
     super.dispose();

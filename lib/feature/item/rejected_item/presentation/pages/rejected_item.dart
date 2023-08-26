@@ -3,40 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../../../../ui/widgets/card.dart';
-import '../../../approved_item/controller/approved_item_controller.dart';
-import '../../controller/unApproved_item_controller.dart';
-import '../pages/detailed_items.dart';
+import '../../controller/rejected_item_controller.dart';
+import 'detailed_items.dart';
 
-class UnApprovedItemScreen extends StatefulWidget {
-  const UnApprovedItemScreen({super.key});
+class RejectedItemScreen extends StatefulWidget {
+  const RejectedItemScreen({super.key});
 
   @override
-  State<UnApprovedItemScreen> createState() => _UnApprovedItemScreenState();
+  State<RejectedItemScreen> createState() => _RejectedItemScreenState();
 }
 
-class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
+class _RejectedItemScreenState extends State<RejectedItemScreen> {
   @override
   Widget build(BuildContext context) {
-    final UnApprovedItemController ac = Get.put(UnApprovedItemController());
-    // print(ac.GetItemApprovalStatusList[67].itemmasterDetails[0].ApprovalStatus);
-    // print(ac.GetItemApprovalStatusList.length);
-    ac.filteredData.assignAll(ac.GetUnApprovedStatusList);
+    RejectedItemController ac = Get.put(RejectedItemController());
+    ac.filteredData.assignAll(ac.GetRejectedStatusList);
     ac.filteredData.refresh();
     ac.searchToggle.value = false;
     ac.searchToggle.refresh();
     return Scaffold(
         appBar: AppBar(
-          title: Text('UnApproved Item List'),
+          title: Text('Approved Item List'),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: GestureDetector(
                   onTap: () {
-                    ac.filteredData.assignAll(ac.GetUnApprovedStatusList);
+                    ac.filteredData.assignAll(ac.GetRejectedStatusList);
 
                     ac.searchToggle.value = !ac.searchToggle.value;
                     ac.searchToggle.refresh();
@@ -72,7 +68,7 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
                         itemCount: ac.filteredData.length,
                         itemBuilder: (context, index) {
                           return ac.filteredData[index].itemmasterDetails[0]
-                                      .ApprovalStatus !=
+                                      .ApprovalStatus ==
                                   'Approved'
                               ? GestureDetector(
                                   onTap: () {
@@ -85,7 +81,7 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
                                         context,
                                         CupertinoPageRoute(
                                             builder: (context) =>
-                                                DetailedUnApprovedItemScreen(
+                                                DetailedRejectedItemScreen(
                                                   name: ac
                                                           .filteredData[index]
                                                           .itemmasterDetails[0]
@@ -120,8 +116,7 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
                                                 .itemmasterDetails[0]
                                                 .GroupName ??
                                             '',
-                                      )),
-                                )
+                                      )))
                               : SizedBox();
                         }),
                   ),

@@ -20,7 +20,7 @@ class _ApprovedItemScreenState extends State<ApprovedItemScreen> {
   @override
   Widget build(BuildContext context) {
     ApprovedItemController ac = Get.put(ApprovedItemController());
-    ac.filteredData.assignAll(ac.GetItemApprovalStatusList);
+    ac.filteredData.assignAll(ac.GetApprovedStatusList);
     ac.filteredData.refresh();
     ac.searchToggle.value = false;
     ac.searchToggle.refresh();
@@ -32,7 +32,7 @@ class _ApprovedItemScreenState extends State<ApprovedItemScreen> {
               padding: const EdgeInsets.only(right: 10.0),
               child: GestureDetector(
                   onTap: () {
-                    ac.filteredData.assignAll(ac.GetItemApprovalStatusList);
+                    ac.filteredData.assignAll(ac.GetApprovedStatusList);
 
                     ac.searchToggle.value = !ac.searchToggle.value;
                     ac.searchToggle.refresh();
@@ -81,7 +81,7 @@ class _ApprovedItemScreenState extends State<ApprovedItemScreen> {
                                         context,
                                         CupertinoPageRoute(
                                             builder: (context) =>
-                                                DetailedBpScreen(
+                                                DetailedApprovedItemScreen(
                                                   name: ac
                                                           .filteredData[index]
                                                           .itemmasterDetails[0]

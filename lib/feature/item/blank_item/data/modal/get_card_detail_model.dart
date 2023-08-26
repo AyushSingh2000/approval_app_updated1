@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'get_item_master_details_modal.g.dart';
+part 'get_card_detail_model.g.dart';
 
 @JsonSerializable()
 class GetItemDetailsModal {
-  final List<ItemDetail_code> itemmasterDetails;
+  final List<ItemDetail_blank> itemmasterDetails;
 
   GetItemDetailsModal({required this.itemmasterDetails});
 
@@ -15,7 +15,7 @@ class GetItemDetailsModal {
 }
 
 @JsonSerializable()
-class ItemDetail_code {
+class ItemDetail_blank {
   String? ItemCode;
   String? ItemName;
   String? FrgnName;
@@ -41,7 +41,7 @@ class ItemDetail_code {
   String? UpdateDate;
   int? UpdateTS;
 
-  ItemDetail_code({
+  ItemDetail_blank({
     this.ItemCode,
     this.ItemName,
     this.FrgnName,
@@ -68,8 +68,8 @@ class ItemDetail_code {
     this.UpdateTS,
   });
 
-  factory ItemDetail_code.fromJson(Map<String, dynamic> json) =>
-      _$ItemDetail_codeFromJson(json);
+  factory ItemDetail_blank.fromJson(Map<String, dynamic> json) =>
+      _$ItemDetail_blankFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ItemDetail_codeToJson(this);
+  Map<String, dynamic> toJson() => _$ItemDetail_blankToJson(this);
 }

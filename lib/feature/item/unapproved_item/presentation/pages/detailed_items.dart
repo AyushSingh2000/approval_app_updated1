@@ -6,19 +6,23 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../ui/widgets/detailed_card.dart';
 import '../../../approved_item/controller/approved_item_controller.dart';
+import '../../controller/unApproved_item_controller.dart';
 
-class DetailedBpScreen extends StatefulWidget {
+class DetailedUnApprovedItemScreen extends StatefulWidget {
   final String name;
   final String code;
-  const DetailedBpScreen({Key? key, required this.name, required this.code})
+  const DetailedUnApprovedItemScreen(
+      {Key? key, required this.name, required this.code})
       : super(key: key);
 
   @override
-  State<DetailedBpScreen> createState() => _DetailedBpScreenState();
+  State<DetailedUnApprovedItemScreen> createState() =>
+      _DetailedUnApprovedItemScreenState();
 }
 
-class _DetailedBpScreenState extends State<DetailedBpScreen> {
-  ApprovedItemController ac = Get.put(ApprovedItemController());
+class _DetailedUnApprovedItemScreenState
+    extends State<DetailedUnApprovedItemScreen> {
+  UnApprovedItemController ac = Get.put(UnApprovedItemController());
   @override
   void dispose() {
     // TODO: implement dispose
@@ -28,7 +32,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ac.getItemsDetailsData();
+    ac.getItemDetailsData();
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(

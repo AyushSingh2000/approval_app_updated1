@@ -158,8 +158,12 @@ class _Items4State extends State<Items4> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: ButtonBS(
-                      title: Text('Back',style: TextStyle(
-                        color: Colors.white,),),
+                      title: Text(
+                        'Back',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                       textColor: Colors.white,
                       backgroundColor: Colors.blue,
                       borderRadius: 12,
@@ -176,8 +180,12 @@ class _Items4State extends State<Items4> {
                               true
                           ? CircularProgressIndicator()
                           : ButtonBS(
-                              title: Text('Submit',style: TextStyle(
-                                color: Colors.white,),),
+                              title: Text(
+                                'Submit',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                               textColor: Colors.white,
                               backgroundColor: Colors.blue,
                               borderRadius: 12,
@@ -193,7 +201,7 @@ class _Items4State extends State<Items4> {
                                   Navigator.popUntil(context, (route) {
                                     return count++ == 3;
                                   });
-                                  ac.getApprovalStatusData();
+                                  ac.getApprovedItemData();
                                 } else {
                                   if (itemsController.Item_Name_alt.value ==
                                       '') {

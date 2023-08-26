@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_item_master_details_modal.dart';
+part of 'get_card_detail_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -9,7 +9,7 @@ part of 'get_item_master_details_modal.dart';
 GetItemDetailsModal _$GetItemDetailsModalFromJson(Map<String, dynamic> json) =>
     GetItemDetailsModal(
       itemmasterDetails: (json['itemmasterDetails'] as List<dynamic>)
-          .map((e) => ItemDetail_code.fromJson(e as Map<String, dynamic>))
+          .map((e) => ItemDetail_blank.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -19,8 +19,8 @@ Map<String, dynamic> _$GetItemDetailsModalToJson(
       'itemmasterDetails': instance.itemmasterDetails,
     };
 
-ItemDetail_code _$ItemDetail_codeFromJson(Map<String, dynamic> json) =>
-    ItemDetail_code(
+ItemDetail_blank _$ItemDetail_blankFromJson(Map<String, dynamic> json) =>
+    ItemDetail_blank(
       ItemCode: json['ItemCode'] as String?,
       ItemName: json['ItemName'] as String?,
       FrgnName: json['FrgnName'] as String?,
@@ -47,7 +47,7 @@ ItemDetail_code _$ItemDetail_codeFromJson(Map<String, dynamic> json) =>
       UpdateTS: json['UpdateTS'] as int?,
     );
 
-Map<String, dynamic> _$ItemDetail_codeToJson(ItemDetail_code instance) =>
+Map<String, dynamic> _$ItemDetail_blankToJson(ItemDetail_blank instance) =>
     <String, dynamic>{
       'ItemCode': instance.ItemCode,
       'ItemName': instance.ItemName,

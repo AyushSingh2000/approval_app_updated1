@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/feature/customer/rejected_bp/controller/rejected_bp_controller.dart';
+import 'package:new_app/feature/customer/unapproved_bp/controller/unapproved_bp_controller.dart';
 
 import '../../../../../ui/Buttons/buttonBS.dart';
 import '../../../../../ui/widgets/detailed_card.dart';
+import '../../../approved_bp/controller/approved_bp_controller.dart';
 import '../../controller/blank_bp_controller.dart';
 
 class DetailedBlankScreen extends StatefulWidget {
@@ -19,6 +22,8 @@ class DetailedBlankScreen extends StatefulWidget {
 
 class _DetailedBlankScreenState extends State<DetailedBlankScreen> {
   BlankCustomerController ac = Get.put(BlankCustomerController());
+  UnApprovedBpController uc = Get.put(UnApprovedBpController());
+  RejectedCustomerController rc = Get.put(RejectedCustomerController());
 
   @override
   void dispose() {
@@ -186,47 +191,144 @@ class _DetailedBlankScreenState extends State<DetailedBlankScreen> {
                                                         MainAxisAlignment
                                                             .spaceEvenly,
                                                     children: [
-                                                      ButtonBS(
-                                                        // prefixIcon: CupertinoIcons.cube_box,
-                                                        // prefixIconColor: Colors.white,
-                                                        // suffixIcon: CupertinoIcons.arrow_right_circle_fill,
-                                                        // suffixIconColor: Colors.white,
-                                                        title: Text('Approve'),
-                                                        backgroundColor:
-                                                            const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                33,
-                                                                79,
-                                                                243),
+                                                      Obx(
+                                                        () => ButtonBS(
+                                                          title: ac.load1
+                                                                      .value ==
+                                                                  true
+                                                              ? CircularProgressIndicator(
+                                                                  strokeWidth:
+                                                                      1,
+                                                                  color: Colors
+                                                                      .white,
+                                                                )
+                                                              : Text(
+                                                                  'Un-Approve',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                          backgroundColor:
+                                                              const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  33,
+                                                                  79,
+                                                                  243),
+                                                          textColor:
+                                                              Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          paddingAll: 16,
+                                                          borderRadius: 10,
+                                                          fontSize: 16,
+                                                          onPressed: () async {
+                                                            ac.load1.value =
+                                                                true;
+                                                            var res = await ac
+                                                                .updateBPDetailsData(
+                                                                    widget.code,
+                                                                    "Un-Approved");
+                                                            ac.load1.value =
+                                                                false;
 
-                                                        textColor: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        paddingAll: 16,
-                                                        borderRadius: 10,
-                                                        fontSize: 16,
-                                                        onPressed: () {},
+                                                            if (ac.res.value ==
+                                                                "Success") {
+                                                              await ac
+                                                                  .getBlankCustomerData();
+                                                              await uc
+                                                                  .getUn_ApprovedCustomerData();
+                                                              ac.filterData('');
+                                                              uc.filterData_UN(
+                                                                  '');
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('Successfully Un-Approved')));
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('An error has occurred')));
+                                                            }
+                                                          },
+                                                        ),
                                                       ),
-                                                      ButtonBS(
-                                                        title: Text('Reject'),
-                                                        backgroundColor:
-                                                            const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                228,
-                                                                228,
-                                                                228),
-                                                        textColor: const Color
-                                                                .fromARGB(
-                                                            255, 33, 79, 243),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        paddingAll: 16,
-                                                        borderRadius: 10,
-                                                        fontSize: 16,
-                                                        onPressed: () {},
-                                                      ),
+                                                      Obx(
+                                                        () => ButtonBS(
+                                                          title: ac.load2
+                                                                      .value ==
+                                                                  true
+                                                              ? CircularProgressIndicator(
+                                                                  strokeWidth:
+                                                                      1,
+                                                                  color: Colors
+                                                                      .black,
+                                                                )
+                                                              : Text('Reject'),
+                                                          backgroundColor:
+                                                              const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  228,
+                                                                  228,
+                                                                  228),
+                                                          textColor: const Color
+                                                                  .fromARGB(
+                                                              255, 33, 79, 243),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          paddingAll: 16,
+                                                          borderRadius: 10,
+                                                          fontSize: 16,
+                                                          onPressed: () async {
+                                                            ac.load2.value =
+                                                                true;
+                                                            var res = await ac
+                                                                .updateBPDetailsData(
+                                                                    widget.code,
+                                                                    "Rejected");
+                                                            ac.load2.value =
+                                                                false;
+                                                            if (ac.res.value ==
+                                                                "Success") {
+                                                              await ac
+                                                                  .getBlankCustomerData();
+                                                              await rc
+                                                                  .getRejectedCustomerData();
+                                                              ac.filterData('');
+                                                              rc.filterData('');
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('Successfully Approved')));
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('An error has occurred')));
+                                                            }
+                                                          },
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 ],

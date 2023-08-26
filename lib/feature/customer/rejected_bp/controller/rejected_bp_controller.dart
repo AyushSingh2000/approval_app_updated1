@@ -22,7 +22,7 @@ class RejectedCustomerController extends GetxController {
   var sortToggle = false.obs;
 
   var load = false.obs;
-  var load_rejected = false.obs;
+  var load2 = false.obs;
   var res = ''.obs;
 
   var un_dataLoading = false.obs;
@@ -35,7 +35,7 @@ class RejectedCustomerController extends GetxController {
     super.onInit();
 
     initialDataLoading.value = true;
-    await getBlankCustomerData();
+    await getRejectedCustomerData();
     filteredData.assignAll(GetRejectedStatusList);
     initialDataLoading.value = false;
   }
@@ -77,7 +77,7 @@ class RejectedCustomerController extends GetxController {
     return false;
   }
 
-  Future<void> getBlankCustomerData() async {
+  Future<void> getRejectedCustomerData() async {
     final data = await rejectedBpDataSourceImpl.getCustomerRejectedData();
     print('//|||||||||||||||||||${data}');
     final List<GetCustomerRejectedModal> approvalStatusList = data

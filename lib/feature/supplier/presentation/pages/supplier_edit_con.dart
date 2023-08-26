@@ -200,7 +200,12 @@ class _SupplierEditPageState extends State<SupplierEditPage> {
                   customer_Controller.contactemployee.refresh();
                   Get.back();
                 },
-                title: 'Update',
+                title: Text(
+                  'Update',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
                 backgroundColor: Colors.blue,
                 width: 100,
                 height: 40,

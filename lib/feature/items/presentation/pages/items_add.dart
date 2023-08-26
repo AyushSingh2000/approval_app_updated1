@@ -617,7 +617,8 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                             // }
                           }
                         },
-                        title: 'Next',
+                        title: Text('Next',style: TextStyle(
+                          color: Colors.white,),),
                       ),
                     ),
                   ),

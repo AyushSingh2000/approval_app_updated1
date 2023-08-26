@@ -257,7 +257,8 @@ class _SupplierPage_2_1State extends State<SupplierPage_2_1> {
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   }
                 },
-                title: 'Add',
+                title: Text('Add',style: TextStyle(
+                  color: Colors.white,),),
                 backgroundColor: Colors.blue,
                 width: 100,
                 height: 40,

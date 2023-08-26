@@ -161,7 +161,8 @@ class _Items2State extends State<Items2> {
               Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: ButtonBS(
-                    title: 'Back',
+                    title: Text('Back',style: TextStyle(
+                        color: Colors.white,),),
                     textColor: Colors.white,
                     backgroundColor: Colors.blue,
                     borderRadius: 12,
@@ -177,7 +178,8 @@ class _Items2State extends State<Items2> {
                     child: itemsController.postItemMasterLoading.value == true
                         ? CircularProgressIndicator()
                         : ButtonBS(
-                            title: 'Next',
+                            title:Text('Next',style: TextStyle(
+                              color: Colors.white,),),
                             textColor: Colors.white,
                             backgroundColor: Colors.blue,
                             borderRadius: 12,

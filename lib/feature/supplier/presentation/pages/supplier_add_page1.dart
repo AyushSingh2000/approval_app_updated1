@@ -442,7 +442,12 @@ class _SupplierPageState extends State<SupplierPage> {
                       borderRadius: 12,
                       backgroundColor: Colors.blue,
                       textColor: Colors.white,
-                      title: 'Next',
+                      title: Text(
+                        'Next',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                       onPressed: () {
                         Navigator.push(
                             context,

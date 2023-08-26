@@ -48,6 +48,7 @@ dependencies:
   json_annotation: ^4.8.1
   intl_phone_field: ^3.2.0
   country_state_picker: ^0.0.5
+  showcaseview: ^2.0.3
 
 dev_dependencies:
   flutter_test:

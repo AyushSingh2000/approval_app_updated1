@@ -6,22 +6,23 @@ part of 'get_supplier_blank_modal.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetCustomerBlankModal _$GetCustomerBlankModalFromJson(
+GetSupplierBlankModal _$GetSupplierBlankModalFromJson(
         Map<String, dynamic> json) =>
-    GetCustomerBlankModal(
+    GetSupplierBlankModal(
       bpmasterDetails: (json['bpmasterDetails'] as List<dynamic>)
-          .map((e) => BpDetail_Blank.fromJson(e as Map<String, dynamic>))
+          .map((e) => SupplierDetail_Blank.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$GetCustomerBlankModalToJson(
-        GetCustomerBlankModal instance) =>
+Map<String, dynamic> _$GetSupplierBlankModalToJson(
+        GetSupplierBlankModal instance) =>
     <String, dynamic>{
       'bpmasterDetails': instance.bpmasterDetails,
     };
 
-BpDetail_Blank _$BpDetail_BlankFromJson(Map<String, dynamic> json) =>
-    BpDetail_Blank(
+SupplierDetail_Blank _$SupplierDetail_BlankFromJson(
+        Map<String, dynamic> json) =>
+    SupplierDetail_Blank(
       CardCode: json['CardCode'] as String?,
       CardName: json['CardName'] as String?,
       GroupName: json['GroupName'] as String?,
@@ -30,7 +31,8 @@ BpDetail_Blank _$BpDetail_BlankFromJson(Map<String, dynamic> json) =>
       ApprovalStatus: json['ApprovalStatus'] as String?,
     );
 
-Map<String, dynamic> _$BpDetail_BlankToJson(BpDetail_Blank instance) =>
+Map<String, dynamic> _$SupplierDetail_BlankToJson(
+        SupplierDetail_Blank instance) =>
     <String, dynamic>{
       'CardCode': instance.CardCode,
       'CardName': instance.CardName,

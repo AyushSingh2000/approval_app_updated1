@@ -75,4 +75,18 @@ class URLConst {
 
   static const getCustomerListRejectedURL =
       "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetCustomerList_Rejected.xsjs?DBName=TESTAC0718";
+
+  /// Supplier -------------------------------------------------------
+
+  static const getSupplierBlankListURL =
+      "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetSupplierList_ApproveBlank.xsjs?DBName=TESTAC0718";
+
+  static const getSupplierUnApprovedListURL =
+      "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetSupplierList_Un-Approved.xsjs?DBName=TESTAC0718";
+
+  static const getSupplierApprovedListURL =
+      "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetSupplierList_Approved.xsjs?DBName=TESTAC0718";
+
+  static const getSupplierRejectedListURL =
+      "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetSupplierList_Rejected.xsjs?DBName=TESTAC0718";
 }

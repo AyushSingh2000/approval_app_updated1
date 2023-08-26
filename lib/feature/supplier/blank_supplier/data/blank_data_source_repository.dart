@@ -1,6 +1,6 @@
-abstract class BlankBpDataSourceRepository {
-  Future<List<dynamic>> getBPDetailData(String CardCode);
-  Future<List<dynamic>> getCustomerBlankData();
+abstract class BlankSupplierDataSourceRepository {
+  Future<List<dynamic>> getSupplierDetailData(String CardCode);
+  Future<List<dynamic>> getSupplierBlankData();
   // Future<List<dynamic>> getApprovalStatusData();
-  Future<String> updateBPStatusData(String CardCode, String Status);
+  Future<String> updateSupplierStatusData(String CardCode, String Status);
 }

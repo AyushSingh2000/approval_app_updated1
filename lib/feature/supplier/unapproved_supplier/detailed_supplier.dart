@@ -7,19 +7,23 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../../ui/Buttons/buttonBS.dart';
 import '../../../../ui/widgets/detailed_card.dart';
 import '../../customer/approved_bp/controller/approved_bp_controller.dart';
+import '../approved_supplier/controller/Approved_supplier_controller.dart';
+import 'controller/unapproved_supplier_controller.dart';
 
-class DetailedBpScreen extends StatefulWidget {
+class DetailedSupplierScreen extends StatefulWidget {
   final String name;
   final String code;
-  const DetailedBpScreen({Key? key, required this.name, required this.code})
+  const DetailedSupplierScreen(
+      {Key? key, required this.name, required this.code})
       : super(key: key);
 
   @override
-  State<DetailedBpScreen> createState() => _DetailedBpScreenState();
+  State<DetailedSupplierScreen> createState() => _DetailedSupplierScreenState();
 }
 
-class _DetailedBpScreenState extends State<DetailedBpScreen> {
-  ApprovedBpController ac = Get.put(ApprovedBpController());
+class _DetailedSupplierScreenState extends State<DetailedSupplierScreen> {
+  UnApprovedSupplierController ac = Get.put(UnApprovedSupplierController());
+  ApprovedSupplierController x = Get.put(ApprovedSupplierController());
   @override
   void dispose() {
     // TODO: implement dispose
@@ -29,7 +33,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ac.getBPDetailsData();
+    ac.getSupplierDetailsData();
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -102,7 +106,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                   child: TabBarView(
                                     children: [
                                       // Content for Tab 1
-                                      ac.GetBPDetailsList.length != 0
+                                      ac.GetSupplierDetailsList.length != 0
                                           ? Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -116,21 +120,21 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Name',
                                                         'text':
-                                                            ac.GetBPDetailsList[0]
+                                                            ac.GetSupplierDetailsList[0]
                                                                     .CardName ??
                                                                 "-"
                                                       },
                                                       {
                                                         'subtitle': 'Code',
                                                         'text':
-                                                            ac.GetBPDetailsList[0]
+                                                            ac.GetSupplierDetailsList[0]
                                                                     .CardCode ??
                                                                 "-"
                                                       },
                                                       {
                                                         'subtitle': 'Currency',
                                                         'text':
-                                                            ac.GetBPDetailsList[0]
+                                                            ac.GetSupplierDetailsList[0]
                                                                     .Currency ??
                                                                 "-"
                                                       },
@@ -138,7 +142,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                         'subtitle':
                                                             'Sale Employee Name',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .SalEmpNam ??
                                                             "-"
@@ -146,28 +150,28 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Telephone',
                                                         'text':
-                                                            ac.GetBPDetailsList[0]
+                                                            ac.GetSupplierDetailsList[0]
                                                                     .Cellular ??
                                                                 "-"
                                                       },
                                                       {
                                                         'subtitle': 'Mobile No',
                                                         'text':
-                                                            ac.GetBPDetailsList[0]
+                                                            ac.GetSupplierDetailsList[0]
                                                                     .Phone1 ??
                                                                 "-"
                                                       },
                                                       {
                                                         'subtitle': 'Email',
                                                         'text':
-                                                            ac.GetBPDetailsList[0]
+                                                            ac.GetSupplierDetailsList[0]
                                                                     .E_Mail ??
                                                                 "-"
                                                       },
                                                       {
                                                         'subtitle': 'Website',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .IntrntSite ??
                                                             "-"
@@ -221,7 +225,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                             ac.load.value =
                                                                 true;
                                                             var res = await ac
-                                                                .updateBPDetailsData(
+                                                                .updateSupplierDetailsData(
                                                                     widget.code,
                                                                     "Approved");
                                                             ac.load.value =
@@ -231,9 +235,8 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               print(
                                                                   '!!!!!!!!Approved');
                                                               await ac
-                                                                  .getUn_ApprovedCustomerData();
-                                                              ac.filterData_UN(
-                                                                  '');
+                                                                  .getUnApprovedSupplierData();
+                                                              ac.filterData('');
                                                               ScaffoldMessenger
                                                                       .of(
                                                                           context)
@@ -242,14 +245,14 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                                           content:
                                                                               Text('Approval Successfull')));
 
-                                                              await ac
-                                                                  .getApprovedCustomerData();
+                                                              await x
+                                                                  .getApprovedSupplierData();
 
-                                                              ac.GetBPUN_ApprovalStatusList
+                                                              ac.GetUnApprovedStatusList
                                                                   .refresh();
-                                                              ac.filteredData_unApproved
+                                                              ac.filteredData
                                                                   .refresh();
-                                                              ac.GetBPApprovalStatusList
+                                                              x.GetApprovedStatusList
                                                                   .refresh();
                                                               Navigator.of(
                                                                       context)
@@ -316,7 +319,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               .value = true;
 
                                                           var res = await ac
-                                                              .updateBPDetailsData(
+                                                              .updateSupplierDetailsData(
                                                                   widget.code,
                                                                   "Rejected");
                                                           ac.load_rejected
@@ -326,9 +329,8 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                             print(
                                                                 '!!!!!!!!Rejected');
                                                             await ac
-                                                                .getUn_ApprovedCustomerData();
-                                                            ac.filterData_UN(
-                                                                '');
+                                                                .getUnApprovedSupplierData();
+                                                            ac.filterData('');
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(
@@ -336,14 +338,14 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                                         content:
                                                                             Text('Rejected Successfully')));
 
-                                                            await ac
-                                                                .getApprovedCustomerData();
+                                                            await x
+                                                                .getApprovedSupplierData();
 
-                                                            ac.GetBPUN_ApprovalStatusList
+                                                            ac.GetUnApprovedStatusList
                                                                 .refresh();
-                                                            ac.filteredData_unApproved
+                                                            ac.filteredData
                                                                 .refresh();
-                                                            ac.GetBPApprovalStatusList
+                                                            x.GetApprovedStatusList
                                                                 .refresh();
                                                             Navigator.of(
                                                                     context)
@@ -365,7 +367,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                             )
                                           : SizedBox(),
                                       // Content for Tab 2
-                                      ac.GetBPDetailsList.length != 0
+                                      ac.GetSupplierDetailsList.length != 0
                                           ? Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -380,7 +382,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                         'subtitle':
                                                             'First Name',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .ContactPersons?[
                                                                     0]
@@ -391,7 +393,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                         'subtitle':
                                                             'Middle Name',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .ContactPersons?[
                                                                     0]
@@ -401,7 +403,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Last Name',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .ContactPersons?[
                                                                     0]
@@ -412,7 +414,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                         'subtitle':
                                                             'Designation',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .ContactPersons?[
                                                                     0]
@@ -422,7 +424,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Telephone',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .ContactPersons?[
                                                                     0]
@@ -432,7 +434,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Number',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .ContactPersons?[
                                                                     0]
@@ -442,7 +444,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Email',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .ContactPersons?[
                                                                     0]
@@ -452,7 +454,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Address',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .ContactPersons?[
                                                                     0]
@@ -462,7 +464,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Active',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .ContactPersons?[
                                                                     0]
@@ -477,7 +479,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                           : SizedBox(),
 
                                       // Content for Tab 3
-                                      ac.GetBPDetailsList.length != 0
+                                      ac.GetSupplierDetailsList.length != 0
                                           ? Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -492,7 +494,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                         'subtitle':
                                                             'Address Type',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -502,7 +504,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Building',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -512,7 +514,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Block',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -522,7 +524,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Street',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -532,7 +534,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'City',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -542,7 +544,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Country',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -552,7 +554,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'State',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -562,7 +564,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Zip Code',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -573,7 +575,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                         'subtitle':
                                                             'Ship to Country',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -583,7 +585,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       {
                                                         'subtitle': 'Address',
                                                         'text': ac
-                                                                .GetBPDetailsList[
+                                                                .GetSupplierDetailsList[
                                                                     0]
                                                                 .CustomerAddress?[
                                                                     0]
@@ -592,7 +594,8 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       },
                                                     ],
                                                   ),
-                                                  ac.GetBPDetailsList.length ==
+                                                  ac.GetSupplierDetailsList
+                                                              .length ==
                                                           2
                                                       ? DetailsCard(
                                                           title: "Shipping",
@@ -601,7 +604,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'Address Type',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]
@@ -612,7 +615,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'Building',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]
@@ -623,7 +626,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'Block',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]
@@ -634,7 +637,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'Street',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]
@@ -645,7 +648,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'City',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]
@@ -656,7 +659,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'Country',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]
@@ -667,7 +670,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'State',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]
@@ -678,7 +681,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'Zip Code',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]
@@ -689,7 +692,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'Ship to Country',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]
@@ -700,7 +703,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                               'subtitle':
                                                                   'Address',
                                                               'text': ac
-                                                                      .GetBPDetailsList[
+                                                                      .GetSupplierDetailsList[
                                                                           0]
                                                                       .CustomerAddress?[
                                                                           1]

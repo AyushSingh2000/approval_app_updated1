@@ -1,19 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_bp_details_modal.dart';
+part of 'get_card_detail_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetBPDetailsModal _$GetBPDetailsModalFromJson(Map<String, dynamic> json) =>
-    GetBPDetailsModal(
+GetSupplierDetailsModal_Blank _$GetSupplierDetailsModal_BlankFromJson(
+        Map<String, dynamic> json) =>
+    GetSupplierDetailsModal_Blank(
       cardDetails: (json['cardDetails'] as List<dynamic>)
           .map((e) => CardDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$GetBPDetailsModalToJson(GetBPDetailsModal instance) =>
+Map<String, dynamic> _$GetSupplierDetailsModal_BlankToJson(
+        GetSupplierDetailsModal_Blank instance) =>
     <String, dynamic>{
       'cardDetails': instance.cardDetails,
     };

@@ -2,15 +2,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:new_app/API/URLConst.dart';
 
-import '../../../customer/approved_bp/data/modal/get_bp_details_modal.dart';
+import '../data/modal/get_card_detail_model.dart';
 import 'rejected_data_source_repository.dart';
-import 'modal/get_customer_rejected_modal.dart';
+import 'modal/get_supplier_rejected_modal.dart';
 
 const DEBUG = true;
 
-class RejectedBpDataSourceImpl implements RejectedBpDataSourceRepository {
+class RejectedSupplierDataSourceImpl
+    implements RejectedSupplierDataSourceRepository {
   @override
-  Future<List<CardDetail>> getBPDetailData(String CardCode) async {
+  Future<List<CardDetail>> getSupplierDetailData(String CardCode) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
       String URL = URLConst.getBPMasterDetailsURL + CardCode;
@@ -43,10 +44,10 @@ class RejectedBpDataSourceImpl implements RejectedBpDataSourceRepository {
   }
 
   @override
-  Future<List<BpDetail_Rejected>> getCustomerRejectedData() async {
+  Future<List<SupplierDetail_Rejected>> getSupplierRejectedData() async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getCustomerListRejectedURL;
+      String URL = URLConst.getSupplierRejectedListURL;
 
       var response = await http.get(
         Uri.parse(URL),
@@ -58,9 +59,9 @@ class RejectedBpDataSourceImpl implements RejectedBpDataSourceRepository {
         print('|||||||||||||${jsonResponse}');
 
         final Map<String, dynamic> jsonMap =
-            jsonResponse['CustomerList_Rejected'];
-        final List<BpDetail_Rejected> data = jsonMap.values
-            .map((entry) => BpDetail_Rejected.fromJson(entry))
+            jsonResponse['SupplierList_Reject'];
+        final List<SupplierDetail_Rejected> data = jsonMap.values
+            .map((entry) => SupplierDetail_Rejected.fromJson(entry))
             .toList();
 
         return data;
@@ -78,7 +79,8 @@ class RejectedBpDataSourceImpl implements RejectedBpDataSourceRepository {
     }
   }
 
-  Future<String> updateBPStatusData(String CardCode, String Status) async {
+  Future<String> updateSupplierStatusData(
+      String CardCode, String Status) async {
     try {
       String URL = URLConst.updateBPMasterStatus + CardCode.toString();
 

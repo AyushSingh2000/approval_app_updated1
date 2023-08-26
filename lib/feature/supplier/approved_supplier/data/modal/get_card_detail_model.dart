@@ -1,18 +1,17 @@
 import 'package:json_annotation/json_annotation.dart';
 
-
-part 'get_bp_details_modal.g.dart';
+part 'get_card_detail_model.g.dart';
 
 @JsonSerializable()
-class GetBPDetailsModal {
+class GetSupplierDetailsModal_Blank {
   final List<CardDetail> cardDetails;
 
-  GetBPDetailsModal({required this.cardDetails});
+  GetSupplierDetailsModal_Blank({required this.cardDetails});
 
-  factory GetBPDetailsModal.fromJson(Map<String, dynamic> json) =>
-      _$GetBPDetailsModalFromJson(json);
+  factory GetSupplierDetailsModal_Blank.fromJson(Map<String, dynamic> json) =>
+      _$GetSupplierDetailsModal_BlankFromJson(json);
 
-  Map<String, dynamic> toJson() => _$GetBPDetailsModalToJson(this);
+  Map<String, dynamic> toJson() => _$GetSupplierDetailsModal_BlankToJson(this);
 }
 
 @JsonSerializable()

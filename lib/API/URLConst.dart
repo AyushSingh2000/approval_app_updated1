@@ -69,4 +69,10 @@ class URLConst {
 
   static const getCustomerListUN_ApprovedURL =
       "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetCustomerList_Un-Approved.xsjs?DBName=TESTAC0718";
+
+  static const getCustomerListBlankURL =
+      "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetCustomerList_ApproveBlank.xsjs?DBName=TESTAC0718";
+
+  static const getCustomerListRejectedURL =
+      "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetCustomerList_Rejected.xsjs?DBName=TESTAC0718";
 }

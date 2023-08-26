@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/feature/rejected_bp/presentation/pages/rejected_bp.dart';
 import 'package:new_app/feature/supplier/presentation/pages/supplier.dart';
 import 'package:new_app/feature/unapproved_bp/presentation/pages/unapproved_bp.dart';
 import 'package:new_app/feature/unapproved_item/presentation/pages/unapproved_item.dart';
+import 'Blank_bp/presentation/pages/blank_bp.dart';
 import 'approved_bp/presentation/pages/approved_bp.dart';
 import 'approved_item/presentation/pages/approved_item.dart';
 import 'customer/presentation/pages/customer.dart';
@@ -60,24 +62,24 @@ class _NavScreenState extends State<NavScreen> {
                     BottomNavigationBarItem(
                       icon: Icon(Icons.home_outlined),
                       activeIcon: Icon(Icons.home),
-                      label: 'UnApproved',
+                      label: 'Blank',
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.people_outline),
                       activeIcon: Icon(Icons.people),
-                      label: 'Approved',
+                      label: 'Un-Approved',
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons
                           .water_drop_outlined), //Image.asset(AppImagePaths.petrolIcon, scale: 3,),
                       activeIcon: Icon(Icons.water_drop),
-                      label: 'Customer',
+                      label: 'Approved',
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons
                           .oil_barrel_outlined), //Image.asset(AppImagePaths.dieselIcon, scale: 3,),
                       activeIcon: Icon(Icons.oil_barrel),
-                      label: 'Supplier',
+                      label: 'Rejected',
                     ),
                   ]
                 : const <BottomNavigationBarItem>[
@@ -110,14 +112,16 @@ class _NavScreenState extends State<NavScreen> {
                 ? (context) {
                     switch (lc.pageNumber.value) {
                       case 0:
-                        return const UnApprovedBPScreen();
+                        return const BlankBPScreen();
 
                       case 1:
-                        return const ApprovedBPScreen();
+                        return const UnApprovedBPScreen();
+
                       case 2:
-                        return Customer_add();
+                        return const ApprovedBPScreen();
+
                       case 3:
-                        return const Supplier_Add();
+                        return RejectedBPScreen();
                       default:
                         return const Center(child: Text("Work in Progress"));
                     }

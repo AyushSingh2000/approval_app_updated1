@@ -274,98 +274,102 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                           },
                                                         ),
                                                       ),
-                                                      ButtonBS(
-                                                        title: ac.load_rejected
-                                                                    .value ==
-                                                                true
-                                                            ? Container(
-                                                                height: 25,
-                                                                width: 25,
-                                                                child:
-                                                                    CircularProgressIndicator(
-                                                                  strokeWidth:
-                                                                      1,
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          33,
-                                                                          79,
-                                                                          243),
-                                                                ))
-                                                            : Text(
-                                                                'Reject',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          33,
-                                                                          79,
-                                                                          243),
+                                                      Obx(
+                                                        () => ButtonBS(
+                                                          title: uac.load_rejected
+                                                                      .value ==
+                                                                  true
+                                                              ? Container(
+                                                                  height: 25,
+                                                                  width: 25,
+                                                                  child:
+                                                                      CircularProgressIndicator(
+                                                                    strokeWidth:
+                                                                        1,
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            33,
+                                                                            79,
+                                                                            243),
+                                                                  ))
+                                                              : Text(
+                                                                  'Reject',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            33,
+                                                                            79,
+                                                                            243),
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                        backgroundColor:
-                                                            const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                228,
-                                                                228,
-                                                                228),
-                                                        textColor: const Color
-                                                                .fromARGB(
-                                                            255, 33, 79, 243),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        paddingAll: 16,
-                                                        borderRadius: 10,
-                                                        fontSize: 16,
-                                                        onPressed: () async {
-                                                          uac.load_rejected
-                                                              .value = true;
+                                                          backgroundColor:
+                                                              const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  228,
+                                                                  228,
+                                                                  228),
+                                                          textColor: const Color
+                                                                  .fromARGB(
+                                                              255, 33, 79, 243),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          paddingAll: 16,
+                                                          borderRadius: 10,
+                                                          fontSize: 16,
+                                                          onPressed: () async {
+                                                            uac.load_rejected
+                                                                .value = true;
 
-                                                          var res = await uac
-                                                              .updateBPDetailsData(
-                                                                  widget.code,
-                                                                  "Rejected");
-                                                          uac.load_rejected
-                                                              .value = false;
-                                                          if (uac.res.value ==
-                                                              "Success") {
-                                                            print(
-                                                                '!!!!!!!!Rejected');
-                                                            await uac
-                                                                .getUn_ApprovedCustomerData();
-                                                            uac.filterData_UN(
-                                                                '');
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                                    SnackBar(
-                                                                        content:
-                                                                            Text('Rejected Successfully')));
+                                                            var res = await uac
+                                                                .updateBPDetailsData(
+                                                                    widget.code,
+                                                                    "Rejected");
+                                                            uac.load_rejected
+                                                                .value = false;
+                                                            if (uac.res.value ==
+                                                                "Success") {
+                                                              print(
+                                                                  '!!!!!!!!Rejected');
+                                                              await uac
+                                                                  .getUn_ApprovedCustomerData();
+                                                              uac.filterData_UN(
+                                                                  '');
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('Rejected Successfully')));
 
-                                                            await ac
-                                                                .getApprovedCustomerData();
+                                                              await ac
+                                                                  .getApprovedCustomerData();
 
-                                                            uac.GetBPUN_ApprovalStatusList
-                                                                .refresh();
-                                                            uac.filteredData_unApproved
-                                                                .refresh();
-                                                            ac.GetBPApprovalStatusList
-                                                                .refresh();
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          } else {
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                                    SnackBar(
-                                                                        content:
-                                                                            Text('Un-Successfull')));
-                                                          }
-                                                        },
-                                                      ),
+                                                              uac.GetBPUN_ApprovalStatusList
+                                                                  .refresh();
+                                                              uac.filteredData_unApproved
+                                                                  .refresh();
+                                                              ac.GetBPApprovalStatusList
+                                                                  .refresh();
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('Un-Successfull')));
+                                                            }
+                                                          },
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 ],

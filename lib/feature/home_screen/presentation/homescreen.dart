@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //   height: 10,
                   // ),
                   Text(
-                    'This app is here to simplify your \n customer and  item management tasks, \n making your daily operations smoother \n than ever before. ',
+                    'This app is here to simplify your \n createCustomer and  item management tasks, \n making your daily operations smoother \n than ever before. ',
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w200,
@@ -160,10 +160,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-//customer
+//createCustomer
 // Get.to(const NavScreen(index: 0));
 
-//items
+//createItem
 // Get.to(const NavScreen(
 //                     index: 1,
 //                   ));

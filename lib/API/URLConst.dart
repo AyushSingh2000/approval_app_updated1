@@ -8,7 +8,7 @@ class URLConst {
   static const loginURL =
       "http://aquachemie.c360.zone:8000/TEKROI_C360/XSJS/Login.xsjs";
 
-  //BP_Master customer
+  //BP_Master createCustomer
   static const getBPSeriesURL = "BPSeries.xsjs?DBName=TESTACAE01";
   static const getBPGroupCodeURL = "BPGroupCode.xsjs?DBName=TESTACAE01";
   static const getBPCurrenciesURL = "BPCurrencies.xsjs?DBName=TESTACAE01";

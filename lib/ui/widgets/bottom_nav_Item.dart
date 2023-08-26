@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/feature/approved_item/presentation/pages/approved_item.dart';
-import 'package:new_app/feature/unapproved_item/presentation/pages/unapproved_item.dart';
 
-import '../../feature/items/presentation/pages/items.dart';
+import '../../feature/item/approved_item/presentation/pages/approved_item.dart';
+import '../../feature/item/createItem/presentation/pages/items.dart';
+import '../../feature/item/unapproved_item/presentation/pages/unapproved_item.dart';
 
 
 Widget BottomNavItem(int currentIndex){

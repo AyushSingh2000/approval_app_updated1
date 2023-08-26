@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 //
-// import '../../feature/item/approved_item/presentation/pages/approved_item.dart';
+// import '../../feature/item/approved_item/presentation/pages/rejected_item.dart';
 // import '../../feature/item/createItem/presentation/pages/items.dart';
 // import '../../feature/item/unapproved_item/presentation/pages/unapproved_item.dart';
 //

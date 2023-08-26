@@ -1,18 +1,17 @@
 import 'package:get/get.dart';
 
 import '../data/modal/get_card_detail_model.dart';
-import '../data/approved_data_source_impl.dart';
-import '../data/modal/get_item_approved_modal.dart';
+import '../data/blank_data_source_impl.dart';
+import '../data/modal/get_item_blank_modal.dart';
 
-class ApprovedItemController extends GetxController {
-  ApprovedItemDataSourceImpl approvedItemDataSourceImpl =
-      ApprovedItemDataSourceImpl();
+class BlankItemController extends GetxController {
+  BlankItemDataSourceImpl blankItemDataSourceImpl = BlankItemDataSourceImpl();
 
-  var GetApprovedStatusList = <GetItemApprovedModal>[].obs;
-  RxList<GetItemApprovedModal> filteredData = <GetItemApprovedModal>[].obs;
-  var GetItemDetailsList = <ItemDetail>[].obs;
+  var GetBlankStatusList = <GetItemBlankModal>[].obs;
+  RxList<GetItemBlankModal> filteredData = <GetItemBlankModal>[].obs;
+  var GetItemDetailsList = <ItemDetail_blank>[].obs;
 
-  var itemCode = ''.obs;
+  var cardCode = ''.obs;
 
   var initialDataLoading = false.obs;
   var detailsDataLoading = false.obs;
@@ -34,8 +33,8 @@ class ApprovedItemController extends GetxController {
     super.onInit();
 
     initialDataLoading.value = true;
-    await getApprovedItemData();
-    filteredData.assignAll(GetApprovedStatusList);
+    await getBlankItemData();
+    filteredData.assignAll(GetBlankStatusList);
     initialDataLoading.value = false;
   }
 
@@ -43,9 +42,9 @@ class ApprovedItemController extends GetxController {
     filteredData.clear();
 
     if (query.isEmpty) {
-      filteredData.assignAll(GetApprovedStatusList);
+      filteredData.assignAll(GetBlankStatusList);
     } else {
-      for (var item in GetApprovedStatusList) {
+      for (var item in GetBlankStatusList) {
         if (itemMatchesQuery_Approved(item, query)) {
           filteredData.add(item);
         }
@@ -53,7 +52,7 @@ class ApprovedItemController extends GetxController {
     }
   }
 
-  bool itemMatchesQuery_Approved(GetItemApprovedModal item, String query) {
+  bool itemMatchesQuery_Approved(GetItemBlankModal item, String query) {
     for (var i = 0; i < item.itemmasterDetails.length; i++) {
       var details = item.itemmasterDetails[i];
       if (details.ItemCode != null &&
@@ -76,27 +75,27 @@ class ApprovedItemController extends GetxController {
     return false;
   }
 
-  Future<void> getApprovedItemData() async {
-    final data = await approvedItemDataSourceImpl.getItemApprovedData();
+  Future<void> getBlankItemData() async {
+    final data = await blankItemDataSourceImpl.getItemBlankData();
     print('//|||||||||||||||||||${data}');
-    final List<GetItemApprovedModal> approvalStatusList = data
-        .map((item) => GetItemApprovedModal(itemmasterDetails: [item]))
+    final List<GetItemBlankModal> approvalStatusList = data
+        .map((item) => GetItemBlankModal(itemmasterDetails: [item]))
         .toList();
 
-    GetApprovedStatusList.assignAll(approvalStatusList);
+    GetBlankStatusList.assignAll(approvalStatusList);
   }
 
   Future<void> getItemDetailsData() async {
     detailsDataLoading.value = true;
     final data =
-        await approvedItemDataSourceImpl.getItemDetailData(itemCode.value);
+        await blankItemDataSourceImpl.getItemDetailData(cardCode.value);
     GetItemDetailsList.assignAll(data);
     // print(GetBPDetailsList[0].CardCode);
     detailsDataLoading.value = false;
   }
 
   Future<void> updateItemDetailsData(String cardCode, String status) async {
-    final data = await approvedItemDataSourceImpl.updateItemStatusData(
+    final data = await blankItemDataSourceImpl.updateSupplierStatusData(
         cardCode.toString(), status.toString());
     res.value = data;
   }

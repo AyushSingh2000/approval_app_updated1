@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:new_app/feature/rejected_bp/presentation/pages/rejected_bp.dart';
-import 'package:new_app/feature/supplier/presentation/pages/supplier.dart';
-import 'package:new_app/feature/unapproved_bp/presentation/pages/unapproved_bp.dart';
-import 'package:new_app/feature/unapproved_item/presentation/pages/unapproved_item.dart';
-import 'Blank_bp/presentation/pages/blank_bp.dart';
-import 'approved_bp/presentation/pages/approved_bp.dart';
-import 'approved_item/presentation/pages/approved_item.dart';
-import 'customer/presentation/pages/customer.dart';
-import 'items/presentation/pages/items.dart';
+import 'customer/Blank_bp/presentation/pages/blank_bp.dart';
+import 'customer/approved_bp/presentation/pages/approved_bp.dart';
+import 'customer/rejected_bp/presentation/pages/rejected_bp.dart';
+import 'customer/unapproved_bp/presentation/pages/unapproved_bp.dart';
+import 'item/approved_item/presentation/pages/approved_item.dart';
+import 'item/createItem/presentation/pages/items.dart';
+import 'item/unapproved_item/presentation/pages/unapproved_item.dart';
 import 'login/controller/login_controller.dart';
 
 class NavScreen extends StatefulWidget {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/feature/approved_bp/presentation/pages/approved_bp.dart';
-import 'package:new_app/feature/customer/presentation/pages/customer.dart';
-import 'package:new_app/feature/supplier/presentation/pages/supplier.dart';
-import 'package:new_app/feature/unapproved_bp/presentation/pages/unapproved_bp.dart';
+
+import '../../feature/customer/approved_bp/presentation/pages/approved_bp.dart';
+import '../../feature/customer/createCustomer/presentation/pages/customer.dart';
+import '../../feature/customer/unapproved_bp/presentation/pages/unapproved_bp.dart';
+import '../../feature/supplier/createSupplier/presentation/pages/supplier.dart';
 
 Widget BottomNavBP(int currentIndex) {
   return ClipRRect(

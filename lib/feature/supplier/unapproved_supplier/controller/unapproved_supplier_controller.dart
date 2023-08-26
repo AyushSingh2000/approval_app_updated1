@@ -1,15 +1,17 @@
 import 'package:get/get.dart';
 
-import '../../../customer/approved_bp/data/modal/get_bp_details_modal.dart';
-import '../data/blank_data_source_impl.dart';
-import '../data/modal/get_supplier_blank_modal.dart';
+import '../data/modal/get_card_detail_model.dart';
+import '../data/unapproved_data_source_impl.dart';
+import '../data/modal/get_supplier_unApproved_modal.dart';
 
-class BlankCustomerController extends GetxController {
-  BlankBpDataSourceImpl blankBpDataSourceImpl = BlankBpDataSourceImpl();
+class UnApprovedSupplierController extends GetxController {
+  UnApprovedSupplierDataSourceImpl unApprovedSupplierDataSourceImpl =
+      UnApprovedSupplierDataSourceImpl();
 
-  var GetBlankStatusList = <GetCustomerBlankModal>[].obs;
-  RxList<GetCustomerBlankModal> filteredData = <GetCustomerBlankModal>[].obs;
-  var GetBPDetailsList = <CardDetail>[].obs;
+  var GetUnApprovedStatusList = <GetSupplierUnApprovedModal>[].obs;
+  RxList<GetSupplierUnApprovedModal> filteredData =
+      <GetSupplierUnApprovedModal>[].obs;
+  var GetSupplierDetailsList = <CardDetail>[].obs;
 
   var cardCode = ''.obs;
 
@@ -33,8 +35,8 @@ class BlankCustomerController extends GetxController {
     super.onInit();
 
     initialDataLoading.value = true;
-    await getBlankCustomerData();
-    filteredData.assignAll(GetBlankStatusList);
+    await getUnApprovedSupplierData();
+    filteredData.assignAll(GetUnApprovedStatusList);
     initialDataLoading.value = false;
   }
 
@@ -42,9 +44,9 @@ class BlankCustomerController extends GetxController {
     filteredData.clear();
 
     if (query.isEmpty) {
-      filteredData.assignAll(GetBlankStatusList);
+      filteredData.assignAll(GetUnApprovedStatusList);
     } else {
-      for (var item in GetBlankStatusList) {
+      for (var item in GetUnApprovedStatusList) {
         if (itemMatchesQuery_Approved(item, query)) {
           filteredData.add(item);
         }
@@ -52,7 +54,8 @@ class BlankCustomerController extends GetxController {
     }
   }
 
-  bool itemMatchesQuery_Approved(GetCustomerBlankModal item, String query) {
+  bool itemMatchesQuery_Approved(
+      GetSupplierUnApprovedModal item, String query) {
     for (var i = 0; i < item.bpmasterDetails.length; i++) {
       var details = item.bpmasterDetails[i];
       if (details.CardCode != null &&
@@ -75,27 +78,29 @@ class BlankCustomerController extends GetxController {
     return false;
   }
 
-  Future<void> getBlankCustomerData() async {
-    final data = await blankBpDataSourceImpl.getCustomerBlankData();
+  Future<void> getUnApprovedSupplierData() async {
+    final data =
+        await unApprovedSupplierDataSourceImpl.getSupplierUnapprovedData();
     print('//|||||||||||||||||||${data}');
-    final List<GetCustomerBlankModal> approvalStatusList = data
-        .map((item) => GetCustomerBlankModal(bpmasterDetails: [item]))
+    final List<GetSupplierUnApprovedModal> approvalStatusList = data
+        .map((item) => GetSupplierUnApprovedModal(bpmasterDetails: [item]))
         .toList();
 
-    GetBlankStatusList.assignAll(approvalStatusList);
+    GetUnApprovedStatusList.assignAll(approvalStatusList);
   }
 
-  Future<void> getBPDetailsData() async {
+  Future<void> getSupplierDetailsData() async {
     detailsDataLoading.value = true;
-    final data = await blankBpDataSourceImpl.getBPDetailData(cardCode.value);
-    // GetBPDetailsList.assignAll(data);
+    final data = await unApprovedSupplierDataSourceImpl
+        .getSupplierDetailData(cardCode.value);
+    GetSupplierDetailsList.assignAll(data);
     // print(GetBPDetailsList[0].CardCode);
     detailsDataLoading.value = false;
   }
 
-  Future<void> updateBPDetailsData(String cardCode, String status) async {
-    final data = await blankBpDataSourceImpl.updateBPStatusData(
-        cardCode.toString(), status.toString());
+  Future<void> updateSupplierDetailsData(String cardCode, String status) async {
+    final data = await unApprovedSupplierDataSourceImpl
+        .updateSupplierStatusData(cardCode.toString(), status.toString());
     res.value = data;
   }
 }

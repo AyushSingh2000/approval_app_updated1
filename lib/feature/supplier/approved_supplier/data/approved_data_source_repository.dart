@@ -1,8 +1,6 @@
-abstract class ApprovedBpDataSourceRepository {
-  Future<List<dynamic>> getApprovalStatusData();
-  Future<List<dynamic>> getBPDetailData(String CardCode);
-  Future<List<dynamic>> getCustomerApprovedData2();
-  Future<List<dynamic>> getCustomerUN_ApprovedData();
+abstract class ApprovedSupplierDataSourceRepository {
+  Future<List<dynamic>> getSupplierDetailData(String CardCode);
+  Future<List<dynamic>> getSupplierApprovedData();
   // Future<List<dynamic>> getApprovalStatusData();
-  Future<String> updateBPStatusData(String CardCode, String Status);
+  Future<String> updateSupplierStatusData(String CardCode, String Status);
 }

@@ -1,26 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_customer_un_approved_modal.dart';
+part of 'get_supplier_approved_modal.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetCustomerUnApprovedModal _$GetCustomerUnApprovedModalFromJson(
+GetSupplierApprovedModal _$GetSupplierApprovedModalFromJson(
         Map<String, dynamic> json) =>
-    GetCustomerUnApprovedModal(
+    GetSupplierApprovedModal(
       bpmasterDetails: (json['bpmasterDetails'] as List<dynamic>)
-          .map((e) => BpDetail_UN.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              SupplierDetail_Approved.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$GetCustomerUnApprovedModalToJson(
-        GetCustomerUnApprovedModal instance) =>
+Map<String, dynamic> _$GetSupplierApprovedModalToJson(
+        GetSupplierApprovedModal instance) =>
     <String, dynamic>{
       'bpmasterDetails': instance.bpmasterDetails,
     };
 
-BpDetail_UN _$BpDetail_UNFromJson(Map<String, dynamic> json) => BpDetail_UN(
+SupplierDetail_Approved _$SupplierDetail_ApprovedFromJson(
+        Map<String, dynamic> json) =>
+    SupplierDetail_Approved(
       CardCode: json['CardCode'] as String?,
       CardName: json['CardName'] as String?,
       GroupName: json['GroupName'] as String?,
@@ -29,7 +32,8 @@ BpDetail_UN _$BpDetail_UNFromJson(Map<String, dynamic> json) => BpDetail_UN(
       ApprovalStatus: json['ApprovalStatus'] as String?,
     );
 
-Map<String, dynamic> _$BpDetail_UNToJson(BpDetail_UN instance) =>
+Map<String, dynamic> _$SupplierDetail_ApprovedToJson(
+        SupplierDetail_Approved instance) =>
     <String, dynamic>{
       'CardCode': instance.CardCode,
       'CardName': instance.CardName,

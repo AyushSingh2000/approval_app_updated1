@@ -3,12 +3,13 @@ import 'package:http/http.dart' as http;
 import 'package:new_app/API/URLConst.dart';
 
 import '../data/modal/get_card_detail_model.dart';
-import 'blank_data_source_repository.dart';
-import 'modal/get_supplier_blank_modal.dart';
+import 'unapproved_data_source_repository.dart';
+import 'modal/get_supplier_unApproved_modal.dart';
 
 const DEBUG = true;
 
-class BlankSupplierDataSourceImpl implements BlankSupplierDataSourceRepository {
+class UnApprovedSupplierDataSourceImpl
+    implements UnApprovedSupplierDataSourceRepository {
   @override
   Future<List<CardDetail>> getSupplierDetailData(String CardCode) async {
     try {
@@ -43,10 +44,10 @@ class BlankSupplierDataSourceImpl implements BlankSupplierDataSourceRepository {
   }
 
   @override
-  Future<List<SupplierDetail_Blank>> getSupplierBlankData() async {
+  Future<List<SupplierDetail_UnApproved>> getSupplierUnapprovedData() async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getSupplierBlankListURL;
+      String URL = URLConst.getSupplierUnApprovedListURL;
 
       var response = await http.get(
         Uri.parse(URL),
@@ -58,9 +59,9 @@ class BlankSupplierDataSourceImpl implements BlankSupplierDataSourceRepository {
         print('|||||||||||||${jsonResponse}');
 
         final Map<String, dynamic> jsonMap =
-            jsonResponse['SupplierList_ApproveBlanks'];
-        final List<SupplierDetail_Blank> data = jsonMap.values
-            .map((entry) => SupplierDetail_Blank.fromJson(entry))
+            jsonResponse['SupplierList_Reject'];
+        final List<SupplierDetail_UnApproved> data = jsonMap.values
+            .map((entry) => SupplierDetail_UnApproved.fromJson(entry))
             .toList();
 
         return data;

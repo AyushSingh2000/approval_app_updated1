@@ -2,50 +2,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:new_app/API/URLConst.dart';
 
+import '../data/modal/get_card_detail_model.dart';
 import 'approved_data_source_repository.dart';
-import 'modal/get_bp_approval_status_modal.dart';
-import 'modal/get_bp_details_modal.dart';
-import 'modal/get_customer_un_approved_modal.dart';
+import 'modal/get_supplier_approved_modal.dart';
 
 const DEBUG = true;
 
-class ApprovedBpDataSourceImpl implements ApprovedBpDataSourceRepository {
+class ApprovedSupplierDataSourceImpl
+    implements ApprovedSupplierDataSourceRepository {
   @override
-  Future<List<BpDetail>> getApprovalStatusData() async {
-    try {
-      // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getBpMasterApprovalStatusURL;
-
-      var response = await http.get(
-        Uri.parse(URL),
-      );
-      print(response.body);
-
-      if (response.statusCode == 200 || response.statusCode == 202) {
-        final jsonResponse = jsonDecode(response.body);
-        print('|||||||||||||${jsonResponse}');
-
-        final Map<String, dynamic> jsonMap = jsonResponse['BPMaster Details'];
-        final List<BpDetail> data =
-            jsonMap.values.map((entry) => BpDetail.fromJson(entry)).toList();
-
-        return data;
-      }
-
-      if (DEBUG)
-        print(
-            "Error in Future<Map<String,int>> getBPSeries() \n Response code: ${response.statusCode}");
-
-      throw Exception('Failed to load approval data');
-    } catch (e) {
-      if (DEBUG) print("Error in Future<Map<String,int>> getBPSeries() \n $e");
-      print(e);
-      throw Exception('Failed to load approval data');
-    }
-  }
-
-  @override
-  Future<List<CardDetail>> getBPDetailData(String CardCode) async {
+  Future<List<CardDetail>> getSupplierDetailData(String CardCode) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
       String URL = URLConst.getBPMasterDetailsURL + CardCode;
@@ -78,10 +44,10 @@ class ApprovedBpDataSourceImpl implements ApprovedBpDataSourceRepository {
   }
 
   @override
-  Future<List<BpDetail>> getCustomerApprovedData2() async {
+  Future<List<SupplierDetail_Approved>> getSupplierApprovedData() async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getCustomerListApprovedURL2;
+      String URL = URLConst.getSupplierApprovedListURL;
 
       var response = await http.get(
         Uri.parse(URL),
@@ -93,9 +59,10 @@ class ApprovedBpDataSourceImpl implements ApprovedBpDataSourceRepository {
         print('|||||||||||||${jsonResponse}');
 
         final Map<String, dynamic> jsonMap =
-            jsonResponse['CustomerList_Approved'];
-        final List<BpDetail> data =
-            jsonMap.values.map((entry) => BpDetail.fromJson(entry)).toList();
+            jsonResponse['SupplierList_Approved'];
+        final List<SupplierDetail_Approved> data = jsonMap.values
+            .map((entry) => SupplierDetail_Approved.fromJson(entry))
+            .toList();
 
         return data;
       }
@@ -112,42 +79,8 @@ class ApprovedBpDataSourceImpl implements ApprovedBpDataSourceRepository {
     }
   }
 
-  @override
-  Future<List<BpDetail_UN>> getCustomerUN_ApprovedData() async {
-    try {
-      // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getCustomerListUN_ApprovedURL;
-
-      var response = await http.get(
-        Uri.parse(URL),
-      );
-      print(response.body);
-
-      if (response.statusCode == 200 || response.statusCode == 202) {
-        final jsonResponse = jsonDecode(response.body);
-        print('|||||||||||||${jsonResponse}');
-
-        final Map<String, dynamic> jsonMap =
-            jsonResponse['CustomerList_UnApproved'];
-        final List<BpDetail_UN> data =
-            jsonMap.values.map((entry) => BpDetail_UN.fromJson(entry)).toList();
-
-        return data;
-      }
-
-      if (DEBUG)
-        print(
-            "Error in Future<Map<String,int>> getBPSeries() \n Response code: ${response.statusCode}");
-
-      throw Exception('Failed to load approval data');
-    } catch (e) {
-      if (DEBUG) print("Error in Future<Map<String,int>> getBPSeries() \n $e");
-      print(e);
-      throw Exception('Failed to load approval data');
-    }
-  }
-
-  Future<String> updateBPStatusData(String CardCode, String Status) async {
+  Future<String> updateSupplierStatusData(
+      String CardCode, String Status) async {
     try {
       String URL = URLConst.updateBPMasterStatus + CardCode.toString();
 

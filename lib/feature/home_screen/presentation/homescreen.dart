@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
 
-import '../../Nav.dart';
+import '../../navs/Nav.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -118,7 +118,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: const Color.fromARGB(255, 225, 225, 225),
                     ),
                     child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(const NavScreen(index: 1));
+                        },
                         icon: const Icon(
                           CupertinoIcons.arrow_right_arrow_left,
                           color: AppColors.mainblue,
@@ -137,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: IconButton(
                         onPressed: () {
                           Get.to(const NavScreen(
-                            index: 1,
+                            index: 2,
                           ));
                         },
                         icon: const Icon(

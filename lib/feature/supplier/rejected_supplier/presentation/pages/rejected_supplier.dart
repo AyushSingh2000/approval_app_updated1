@@ -3,48 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-// ignore: unused_import
-import 'package:new_app/feature/customer/createCustomer/presentation/widgets/add_contact.dart';
 import 'package:new_app/ui/widgets/card.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
-import '../../../../customer/approved_bp/controller/approved_bp_controller.dart';
 import '../../../../login/controller/login_controller.dart';
-import 'detailed_bp.dart';
+import '../../controller/rejected_supplier_controller.dart';
+import 'rejected_detailed_supplier.dart';
 
-class ApprovedBPScreen extends StatefulWidget {
-  const ApprovedBPScreen({super.key});
+class RejectedSupplierScreen extends StatefulWidget {
+  const RejectedSupplierScreen({super.key});
 
   @override
-  State<ApprovedBPScreen> createState() => _ApprovedBPScreenState();
+  State<RejectedSupplierScreen> createState() => _RejectedSupplierScreenState();
 }
 
-class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
+class _RejectedSupplierScreenState extends State<RejectedSupplierScreen> {
   final LoginController lc = Get.find<LoginController>();
-  ApprovedBpController ac = Get.put(ApprovedBpController());
+  RejectedSupplierController ac = Get.put(RejectedSupplierController());
 
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   ac.filteredData.assignAll(ac.GetBPApprovalStatusList);
-  //   ac.searchToggle.value = false;
-  //   ac.searchToggle.refresh();
-  //   super.dispose();
-  // }
   List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
   @override
   Widget build(BuildContext context) {
-    ApprovedBpController ac = Get.put(ApprovedBpController());
-    // ac.getApprovedCustomerData();
-    ac.filteredData.assignAll(ac.GetBPApprovalStatusList);
+    RejectedSupplierController ac = Get.put(RejectedSupplierController());
+    ac.filteredData.assignAll(ac.GetRejectedStatusList);
     ac.filteredData.refresh();
     ac.searchToggle.value = false;
     ac.searchToggle.refresh();
     ac.sortToggle.value = false;
     ac.sortToggle.refresh();
 
-    print(ac.GetBPApprovalStatusList.length);
+    print(ac.GetRejectedStatusList.length);
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
@@ -64,7 +53,7 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
               padding: const EdgeInsets.only(right: 10.0),
               child: GestureDetector(
                   onTap: () {
-                    ac.filteredData.assignAll(ac.GetBPApprovalStatusList);
+                    ac.filteredData.assignAll(ac.GetRejectedStatusList);
 
                     ac.searchToggle.value = !ac.searchToggle.value;
                     ac.searchToggle.refresh();
@@ -175,55 +164,49 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
                         // itemCount: ac.GetBPApprovalStatusList.length,
                         itemCount: ac.filteredData.length,
                         itemBuilder: (context, index) {
-                          return ac.filteredData[index].bpmasterDetails[0]
-                                      .ApprovalStatus ==
-                                  'Approved'
-                              ? GestureDetector(
-                                  onTap: () {
-                                    // print(ac.GetBPApprovalStatusList[index]
-                                    //     .bpmasterDetails[0].CardCode);
-                                    ac.cardCode.value = ac.filteredData[index]
-                                            .bpmasterDetails[0].CardCode ??
-                                        '';
+                          return GestureDetector(
+                            onTap: () {
+                              ac.cardCode.value = ac.filteredData[index]
+                                      .bpmasterDetails[0].CardCode ??
+                                  '';
 
-                                    // print(ac.cardCode.value);
-                                    // ac.getBPDetailsData();
-                                    Navigator.push(
-                                        context,
-                                        CupertinoPageRoute(
-                                            builder: (context) =>
-                                                DetailedBpScreen(
-                                                  name: ac
-                                                          .filteredData[index]
-                                                          .bpmasterDetails[0]
-                                                          .CardName ??
-                                                      '',
-                                                  code: ac
-                                                          .filteredData[index]
-                                                          .bpmasterDetails[0]
-                                                          .CardCode ??
-                                                      '',
-                                                )));
-                                    ac.searchToggle.value = false;
-                                    ac.searchToggle.refresh();
-                                    ac.filterData('');
-                                  },
-                                  child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0, vertical: 5),
-                                      child: ProfileCard(
-                                        cardName: ac.filteredData[index]
-                                                .bpmasterDetails[0].CardName ??
-                                            '',
-                                        cardCode: ac.filteredData[index]
-                                                .bpmasterDetails[0].CardCode ??
-                                            '',
-                                        groupName: ac.filteredData[index]
-                                                .bpmasterDetails[0].GroupName ??
-                                            '',
-                                      )),
-                                )
-                              : SizedBox();
+                              // print(ac.cardCode.value);
+                              // ac.getBPDetailsData();
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) =>
+                                          DetailedRejectedScreen(
+                                            name: ac
+                                                    .filteredData[index]
+                                                    .bpmasterDetails[0]
+                                                    .CardName ??
+                                                '',
+                                            code: ac
+                                                    .filteredData[index]
+                                                    .bpmasterDetails[0]
+                                                    .CardCode ??
+                                                '',
+                                          )));
+                              ac.searchToggle.value = false;
+                              ac.searchToggle.refresh();
+                              ac.filterData('');
+                            },
+                            child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 5),
+                                child: ProfileCard(
+                                  cardName: ac.filteredData[index]
+                                          .bpmasterDetails[0].CardName ??
+                                      '',
+                                  cardCode: ac.filteredData[index]
+                                          .bpmasterDetails[0].CardCode ??
+                                      '',
+                                  groupName: ac.filteredData[index]
+                                          .bpmasterDetails[0].GroupName ??
+                                      '',
+                                )),
+                          );
                         }),
                   )
                 ],

@@ -3,19 +3,19 @@ import 'package:json_annotation/json_annotation.dart';
 part 'get_supplier_blank_modal.g.dart';
 
 @JsonSerializable()
-class GetCustomerBlankModal {
-  final List<BpDetail_Blank> bpmasterDetails;
+class GetSupplierBlankModal {
+  final List<SupplierDetail_Blank> bpmasterDetails;
 
-  GetCustomerBlankModal({required this.bpmasterDetails});
+  GetSupplierBlankModal({required this.bpmasterDetails});
 
-  factory GetCustomerBlankModal.fromJson(Map<String, dynamic> json) =>
-      _$GetCustomerBlankModalFromJson(json);
+  factory GetSupplierBlankModal.fromJson(Map<String, dynamic> json) =>
+      _$GetSupplierBlankModalFromJson(json);
 
-  Map<String, dynamic> toJson() => _$GetCustomerBlankModalToJson(this);
+  Map<String, dynamic> toJson() => _$GetSupplierBlankModalToJson(this);
 }
 
 @JsonSerializable()
-class BpDetail_Blank {
+class SupplierDetail_Blank {
   String? CardCode;
   String? CardName;
   String? GroupName;
@@ -23,7 +23,7 @@ class BpDetail_Blank {
   dynamic RequestedBy;
   String? ApprovalStatus;
 
-  BpDetail_Blank(
+  SupplierDetail_Blank(
       {this.CardCode,
       this.CardName,
       this.GroupName,
@@ -31,8 +31,8 @@ class BpDetail_Blank {
       this.RequestedBy,
       this.ApprovalStatus});
 
-  factory BpDetail_Blank.fromJson(Map<String, dynamic> json) =>
-      _$BpDetail_BlankFromJson(json);
+  factory SupplierDetail_Blank.fromJson(Map<String, dynamic> json) =>
+      _$SupplierDetail_BlankFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BpDetail_BlankToJson(this);
+  Map<String, dynamic> toJson() => _$SupplierDetail_BlankToJson(this);
 }

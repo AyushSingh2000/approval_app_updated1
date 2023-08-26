@@ -8,24 +8,27 @@ import '../../../../ui/TextField/customTextField.dart';
 import '../../../../ui/widgets/card.dart';
 import '../../customer/approved_bp/controller/approved_bp_controller.dart';
 import '../../customer/approved_bp/presentation/pages/detailed_bp.dart';
+import 'controller/unapproved_supplier_controller.dart';
+import 'detailed_supplier.dart';
 
-class UnApprovedBPScreen extends StatefulWidget {
-  const UnApprovedBPScreen({super.key});
+class UnApprovedSupplierScreen extends StatefulWidget {
+  const UnApprovedSupplierScreen({super.key});
 
   @override
-  State<UnApprovedBPScreen> createState() => _UnApprovedBPScreenState();
+  State<UnApprovedSupplierScreen> createState() =>
+      _UnApprovedSupplierScreenState();
 }
 
-class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
+class _UnApprovedSupplierScreenState extends State<UnApprovedSupplierScreen> {
   List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
 
   @override
   Widget build(BuildContext context) {
-    ApprovedBpController ac =
-        Get.put<ApprovedBpController>(ApprovedBpController());
-    ac.filteredData_unApproved.assignAll(ac.GetBPUN_ApprovalStatusList);
-    ac.filteredData_unApproved.refresh();
+    UnApprovedSupplierController ac =
+        Get.put<UnApprovedSupplierController>(UnApprovedSupplierController());
+    ac.filteredData.assignAll(ac.GetUnApprovedStatusList);
+    ac.filteredData.refresh();
     ac.searchToggle.value = false;
     ac.searchToggle.refresh();
     // ac.getApprovalStatusData();
@@ -47,8 +50,7 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
             padding: const EdgeInsets.only(right: 10.0),
             child: GestureDetector(
                 onTap: () {
-                  ac.filteredData_unApproved
-                      .assignAll(ac.GetBPUN_ApprovalStatusList);
+                  ac.filteredData.assignAll(ac.GetUnApprovedStatusList);
 
                   ac.searchToggle.value = !ac.searchToggle.value;
                   ac.searchToggle.refresh();
@@ -73,7 +75,7 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
                                   EdgeInsets.only(top: 10, left: 20),
                               hintText: 'Search',
                               onChanged: (query) {
-                                ac.filterData_UN(query);
+                                ac.filterData(query);
                               }),
                         ),
                       )
@@ -97,7 +99,7 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
                                 //     .CardName);
                                 ac.selectedValue.value = newValue!;
                                 print(ac.selectedValue.value);
-                                ac.filteredData_unApproved.sort((a, b) {
+                                ac.filteredData.sort((a, b) {
                                   var aValue, bValue;
 
                                   // Determine which field to sort by based on selectedValue
@@ -157,17 +159,15 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
                   () => Expanded(
                     child: ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        itemCount: ac.filteredData_unApproved.length,
+                        itemCount: ac.filteredData.length,
                         itemBuilder: (context, index) {
-                          return ac.filteredData_unApproved[index]
-                                      .bpmasterDetails[0].ApprovalStatus !=
+                          return ac.filteredData[index].bpmasterDetails[0]
+                                      .ApprovalStatus !=
                                   'Approved'
                               ? GestureDetector(
                                   onTap: () {
-                                    ac.cardCode.value = ac
-                                            .filteredData_unApproved[index]
-                                            .bpmasterDetails[0]
-                                            .CardCode ??
+                                    ac.cardCode.value = ac.filteredData[index]
+                                            .bpmasterDetails[0].CardCode ??
                                         '';
                                     // print(ac.cardCode.value);
                                     // ac.getBPDetailsData();
@@ -175,42 +175,34 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
                                         context,
                                         CupertinoPageRoute(
                                             builder: (context) =>
-                                                DetailedBpScreen(
+                                                DetailedSupplierScreen(
                                                   name: ac
-                                                          .filteredData_unApproved[
-                                                              index]
+                                                          .filteredData[index]
                                                           .bpmasterDetails[0]
                                                           .CardName ??
                                                       '',
                                                   code: ac
-                                                          .filteredData_unApproved[
-                                                              index]
+                                                          .filteredData[index]
                                                           .bpmasterDetails[0]
                                                           .CardCode ??
                                                       '',
                                                 )));
                                     ac.searchToggle.value = false;
                                     ac.searchToggle.refresh();
-                                    ac.filterData_UN('');
+                                    ac.filterData('');
                                   },
                                   child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 8.0, vertical: 8),
                                       child: ProfileCard(
-                                        cardName: ac
-                                                .filteredData_unApproved[index]
-                                                .bpmasterDetails[0]
-                                                .CardName ??
+                                        cardName: ac.filteredData[index]
+                                                .bpmasterDetails[0].CardName ??
                                             '',
-                                        cardCode: ac
-                                                .filteredData_unApproved[index]
-                                                .bpmasterDetails[0]
-                                                .CardCode ??
+                                        cardCode: ac.filteredData[index]
+                                                .bpmasterDetails[0].CardCode ??
                                             '',
-                                        groupName: ac
-                                                .filteredData_unApproved[index]
-                                                .bpmasterDetails[0]
-                                                .GroupName ??
+                                        groupName: ac.filteredData[index]
+                                                .bpmasterDetails[0].GroupName ??
                                             '',
                                       )),
                                 )

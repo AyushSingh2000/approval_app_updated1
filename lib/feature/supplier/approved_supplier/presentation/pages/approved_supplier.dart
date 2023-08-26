@@ -3,37 +3,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+// ignore: unused_import
+import 'package:new_app/feature/customer/createCustomer/presentation/widgets/add_contact.dart';
 import 'package:new_app/ui/widgets/card.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
+import '../../../../customer/approved_bp/controller/approved_bp_controller.dart';
 import '../../../../login/controller/login_controller.dart';
-import '../../controller/rejected_bp_controller.dart';
-import 'rejected_detailed_bp.dart';
+import '../../controller/Approved_supplier_controller.dart';
+import 'detailed_bp.dart';
 
-class RejectedBPScreen extends StatefulWidget {
-  const RejectedBPScreen({super.key});
+class ApprovedSupplierScreen extends StatefulWidget {
+  const ApprovedSupplierScreen({super.key});
 
   @override
-  State<RejectedBPScreen> createState() => _RejectedBPScreenState();
+  State<ApprovedSupplierScreen> createState() => _ApprovedSupplierScreenState();
 }
 
-class _RejectedBPScreenState extends State<RejectedBPScreen> {
+class _ApprovedSupplierScreenState extends State<ApprovedSupplierScreen> {
   final LoginController lc = Get.find<LoginController>();
-  RejectedCustomerController ac = Get.put(RejectedCustomerController());
+  ApprovedSupplierController ac = Get.put(ApprovedSupplierController());
 
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   ac.filteredData.assignAll(ac.GetBPApprovalStatusList);
+  //   ac.searchToggle.value = false;
+  //   ac.searchToggle.refresh();
+  //   super.dispose();
+  // }
   List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
   @override
   Widget build(BuildContext context) {
-    RejectedCustomerController ac = Get.put(RejectedCustomerController());
-    ac.filteredData.assignAll(ac.GetRejectedStatusList);
+    ApprovedSupplierController ac = Get.put(ApprovedSupplierController());
+    // ac.getApprovedCustomerData();
+    ac.filteredData.assignAll(ac.GetApprovedStatusList);
     ac.filteredData.refresh();
     ac.searchToggle.value = false;
     ac.searchToggle.refresh();
     ac.sortToggle.value = false;
     ac.sortToggle.refresh();
 
-    print(ac.GetRejectedStatusList.length);
+    print(ac.GetApprovedStatusList.length);
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
@@ -53,7 +65,7 @@ class _RejectedBPScreenState extends State<RejectedBPScreen> {
               padding: const EdgeInsets.only(right: 10.0),
               child: GestureDetector(
                   onTap: () {
-                    ac.filteredData.assignAll(ac.GetRejectedStatusList);
+                    ac.filteredData.assignAll(ac.GetApprovedStatusList);
 
                     ac.searchToggle.value = !ac.searchToggle.value;
                     ac.searchToggle.refresh();
@@ -166,6 +178,8 @@ class _RejectedBPScreenState extends State<RejectedBPScreen> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
+                              // print(ac.GetBPApprovalStatusList[index]
+                              //     .bpmasterDetails[0].CardCode);
                               ac.cardCode.value = ac.filteredData[index]
                                       .bpmasterDetails[0].CardCode ??
                                   '';
@@ -176,7 +190,7 @@ class _RejectedBPScreenState extends State<RejectedBPScreen> {
                                   context,
                                   CupertinoPageRoute(
                                       builder: (context) =>
-                                          DetailedRejectedScreen(
+                                          DetailedSupplierScreen(
                                             name: ac
                                                     .filteredData[index]
                                                     .bpmasterDetails[0]

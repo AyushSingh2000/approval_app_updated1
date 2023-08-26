@@ -93,7 +93,7 @@ class _CustomerPage_2State extends State<CustomerPage_2> {
                   borderRadius: 12,
                   backgroundColor: Colors.blue,
                   textColor: Colors.white,
-                  title: 'Back',
+                  title: Text('Back'),
                   onPressed: () {
                     Get.back();
                   },
@@ -103,7 +103,7 @@ class _CustomerPage_2State extends State<CustomerPage_2> {
                   borderRadius: 12,
                   backgroundColor: Colors.blue,
                   textColor: Colors.white,
-                  title: 'Next',
+                  title: Text('Next'),
                   onPressed: () {
                     Navigator.push(
                         context,

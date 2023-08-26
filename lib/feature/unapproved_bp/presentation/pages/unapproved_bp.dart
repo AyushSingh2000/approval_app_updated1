@@ -19,22 +19,12 @@ class UnApprovedBPScreen extends StatefulWidget {
 class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
   List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
-  // ApprovedBpController ac = Get.put(ApprovedBpController());
-
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   ac.filteredData.assignAll(ac.GetBPApprovalStatusList);
-  //   ac.searchToggle.value = false;
-  //   ac.searchToggle.refresh();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
     ApprovedBpController ac =
         Get.put<ApprovedBpController>(ApprovedBpController());
-    ac.filteredData_unApproved.assignAll(ac.GetBPApprovalStatusList);
+    ac.filteredData_unApproved.assignAll(ac.GetBPUN_ApprovalStatusList);
     ac.filteredData_unApproved.refresh();
     ac.searchToggle.value = false;
     ac.searchToggle.refresh();
@@ -58,7 +48,7 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
             child: GestureDetector(
                 onTap: () {
                   ac.filteredData_unApproved
-                      .assignAll(ac.GetBPApprovalStatusList);
+                      .assignAll(ac.GetBPUN_ApprovalStatusList);
 
                   ac.searchToggle.value = !ac.searchToggle.value;
                   ac.searchToggle.refresh();

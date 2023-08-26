@@ -94,7 +94,8 @@ class _SupplierPage_2State extends State<SupplierPage_2> {
                   borderRadius: 12,
                   backgroundColor: Colors.blue,
                   textColor: Colors.white,
-                  title: 'Back',
+                  title: Text('Back',style: TextStyle(
+                    color: Colors.white,),),
                   onPressed: () {
                     Get.back();
                   },
@@ -104,7 +105,8 @@ class _SupplierPage_2State extends State<SupplierPage_2> {
                   borderRadius: 12,
                   backgroundColor: Colors.blue,
                   textColor: Colors.white,
-                  title: 'Next',
+                  title: Text('Next',style: TextStyle(
+                    color: Colors.white,),),
                   onPressed: () {
                     Navigator.push(
                         context,

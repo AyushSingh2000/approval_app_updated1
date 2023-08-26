@@ -459,7 +459,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                   borderRadius: 12,
                   backgroundColor: Colors.blue,
                   textColor: Colors.white,
-                  title: 'Back',
+                  title: Text('Back'),
                   onPressed: () {
                     Get.back();
                   },
@@ -474,7 +474,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                     borderRadius: 12,
                     backgroundColor: Colors.blue,
                     textColor: Colors.white,
-                    title: 'Submit',
+                    title: Text('Submit'),
                     onPressed: () async {
                       customerController.addresslist.value = [];
                       add_address(isChecked);
@@ -497,7 +497,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                           type: QuickAlertType.success,
                           text: res.message,
                         );
-                        ac.getApprovalStatusData();
+                        // ac.getApprovalStatusData();
                         // Navigator.popUntil(context, (route) {
                         //   return count++ == 3;
                         // });

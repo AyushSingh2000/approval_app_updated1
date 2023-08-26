@@ -60,4 +60,13 @@ class URLConst {
 
   static const getShipToCounty =
       "http://202.65.143.242:8000/TEKROI_C360/SetUpMasters/ShipToCounty.xsjs?DBName=TESTACAE01";
+
+  static const updateBPMasterStatus =
+      "http://202.65.143.242:8000/TEKROI_C360/PostMasterData/UpdateBPMaster.xsjs?DBName=TESTAC0718&CardCode=";
+
+  static const getCustomerListApprovedURL2 =
+      "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetCustomerList_Approved.xsjs?DBName=TESTAC0718";
+
+  static const getCustomerListUN_ApprovedURL =
+      "http://202.65.143.242:8000/TEKROI_C360/GetMasterData/GetCustomerList_Un-Approved.xsjs?DBName=TESTAC0718";
 }

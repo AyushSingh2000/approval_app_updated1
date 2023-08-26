@@ -458,7 +458,8 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                   borderRadius: 12,
                   backgroundColor: Colors.blue,
                   textColor: Colors.white,
-                  title: 'Back',
+                  title: Text('Back',style: TextStyle(
+                    color: Colors.white,),),
                   onPressed: () {
                     Get.back();
                   },
@@ -473,7 +474,8 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                     borderRadius: 12,
                     backgroundColor: Colors.blue,
                     textColor: Colors.white,
-                    title: 'Submit',
+                    title:Text('Submit',style: TextStyle(
+                      color: Colors.white,),),
                     onPressed: () async {
                       customerController.addresslist.value = [];
                       add_address(isChecked);
@@ -496,7 +498,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                           type: QuickAlertType.success,
                           text: res.message,
                         );
-                        ac.getApprovalStatusData();
+                        // ac.getApprovalStatusData();
                         Navigator.popUntil(context, (route) {
                           return count++ == 3;
                         });

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class ButtonBS extends StatelessWidget {
-  final String title;
+  final Widget? title;
   final String? buttonText;
   final double? height;
   final double? width;
@@ -67,16 +67,7 @@ class ButtonBS extends StatelessWidget {
             ),
             //suffix icons
 
-            Padding(
-              padding: EdgeInsets.all(paddingAll),
-              child: Text(
-                title,
-                style: TextStyle(
-                    color: textColor,
-                    fontSize: fontSize,
-                    fontWeight: fontWeight),
-              ),
-            ),
+            Padding(padding: EdgeInsets.all(paddingAll), child: title),
             SizedBox(
               width: separateSuffixIcon,
             ),

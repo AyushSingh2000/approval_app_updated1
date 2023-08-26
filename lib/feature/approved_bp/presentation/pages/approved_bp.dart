@@ -35,6 +35,7 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
   @override
   Widget build(BuildContext context) {
     ApprovedBpController ac = Get.put(ApprovedBpController());
+    // ac.getApprovedCustomerData();
     ac.filteredData.assignAll(ac.GetBPApprovalStatusList);
     ac.filteredData.refresh();
     ac.searchToggle.value = false;

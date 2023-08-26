@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../ui/Buttons/buttonBS.dart';
 import '../../../../ui/widgets/detailed_card.dart';
 import '../../controller/approved_bp_controller.dart';
 
@@ -58,11 +59,16 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            widget.name,
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
+                            child: Text(
+                              widget.name,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -72,7 +78,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                             widget.code,
                             style: TextStyle(
                                 fontSize: 15.0,
-                                fontWeight: FontWeight.w300,
+                                fontWeight: FontWeight.w400,
                                 color: Colors.blueAccent),
                           ),
                           SizedBox(height: 20.0),
@@ -171,7 +177,58 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                             "-"
                                                       },
                                                     ],
-                                                  )
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      ButtonBS(
+                                                        // prefixIcon: CupertinoIcons.cube_box,
+                                                        // prefixIconColor: Colors.white,
+                                                        // suffixIcon: CupertinoIcons.arrow_right_circle_fill,
+                                                        // suffixIconColor: Colors.white,
+                                                        title: Text('Approve'),
+                                                        backgroundColor:
+                                                            const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                33,
+                                                                79,
+                                                                243),
+
+                                                        textColor: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        paddingAll: 16,
+                                                        borderRadius: 10,
+                                                        fontSize: 16,
+                                                        onPressed: () {},
+                                                      ),
+                                                      ButtonBS(
+                                                        title: Text('Reject'),
+                                                        backgroundColor:
+                                                            const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                228,
+                                                                228,
+                                                                228),
+                                                        textColor: const Color
+                                                                .fromARGB(
+                                                            255, 33, 79, 243),
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        paddingAll: 16,
+                                                        borderRadius: 10,
+                                                        fontSize: 16,
+                                                        onPressed: () {},
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ],
                                               ),
                                             )

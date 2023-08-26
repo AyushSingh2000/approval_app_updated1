@@ -171,7 +171,8 @@ class _Items3State extends State<Items3> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: ButtonBS(
-                      title: 'Back',
+                      title:Text('Back',style: TextStyle(
+                        color: Colors.white,),),
                       textColor: Colors.white,
                       backgroundColor: Colors.blue,
                       borderRadius: 12,
@@ -188,7 +189,8 @@ class _Items3State extends State<Items3> {
                               true
                           ? CircularProgressIndicator()
                           : ButtonBS(
-                              title: 'Next',
+                              title:Text('Next',style: TextStyle(
+                                color: Colors.white,),),
                               textColor: Colors.white,
                               backgroundColor: Colors.blue,
                               borderRadius: 12,

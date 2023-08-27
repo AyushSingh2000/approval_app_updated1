@@ -113,42 +113,42 @@ class _CustomerPageState extends State<CustomerPage> {
                 const SizedBox(height: 16.0),
 
                 //cardtype
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 0),
-                  height: 60,
-                  child: TextDropdownFormField(
-                    decoration: InputDecoration(
-                      // enabled: false,
-                      labelText: list1.isEmpty
-                          ? 'No Card type Found'
-                          : 'Select Card type',
-                      fillColor: Colors.grey[200],
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(9)),
-                      // hintText: 'Select State',
-                      filled: true,
-                      hintStyle: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                      contentPadding:
-                          const EdgeInsets.only(left: 12, right: 12, top: 20),
-                      isCollapsed: true,
-                    ),
-                    options: list1,
-                    onChanged: (dynamic newValue) {
-                      customerController.Cardtype.value = list1_1[newValue]!;
-                    },
-                  ),
-                ),
-                const SizedBox(height: 16.0),
+                // Container(
+                //   margin: const EdgeInsets.symmetric(vertical: 0),
+                //   height: 60,
+                //   child: TextDropdownFormField(
+                //     decoration: InputDecoration(
+                //       // enabled: false,
+                //       labelText: list1.isEmpty
+                //           ? 'No Card type Found'
+                //           : 'Select Card type',
+                //       fillColor: Colors.grey[200],
+                //       suffixIcon: Padding(
+                //         padding: const EdgeInsets.all(18.0),
+                //         child: Icon(
+                //           Icons.arrow_drop_down,
+                //           color: Colors.black.withOpacity(0.6),
+                //         ),
+                //       ),
+                //
+                //       border: OutlineInputBorder(
+                //           borderSide: BorderSide.none,
+                //           borderRadius: BorderRadius.circular(9)),
+                //       // hintText: 'Select State',
+                //       filled: true,
+                //       hintStyle: const TextStyle(
+                //           fontWeight: FontWeight.bold, color: Colors.black),
+                //       contentPadding:
+                //           const EdgeInsets.only(left: 12, right: 12, top: 20),
+                //       isCollapsed: true,
+                //     ),
+                //     options: list1,
+                //     onChanged: (dynamic newValue) {
+                //       customerController.Cardtype.value = list1_1[newValue]!;
+                //     },
+                //   ),
+                // ),
+                // const SizedBox(height: 16.0),
 
                 CustomTextField(
                   hintText: 'Foreign Name',

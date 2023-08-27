@@ -100,7 +100,8 @@ class ItemDataSourceImpl implements ItemDataSourceRepository {
     Map<String, int> data = {};
 
     try {
-      const URL = URLConst.baseURL + URLConst.getItemSeriesURL;
+      // const URL = URLConst.baseURL + URLConst.getItemSeriesURL;
+      const URL = URLConst.getItemSeriesListURL;
 
       var response = await http.get(
         Uri.parse(URL),
@@ -108,7 +109,7 @@ class ItemDataSourceImpl implements ItemDataSourceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);
-        var resData = jsonResponse['Series'];
+        var resData = jsonResponse['ItemSeries'];
 
         resData.forEach((k, v) {
           data[v['SeriesName']] = v['Series'];
@@ -134,7 +135,8 @@ class ItemDataSourceImpl implements ItemDataSourceRepository {
     Map<String, int> data = {};
 
     try {
-      const URL = URLConst.baseURL + URLConst.getItemGroupURL;
+      // const URL = URLConst.baseURL + URLConst.getItemGroupURL;
+      const URL = URLConst.getItemGroupListURL;
 
       var response = await http.get(
         Uri.parse(URL),
@@ -142,10 +144,10 @@ class ItemDataSourceImpl implements ItemDataSourceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);
-        var resData = jsonResponse['Series'];
+        var resData = jsonResponse['ItemGroup'];
 
         resData.forEach((k, v) {
-          data[v['SeriesName']] = v['Series'];
+          data[v['ItmsGrpNam']] = v['ItmsGrpCod'];
         });
 
         return data;

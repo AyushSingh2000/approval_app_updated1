@@ -54,7 +54,8 @@ class SupplierDataSourceImpl implements SupplierDataSourceRepository {
     Map<String, int> data = {};
 
     try {
-      String URL = URLConst.baseURL + URLConst.getBPSeriesURL;
+      // String URL = URLConst.baseURL + URLConst.getBPSeriesURL;
+      String URL = URLConst.getSupplierSeriesListURL;
 
       var response = await http.get(
         Uri.parse(URL),
@@ -62,7 +63,7 @@ class SupplierDataSourceImpl implements SupplierDataSourceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);
-        var resData = jsonResponse['Series'];
+        var resData = jsonResponse['SupplierSeries'];
 
         resData.forEach((k, v) {
           data[v['SeriesName']] = v['Series'];
@@ -88,7 +89,8 @@ class SupplierDataSourceImpl implements SupplierDataSourceRepository {
     Map<String, int> data = {};
 
     try {
-      const URL = URLConst.baseURL + URLConst.getBPGroupCodeURL;
+      // const URL = URLConst.baseURL + URLConst.getBPGroupCodeURL;
+      const URL = URLConst.getSupplierGroupListURL;
 
       var response = await http.get(
         Uri.parse(URL),
@@ -96,7 +98,7 @@ class SupplierDataSourceImpl implements SupplierDataSourceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);
-        var resData = jsonResponse['GroupCodes'];
+        var resData = jsonResponse['SupplierGroup'];
 
         // resData.forEach((k, v) {
         //   data[v['SeriesName']] = v['Series'];

@@ -131,7 +131,7 @@ class _NavScreenState extends State<NavScreen> {
                           icon: Icon(Icons
                               .water_drop_outlined), //Image.asset(AppImagePaths.petrolIcon, scale: 3,),
                           activeIcon: Icon(Icons.water_drop),
-                          label: 'Item',
+                          label: 'Rejected',
                         ),
                       ],
             currentIndex: _selectedIndex,

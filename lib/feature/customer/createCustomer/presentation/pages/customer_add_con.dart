@@ -1,3 +1,4 @@
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -31,13 +32,25 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
   var con_Address = ''.obs;
   var con_Active = ''.obs;
 
+  var full = ''.obs;
+
   void addcontact() {
     contactEmployees newcontact = contactEmployees(
         Title: con_Title.value,
         FirstName: con_First_Name.value,
         MiddleName: con_Middle_Name.value,
         LastName: con_Last_Name.value,
-        Name: con_Contact_Name.value,
+        Name: con_Middle_Name.value.isEmpty
+            ? con_First_Name.value +
+                '' +
+                con_Middle_Name.value +
+                ' ' +
+                con_Last_Name.value
+            : con_First_Name.value +
+                ' ' +
+                con_Middle_Name.value +
+                ' ' +
+                con_Last_Name.value,
         Position: con_Designation.value,
         Address: con_Address.value,
         Phone1: con_Telephone.value,
@@ -48,6 +61,7 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
     print(newcontact);
     cust_Ctrl.contactemployee.add(newcontact);
   }
+
   // void addcontact() {
   //   contactEmployees newcontact = contactEmployees(
   //       CardCode: "CAE00283",
@@ -66,8 +80,23 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
   //
   //   cust_Ctrl.contactemployee.add(newcontact);
   // }
+  TextEditingController dobController = TextEditingController();
+  TextEditingController anniversaryController = TextEditingController();
+  Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  Rx<DateTime?> anniDate = Rx<DateTime?>(null);
+
+  String formatDate(DateTime? date, {bool isFormatted = true}) {
+    if (date == null) return '';
+
+    if (isFormatted) {
+      return '${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year.toString()}';
+    } else {
+      return '${date.year.toString()}${date.month.toString().padLeft(2, '0')}${date.day.toString().padLeft(2, '0')}';
+    }
+  }
 
   List<String> list3 = ['tYES', 'tNO'];
+  List<String> title = ['Mr', 'Mrs'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,24 +114,56 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
-                hintText: 'Title',
-                onChanged: (p0) => con_Title.value = p0,
+
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 0),
+                height: 60,
+                child: TextDropdownFormField(
+                  decoration: InputDecoration(
+                    // enabled: false,
+                    labelText: 'Select Title',
+                    fillColor: Colors.grey[200],
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.black.withOpacity(0.6),
+                      ),
+                    ),
+
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(9)),
+                    // hintText: 'Select State',
+                    filled: true,
+                    hintStyle: const TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                    contentPadding:
+                        const EdgeInsets.only(left: 12, right: 12, top: 20),
+                    isCollapsed: true,
+                  ),
+                  options: title,
+                  onChanged: (dynamic newValue) {
+                    con_Title.value = newValue;
+                  },
+                ),
               ),
               const SizedBox(
                 height: 10,
               ),
               CustomTextField(
-                hintText: 'First Name *',
-                onChanged: (p0) => con_First_Name.value = p0,
-              ),
+                  hintText: 'First Name *',
+                  onChanged: (p0) {
+                    con_First_Name.value = p0;
+                  }),
               const SizedBox(
                 height: 10,
               ),
               CustomTextField(
-                hintText: 'Middle Name',
-                onChanged: (p0) => con_Middle_Name.value = p0,
-              ),
+                  hintText: 'Middle Name',
+                  onChanged: (p0) {
+                    con_Middle_Name.value = p0;
+                  }),
               const SizedBox(
                 height: 10,
               ),
@@ -113,10 +174,28 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
-                hintText: 'Contact Name *',
-                onChanged: (p0) => con_Contact_Name.value = p0,
+              Obx(
+                () => CustomTextField(
+                    hintText: (con_First_Name.value +
+                                con_Middle_Name.value +
+                                con_Last_Name.value)
+                            .isEmpty
+                        ? "Contact Name"
+                        : con_Middle_Name.value.isEmpty
+                            ? con_First_Name.value +
+                                '' +
+                                con_Middle_Name.value +
+                                ' ' +
+                                con_Last_Name.value
+                            : con_First_Name.value +
+                                ' ' +
+                                con_Middle_Name.value +
+                                ' ' +
+                                con_Last_Name.value,
+                    enable: false,
+                    onChanged: (p0) {}),
               ),
+
               const SizedBox(
                 height: 10,
               ),
@@ -183,16 +262,74 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
-                hintText: 'Date of Birth',
-                onChanged: (p0) => con_Date_of_Birth.value = p0,
+              TextField(
+                controller: dobController,
+                decoration: InputDecoration(
+                  hintText: 'Date of Birth',
+                  prefixIcon: Icon(Icons.calendar_today),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                readOnly: true, // Make the text field non-editable
+                onTap: () async {
+                  final currentDate = selectedDate.value ?? DateTime.now();
+                  final pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: currentDate,
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (pickedDate != null && pickedDate != selectedDate.value) {
+                    selectedDate.value = pickedDate;
+                    dobController.text = formatDate(pickedDate);
+                    con_Date_of_Birth.value =
+                        formatDate(pickedDate, isFormatted: false);
+                  }
+                  print('!!!!!!!${con_Date_of_Birth.value}');
+                },
               ),
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
-                hintText: 'Date of Anniversary',
-                onChanged: (p0) => con_Date_of_Anniversary.value = p0,
+              TextField(
+                controller: anniversaryController,
+                decoration: InputDecoration(
+                  hintText: 'Date of Anniversary',
+                  prefixIcon: Icon(Icons.calendar_today),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                readOnly: true, // Make the text field non-editable
+                onTap: () async {
+                  final currentDate = anniDate.value ?? DateTime.now();
+                  final pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: currentDate,
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (pickedDate != null && pickedDate != anniDate.value) {
+                    anniDate.value = pickedDate;
+                    anniversaryController.text = formatDate(pickedDate);
+                    con_Date_of_Anniversary.value =
+                        formatDate(pickedDate, isFormatted: false);
+                  }
+                  print('!!!!!!!${con_Date_of_Anniversary.value}');
+                },
               ),
               const SizedBox(
                 height: 10,

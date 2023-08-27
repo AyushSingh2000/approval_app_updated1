@@ -271,7 +271,7 @@ class _DetailedUnApprovedItemScreenState
                                                                 context)
                                                             .showSnackBar(SnackBar(
                                                                 content: Text(
-                                                                    'Successfully Un-Approved')));
+                                                                    'Successfully Approved')));
                                                         Navigator.of(context)
                                                             .pop();
                                                       } else {
@@ -322,7 +322,7 @@ class _DetailedUnApprovedItemScreenState
                                                                 context)
                                                             .showSnackBar(SnackBar(
                                                                 content: Text(
-                                                                    'Successfully Approved')));
+                                                                    'Successfully Rejected')));
                                                         Navigator.of(context)
                                                             .pop();
                                                       } else {

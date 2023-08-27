@@ -81,14 +81,14 @@ class BlankSupplierDataSourceImpl implements BlankSupplierDataSourceRepository {
   Future<String> updateSupplierStatusData(
       String CardCode, String Status) async {
     try {
-      String URL = URLConst.updateBPMasterStatus + CardCode.toString();
+      String URL = URLConst.updateSupplierStatusDataURL + CardCode.toString();
 
       var data = {"U_TRPAPPST": Status};
 
       print(data);
 
       var response = await http.patch(Uri.parse(URL), body: jsonEncode(data));
-
+      print('Response after update ${response.body}');
       if (response.statusCode == 200) {
         print('Update successful');
         return "Success";

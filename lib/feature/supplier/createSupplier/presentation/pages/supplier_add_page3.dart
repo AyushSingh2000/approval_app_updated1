@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:new_app/core/post_enum_response.dart';
+import 'package:new_app/feature/supplier/unapproved_supplier/controller/unapproved_supplier_controller.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
 import 'package:quickalert/quickalert.dart';
@@ -13,7 +14,7 @@ import 'package:quickalert/quickalert.dart';
 import '../../../../customer/approved_bp/controller/approved_bp_controller.dart';
 import '../../../../login/controller/login_controller.dart';
 import '../../controller/supplier_controller.dart';
-import '../../data/model/BP_post_1.dart';
+import '../../data/model/supplier_post_1.dart';
 
 class SupplierPage_3 extends StatefulWidget {
   const SupplierPage_3({super.key});
@@ -24,8 +25,9 @@ class SupplierPage_3 extends StatefulWidget {
 
 class _SupplierPage_3State extends State<SupplierPage_3> {
   LoginController lc = Get.put(LoginController());
-  ApprovedBpController ac =
-      Get.put<ApprovedBpController>(ApprovedBpController());
+  // SupplierController ac = Get.put<SupplierController>(SupplierController());
+  UnApprovedSupplierController uac =
+      Get.put<UnApprovedSupplierController>(UnApprovedSupplierController());
 
   int count = 0;
   final SupplierController customerController = Get.find<SupplierController>();
@@ -153,6 +155,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                     (element) => element.toString()).toList();
                 final bpcountyList = customerController.BPCountyList.map(
                     (element) => element.toString()).toList();
+                final databaseList = lc.databaseList;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -188,7 +191,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                               left: 12, right: 12, top: 20),
                           isCollapsed: true,
                         ),
-                        options: bpcountryList,
+                        options: bpcountyList,
                         onChanged: (dynamic newValue) {
                           customerController.Adrs_Ship_To_County.value =
                               customerController.BPCountyMapData[newValue];
@@ -308,7 +311,76 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                       hintText: 'Zip',
                       onChanged: (p0) =>
                           customerController.Adrs_Zip_Code.value = p0,
-                    ), //AddressID
+                    ),
+                    const SizedBox(height: 16.0),
+
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 0),
+                      height: 60,
+                      child: DropdownButtonFormField<String>(
+                        hint: const Text(
+                          'Select Database',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 225, 225, 225),
+                          labelText: 'Database',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        value: null,
+                        onChanged: (String? newValue) {
+                          if (newValue != null) {
+                            if (customerController.database.value
+                                .contains(newValue)) {
+                              customerController.database.value
+                                  .remove(newValue);
+                            } else {
+                              customerController.database.value.add(newValue);
+                            }
+                            customerController.database.refresh();
+                            customerController.dbString.value =
+                                customerController.database.join(';');
+                          }
+                        },
+                        items: databaseList.map((option) {
+                          return DropdownMenuItem<String>(
+                            value: option,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  customerController.database.value
+                                          .contains(option)
+                                      ? Icons.check_box
+                                      : Icons.check_box_outline_blank,
+                                  color: customerController.database.value
+                                          .contains(option)
+                                      ? Colors.blue
+                                      : Colors.black,
+                                ),
+                                SizedBox(width: 8),
+                                Text(option),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    Wrap(
+                      children: customerController.database.value
+                          .map((selectedOption) {
+                        return Chip(
+                          label: Text(selectedOption),
+                          onDeleted: () {
+                            customerController.database.value
+                                .remove(selectedOption);
+                            customerController.database.refresh();
+                          },
+                        );
+                      }).toList(),
+                    ) //AddressID
                   ],
                 );
               }),
@@ -494,10 +566,14 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                         await QuickAlert.show(
                             context: context,
                             type: QuickAlertType.error,
-                            text: res.message);
+                            text: res.message == "default"
+                                ? "Server Error"
+                                : res.message);
 
                         return;
                       } else {
+                        await uac.getUnApprovedSupplierData();
+                        uac.filterData('');
                         await QuickAlert.show(
                           context: context,
                           type: QuickAlertType.success,

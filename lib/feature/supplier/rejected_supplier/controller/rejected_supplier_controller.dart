@@ -21,8 +21,8 @@ class RejectedSupplierController extends GetxController {
   var searchToggle = false.obs;
   var sortToggle = false.obs;
 
-  var load = false.obs;
-  var load_rejected = false.obs;
+  var load1 = false.obs;
+  var load2 = false.obs;
   var res = ''.obs;
 
   var un_dataLoading = false.obs;

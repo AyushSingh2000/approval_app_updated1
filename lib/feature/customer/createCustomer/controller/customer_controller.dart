@@ -83,6 +83,7 @@ class CustomerController extends GetxController {
   var Adrs_Zip_Code = ''.obs;
   var Adrs_Ship_To_County = ''.obs;
   var Adrs_AddressID = ''.obs;
+  var dbString = ''.obs;
   var database = <String>[].obs;
 
 //address ship to
@@ -217,7 +218,7 @@ class CustomerController extends GetxController {
       BP_PostModel_test bp_postModel = BP_PostModel_test(
         Series: double.parse(Series.value),
         CardName: Name.value,
-        CardType: Cardtype.value,
+        CardType: 'C',
         CardForeignName: Foreign_name.value,
         GroupCode: double.parse(GroupCode.value.toString()),
         Currency: Currencies.value,
@@ -228,8 +229,10 @@ class CustomerController extends GetxController {
         EmailAddress: Email.value,
         Website: Website.value,
         U_ARADDR: Arabic_address.value,
+        U_TRPBPTYP: '',
         U_TRPAPPST: "Un-Approved",
         U_TRPCRBY: "Ravali",
+        U_TRPADBS: dbString.value,
         BPAddresses: addresslist,
         ContactEmployees: contactemployee,
       );

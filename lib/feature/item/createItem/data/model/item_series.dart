@@ -22,8 +22,6 @@ class ItemModel {
   String CostAccountingMethod;
   String SWW;
   dynamic U_TRPHSC;
-  double MaxInventory;
-  double MinInventory;
   String U_TRPAPPST;
   dynamic U_VSPPC;
   String ProcurementMethod;
@@ -50,8 +48,6 @@ class ItemModel {
     required this.CostAccountingMethod,
     required this.SWW,
     required this.U_TRPHSC,
-    required this.MaxInventory,
-    required this.MinInventory,
     required this.U_TRPAPPST,
     required this.U_VSPPC,
     required this.ProcurementMethod,
@@ -80,8 +76,6 @@ class ItemModel {
       'CostAccountingMethod': CostAccountingMethod,
       'SWW': SWW,
       'U_TRPHSC': U_TRPHSC,
-      'MaxInventory': MaxInventory,
-      'MinInventory': MinInventory,
       'U_TRPAPPST': U_TRPAPPST,
       'U_VSPPC': U_VSPPC,
       'ProcurementMethod': ProcurementMethod,
@@ -111,8 +105,6 @@ class ItemModel {
       CostAccountingMethod: map['CostAccountingMethod'] as String,
       SWW: map['SWW'] as String,
       U_TRPHSC: map['U_TRPHSC'] as dynamic,
-      MaxInventory: map['MaxInventory'] as double,
-      MinInventory: map['MinInventory'] as double,
       U_TRPAPPST: map['U_TRPAPPST'] as String,
       U_VSPPC: map['U_VSPPC'] as dynamic,
       ProcurementMethod: map['ProcurementMethod'] as String,

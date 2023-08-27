@@ -7,6 +7,8 @@ import 'package:new_app/ui/widgets/card.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../../../login/controller/login_controller.dart';
+import '../../../approved_supplier/controller/Approved_supplier_controller.dart';
+import '../../../unapproved_supplier/controller/unapproved_supplier_controller.dart';
 import '../../controller/rejected_supplier_controller.dart';
 import 'rejected_detailed_supplier.dart';
 
@@ -26,6 +28,7 @@ class _RejectedSupplierScreenState extends State<RejectedSupplierScreen> {
   @override
   Widget build(BuildContext context) {
     RejectedSupplierController ac = Get.put(RejectedSupplierController());
+
     ac.filteredData.assignAll(ac.GetRejectedStatusList);
     ac.filteredData.refresh();
     ac.searchToggle.value = false;
@@ -190,7 +193,9 @@ class _RejectedSupplierScreenState extends State<RejectedSupplierScreen> {
                                           )));
                               ac.searchToggle.value = false;
                               ac.searchToggle.refresh();
-                              ac.filterData('');
+                              Future.delayed(Duration(milliseconds: 500), () {
+                                ac.filterData('');
+                              });
                             },
                             child: Padding(
                                 padding: const EdgeInsets.symmetric(

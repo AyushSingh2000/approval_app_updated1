@@ -346,6 +346,8 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                               customerController.database.value.add(newValue);
                             }
                             customerController.database.refresh();
+                            customerController.dbString.value =
+                                customerController.database.join(';');
                           }
                         },
                         items: databaseList.map((option) {
@@ -559,7 +561,9 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                         await QuickAlert.show(
                             context: context,
                             type: QuickAlertType.error,
-                            text: res.message);
+                            text: res.message == "default"
+                                ? "Server Error"
+                                : res.message);
 
                         return;
                       } else {

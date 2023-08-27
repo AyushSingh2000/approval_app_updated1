@@ -8,6 +8,7 @@ import '../../../../ui/Buttons/buttonBS.dart';
 import '../../../../ui/widgets/detailed_card.dart';
 import '../../customer/approved_bp/controller/approved_bp_controller.dart';
 import '../approved_supplier/controller/Approved_supplier_controller.dart';
+import '../rejected_supplier/controller/rejected_supplier_controller.dart';
 import 'controller/unapproved_supplier_controller.dart';
 
 class DetailedSupplierScreen extends StatefulWidget {
@@ -23,7 +24,8 @@ class DetailedSupplierScreen extends StatefulWidget {
 
 class _DetailedSupplierScreenState extends State<DetailedSupplierScreen> {
   UnApprovedSupplierController ac = Get.put(UnApprovedSupplierController());
-  ApprovedSupplierController x = Get.put(ApprovedSupplierController());
+  ApprovedSupplierController apc = Get.put(ApprovedSupplierController());
+  RejectedSupplierController rc = Get.put(RejectedSupplierController());
   @override
   void dispose() {
     // TODO: implement dispose
@@ -188,24 +190,20 @@ class _DetailedSupplierScreenState extends State<DetailedSupplierScreen> {
                                                     children: [
                                                       Obx(
                                                         () => ButtonBS(
-                                                          title: ac.load
+                                                          title: ac.load1
                                                                       .value ==
                                                                   true
-                                                              ? Container(
-                                                                  height: 25,
-                                                                  width: 25,
-                                                                  child: CircularProgressIndicator(
-                                                                      strokeWidth:
-                                                                          1,
-                                                                      color: Colors
-                                                                          .white))
+                                                              ? CircularProgressIndicator(
+                                                                  strokeWidth:
+                                                                      1,
+                                                                  color: Colors
+                                                                      .white,
+                                                                )
                                                               : Text(
                                                                   'Approve',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white),
                                                                 ),
                                                           backgroundColor:
                                                               const Color
@@ -222,38 +220,31 @@ class _DetailedSupplierScreenState extends State<DetailedSupplierScreen> {
                                                           borderRadius: 10,
                                                           fontSize: 16,
                                                           onPressed: () async {
-                                                            ac.load.value =
+                                                            ac.load1.value =
                                                                 true;
                                                             var res = await ac
                                                                 .updateSupplierDetailsData(
                                                                     widget.code,
                                                                     "Approved");
-                                                            ac.load.value =
+                                                            ac.load1.value =
                                                                 false;
+
                                                             if (ac.res.value ==
                                                                 "Success") {
-                                                              print(
-                                                                  '!!!!!!!!Approved');
                                                               await ac
                                                                   .getUnApprovedSupplierData();
+                                                              await apc
+                                                                  .getApprovedSupplierData();
                                                               ac.filterData('');
+                                                              apc.filterData(
+                                                                  '');
                                                               ScaffoldMessenger
                                                                       .of(
                                                                           context)
                                                                   .showSnackBar(
                                                                       SnackBar(
                                                                           content:
-                                                                              Text('Approval Successfull')));
-
-                                                              await x
-                                                                  .getApprovedSupplierData();
-
-                                                              ac.GetUnApprovedStatusList
-                                                                  .refresh();
-                                                              ac.filteredData
-                                                                  .refresh();
-                                                              x.GetApprovedStatusList
-                                                                  .refresh();
+                                                                              Text('Successfully Approved')));
                                                               Navigator.of(
                                                                       context)
                                                                   .pop();
@@ -264,102 +255,77 @@ class _DetailedSupplierScreenState extends State<DetailedSupplierScreen> {
                                                                   .showSnackBar(
                                                                       SnackBar(
                                                                           content:
-                                                                              Text('Approval Un-Successfull')));
+                                                                              Text('An error has occurred')));
                                                             }
                                                           },
                                                         ),
                                                       ),
-                                                      ButtonBS(
-                                                        title: ac.load_rejected
-                                                                    .value ==
-                                                                true
-                                                            ? Container(
-                                                                height: 25,
-                                                                width: 25,
-                                                                child:
-                                                                    CircularProgressIndicator(
+                                                      Obx(
+                                                        () => ButtonBS(
+                                                          title: ac.load2
+                                                                      .value ==
+                                                                  true
+                                                              ? CircularProgressIndicator(
                                                                   strokeWidth:
                                                                       1,
-                                                                  color: Color
+                                                                  color: Colors
+                                                                      .black,
+                                                                )
+                                                              : Text('Reject'),
+                                                          backgroundColor:
+                                                              const Color
                                                                       .fromARGB(
-                                                                          255,
-                                                                          33,
-                                                                          79,
-                                                                          243),
-                                                                ))
-                                                            : Text(
-                                                                'Reject',
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          33,
-                                                                          79,
-                                                                          243),
-                                                                ),
-                                                              ),
-                                                        backgroundColor:
-                                                            const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                228,
-                                                                228,
-                                                                228),
-                                                        textColor: const Color
-                                                                .fromARGB(
-                                                            255, 33, 79, 243),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        paddingAll: 16,
-                                                        borderRadius: 10,
-                                                        fontSize: 16,
-                                                        onPressed: () async {
-                                                          ac.load_rejected
-                                                              .value = true;
-
-                                                          var res = await ac
-                                                              .updateSupplierDetailsData(
-                                                                  widget.code,
-                                                                  "Rejected");
-                                                          ac.load_rejected
-                                                              .value = false;
-                                                          if (ac.res.value ==
-                                                              "Success") {
-                                                            print(
-                                                                '!!!!!!!!Rejected');
-                                                            await ac
-                                                                .getUnApprovedSupplierData();
-                                                            ac.filterData('');
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                                    SnackBar(
-                                                                        content:
-                                                                            Text('Rejected Successfully')));
-
-                                                            await x
-                                                                .getApprovedSupplierData();
-
-                                                            ac.GetUnApprovedStatusList
-                                                                .refresh();
-                                                            ac.filteredData
-                                                                .refresh();
-                                                            x.GetApprovedStatusList
-                                                                .refresh();
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          } else {
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                                    SnackBar(
-                                                                        content:
-                                                                            Text('Un-Successfull')));
-                                                          }
-                                                        },
-                                                      ),
+                                                                  255,
+                                                                  228,
+                                                                  228,
+                                                                  228),
+                                                          textColor: const Color
+                                                                  .fromARGB(
+                                                              255, 33, 79, 243),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          paddingAll: 16,
+                                                          borderRadius: 10,
+                                                          fontSize: 16,
+                                                          onPressed: () async {
+                                                            ac.load2.value =
+                                                                true;
+                                                            var res = await ac
+                                                                .updateSupplierDetailsData(
+                                                                    widget.code,
+                                                                    "Rejected");
+                                                            ac.load2.value =
+                                                                false;
+                                                            if (ac.res.value ==
+                                                                "Success") {
+                                                              await ac
+                                                                  .getUnApprovedSupplierData();
+                                                              await rc
+                                                                  .getRejectedSupplierData();
+                                                              ac.filterData('');
+                                                              rc.filterData('');
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('Successfully Rejected')));
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('An error has occurred')));
+                                                            }
+                                                          },
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 ],

@@ -579,9 +579,9 @@ class _DetailedBlankScreenState extends State<DetailedBlankScreen> {
                                                                 },
                                                               ],
                                                             ),
-                                                            ac.GetBPDetailsList[0].CustomerAddress!
-                                                                        .length >
-                                                                    1
+                                                            ac.GetBPDetailsList[0]
+                                                                        .CustomerAddress?[1] !=
+                                                                    null
                                                                 ? DetailsCard(
                                                                     title:
                                                                         "Shipping Address",

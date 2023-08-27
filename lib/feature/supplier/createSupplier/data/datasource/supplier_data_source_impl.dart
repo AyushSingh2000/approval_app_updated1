@@ -5,7 +5,7 @@ import 'package:new_app/API/URLConst.dart';
 import 'package:new_app/core/post_enum_response.dart';
 
 import '../../../../../core/failure.dart';
-import '../model/BP_post_1.dart';
+import '../model/supplier_post_1.dart';
 import 'supplier_data_source_repository.dart';
 
 const DEBUG = true;
@@ -16,10 +16,11 @@ class SupplierDataSourceImpl implements SupplierDataSourceRepository {
       BP_PostModel_Supplier data) async {
     try {
       // print(URLConst.baseURL + URLConst.postBP);
-      print(data.toJson());
-      const URL = URLConst.postBP;
+      print('Supplier Post Data: ${data.toJson()}');
+      const URL = URLConst.postSupplierDataURL;
       var response = await http.post(
         Uri.parse(URL),
+        // Uri.parse(''),
         body: data.toJson(),
       );
 
@@ -38,8 +39,7 @@ class SupplierDataSourceImpl implements SupplierDataSourceRepository {
         }
 
         return Right(PostResponseType(
-            postResponseEnum: PostResponseEnum.success,
-            message: jsonResponse.toString()));
+            postResponseEnum: PostResponseEnum.success, message: "Success"));
       }
 
       return left(
@@ -229,7 +229,8 @@ class SupplierDataSourceImpl implements SupplierDataSourceRepository {
     Map<String, String> data = {};
 
     try {
-      String URL = URLConst.baseURL + URLConst.getBPCountryURL;
+      // String URL = URLConst.baseURL + URLConst.getBPCountryURL;
+      String URL = URLConst.getSupplierCountryListURL;
 
       var response = await http.get(
         Uri.parse(URL),

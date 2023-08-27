@@ -20,7 +20,7 @@ class ItemDataSourceImpl implements ItemDataSourceRepository {
     try {
       print(itemModel.toJson());
       var response = await http.post(
-        Uri.parse(URLConst.postItemMasterURL),
+        Uri.parse(URLConst.postItemMasterDataURL),
         body: itemModel.toJson(),
       );
 

@@ -160,8 +160,48 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                       'Billing Address',
                       style: TextStyle(fontWeight: FontWeight.w700),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 0),
+                      height: 60,
+                      child: TextDropdownFormField(
+                        decoration: InputDecoration(
+                          // enabled: false,
+                          labelText: 'Select County',
+                          fillColor: Colors.grey[200],
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
 
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(9)),
+                          // hintText: 'Select Country',
+                          filled: true,
+                          hintStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                          contentPadding: const EdgeInsets.only(
+                              left: 12, right: 12, top: 20),
+                          isCollapsed: true,
+                        ),
+                        options: bpcountryList,
+                        onChanged: (dynamic newValue) {
+                          customerController.Adrs_Ship_To_County.value =
+                              customerController.BPCountyMapData[newValue];
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    CustomTextField(
+                      hintText: 'Address ID',
+                      onChanged: (p0) =>
+                          customerController.Adrs_AddressID.value = p0,
+                    ),
+                    const SizedBox(height: 16.0),
                     CustomTextField(
                       hintText: 'Building/Floor/Room',
                       onChanged: (p0) => customerController
@@ -268,49 +308,6 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                       hintText: 'Zip',
                       onChanged: (p0) =>
                           customerController.Adrs_Zip_Code.value = p0,
-                    ), //Zip Code
-                    const SizedBox(height: 16.0),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 0),
-                      height: 60,
-                      child: TextDropdownFormField(
-                        decoration: InputDecoration(
-                          // enabled: false,
-                          labelText: 'Select County',
-                          fillColor: Colors.grey[200],
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.black.withOpacity(0.6),
-                            ),
-                          ),
-
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(9)),
-                          // hintText: 'Select Country',
-                          filled: true,
-                          hintStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                          contentPadding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 20),
-                          isCollapsed: true,
-                        ),
-                        options: bpcountryList,
-                        onChanged: (dynamic newValue) {
-                          customerController.Adrs_Ship_To_County.value =
-                              customerController.BPCountyMapData[newValue];
-                        },
-                      ),
-                    ),
-
-                    const SizedBox(height: 16.0),
-
-                    CustomTextField(
-                      hintText: 'Address ID',
-                      onChanged: (p0) =>
-                          customerController.Adrs_AddressID.value = p0,
                     ), //AddressID
                   ],
                 );
@@ -458,8 +455,12 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                   borderRadius: 12,
                   backgroundColor: Colors.blue,
                   textColor: Colors.white,
-                  title: Text('Back',style: TextStyle(
-                    color: Colors.white,),),
+                  title: Text(
+                    'Back',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                   onPressed: () {
                     Get.back();
                   },
@@ -474,8 +475,12 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                     borderRadius: 12,
                     backgroundColor: Colors.blue,
                     textColor: Colors.white,
-                    title:Text('Submit',style: TextStyle(
-                      color: Colors.white,),),
+                    title: Text(
+                      'Submit',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                     onPressed: () async {
                       customerController.addresslist.value = [];
                       add_address(isChecked);

@@ -54,7 +54,8 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
     Map<String, int> data = {};
 
     try {
-      String URL = URLConst.baseURL + URLConst.getBPSeriesURL;
+      // String URL = URLConst.baseURL + URLConst.getBPSeriesURL;
+      String URL = URLConst.getCustomerSeries;
 
       var response = await http.get(
         Uri.parse(URL),
@@ -62,7 +63,7 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);
-        var resData = jsonResponse['Series'];
+        var resData = jsonResponse['CustomerSeries'];
 
         resData.forEach((k, v) {
           data[v['SeriesName']] = v['Series'];
@@ -88,7 +89,8 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
     Map<String, int> data = {};
 
     try {
-      const URL = URLConst.baseURL + URLConst.getBPGroupCodeURL;
+      // const URL = URLConst.baseURL + URLConst.getBPGroupCodeURL;
+      const URL = URLConst.getCustomerGroupCode;
 
       var response = await http.get(
         Uri.parse(URL),
@@ -96,7 +98,7 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);
-        var resData = jsonResponse['GroupCodes'];
+        var resData = jsonResponse['CustomerGroup'];
 
         // resData.forEach((k, v) {
         //   data[v['SeriesName']] = v['Series'];
@@ -235,7 +237,7 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);
-        var resData = jsonResponse['Currencies'];
+        var resData = jsonResponse['Country'];
 
         resData.forEach((k, v) {
           data[v['Name']] = v['Code'];

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   TextEditingController? controller;
   EdgeInsetsGeometry? contentPadding;
+  // InputDecoration? decoration;
   IconData? prefixIcon;
   double? prefixIconSize;
   Color? prefixIconColor;
@@ -23,11 +24,13 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final Function(String)? onChanged;
+  final VoidCallback? onTap;
 
   CustomTextField({
     super.key,
     this.contentPadding,
     this.controller,
+    // this.decoration,
     this.enable,
     this.prefixIcon,
     this.showPrefixIcon = false,
@@ -46,6 +49,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
     this.onChanged,
+    this.onTap,
   });
 
   @override
@@ -57,6 +61,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: obscureText,
       onChanged: onChanged,
+      onTap: onTap,
       minLines: minLines,
       maxLines: maxLines,
       decoration: InputDecoration(

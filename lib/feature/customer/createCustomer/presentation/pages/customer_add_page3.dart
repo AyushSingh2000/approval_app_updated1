@@ -164,6 +164,49 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                       'Billing Address',
                       style: TextStyle(fontWeight: FontWeight.w700),
                     ),
+                    const SizedBox(height: 16.0),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 0),
+                      height: 60,
+                      child: TextDropdownFormField(
+                        decoration: InputDecoration(
+                          // enabled: false,
+                          labelText: 'Select County',
+                          fillColor: Colors.grey[200],
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
+
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(9)),
+                          // hintText: 'Select Country',
+                          filled: true,
+                          hintStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                          contentPadding: const EdgeInsets.only(
+                              left: 12, right: 12, top: 20),
+                          isCollapsed: true,
+                        ),
+                        options: bpcountyList,
+                        onChanged: (dynamic newValue) {
+                          customerController.Adrs_Ship_To_County.value =
+                              customerController.BPCountyMapData[newValue];
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 16.0),
+
+                    CustomTextField(
+                      hintText: 'Address ID',
+                      onChanged: (p0) =>
+                          customerController.Adrs_AddressID.value = p0,
+                    ),
                     SizedBox(height: 16.0),
 
                     CustomTextField(
@@ -273,49 +316,6 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                       onChanged: (p0) =>
                           customerController.Adrs_Zip_Code.value = p0,
                     ), //Zip Code
-                    const SizedBox(height: 16.0),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 0),
-                      height: 60,
-                      child: TextDropdownFormField(
-                        decoration: InputDecoration(
-                          // enabled: false,
-                          labelText: 'Select County',
-                          fillColor: Colors.grey[200],
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Icon(
-                              Icons.arrow_drop_down,
-                              color: Colors.black.withOpacity(0.6),
-                            ),
-                          ),
-
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(9)),
-                          // hintText: 'Select Country',
-                          filled: true,
-                          hintStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.black),
-                          contentPadding: const EdgeInsets.only(
-                              left: 12, right: 12, top: 20),
-                          isCollapsed: true,
-                        ),
-                        options: bpcountyList,
-                        onChanged: (dynamic newValue) {
-                          customerController.Adrs_Ship_To_County.value =
-                              customerController.BPCountyMapData[newValue];
-                        },
-                      ),
-                    ),
-
-                    const SizedBox(height: 16.0),
-
-                    CustomTextField(
-                      hintText: 'Address ID',
-                      onChanged: (p0) =>
-                          customerController.Adrs_AddressID.value = p0,
-                    ),
 
                     const SizedBox(height: 16.0),
 
@@ -338,8 +338,10 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                         value: null,
                         onChanged: (String? newValue) {
                           if (newValue != null) {
-                            if (customerController.database.value.contains(newValue)) {
-                              customerController.database.value.remove(newValue);
+                            if (customerController.database.value
+                                .contains(newValue)) {
+                              customerController.database.value
+                                  .remove(newValue);
                             } else {
                               customerController.database.value.add(newValue);
                             }
@@ -352,10 +354,12 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                             child: Row(
                               children: [
                                 Icon(
-                                  customerController.database.value.contains(option)
+                                  customerController.database.value
+                                          .contains(option)
                                       ? Icons.check_box
                                       : Icons.check_box_outline_blank,
-                                  color: customerController.database.value.contains(option)
+                                  color: customerController.database.value
+                                          .contains(option)
                                       ? Colors.blue
                                       : Colors.black,
                                 ),
@@ -368,11 +372,13 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                       ),
                     ),
                     Wrap(
-                      children: customerController.database.value.map((selectedOption) {
+                      children: customerController.database.value
+                          .map((selectedOption) {
                         return Chip(
                           label: Text(selectedOption),
                           onDeleted: () {
-                            customerController.database.value.remove(selectedOption);
+                            customerController.database.value
+                                .remove(selectedOption);
                             customerController.database.refresh();
                           },
                         );

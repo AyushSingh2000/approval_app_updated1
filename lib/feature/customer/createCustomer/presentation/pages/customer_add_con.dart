@@ -376,7 +376,6 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
               ButtonBS(
                 onPressed: () {
                   if (con_First_Name.value != '' &&
-                      con_Contact_Name.value != '' &&
                       con_Designation.value != '' &&
                       con_Mobile_No.value != '') {
                     addcontact();

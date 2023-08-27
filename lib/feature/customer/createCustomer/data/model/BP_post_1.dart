@@ -15,8 +15,10 @@ class BP_PostModel_test {
   String? EmailAddress;
   String? Website;
   String? U_ARADDR;
+  String? U_TRPBPTYP;
   String? U_TRPAPPST;
   String? U_TRPCRBY;
+  String? U_TRPADBS;
   List<bPAddresses>? BPAddresses;
   List<contactEmployees>? ContactEmployees;
 
@@ -34,8 +36,10 @@ class BP_PostModel_test {
       this.EmailAddress,
       this.Website,
       this.U_ARADDR,
+      this.U_TRPBPTYP,
       this.U_TRPAPPST,
       this.U_TRPCRBY,
+      this.U_TRPADBS,
       this.BPAddresses,
       this.ContactEmployees});
 
@@ -54,8 +58,10 @@ class BP_PostModel_test {
       'EmailAddress': EmailAddress,
       'Website': Website,
       'U_ARADDR': U_ARADDR,
+      'U_TRPBPTYP': U_TRPBPTYP,
       'U_TRPAPPST': U_TRPAPPST,
       'U_TRPCRBY': U_TRPCRBY,
+      'U_TRPADBS': U_TRPADBS,
       'BPAddresses': BPAddresses?.map((x) => x.toMap()).toList(),
       'ContactEmployees': ContactEmployees?.map((x) => x.toMap()).toList(),
     };
@@ -82,9 +88,12 @@ class BP_PostModel_test {
           map['EmailAddress'] != null ? map['EmailAddress'] as String : null,
       Website: map['Website'] != null ? map['Website'] as String : null,
       U_ARADDR: map['U_ARADDR'] != null ? map['U_ARADDR'] as String : null,
+      U_TRPBPTYP:
+          map['U_TRPBPTYP'] != null ? map['U_TRPBPTYP'] as String : null,
       U_TRPAPPST:
           map['U_TRPAPPST'] != null ? map['U_TRPAPPST'] as String : null,
       U_TRPCRBY: map['U_TRPCRBY'] != null ? map['U_TRPCRBY'] as String : null,
+      U_TRPADBS: map['U_TRPADBS'] != null ? map['U_TRPADBS'] as String : null,
       BPAddresses: map['BPAddresses'] != null
           ? List<bPAddresses>.from(
               (map['BPAddresses'] as List<int>).map<bPAddresses?>(

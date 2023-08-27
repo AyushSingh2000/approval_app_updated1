@@ -205,7 +205,10 @@ class _ApprovedBPScreenState extends State<ApprovedBPScreen> {
                                                 )));
                                     ac.searchToggle.value = false;
                                     ac.searchToggle.refresh();
-                                    ac.filterData('');
+                                    Future.delayed(Duration(milliseconds: 500),
+                                        () {
+                                      ac.filterData('');
+                                    });
                                   },
                                   child: Padding(
                                       padding: const EdgeInsets.symmetric(

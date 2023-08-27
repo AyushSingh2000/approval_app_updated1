@@ -189,7 +189,10 @@ class _UnApprovedSupplierScreenState extends State<UnApprovedSupplierScreen> {
                                                 )));
                                     ac.searchToggle.value = false;
                                     ac.searchToggle.refresh();
-                                    ac.filterData('');
+                                    Future.delayed(Duration(milliseconds: 500),
+                                        () {
+                                      ac.filterData('');
+                                    });
                                   },
                                   child: Padding(
                                       padding: const EdgeInsets.symmetric(

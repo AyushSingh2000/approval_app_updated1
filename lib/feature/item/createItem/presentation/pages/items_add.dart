@@ -34,13 +34,49 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
   // }
 
   List<String> manageItemBy = ['Batches', 'Serial Numbers', 'None'];
+  Map<String, String> manageMap = {
+    'Batches': 'N',
+    'Serial Numbers': 'Y  ',
+    'None': '0'
+  };
   List<String> manageMethod = ['On Every Transaction', 'On Release'];
+  Map<String, String> manageMethodMap = {
+    'On Every Transaction': 'A',
+    'On Release': 'B'
+  };
   List<String> ValuationMethod = [
     'FIFO',
     'Standard',
     'Moving Average',
     'Serial/Batch'
   ];
+
+  Map<String, String> ValuationMap = {
+    'FIFO': 'F',
+    'Standard': 'S',
+    'Moving Average': 'A',
+    'Serial/Batch': 'B'
+  };
+
+  List<String> procurementMethod = [
+    'Buy',
+    'Make',
+  ];
+
+  Map<String, String> procurementMap = {
+    'Buy': 'B',
+    'Make': 'M',
+  };
+
+  List<String> dgMethod = [
+    'DG',
+    'Non-DG',
+  ];
+
+  Map<String, String> dgMap = {
+    'DG': 'DG',
+    'Non-DG': 'Non-DG',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -211,6 +247,7 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                       onChanged: (dynamic newValue) {
                         itemsController.UoM_code.value =
                             itemsController.UoMMapData[newValue!];
+                        print(itemsController.UoM_code.value);
                       },
                     ),
                   ),
@@ -374,7 +411,8 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                       ),
                       options: manageItemBy,
                       onChanged: (dynamic newValue) {
-                        itemsController.Manage_Item_by.value = newValue;
+                        itemsController.Manage_Item_by.value =
+                            manageMap[newValue]!;
                       },
                     ),
                   ),
@@ -410,7 +448,8 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                       ),
                       options: manageMethod,
                       onChanged: (dynamic newValue) {
-                        itemsController.Management_Method.value = newValue;
+                        itemsController.Management_Method.value =
+                            manageMethodMap[newValue]!;
                       },
                     ),
                   ),
@@ -446,7 +485,8 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                       ),
                       options: ValuationMethod,
                       onChanged: (dynamic newValue) {
-                        itemsController.Valuation_Method.value = newValue;
+                        itemsController.Valuation_Method.value =
+                            ValuationMap[newValue]!;
                       },
                     ),
                   ),
@@ -477,19 +517,76 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                   const SizedBox(
                     height: 16,
                   ),
-                  CustomTextField(
-                      hintText: 'Procurement Method',
-                      onChanged: (Value) {
-                        itemsController.Procurement_Method.value = Value;
-                      }),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    height: 60,
+                    child: TextDropdownFormField(
+                      decoration: InputDecoration(
+                        // enabled: false,
+                        labelText: 'Procurement Method',
+                        fillColor: Colors.grey[200],
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(9)),
+                        // hintText: 'Select State',
+                        filled: true,
+                        hintStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        contentPadding:
+                            const EdgeInsets.only(left: 12, right: 12, top: 20),
+                        isCollapsed: true,
+                      ),
+                      options: procurementMethod,
+                      onChanged: (dynamic newValue) {
+                        itemsController.Procurement_Method.value =
+                            procurementMap[newValue]!;
+                      },
+                    ),
+                  ),
                   const SizedBox(
                     height: 16,
                   ),
-                  CustomTextField(
-                      hintText: 'DG Type',
-                      onChanged: (Value) {
-                        itemsController.DG_Type.value = Value;
-                      }),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    height: 60,
+                    child: TextDropdownFormField(
+                      decoration: InputDecoration(
+                        // enabled: false,
+                        labelText: 'DG Type',
+                        fillColor: Colors.grey[200],
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black.withOpacity(0.6),
+                          ),
+                        ),
+
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(9)),
+                        // hintText: 'Select State',
+                        filled: true,
+                        hintStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        contentPadding:
+                            const EdgeInsets.only(left: 12, right: 12, top: 20),
+                        isCollapsed: true,
+                      ),
+                      options: dgMethod,
+                      onChanged: (dynamic newValue) {
+                        itemsController.DG_Type.value = dgMap[newValue]!;
+                      },
+                    ),
+                  ),
                   const SizedBox(
                     height: 16,
                   ),

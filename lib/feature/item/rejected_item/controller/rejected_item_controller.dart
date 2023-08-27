@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../data/modal/get_card_detail_model.dart';
-import '../data/approved_data_source_impl.dart';
+import '../data/rejected_data_source_impl.dart';
 import '../data/modal/get_item_rejected_modal.dart';
 
 class RejectedItemController extends GetxController {
@@ -20,8 +20,8 @@ class RejectedItemController extends GetxController {
   var searchToggle = false.obs;
   var sortToggle = false.obs;
 
-  var load = false.obs;
-  var load_rejected = false.obs;
+  var load1 = false.obs;
+  var load2 = false.obs;
   var res = ''.obs;
 
   var un_dataLoading = false.obs;
@@ -78,12 +78,13 @@ class RejectedItemController extends GetxController {
 
   Future<void> getRejectedItemData() async {
     final data = await rejectedItemDataSourceImpl.getItemRejectedData();
-    print('//|||||||||||||||||||${data}');
+    // print('//|||||||||||||||||||${data}');
     final List<GetItemRejectedModal> approvalStatusList = data
         .map((item) => GetItemRejectedModal(itemmasterDetails: [item]))
         .toList();
-
+    // print(approvalStatusList);
     GetRejectedStatusList.assignAll(approvalStatusList);
+    // print('From controller ${GetRejectedStatusList}');
   }
 
   Future<void> getItemDetailsData() async {

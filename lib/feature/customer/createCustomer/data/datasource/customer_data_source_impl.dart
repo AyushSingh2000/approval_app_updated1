@@ -16,10 +16,11 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
       BP_PostModel_test data) async {
     try {
       // print(URLConst.baseURL + URLConst.postBP);
-      print(data.toJson());
-      const URL = URLConst.postBP;
+      print('Customer Post Data: ${data.toJson()}');
+      const URL = URLConst.postCustomerDataURL;
       var response = await http.post(
         Uri.parse(URL),
+        // Uri.parse(''),
         body: data.toJson(),
       );
 
@@ -38,8 +39,7 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
         }
 
         return Right(PostResponseType(
-            postResponseEnum: PostResponseEnum.success,
-            message: jsonResponse.toString()));
+            postResponseEnum: PostResponseEnum.success, message: "Success"));
       }
 
       return left(

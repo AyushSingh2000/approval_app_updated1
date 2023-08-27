@@ -6,7 +6,7 @@ import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
 
 import '../../controller/supplier_controller.dart';
-import '../../data/model/BP_post_1.dart';
+import '../../data/model/supplier_post_1.dart';
 
 class SupplierPage_2_1 extends StatefulWidget {
   const SupplierPage_2_1({super.key});
@@ -55,7 +55,7 @@ class _SupplierPage_2_1State extends State<SupplierPage_2_1> {
         MobilePhone: con_Mobile_No.value,
         E_Mail: con_Email_Id.value,
         DateOfBirth: con_Date_of_Birth.value,
-        Active: con_Active.value);
+        Active: 'Y');
 
     cust_Ctrl.contactemployee.add(newcontact);
   }
@@ -374,7 +374,6 @@ class _SupplierPage_2_1State extends State<SupplierPage_2_1> {
               ButtonBS(
                 onPressed: () {
                   if (con_First_Name.value != '' &&
-                      con_Contact_Name.value != '' &&
                       con_Designation.value != '' &&
                       con_Mobile_No.value != '') {
                     addcontact();

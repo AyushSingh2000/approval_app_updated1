@@ -99,6 +99,15 @@ class URLConst {
   static const getSupplierGroupListURL =
       "http://202.65.143.242:8000/TEKROI_C360/SetUpMasters/SupplierGroup.xsjs?DBName=TESTAC0718";
 
+  static const getSupplierCountryListURL =
+      "http://202.65.143.242:8000/TEKROI_C360/SetUpMasters/Country.xsjs?DBName=TESTAC0718";
+
+  static const postSupplierDataURL =
+      "http://202.65.143.242:8000/TEKROI_C360/PostMasterData/PostBPMaster.xsjs?DBName=TESTAC0718";
+
+  static const updateSupplierStatusDataURL =
+      "http://202.65.143.242:8000/TEKROI_C360/PostMasterData/UpdateBPMaster.xsjs?DBName=TESTAC0718&CardCode=";
+
   /// Item -------------------------------------------------------
 
   static const getItemBlankListURL =
@@ -122,6 +131,12 @@ class URLConst {
   static const getItemGroupListURL =
       "http://202.65.143.242:8000/TEKROI_C360/SetUpMasters/ItemGroup.xsjs?DBName=TESTAC0718";
 
+  static const postItemMasterDataURL =
+      "http://202.65.143.242:8000/TEKROI_C360/PostMasterData/PostItemMaster.xsjs?DBName=TESTAC0718";
+
+  static const updateItemStatusDataURL =
+      "http://202.65.143.242:8000/TEKROI_C360/PostMasterData/UpdateItemMaster.xsjs?DBName=TESTAC0718&ItemCode=";
+
   /// Customer ---------------------------------------------------
 
   static const getCustomerSeries =
@@ -129,4 +144,7 @@ class URLConst {
 
   static const getCustomerGroupCode =
       "http://202.65.143.242:8000/TEKROI_C360/SetUpMasters/CustomerGroup.xsjs?DBName=TESTAC0718";
+
+  static const postCustomerDataURL =
+      "http://202.65.143.242:8000/TEKROI_C360/PostMasterData/PostBPMaster.xsjs?DBName=TESTAC0718";
 }

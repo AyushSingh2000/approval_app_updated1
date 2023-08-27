@@ -4,7 +4,7 @@ import 'package:new_app/core/post_enum_response.dart';
 
 import '../../../customer/approved_bp/data/modal/get_bp_approval_status_modal.dart';
 import '../data/datasource/supplier_data_source_impl.dart';
-import '../data/model/BP_post_1.dart';
+import '../data/model/supplier_post_1.dart';
 
 class SupplierController extends GetxController {
   SupplierDataSourceImpl supplierDataSourceImpl = SupplierDataSourceImpl();
@@ -65,6 +65,9 @@ class SupplierController extends GetxController {
   var Active = ''.obs;
   var BpCountries = ''.obs;
   var blank = ''.obs;
+
+  var database = <String>[].obs;
+  var dbString = ''.obs;
 
   var count = '0'.obs;
 
@@ -218,7 +221,7 @@ class SupplierController extends GetxController {
       BP_PostModel_Supplier bp_postModel = BP_PostModel_Supplier(
         Series: double.parse(Series.value),
         CardName: Name.value,
-        CardType: Cardtype.value,
+        CardType: 'S',
         CardForeignName: Foreign_name.value,
         GroupCode: double.parse(GroupCode.value.toString()),
         Currency: Currencies.value,
@@ -229,8 +232,10 @@ class SupplierController extends GetxController {
         EmailAddress: Email.value,
         Website: Website.value,
         U_ARADDR: Arabic_address.value,
+        U_TRPBPTYP: "",
         U_TRPAPPST: "Un-Approved",
         U_TRPCRBY: "Ravali",
+        U_TRPADBS: dbString.value,
         BPAddresses: addresslist,
         ContactEmployees: contactemployee,
       );

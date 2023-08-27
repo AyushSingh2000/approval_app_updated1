@@ -233,14 +233,17 @@ class ItemsController extends GetxController {
         ItemName: Item_Name.value,
         ForeignName: Foreign_Name.value,
         ItemsGroupCode: Item_Group_Code.value,
-        ItemType: Item_Type.value,
+        ItemType: 'I',
         PurchaseItem: Purchase_Item.value == true ? "tYES" : "tNO",
         SalesItem: Sales_Item.value == true ? "tYES" : "tNO",
         InventoryItem: Inventory_Item.value == true ? "tYES" : "tNO",
-        UoMGroupEntry: UoM_code.value,
-        InventoryUoMEntry: Inventory_UoM_code.value,
-        DefaultSalesUoMEntry: Sales_UoM_code.value,
-        DefaultPurchasingUoMEntry: Purchasing_UoM_code.value,
+        UoMGroupEntry: int.parse(UoM_code.value.toString()),
+        // InventoryUoMEntry: Inventory_UoM_code.value,
+        InventoryUoMEntry: int.parse(UoM_code.value.toString()),
+        // DefaultSalesUoMEntry: Sales_UoM_code.value,
+        DefaultSalesUoMEntry: int.parse(UoM_code.value.toString()),
+        // DefaultPurchasingUoMEntry: Purchasing_UoM_code.value,
+        DefaultPurchasingUoMEntry: int.parse(UoM_code.value.toString()),
         SupplierCatalogNo: Mfr_Catalog_No.value,
         Manufacturer: -1,
         ManageSerialNumbers: Manage_Item_by.value,
@@ -249,8 +252,6 @@ class ItemsController extends GetxController {
         CostAccountingMethod: Valuation_Method.value,
         SWW: Additional_Identifier.value,
         U_TRPHSC: HS_Code.value,
-        MaxInventory: int.parse(Max_Inventory.value).toDouble(),
-        MinInventory: int.parse(Min_Inventory.value).toDouble(),
         U_TRPAPPST: Status.value,
         U_VSPPC: Classification_No.value,
         ProcurementMethod: Procurement_Method.value,
@@ -286,6 +287,7 @@ class ItemsController extends GetxController {
       //   U_TRPITMGP: "DG",
       // );
 
+      print('Req body: ${itemModel.toJson()}');
       var res = await itemDataSourceImpl.postItemMaster(itemModel);
       print('qwertrsasdfgg${res}');
 

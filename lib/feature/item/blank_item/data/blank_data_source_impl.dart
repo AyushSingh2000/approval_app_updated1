@@ -83,7 +83,7 @@ class BlankItemDataSourceImpl implements BlankItemDataSourceRepository {
   Future<String> updateSupplierStatusData(
       String CardCode, String Status) async {
     try {
-      String URL = URLConst.updateBPMasterStatus + CardCode.toString();
+      String URL = URLConst.updateItemStatusDataURL + CardCode.toString();
 
       var data = {"U_TRPAPPST": Status};
 

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:new_app/core/post_enum_response.dart';
 
 import '../../../../../core/failure.dart';
-import '../model/BP_post_1.dart';
+import '../model/supplier_post_1.dart';
 
 abstract class SupplierDataSourceRepository {
   Future<Map<String, int>> getBPSeries_supplier();

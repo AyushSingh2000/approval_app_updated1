@@ -192,7 +192,10 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
                                                 )));
                                     ac.searchToggle.value = false;
                                     ac.searchToggle.refresh();
-                                    ac.filterData_UN('');
+                                    Future.delayed(Duration(milliseconds: 500),
+                                        () {
+                                      ac.filterData_UN('');
+                                    });
                                   },
                                   child: Padding(
                                       padding: const EdgeInsets.symmetric(

@@ -134,6 +134,9 @@ class URLConst {
   static const postItemMasterDataURL =
       "http://202.65.143.242:8000/TEKROI_C360/PostMasterData/PostItemMaster.xsjs?DBName=TESTAC0718";
 
+  static const updateItemStatusDataURL =
+      "http://202.65.143.242:8000/TEKROI_C360/PostMasterData/UpdateItemMaster.xsjs?DBName=TESTAC0718&ItemCode=";
+
   /// Customer ---------------------------------------------------
 
   static const getCustomerSeries =

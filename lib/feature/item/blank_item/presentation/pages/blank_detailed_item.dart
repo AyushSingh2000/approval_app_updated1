@@ -219,6 +219,9 @@ class _DetailedItemBlankScreenState extends State<DetailedItemBlankScreen> {
                                                 ],
                                               ),
                                             ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,

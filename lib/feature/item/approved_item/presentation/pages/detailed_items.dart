@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/feature/item/rejected_item/controller/rejected_item_controller.dart';
+import 'package:new_app/feature/item/unapproved_item/controller/unApproved_item_controller.dart';
 
+import '../../../../../ui/Buttons/buttonBS.dart';
 import '../../../../../ui/widgets/detailed_card.dart';
 import '../../controller/approved_item_controller.dart';
 
@@ -21,6 +24,8 @@ class DetailedApprovedItemScreen extends StatefulWidget {
 class _DetailedApprovedItemScreenState
     extends State<DetailedApprovedItemScreen> {
   ApprovedItemController ac = Get.put(ApprovedItemController());
+  UnApprovedItemController uac = Get.put(UnApprovedItemController());
+  RejectedItemController rc = Get.put(RejectedItemController());
   @override
   void dispose() {
     super.dispose();
@@ -214,7 +219,122 @@ class _DetailedApprovedItemScreenState
                                                   // {'subtitle': 'Website', 'text': ac.GetItemDetailsList[0].IntrntSite ?? "-"},
                                                 ],
                                               ),
-                                            )
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Obx(
+                                                  () => ButtonBS(
+                                                    title: ac.load1.value ==
+                                                            true
+                                                        ? CircularProgressIndicator(
+                                                            strokeWidth: 1,
+                                                            color: Colors.white,
+                                                          )
+                                                        : Text(
+                                                            'Un-Approve',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                    backgroundColor:
+                                                        const Color.fromARGB(
+                                                            255, 33, 79, 243),
+                                                    textColor: Colors.white,
+                                                    fontWeight: FontWeight.w500,
+                                                    paddingAll: 16,
+                                                    borderRadius: 10,
+                                                    fontSize: 16,
+                                                    onPressed: () async {
+                                                      ac.load1.value = true;
+                                                      var res = await ac
+                                                          .updateItemDetailsData(
+                                                              widget.code,
+                                                              "Un-Approved");
+                                                      ac.load1.value = false;
+
+                                                      if (ac.res.value ==
+                                                          "Success") {
+                                                        await ac
+                                                            .getApprovedItemData();
+                                                        await uac
+                                                            .getUnApprovedItemData();
+                                                        ac.filterData('');
+                                                        uac.filterData('');
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Successfully Approved')));
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'An error has occurred')));
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                                Obx(
+                                                  () => ButtonBS(
+                                                    title: ac.load2.value ==
+                                                            true
+                                                        ? CircularProgressIndicator(
+                                                            strokeWidth: 1,
+                                                            color: Colors.black,
+                                                          )
+                                                        : Text('Reject'),
+                                                    backgroundColor:
+                                                        const Color.fromARGB(
+                                                            255, 228, 228, 228),
+                                                    textColor:
+                                                        const Color.fromARGB(
+                                                            255, 33, 79, 243),
+                                                    fontWeight: FontWeight.w500,
+                                                    paddingAll: 16,
+                                                    borderRadius: 10,
+                                                    fontSize: 16,
+                                                    onPressed: () async {
+                                                      ac.load2.value = true;
+                                                      var res = await ac
+                                                          .updateItemDetailsData(
+                                                              widget.code,
+                                                              "Rejected");
+                                                      ac.load2.value = false;
+                                                      if (ac.res.value ==
+                                                          "Success") {
+                                                        await ac
+                                                            .getApprovedItemData();
+                                                        await rc
+                                                            .getRejectedItemData();
+                                                        ac.filterData('');
+                                                        rc.filterData('');
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'Successfully Rejected')));
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(SnackBar(
+                                                                content: Text(
+                                                                    'An error has occurred')));
+                                                      }
+                                                    },
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ],
                                         ),
                                       ),

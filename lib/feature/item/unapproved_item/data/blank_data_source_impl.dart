@@ -83,7 +83,7 @@ class UnApprovedItemDataSourceImpl
 
   Future<String> updateItemStatusData(String CardCode, String Status) async {
     try {
-      String URL = URLConst.updateItemMasterStatus + CardCode.toString();
+      String URL = URLConst.updateItemStatusDataURL + CardCode.toString();
 
       var data = {"U_TRPAPPST": Status};
 

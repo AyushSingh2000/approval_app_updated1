@@ -67,57 +67,47 @@ class _RejectedItemScreenState extends State<RejectedItemScreen> {
                         physics: BouncingScrollPhysics(),
                         itemCount: ac.filteredData.length,
                         itemBuilder: (context, index) {
-                          return ac.filteredData[index].itemmasterDetails[0]
-                                      .ApprovalStatus ==
-                                  'Approved'
-                              ? GestureDetector(
-                                  onTap: () {
-                                    ac.itemCode.value = ac.filteredData[index]
+                          return GestureDetector(
+                              onTap: () {
+                                ac.itemCode.value = ac.filteredData[index]
+                                        .itemmasterDetails[0].ItemCode ??
+                                    '';
+                                // print(ac.cardCode.value);
+                                // ac.getBPDetailsData();
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (context) =>
+                                            DetailedRejectedItemScreen(
+                                              name: ac
+                                                      .filteredData[index]
+                                                      .itemmasterDetails[0]
+                                                      .ItemName ??
+                                                  '',
+                                              code: ac
+                                                      .filteredData[index]
+                                                      .itemmasterDetails[0]
+                                                      .ItemCode ??
+                                                  '',
+                                            )));
+                                ac.searchToggle.value = false;
+                                ac.searchToggle.refresh();
+                                ac.filterData('');
+                              },
+                              child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: 5),
+                                  child: ProfileCard(
+                                    cardName: ac.filteredData[index]
+                                            .itemmasterDetails[0].ItemName ??
+                                        '',
+                                    cardCode: ac.filteredData[index]
                                             .itemmasterDetails[0].ItemCode ??
-                                        '';
-                                    // print(ac.cardCode.value);
-                                    // ac.getBPDetailsData();
-                                    Navigator.push(
-                                        context,
-                                        CupertinoPageRoute(
-                                            builder: (context) =>
-                                                DetailedRejectedItemScreen(
-                                                  name: ac
-                                                          .filteredData[index]
-                                                          .itemmasterDetails[0]
-                                                          .ItemName ??
-                                                      '',
-                                                  code: ac
-                                                          .filteredData[index]
-                                                          .itemmasterDetails[0]
-                                                          .ItemCode ??
-                                                      '',
-                                                )));
-                                    ac.searchToggle.value = false;
-                                    ac.searchToggle.refresh();
-                                    ac.filterData('');
-                                  },
-                                  child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0, vertical: 5),
-                                      child: ProfileCard(
-                                        cardName: ac
-                                                .filteredData[index]
-                                                .itemmasterDetails[0]
-                                                .ItemName ??
-                                            '',
-                                        cardCode: ac
-                                                .filteredData[index]
-                                                .itemmasterDetails[0]
-                                                .ItemCode ??
-                                            '',
-                                        groupName: ac
-                                                .filteredData[index]
-                                                .itemmasterDetails[0]
-                                                .GroupName ??
-                                            '',
-                                      )))
-                              : SizedBox();
+                                        '',
+                                    groupName: ac.filteredData[index]
+                                            .itemmasterDetails[0].GroupName ??
+                                        '',
+                                  )));
                         }),
                   ),
                 ],

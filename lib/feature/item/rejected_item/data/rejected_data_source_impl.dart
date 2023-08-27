@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:new_app/API/URLConst.dart';
 
-import 'approved_data_source_repository.dart';
+import 'rejected_data_source_repository.dart';
 import 'modal/get_card_detail_model.dart';
 import 'modal/get_item_rejected_modal.dart';
 
@@ -81,7 +81,7 @@ class RejectedItemDataSourceImpl implements RejectedItemDataSourceRepository {
 
   Future<String> updateItemStatusData(String CardCode, String Status) async {
     try {
-      String URL = URLConst.updateBPMasterStatus + CardCode.toString();
+      String URL = URLConst.updateItemStatusDataURL + CardCode.toString();
 
       var data = {"U_TRPAPPST": Status};
 

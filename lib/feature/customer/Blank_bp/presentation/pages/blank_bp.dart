@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:new_app/ui/widgets/card.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../../../login/controller/login_controller.dart';
@@ -41,6 +42,15 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
 
   List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
+  final GlobalKey add = GlobalKey();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ShowCaseWidget.of(context).startShowCase([add]);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     BlankCustomerController ac = Get.put(BlankCustomerController());
@@ -83,9 +93,16 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                       MaterialPageRoute(builder: (context) => CustomerPage()));
                   // Get.to(() => CustomerPage());
                 },
-                icon: const Icon(
-                  Icons.add,
-                  size: 27,
+                icon: Showcase(
+                  key: add,
+                  description: 'Tap to Add customer',
+                  overlayOpacity: 0.5,
+                  targetShapeBorder: const CircleBorder(),
+                  targetPadding: const EdgeInsets.all(8),
+                  child: const Icon(
+                    Icons.add,
+                    size: 27,
+                  ),
                 ))
           ],
         ),

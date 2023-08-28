@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
+import 'package:showcaseview/showcaseview.dart';
 import '../customer/Blank_bp/presentation/pages/blank_bp.dart';
 import '../customer/approved_bp/presentation/pages/approved_bp.dart';
 import '../customer/rejected_bp/presentation/pages/rejected_bp.dart';
@@ -147,7 +148,10 @@ class _NavScreenState extends State<NavScreen> {
                 ? (context) {
                     switch (lc.pageNumber.value) {
                       case 0:
-                        return const BlankBPScreen();
+                        return ShowCaseWidget(
+                          builder: Builder(
+                              builder: (context) => const BlankBPScreen()),
+                        );
 
                       case 1:
                         return const UnApprovedBPScreen();
@@ -165,7 +169,11 @@ class _NavScreenState extends State<NavScreen> {
                     ? (context) {
                         switch (lc.pageNumber.value) {
                           case 0:
-                            return const BlankSupplierScreen();
+                            return ShowCaseWidget(
+                              builder: Builder(
+                                  builder: (context) =>
+                                      const BlankSupplierScreen()),
+                            );
 
                           case 1:
                             return const UnApprovedSupplierScreen();
@@ -183,7 +191,11 @@ class _NavScreenState extends State<NavScreen> {
                     : (context) {
                         switch (lc.pageNumber.value) {
                           case 0:
-                            return const BlankItemScreen();
+                            return ShowCaseWidget(
+                              builder: Builder(
+                                  builder: (context) =>
+                                      const BlankItemScreen()),
+                            );
                           case 1:
                             return const UnApprovedItemScreen();
                           case 2:

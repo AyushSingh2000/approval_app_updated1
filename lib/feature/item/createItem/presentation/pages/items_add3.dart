@@ -34,6 +34,9 @@ class _Items3State extends State<Items3> {
     );
   }
 
+  List<String> catalog = ['Yes', 'No'];
+  Map<String, String> catalogMap = {'Yes': 'Y', 'No': 'N'};
+
   @override
   Widget build(BuildContext context) {
     // Get.lazyPut(() => ItemsController());
@@ -82,7 +85,6 @@ class _Items3State extends State<Items3> {
                   margin: const EdgeInsets.symmetric(vertical: 0),
                   height: 60,
                   child: TextDropdownFormField(
-                    
                     decoration: InputDecoration(
                       // enabled: false,
                       labelText: BPdataList.isEmpty
@@ -111,7 +113,7 @@ class _Items3State extends State<Items3> {
                     options: BPdataList,
                     onChanged: (dynamic newValue) {
                       itemsController.BP_Name.value = newValue!;
-                    itemsController.BP_Code.value = newValue;
+                      itemsController.BP_Code.value = newValue;
                     },
                   ),
                 );
@@ -136,11 +138,44 @@ class _Items3State extends State<Items3> {
             const SizedBox(
               height: 10,
             ),
-            CustomTextField(
-                hintText: 'BP Catalog No',
-                onChanged: (Value) {
-                  itemsController.BP_Catalog_No.value = Value;
-                }),
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 0),
+              height: 60,
+              child: TextDropdownFormField(
+                decoration: InputDecoration(
+                  // enabled: false,
+                  labelText: 'BP Catalog No',
+                  fillColor: Colors.grey[200],
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black.withOpacity(0.6),
+                    ),
+                  ),
+
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(9)),
+                  // hintText: 'Select State',
+                  filled: true,
+                  hintStyle: const TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                  contentPadding:
+                      const EdgeInsets.only(left: 12, right: 12, top: 20),
+                  isCollapsed: true,
+                ),
+                options: catalog,
+                onChanged: (dynamic newValue) {
+                  itemsController.BP_Catalog_No.value = catalogMap[newValue]!;
+                },
+              ),
+            ),
+            // CustomTextField(
+            //     hintText: 'BP Catalog No',
+            //     onChanged: (Value) {
+            //       itemsController.BP_Catalog_No.value = Value;
+            //     }),
             const SizedBox(
               height: 10,
             ),
@@ -171,8 +206,12 @@ class _Items3State extends State<Items3> {
                 Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: ButtonBS(
-                      title:Text('Back',style: TextStyle(
-                        color: Colors.white,),),
+                      title: Text(
+                        'Back',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                       textColor: Colors.white,
                       backgroundColor: Colors.blue,
                       borderRadius: 12,
@@ -189,8 +228,12 @@ class _Items3State extends State<Items3> {
                               true
                           ? CircularProgressIndicator()
                           : ButtonBS(
-                              title:Text('Next',style: TextStyle(
-                                color: Colors.white,),),
+                              title: Text(
+                                'Next',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                               textColor: Colors.white,
                               backgroundColor: Colors.blue,
                               borderRadius: 12,

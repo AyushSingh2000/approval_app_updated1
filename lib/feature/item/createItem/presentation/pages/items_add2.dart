@@ -36,6 +36,8 @@ class _Items2State extends State<Items2> {
   ItemsController itemsController = Get.find<ItemsController>();
   List<String> demo = ['hello', 'hello', 'hello'];
 
+  int count = 0;
+
   @override
   Widget build(BuildContext context) {
     print('sdfghj${itemsController.cardCode.value}');
@@ -161,8 +163,12 @@ class _Items2State extends State<Items2> {
               Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: ButtonBS(
-                    title: Text('Back',style: TextStyle(
-                        color: Colors.white,),),
+                    title: Text(
+                      'Back',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                     textColor: Colors.white,
                     backgroundColor: Colors.blue,
                     borderRadius: 12,
@@ -178,8 +184,12 @@ class _Items2State extends State<Items2> {
                     child: itemsController.postItemMasterLoading.value == true
                         ? CircularProgressIndicator()
                         : ButtonBS(
-                            title:Text('Next',style: TextStyle(
-                              color: Colors.white,),),
+                            title: Text(
+                              'Next',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                             textColor: Colors.white,
                             backgroundColor: Colors.blue,
                             borderRadius: 12,
@@ -194,13 +204,16 @@ class _Items2State extends State<Items2> {
                                 // Navigator.of(context).pop();
                                 _showDialog(context,
                                     itemsController.catalog_status.value);
-
-                                Future.delayed(Duration(seconds: 2), () {
-                                  Navigator.push(
-                                      context,
-                                      CupertinoPageRoute(
-                                          builder: (context) => Items3()));
+                                Navigator.popUntil(context, (route) {
+                                  return count++ == 2;
                                 });
+                                //
+                                // Future.delayed(Duration(seconds: 2), () {
+                                //   Navigator.push(
+                                //       context,
+                                //       CupertinoPageRoute(
+                                //           builder: (context) => Items3()));
+                                // });
                                 // Get.to(() => const Items3());
                               } else {
                                 if (itemsController.Whse_Name.value == '') {

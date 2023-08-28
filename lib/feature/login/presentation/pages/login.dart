@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: EdgeInsets.all(width * 0.075),
                   child: Container(
-                    height: height * 0.50,
+                    height: height * 0.44,
                     width: width * 0.85,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -103,39 +103,39 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Select Database'),
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 10),
-                            height: 60,
-                            child: TextDropdownFormField(
-                              decoration: InputDecoration(
-                                enabled: false,
-                                fillColor: Colors.grey[200],
-                                suffixIcon: const Icon(
-                                  CupertinoIcons.arrowtriangle_down_circle_fill,
-                                  color: AppColors.mainblue,
-                                ),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(9)),
-                                hintText: 'Select',
-                                filled: true,
-                                hintStyle: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                                contentPadding: const EdgeInsets.only(
-                                    left: 12, right: 12, top: 14),
-                                isCollapsed: true,
-                              ),
-                              options: database,
-                              onChanged: (dynamic value) {
-                                loginController.companyDB = value;
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
+                          // const Text('Select Database'),
+                          // Container(
+                          //   margin: const EdgeInsets.symmetric(vertical: 10),
+                          //   height: 60,
+                          //   child: TextDropdownFormField(
+                          //     decoration: InputDecoration(
+                          //       enabled: false,
+                          //       fillColor: Colors.grey[200],
+                          //       suffixIcon: const Icon(
+                          //         CupertinoIcons.arrowtriangle_down_circle_fill,
+                          //         color: AppColors.mainblue,
+                          //       ),
+                          //       border: OutlineInputBorder(
+                          //           borderSide: BorderSide.none,
+                          //           borderRadius: BorderRadius.circular(9)),
+                          //       hintText: 'Select',
+                          //       filled: true,
+                          //       hintStyle: const TextStyle(
+                          //           fontWeight: FontWeight.bold,
+                          //           color: Colors.black),
+                          //       contentPadding: const EdgeInsets.only(
+                          //           left: 12, right: 12, top: 14),
+                          //       isCollapsed: true,
+                          //     ),
+                          //     options: database,
+                          //     onChanged: (dynamic value) {
+                          //       loginController.companyDB = value;
+                          //     },
+                          //   ),
+                          // ),
+                          // SizedBox(
+                          //   height: height * 0.01,
+                          // ),
                           const Text('User Name'),
                           Container(
                               margin: const EdgeInsets.symmetric(vertical: 10),
@@ -227,15 +227,15 @@ class _LoginPageState extends State<LoginPage> {
                                       return;
                                     }
 
-                                    if (loginController.companyDB.isEmpty) {
-                                      await QuickAlert.show(
-                                        context: context,
-                                        type: QuickAlertType.warning,
-                                        text: "Select Database",
-                                      );
-
-                                      return;
-                                    }
+                                    // if (loginController.companyDB.isEmpty) {
+                                    //   await QuickAlert.show(
+                                    //     context: context,
+                                    //     type: QuickAlertType.warning,
+                                    //     text: "Select Database",
+                                    //   );
+                                    //
+                                    //   return;
+                                    // }
 
                                     PostResponseType loginResponse =
                                         await loginController.login();

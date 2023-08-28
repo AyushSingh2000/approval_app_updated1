@@ -1,5 +1,6 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/feature/item/approved_item/controller/approved_item_controller.dart';
@@ -9,6 +10,7 @@ import 'package:new_app/ui/colors/app_colors.dart';
 import '../../../../../ui/Buttons/buttonBS.dart';
 import '../../../../../ui/widgets/detailed_card.dart';
 import '../../controller/rejected_item_controller.dart';
+import '../edit/presentation/pages/items_add.dart';
 
 class DetailedRejectedItemScreen extends StatefulWidget {
   final String name;
@@ -43,6 +45,23 @@ class _DetailedRejectedItemScreenState
           backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
           title: const Text('Item Details'),
+          actions: [
+            Padding(
+                padding: const EdgeInsets.only(right: 20.0),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => editRejectedItemsPage(
+                                list: ac.GetItemDetailsList.value)));
+                  },
+                  icon: Icon(
+                    Icons.edit_note_sharp,
+                    size: 30,
+                  ),
+                )),
+          ],
         ),
         body: Container(
           decoration: const BoxDecoration(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../../../../ui/widgets/card.dart';
@@ -26,6 +27,8 @@ class _ApprovedItemScreenState extends State<ApprovedItemScreen> {
     ac.searchToggle.refresh();
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: AppColors.appbarmainblue,
+          elevation: 0,
           title: Text('Approved Item List'),
           actions: [
             Padding(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:new_app/ui/widgets/card.dart';
 import 'package:showcaseview/showcaseview.dart';
 
@@ -56,6 +57,7 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
+          backgroundColor: AppColors.appbarmainblue,
           title: Text('Approved BP List'),
           actions: [
             Padding(

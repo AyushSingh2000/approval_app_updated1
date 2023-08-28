@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 // import 'package:new_app/feature/customer/presentation/pages/customer_add_page2.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../controller/customer_controller.dart';
@@ -32,6 +33,7 @@ class _CustomerPageState extends State<CustomerPage> {
     CustomerController customerController = Get.put(CustomerController());
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           'Customer',
         ),

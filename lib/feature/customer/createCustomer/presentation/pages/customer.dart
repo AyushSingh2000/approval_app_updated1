@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import '../pages/customer_add_page1.dart';
 
 class Customer_add extends StatefulWidget {
@@ -14,6 +15,7 @@ class _Customer_addState extends State<Customer_add> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: Text('Customer list'),
         actions: [
           IconButton(

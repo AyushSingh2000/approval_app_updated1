@@ -1,5 +1,5 @@
-import 'package:country_state_picker/components/index.dart';
-import 'package:country_state_picker/country_state_picker.dart';
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +9,10 @@ import 'package:new_app/core/post_enum_response.dart';
 import 'package:new_app/feature/customer/createCustomer/controller/customer_controller.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:quickalert/quickalert.dart';
 
-import '../../../../../ui/color/appColor.dart';
+
 import '../../../approved_bp/controller/approved_bp_controller.dart';
 import '../../../../login/controller/login_controller.dart';
 import '../../data/model/BP_post_1.dart';
@@ -139,6 +140,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
     print(lc.databaseList);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           'Add address',
         ),

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/Buttons/buttonBS.dart';
 import '../../../../../ui/widgets/detailed_card.dart';
@@ -36,58 +37,64 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
-          title: Text('BP Master Details'),
+          title: const Text('BP Master Details'),
         ),
         body: Container(
-          decoration: BoxDecoration(
-            color: Colors.blue, // Set the background color here
+          decoration: const BoxDecoration(
+            color: AppColors.appbarmainblue, // Set the background color here
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30.0), // Adjust these values as needed
               topRight: Radius.circular(30.0),
             ),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white, // Set the background color here
               ),
               child: Obx(() => uac.detailsDataLoading.value == true
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
                             widget.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
                             widget.code,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w300,
-                                color: Colors.blueAccent),
+                                color: AppColors.appbarmainblue),
                           ),
-                          SizedBox(height: 20.0),
+                          const SizedBox(height: 20.0),
                           DefaultTabController(
                             length: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                TabBar(
-                                  labelColor: Colors
-                                      .blueAccent, // Color of the selected tab
+                                const TabBar(
+                                  indicator: BoxDecoration(
+                                      color: AppColors.appgrey,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  indicatorColor: AppColors.appbarmainblue,
+                                  labelColor: AppColors
+                                      .appbarmainblue, // // Color of the selected tab
                                   unselectedLabelColor: Color(0xffd4d5d9),
                                   tabs: [
                                     Tab(text: "General"),
@@ -95,7 +102,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                     Tab(text: "Addresses"),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Container(
@@ -182,7 +189,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                       },
                                                     ],
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 20,
                                                   ),
                                                   Row(
@@ -191,183 +198,221 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                             .spaceEvenly,
                                                     children: [
                                                       Obx(
-                                                        () => ButtonBS(
-                                                          title: uac.load
-                                                                      .value ==
-                                                                  true
-                                                              ? Container(
-                                                                  height: 25,
-                                                                  width: 25,
-                                                                  child: CircularProgressIndicator(
-                                                                      strokeWidth:
-                                                                          1,
-                                                                      color: Colors
-                                                                          .white))
-                                                              : Text(
-                                                                  'Approve',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
+                                                        () => SizedBox(
+                                                          height: 50,
+                                                          width: width * 0.33,
+                                                          child: ElevatedButton(
+                                                            style: ButtonStyle(
+                                                              backgroundColor:
+                                                                  MaterialStateProperty
+                                                                      .all<
+                                                                          Color>(
+                                                                AppColors
+                                                                    .mainblue,
+                                                              ),
+                                                              shape: MaterialStateProperty
+                                                                  .all<
+                                                                      RoundedRectangleBorder>(
+                                                                RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12),
+                                                                  // side: const BorderSide(color: Colors.red),
                                                                 ),
-                                                          backgroundColor:
-                                                              const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  33,
-                                                                  79,
-                                                                  243),
-                                                          textColor:
-                                                              Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          paddingAll: 16,
-                                                          borderRadius: 10,
-                                                          fontSize: 16,
-                                                          onPressed: () async {
-                                                            uac.load.value =
-                                                                true;
-                                                            var res = await uac
-                                                                .updateBPDetailsData(
-                                                                    widget.code,
-                                                                    "Approved");
-                                                            uac.load.value =
-                                                                false;
-                                                            if (uac.res.value ==
-                                                                "Success") {
-                                                              print(
-                                                                  '!!!!!!!!Approved');
-                                                              await uac
-                                                                  .getUn_ApprovedCustomerData();
-                                                              uac.filterData_UN(
-                                                                  '');
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                          content:
-                                                                              Text('Approval Successfull')));
+                                                              ),
+                                                            ),
+                                                            // backgroundColor:
+                                                            //     const Color
+                                                            //         .fromARGB(255,
+                                                            //         33, 79, 243),
+                                                            // textColor:
+                                                            //     Colors.white,
+                                                            // fontWeight:
+                                                            //     FontWeight.w500,
+                                                            // paddingAll: 16,
+                                                            // borderRadius: 10,
+                                                            // fontSize: 16,
+                                                            onPressed:
+                                                                () async {
+                                                              uac.load.value =
+                                                                  true;
+                                                              var res = await uac
+                                                                  .updateBPDetailsData(
+                                                                      widget
+                                                                          .code,
+                                                                      "Approved");
+                                                              uac.load.value =
+                                                                  false;
+                                                              if (uac.res
+                                                                      .value ==
+                                                                  "Success") {
+                                                                print(
+                                                                    '!!!!!!!!Approved');
+                                                                await uac
+                                                                    .getUn_ApprovedCustomerData();
+                                                                uac.filterData_UN(
+                                                                    '');
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(const SnackBar(
+                                                                        content:
+                                                                            Text('Approval Successfull')));
 
-                                                              await ac
-                                                                  .getApprovedCustomerData();
+                                                                await ac
+                                                                    .getApprovedCustomerData();
 
-                                                              uac.GetBPUN_ApprovalStatusList
-                                                                  .refresh();
-                                                              uac.filteredData_unApproved
-                                                                  .refresh();
-                                                              ac.GetBPApprovalStatusList
-                                                                  .refresh();
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            } else {
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                          content:
-                                                                              Text('Approval Un-Successfull')));
-                                                            }
-                                                          },
+                                                                uac.GetBPUN_ApprovalStatusList
+                                                                    .refresh();
+                                                                uac.filteredData_unApproved
+                                                                    .refresh();
+                                                                ac.GetBPApprovalStatusList
+                                                                    .refresh();
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(const SnackBar(
+                                                                        content:
+                                                                            Text('Approval Un-Successfull')));
+                                                              }
+                                                            },
+                                                            child: uac.load.value ==
+                                                                    true
+                                                                ? Container(
+                                                                    height: 25,
+                                                                    width: 25,
+                                                                    child: const CircularProgressIndicator(
+                                                                        strokeWidth:
+                                                                            1,
+                                                                        color: Colors
+                                                                            .white))
+                                                                : const Text(
+                                                                    'Approve',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                  ),
+                                                          ),
                                                         ),
                                                       ),
                                                       Obx(
-                                                        () => ButtonBS(
-                                                          title: uac.load_rejected
-                                                                      .value ==
-                                                                  true
-                                                              ? Container(
-                                                                  height: 25,
-                                                                  width: 25,
-                                                                  child:
-                                                                      CircularProgressIndicator(
-                                                                    strokeWidth:
-                                                                        1,
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            33,
-                                                                            79,
-                                                                            243),
-                                                                  ))
-                                                              : Text(
-                                                                  'Reject',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            33,
-                                                                            79,
-                                                                            243),
-                                                                  ),
+                                                        () => SizedBox(
+                                                          height: 50,
+                                                          width: width * 0.33,
+                                                          child: ElevatedButton(
+                                                            style: ButtonStyle(
+                                                              backgroundColor:
+                                                                  MaterialStateProperty
+                                                                      .all<
+                                                                          Color>(
+                                                                AppColors
+                                                                    .appgrey,
+                                                              ),
+                                                              shape: MaterialStateProperty
+                                                                  .all<
+                                                                      RoundedRectangleBorder>(
+                                                                RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12),
+                                                                  // side: const BorderSide(color: Colors.red),
                                                                 ),
-                                                          backgroundColor:
-                                                              const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  228,
-                                                                  228,
-                                                                  228),
-                                                          textColor: const Color
-                                                                  .fromARGB(
-                                                              255, 33, 79, 243),
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          paddingAll: 16,
-                                                          borderRadius: 10,
-                                                          fontSize: 16,
-                                                          onPressed: () async {
-                                                            uac.load_rejected
-                                                                .value = true;
+                                                              ),
+                                                            ),
+                                                            // backgroundColor:
+                                                            //     const Color
+                                                            //         .fromARGB(
+                                                            //         255,
+                                                            //         228,
+                                                            //         228,
+                                                            //         228),
+                                                            // textColor: const Color
+                                                            //     .fromARGB(
+                                                            //     255, 33, 79, 243),
+                                                            // fontWeight:
+                                                            //     FontWeight.w500,
+                                                            // paddingAll: 16,
+                                                            // borderRadius: 10,
+                                                            // fontSize: 16,
+                                                            onPressed:
+                                                                () async {
+                                                              uac.load_rejected
+                                                                  .value = true;
 
-                                                            var res = await uac
-                                                                .updateBPDetailsData(
-                                                                    widget.code,
-                                                                    "Rejected");
-                                                            uac.load_rejected
-                                                                .value = false;
-                                                            if (uac.res.value ==
-                                                                "Success") {
-                                                              print(
-                                                                  '!!!!!!!!Rejected');
-                                                              await uac
-                                                                  .getUn_ApprovedCustomerData();
-                                                              uac.filterData_UN(
-                                                                  '');
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                          content:
-                                                                              Text('Rejected Successfully')));
+                                                              var res = await uac
+                                                                  .updateBPDetailsData(
+                                                                      widget
+                                                                          .code,
+                                                                      "Rejected");
+                                                              uac.load_rejected
+                                                                      .value =
+                                                                  false;
+                                                              if (uac.res
+                                                                      .value ==
+                                                                  "Success") {
+                                                                print(
+                                                                    '!!!!!!!!Rejected');
+                                                                await uac
+                                                                    .getUn_ApprovedCustomerData();
+                                                                uac.filterData_UN(
+                                                                    '');
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(const SnackBar(
+                                                                        content:
+                                                                            Text('Rejected Successfully')));
 
-                                                              await ac
-                                                                  .getApprovedCustomerData();
+                                                                await ac
+                                                                    .getApprovedCustomerData();
 
-                                                              uac.GetBPUN_ApprovalStatusList
-                                                                  .refresh();
-                                                              uac.filteredData_unApproved
-                                                                  .refresh();
-                                                              ac.GetBPApprovalStatusList
-                                                                  .refresh();
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            } else {
-                                                              ScaffoldMessenger
-                                                                      .of(
-                                                                          context)
-                                                                  .showSnackBar(
-                                                                      SnackBar(
-                                                                          content:
-                                                                              Text('Un-Successfull')));
-                                                            }
-                                                          },
+                                                                uac.GetBPUN_ApprovalStatusList
+                                                                    .refresh();
+                                                                uac.filteredData_unApproved
+                                                                    .refresh();
+                                                                ac.GetBPApprovalStatusList
+                                                                    .refresh();
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(const SnackBar(
+                                                                        content:
+                                                                            Text('Un-Successfull')));
+                                                              }
+                                                            },
+                                                            child: uac.load_rejected
+                                                                        .value ==
+                                                                    true
+                                                                ? Container(
+                                                                    height: 25,
+                                                                    width: 25,
+                                                                    child:
+                                                                        const CircularProgressIndicator(
+                                                                      strokeWidth:
+                                                                          1,
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          33,
+                                                                          79,
+                                                                          243),
+                                                                    ))
+                                                                : const Text(
+                                                                    'Reject',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: AppColors
+                                                                          .gradientColor1,
+                                                                    ),
+                                                                  ),
+                                                          ),
                                                         ),
                                                       )
                                                     ],
@@ -375,7 +420,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                 ],
                                               ),
                                             )
-                                          : SizedBox(),
+                                          : const SizedBox(),
                                       // Content for Tab 2
                                       uac.GetBPDetailsList.length != 0
                                           ? Padding(
@@ -486,7 +531,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                 ],
                                               ),
                                             )
-                                          : SizedBox(),
+                                          : const SizedBox(),
 
                                       // Content for Tab 3
                                       uac.GetBPDetailsList.length != 0
@@ -721,11 +766,11 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                             },
                                                           ],
                                                         )
-                                                      : SizedBox()
+                                                      : const SizedBox()
                                                 ],
                                               ),
                                             )
-                                          : SizedBox()
+                                          : const SizedBox()
                                     ],
                                   ),
                                 ),

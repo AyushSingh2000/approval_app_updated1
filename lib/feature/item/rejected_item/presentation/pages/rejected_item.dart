@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../../../../ui/widgets/card.dart';
@@ -26,6 +27,8 @@ class _RejectedItemScreenState extends State<RejectedItemScreen> {
     ac.searchToggle.refresh();
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
+          backgroundColor: AppColors.appbarmainblue,
           title: Text('Approved Item List'),
           actions: [
             Padding(

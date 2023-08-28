@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../ui/TextField/customTextField.dart';
 import '../../../../ui/widgets/card.dart';
+import '../../../ui/colors/app_colors.dart';
 import '../../customer/approved_bp/controller/approved_bp_controller.dart';
 import '../../customer/approved_bp/presentation/pages/detailed_bp.dart';
 import 'controller/unapproved_supplier_controller.dart';
@@ -34,6 +35,7 @@ class _UnApprovedSupplierScreenState extends State<UnApprovedSupplierScreen> {
     // ac.getApprovalStatusData();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: Text('UnApproved BP List'),
         actions: [
           Padding(

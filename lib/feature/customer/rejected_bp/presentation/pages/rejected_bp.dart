@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:new_app/ui/widgets/card.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
@@ -38,6 +39,8 @@ class _RejectedBPScreenState extends State<RejectedBPScreen> {
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
+          backgroundColor: AppColors.appbarmainblue,
+          elevation: 0,
           title: Text('Approved BP List'),
           actions: [
             Padding(

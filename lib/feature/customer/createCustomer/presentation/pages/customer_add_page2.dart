@@ -8,6 +8,7 @@ import 'package:new_app/feature/customer/createCustomer/presentation/pages/custo
 import 'package:new_app/feature/customer/createCustomer/presentation/pages/customer_edit_con.dart';
 import 'package:new_app/feature/customer/createCustomer/presentation/widgets/add_contact.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 class CustomerPage_2 extends StatefulWidget {
   const CustomerPage_2({super.key});
@@ -23,6 +24,7 @@ class _CustomerPage_2State extends State<CustomerPage_2> {
         Get.put(CustomerController());
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           'Contacts',
         ),

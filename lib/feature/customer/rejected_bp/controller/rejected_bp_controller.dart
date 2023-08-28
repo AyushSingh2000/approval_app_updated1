@@ -12,7 +12,7 @@ class RejectedCustomerController extends GetxController {
   RxList<GetCustomerRejectedModal> filteredData =
       <GetCustomerRejectedModal>[].obs;
   var GetBPDetailsList = <CardDetail>[].obs;
-
+  var selectDb = 'TESTAC0718'.obs;
   var cardCode = ''.obs;
 
   var initialDataLoading = false.obs;
@@ -78,7 +78,8 @@ class RejectedCustomerController extends GetxController {
   }
 
   Future<void> getRejectedCustomerData() async {
-    final data = await rejectedBpDataSourceImpl.getCustomerRejectedData();
+    final data = await rejectedBpDataSourceImpl
+        .getCustomerRejectedData(selectDb.toString());
     print('//|||||||||||||||||||${data}');
     final List<GetCustomerRejectedModal> approvalStatusList = data
         .map((item) => GetCustomerRejectedModal(bpmasterDetails: [item]))

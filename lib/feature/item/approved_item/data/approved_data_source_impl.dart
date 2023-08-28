@@ -45,15 +45,18 @@ class ApprovedItemDataSourceImpl implements ApprovedItemDataSourceRepository {
   }
 
   @override
-  Future<List<ItemDetail_Approved>> getItemApprovedData() async {
+  Future<List<ItemDetail_Approved>> getItemApprovedData(String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getItemApprovedListURL;
+      String URL = URLConst.getItemApprovedListURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

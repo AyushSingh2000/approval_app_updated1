@@ -11,7 +11,7 @@ class UnApprovedItemController extends GetxController {
   var GetUnApprovedStatusList = <GetItemUnApprovedModal>[].obs;
   RxList<GetItemUnApprovedModal> filteredData = <GetItemUnApprovedModal>[].obs;
   var GetItemDetailsList = <ItemDetail>[].obs;
-
+  var selectDb = 'TESTAC0718'.obs;
   var itemCode = ''.obs;
 
   var initialDataLoading = false.obs;
@@ -77,7 +77,8 @@ class UnApprovedItemController extends GetxController {
   }
 
   Future<void> getUnApprovedItemData() async {
-    final data = await unApprovedItemDataSourceImpl.getItemUnApprovedData();
+    final data = await unApprovedItemDataSourceImpl
+        .getItemUnApprovedData(selectDb.toString());
     print('//|||||||||||||||||||${data}');
     final List<GetItemUnApprovedModal> approvalStatusList = data
         .map((item) => GetItemUnApprovedModal(itemmasterDetails: [item]))

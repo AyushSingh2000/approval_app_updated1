@@ -11,7 +11,7 @@ class RejectedItemController extends GetxController {
   var GetRejectedStatusList = <GetItemRejectedModal>[].obs;
   RxList<GetItemRejectedModal> filteredData = <GetItemRejectedModal>[].obs;
   var GetItemDetailsList = <ItemDetail>[].obs;
-
+  var selectDb = 'TESTAC0718'.obs;
   var itemCode = ''.obs;
 
   var initialDataLoading = false.obs;
@@ -77,7 +77,8 @@ class RejectedItemController extends GetxController {
   }
 
   Future<void> getRejectedItemData() async {
-    final data = await rejectedItemDataSourceImpl.getItemRejectedData();
+    final data = await rejectedItemDataSourceImpl
+        .getItemRejectedData(selectDb.toString());
     // print('//|||||||||||||||||||${data}');
     final List<GetItemRejectedModal> approvalStatusList = data
         .map((item) => GetItemRejectedModal(itemmasterDetails: [item]))

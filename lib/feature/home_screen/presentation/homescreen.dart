@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/feature/login/controller/login_controller.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../navs/Nav.dart';
@@ -13,8 +14,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  LoginController lc = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
+    print('Customer Status from home screen- ${lc.CustomerStatus}');
+    print('Vendor Status from home screen- ${lc.VendorStatus}');
+    print('Item Status from home screen- ${lc.ItemStatus}');
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,7 +105,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: IconButton(
                         onPressed: () {
-                          Get.to(const NavScreen(index: 0));
+                          lc.CustomerStatus == "NoAccess"
+                              ? ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          'You are not authorized to enter this'),
+                                      duration: Duration(milliseconds: 600)))
+                              : Get.to(const NavScreen(index: 0));
                         },
                         icon: const Icon(
                           CupertinoIcons.person_fill,
@@ -119,7 +130,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: IconButton(
                         onPressed: () {
-                          Get.to(const NavScreen(index: 1));
+                          lc.VendorStatus == "NoAccess"
+                              ? ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          'You are not authorized to enter this'),
+                                      duration: Duration(milliseconds: 600)))
+                              : Get.to(const NavScreen(index: 1));
                         },
                         icon: const Icon(
                           CupertinoIcons.arrow_right_arrow_left,
@@ -138,9 +155,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: IconButton(
                         onPressed: () {
-                          Get.to(const NavScreen(
-                            index: 2,
-                          ));
+                          lc.ItemStatus == "NoAccess"
+                              ? ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                  content: Text(
+                                      'You are not authorized to enter this'),
+                                  duration: Duration(milliseconds: 600),
+                                ))
+                              : Get.to(const NavScreen(index: 2));
                         },
                         icon: const Icon(
                           CupertinoIcons.cube_box,

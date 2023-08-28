@@ -45,15 +45,19 @@ class BlankItemDataSourceImpl implements BlankItemDataSourceRepository {
   }
 
   @override
-  Future<List<ItemDetail_Blank>> getItemBlankData() async {
+  Future<List<ItemDetail_Blank>> getItemBlankData(String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getItemBlankListURL;
+      String URL = URLConst.getItemBlankListURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

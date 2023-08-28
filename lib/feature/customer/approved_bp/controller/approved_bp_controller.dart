@@ -14,7 +14,7 @@ class ApprovedBpController extends GetxController {
   // RxList<GetCustomerUnApprovedModal> filteredData_unApproved =
   //     <GetCustomerUnApprovedModal>[].obs;
   var GetBPDetailsList = <CardDetail>[].obs;
-
+  var selectDb = 'TESTAC0718'.obs;
   var cardCode = ''.obs;
 
   var initialDataLoading = false.obs;
@@ -121,7 +121,8 @@ class ApprovedBpController extends GetxController {
   // }
 
   Future<void> getApprovedCustomerData() async {
-    final data = await approvedBPDataSourceImpl.getCustomerApprovedData2();
+    final data =
+        await approvedBPDataSourceImpl.getCustomerApprovedData2(selectDb.value);
     print('//|||||||||||||||||||${data}');
     final List<GetBpApprovalStatusModal> approvalStatusList = data
         .map((item) => GetBpApprovalStatusModal(bpmasterDetails: [item]))

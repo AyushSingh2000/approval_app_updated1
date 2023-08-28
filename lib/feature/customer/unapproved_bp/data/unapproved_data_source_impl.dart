@@ -43,15 +43,19 @@ class UnApprovedBpDataSourceImpl implements UnApprovedBpDataSourceRepository {
   }
 
   @override
-  Future<List<BpDetail_UN>> getCustomerUN_ApprovedData() async {
+  Future<List<BpDetail_UN>> getCustomerUN_ApprovedData(String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getCustomerListUN_ApprovedURL;
+      String URL = URLConst.getCustomerListUN_ApprovedURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

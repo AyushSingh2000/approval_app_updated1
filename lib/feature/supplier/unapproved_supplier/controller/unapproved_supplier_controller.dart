@@ -12,7 +12,7 @@ class UnApprovedSupplierController extends GetxController {
   RxList<GetSupplierUnApprovedModal> filteredData =
       <GetSupplierUnApprovedModal>[].obs;
   var GetSupplierDetailsList = <CardDetail>[].obs;
-
+  var selectDb = 'TESTAC0718'.obs;
   var cardCode = ''.obs;
 
   var initialDataLoading = false.obs;
@@ -79,8 +79,8 @@ class UnApprovedSupplierController extends GetxController {
   }
 
   Future<void> getUnApprovedSupplierData() async {
-    final data =
-        await unApprovedSupplierDataSourceImpl.getSupplierUnapprovedData();
+    final data = await unApprovedSupplierDataSourceImpl
+        .getSupplierUnapprovedData(selectDb.toString());
     print('//|||||||||||||||||||${data}');
     final List<GetSupplierUnApprovedModal> approvalStatusList = data
         .map((item) => GetSupplierUnApprovedModal(bpmasterDetails: [item]))

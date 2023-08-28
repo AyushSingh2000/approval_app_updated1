@@ -45,15 +45,18 @@ class RejectedItemDataSourceImpl implements RejectedItemDataSourceRepository {
   }
 
   @override
-  Future<List<ItemDetail_Rejected>> getItemRejectedData() async {
+  Future<List<ItemDetail_Rejected>> getItemRejectedData(String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getItemRejectedListURL;
+      String URL = URLConst.getItemRejectedListURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

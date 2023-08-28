@@ -44,15 +44,19 @@ class UnApprovedSupplierDataSourceImpl
   }
 
   @override
-  Future<List<SupplierDetail_UnApproved>> getSupplierUnapprovedData() async {
+  Future<List<SupplierDetail_UnApproved>> getSupplierUnapprovedData(
+      String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getSupplierUnApprovedListURL;
+      String URL = URLConst.getSupplierUnApprovedListURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

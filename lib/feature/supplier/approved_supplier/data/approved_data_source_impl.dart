@@ -44,15 +44,19 @@ class ApprovedSupplierDataSourceImpl
   }
 
   @override
-  Future<List<SupplierDetail_Approved>> getSupplierApprovedData() async {
+  Future<List<SupplierDetail_Approved>> getSupplierApprovedData(
+      String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getSupplierApprovedListURL;
+      String URL = URLConst.getSupplierApprovedListURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

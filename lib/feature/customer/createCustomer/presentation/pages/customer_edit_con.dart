@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/feature/customer/createCustomer/controller/customer_controller.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/Buttons/buttonBS.dart';
 import '../../../../../ui/TextField/customTextField.dart';
@@ -25,6 +26,7 @@ class _CustomerEditPageState extends State<CustomerEditPage> {
         Get.put<CustomerController>(CustomerController());
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           ' Edit contact',
         ),

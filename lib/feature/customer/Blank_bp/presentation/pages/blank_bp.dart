@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:new_app/ui/widgets/card.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
-import '../../../approved_bp/presentation/pages/detailed_bp.dart';
 import '../../../../login/controller/login_controller.dart';
 import '../../../createCustomer/presentation/pages/customer_add_page1.dart';
 import '../../controller/blank_bp_controller.dart';
@@ -56,7 +55,8 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
-          title: Text('Approved BP List'),
+          title: const Text('Approved BP List'),
+          backgroundColor: AppColors.appbarmainblue,
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
@@ -66,7 +66,7 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                     ac.sortToggle.refresh();
                   },
                   child: Container(
-                      height: 30, width: 25, child: Icon(Icons.sort))),
+                      height: 30, width: 25, child: const Icon(Icons.sort))),
             ),
             GestureDetector(
                 onTap: () {
@@ -76,21 +76,25 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                   ac.searchToggle.refresh();
                 },
                 child: Container(
-                    height: 30, width: 25, child: Icon(Icons.search))),
+                    height: 30, width: 25, child: const Icon(Icons.search))),
             IconButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => CustomerPage()));
                   // Get.to(() => CustomerPage());
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.add,
                   size: 27,
                 ))
           ],
         ),
         body: Obx(() => ac.initialDataLoading.value == true
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(
+                color: AppColors.mainblue,
+                strokeWidth: 1,
+              ))
             : Column(
                 children: [
                   ac.searchToggle == true
@@ -101,24 +105,24 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                             height: 50,
                             child: CustomTextField(
                                 contentPadding:
-                                    EdgeInsets.only(top: 10, left: 20),
+                                    const EdgeInsets.only(top: 10, left: 20),
                                 hintText: 'Search',
                                 onChanged: (query) {
                                   ac.filterData(query);
                                 }),
                           ),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   ac.sortToggle == true
                       ? Container(
-                          margin: EdgeInsets.all(16),
+                          margin: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               color: const Color.fromARGB(255, 226, 226, 226)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Text('sort by'),
+                              const Text('sort by'),
                               DropdownButton<String>(
                                 value: ac.selectedValue_approved.value == ''
                                     ? sort[0]
@@ -167,7 +171,7 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                                     return comparisonResult;
                                   });
                                 },
-                                icon: Icon(Icons.sort),
+                                icon: const Icon(Icons.sort),
                                 borderRadius: BorderRadius.circular(12),
                                 dropdownColor:
                                     const Color.fromARGB(255, 230, 230, 230),
@@ -178,15 +182,15 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                                     child: Text(value),
                                   );
                                 }).toList(),
-                                hint: Text('Select an option'),
+                                hint: const Text('Select an option'),
                               ),
                             ],
                           ),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   Expanded(
                     child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         // itemCount: ac.GetBPApprovalStatusList.length,
                         itemCount: ac.filteredData.length,
                         itemBuilder: (context, index) {
@@ -217,7 +221,8 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                                           )));
                               ac.searchToggle.value = false;
                               ac.searchToggle.refresh();
-                              Future.delayed(Duration(milliseconds: 500), () {
+                              Future.delayed(const Duration(milliseconds: 500),
+                                  () {
                                 ac.filterData('');
                               });
                             },

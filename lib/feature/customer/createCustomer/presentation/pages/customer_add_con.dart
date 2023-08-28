@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../controller/customer_controller.dart';
 import '../../data/model/BP_post_1.dart';
@@ -101,6 +102,7 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           ' Add Contact',
         ),

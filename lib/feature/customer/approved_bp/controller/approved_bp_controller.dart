@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import '../data/approved_data_source_impl.dart';
 import '../data/modal/get_bp_approval_status_modal.dart';
 import '../data/modal/get_bp_details_modal.dart';
-import '../data/modal/get_customer_un_approved_modal.dart';
 
 class ApprovedBpController extends GetxController {
   ApprovedBpDataSourceImpl approvedBPDataSourceImpl =

@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../../../../ui/widgets/card.dart';
@@ -30,6 +31,7 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
     ac.searchToggle.refresh();
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: AppColors.appbarmainblue,
           title: Text('UnApproved Item List'),
           actions: [
             Padding(

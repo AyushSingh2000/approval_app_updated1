@@ -202,7 +202,7 @@ class CustomerController extends GetxController {
     BPCountyList.value = data.keys.toList();
 
     // print(BPCountyMapData.value);
-    print(BPCountyList.value);
+    // print(BPCountyList.value);
   }
 
   Future<PostResponseType> postCustomerData() async {

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 class DetailsCard extends StatelessWidget {
   final String title;
@@ -9,7 +11,8 @@ class DetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      color: AppColors.appgrey,
+      elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0), // Rounded edges
       ),
@@ -20,15 +23,24 @@ class DetailsCard extends StatelessWidget {
           children: <Widget>[
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20.0, // Main title font size
-                  fontWeight: FontWeight.w400,
-                  color: Colors.blueAccent
-              ),
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.appbarmainblue),
             ),
-            SizedBox(height: 20.0), // Spacer between main title and subtitles
+            const SizedBox(
+                height: 20.0), // Spacer between main title and subtitles
             for (var data in subtitleData)
               _buildSubtitle(data['subtitle']!, data['text']!),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  CupertinoIcons.arrow_down_circle_fill,
+                  color: AppColors.appbarmainblue,
+                )
+              ],
+            )
           ],
         ),
       ),
@@ -41,21 +53,21 @@ class DetailsCard extends StatelessWidget {
       children: <Widget>[
         Text(
           subtitle,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 12.0, // Subtitle font size
             fontWeight: FontWeight.w200, // Subtitle font weight
           ),
         ),
-        SizedBox(height: 8.0), // Spacer between subtitle and text
+        const SizedBox(height: 8.0), // Spacer between subtitle and text
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14.0, // Text font size
             fontWeight: FontWeight.bold,
-            color: Color(0xFF04064d),
+            color: Color.fromARGB(255, 0, 20, 85),
           ),
         ),
-        SizedBox(height: 15.0),
+        const SizedBox(height: 15.0),
       ],
     );
   }

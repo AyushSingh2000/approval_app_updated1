@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import '../customer/Blank_bp/presentation/pages/blank_bp.dart';
 import '../customer/approved_bp/presentation/pages/approved_bp.dart';
 import '../customer/rejected_bp/presentation/pages/rejected_bp.dart';
@@ -52,14 +53,14 @@ class _NavScreenState extends State<NavScreen> {
         //   child: Text('Approved List'),
         // ),
         bottomNavigationBar: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(26),
-            topRight: Radius.circular(26),
-          ),
+          // borderRadius: const BorderRadius.only(
+          //   topLeft: Radius.circular(26),
+          //   topRight: Radius.circular(26),
+          // ),
           child: BottomNavigationBar(
-            backgroundColor: Colors.blue,
+            backgroundColor: AppColors.mainblue,
             selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white,
+            unselectedItemColor: const Color.fromARGB(255, 225, 225, 225),
             type: BottomNavigationBarType.fixed,
             items: widget.index == 0
                 ? const <BottomNavigationBarItem>[

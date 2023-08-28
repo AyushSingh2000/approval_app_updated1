@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/feature/item/approved_item/controller/approved_item_controller.dart';
 import 'package:new_app/feature/item/unapproved_item/controller/unApproved_item_controller.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/Buttons/buttonBS.dart';
 import '../../../../../ui/widgets/detailed_card.dart';
@@ -39,64 +40,70 @@ class _DetailedRejectedItemScreenState
 
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
-          title: Text('Item Master Details'),
+          title: const Text('Item Master Details'),
         ),
         body: Container(
-          decoration: BoxDecoration(
-            color: Colors.blue, // Set the background color here
+          decoration: const BoxDecoration(
+            color: AppColors.appbarmainblue, // Set the background color here
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30.0), // Adjust these values as needed
               topRight: Radius.circular(30.0),
             ),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white, // Set the background color here
               ),
               child: Obx(() => ac.detailsDataLoading.value == true
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
                             widget.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
                             widget.code,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w300,
-                                color: Colors.blueAccent),
+                                color: AppColors.appbarmainblue),
                           ),
-                          SizedBox(height: 20.0),
+                          const SizedBox(height: 20.0),
                           DefaultTabController(
                             length: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                TabBar(
-                                  labelColor: Colors
-                                      .blueAccent, // Color of the selected tab
+                                const TabBar(
+                                  indicator: BoxDecoration(
+                                      color: AppColors.appgrey,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  indicatorColor: AppColors.appbarmainblue,
+                                  labelColor: AppColors
+                                      .appbarmainblue, //  // Color of the selected tab
                                   unselectedLabelColor: Color(0xffd4d5d9),
                                   tabs: [
                                     Tab(text: "Item"),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Container(
@@ -220,121 +227,121 @@ class _DetailedRejectedItemScreenState
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 20,
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Obx(
-                                                  () => ButtonBS(
-                                                    title: ac.load1.value ==
-                                                            true
-                                                        ? CircularProgressIndicator(
-                                                            strokeWidth: 1,
-                                                            color: Colors.white,
-                                                          )
-                                                        : Text(
-                                                            'Approve',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                            255, 33, 79, 243),
-                                                    textColor: Colors.white,
-                                                    fontWeight: FontWeight.w500,
-                                                    paddingAll: 16,
-                                                    borderRadius: 10,
-                                                    fontSize: 16,
-                                                    onPressed: () async {
-                                                      ac.load1.value = true;
-                                                      var res = await ac
-                                                          .updateItemDetailsData(
-                                                              widget.code,
-                                                              "Approved");
-                                                      ac.load1.value = false;
+                                            // Row(
+                                            //   mainAxisAlignment:
+                                            //       MainAxisAlignment.spaceEvenly,
+                                            //   children: [
+                                            //     Obx(
+                                            //       () => ButtonBS(
+                                            //         title: ac.load1.value ==
+                                            //                 true
+                                            //             ? const CircularProgressIndicator(
+                                            //                 strokeWidth: 1,
+                                            //                 color: Colors.white,
+                                            //               )
+                                            //             : const Text(
+                                            //                 'Approve',
+                                            //                 style: TextStyle(
+                                            //                     color: Colors
+                                            //                         .white),
+                                            //               ),
+                                            //         backgroundColor:
+                                            //             const Color.fromARGB(
+                                            //                 255, 33, 79, 243),
+                                            //         textColor: Colors.white,
+                                            //         fontWeight: FontWeight.w500,
+                                            //         paddingAll: 16,
+                                            //         borderRadius: 10,
+                                            //         fontSize: 16,
+                                            //         onPressed: () async {
+                                            //           ac.load1.value = true;
+                                            //           var res = await ac
+                                            //               .updateItemDetailsData(
+                                            //                   widget.code,
+                                            //                   "Approved");
+                                            //           ac.load1.value = false;
 
-                                                      if (ac.res.value ==
-                                                          'Success') {
-                                                        await ac
-                                                            .getRejectedItemData();
-                                                        await apc
-                                                            .getApprovedItemData();
-                                                        ac.filterData('');
-                                                        apc.filterData('');
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'Successfully Approved')));
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      } else {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'An Error has occurred')));
-                                                      }
-                                                    },
-                                                  ),
-                                                ),
-                                                Obx(
-                                                  () => ButtonBS(
-                                                    title: ac.load2.value ==
-                                                            true
-                                                        ? CircularProgressIndicator(
-                                                            strokeWidth: 1,
-                                                            color: Colors.black,
-                                                          )
-                                                        : Text('Un-Approve'),
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                            255, 228, 228, 228),
-                                                    textColor:
-                                                        const Color.fromARGB(
-                                                            255, 33, 79, 243),
-                                                    fontWeight: FontWeight.w500,
-                                                    paddingAll: 16,
-                                                    borderRadius: 10,
-                                                    fontSize: 16,
-                                                    onPressed: () async {
-                                                      ac.load2.value = true;
-                                                      var res = await ac
-                                                          .updateItemDetailsData(
-                                                              widget.code,
-                                                              "Un-Approved");
-                                                      ac.load2.value = false;
-                                                      if (ac.res.value ==
-                                                          "Success") {
-                                                        await ac
-                                                            .getRejectedItemData();
-                                                        await uc
-                                                            .getUnApprovedItemData();
-                                                        ac.filterData('');
-                                                        uc.filterData('');
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'Successfully Un-Approved')));
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      } else {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(SnackBar(
-                                                                content: Text(
-                                                                    'An Error has occurred')));
-                                                      }
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                            //           if (ac.res.value ==
+                                            //               'Success') {
+                                            //             await ac
+                                            //                 .getRejectedItemData();
+                                            //             await apc
+                                            //                 .getApprovedItemData();
+                                            //             ac.filterData('');
+                                            //             apc.filterData('');
+                                            //             ScaffoldMessenger.of(
+                                            //                     context)
+                                            //                 .showSnackBar(const SnackBar(
+                                            //                     content: Text(
+                                            //                         'Successfully Approved')));
+                                            //             Navigator.of(context)
+                                            //                 .pop();
+                                            //           } else {
+                                            //             ScaffoldMessenger.of(
+                                            //                     context)
+                                            //                 .showSnackBar(const SnackBar(
+                                            //                     content: Text(
+                                            //                         'An Error has occurred')));
+                                            //           }
+                                            //         },
+                                            //       ),
+                                            //     ),
+                                            //     Obx(
+                                            //       () => ButtonBS(
+                                            //         title: ac.load2.value ==
+                                            //                 true
+                                            //             ? const CircularProgressIndicator(
+                                            //                 strokeWidth: 1,
+                                            //                 color: Colors.black,
+                                            //               )
+                                            //             : const Text('Un-Approve'),
+                                            //         backgroundColor:
+                                            //             const Color.fromARGB(
+                                            //                 255, 228, 228, 228),
+                                            //         textColor:
+                                            //             const Color.fromARGB(
+                                            //                 255, 33, 79, 243),
+                                            //         fontWeight: FontWeight.w500,
+                                            //         paddingAll: 16,
+                                            //         borderRadius: 10,
+                                            //         fontSize: 16,
+                                            //         onPressed: () async {
+                                            //           ac.load2.value = true;
+                                            //           var res = await ac
+                                            //               .updateItemDetailsData(
+                                            //                   widget.code,
+                                            //                   "Un-Approved");
+                                            //           ac.load2.value = false;
+                                            //           if (ac.res.value ==
+                                            //               "Success") {
+                                            //             await ac
+                                            //                 .getRejectedItemData();
+                                            //             await uc
+                                            //                 .getUnApprovedItemData();
+                                            //             ac.filterData('');
+                                            //             uc.filterData('');
+                                            //             ScaffoldMessenger.of(
+                                            //                     context)
+                                            //                 .showSnackBar(const SnackBar(
+                                            //                     content: Text(
+                                            //                         'Successfully Un-Approved')));
+                                            //             Navigator.of(context)
+                                            //                 .pop();
+                                            //           } else {
+                                            //             ScaffoldMessenger.of(
+                                            //                     context)
+                                            //                 .showSnackBar(const SnackBar(
+                                            //                     content: Text(
+                                            //                         'An Error has occurred')));
+                                            //           }
+                                            //         },
+                                            //       ),
+                                            //     ),
+                                            //   ],
+                                            // ),
                                           ],
                                         ),
                                       ),

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
@@ -27,7 +29,7 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
       print('123456${response.body}');
 
       if (response.statusCode == 200 || response.statusCode == 202) {
-        // ignore: unused_local_variable
+
         final jsonResponse = jsonDecode(response.body);
         print(response.statusCode);
         if (jsonResponse["Status"] == "failure") {
@@ -337,6 +339,6 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
       return data;
     }
 
-    return data;
+    
   }
 }

@@ -57,7 +57,7 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
         MobilePhone: con_Mobile_No.value,
         E_Mail: con_Email_Id.value,
         DateOfBirth: con_Date_of_Birth.value,
-        Active: con_Active.value);
+        Active: 'Y');
     print(newcontact);
     cust_Ctrl.contactemployee.add(newcontact);
   }
@@ -341,28 +341,28 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
               const SizedBox(
                 height: 10,
               ),
-              DropdownButtonFormField<String>(
-                hint: Text(
-                  'Select items',
-                  style: TextStyle(color: Colors.black),
-                ),
-                decoration: InputDecoration(
-                  filled: true, //<-- SEE HERE
-                  fillColor: const Color.fromARGB(255, 225, 225, 225),
-                  labelText: 'Active *',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                ),
-                onChanged: (newValue) {
-                  con_Active.value = newValue!;
-                },
-                items: list3.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
+              // DropdownButtonFormField<String>(
+              //   hint: Text(
+              //     'Select items',
+              //     style: TextStyle(color: Colors.black),
+              //   ),
+              //   decoration: InputDecoration(
+              //     filled: true, //<-- SEE HERE
+              //     fillColor: const Color.fromARGB(255, 225, 225, 225),
+              //     labelText: 'Active *',
+              //     border: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(12)),
+              //   ),
+              //   onChanged: (newValue) {
+              //     con_Active.value = newValue!;
+              //   },
+              //   items: list3.map((String value) {
+              //     return DropdownMenuItem<String>(
+              //       value: value,
+              //       child: Text(value),
+              //     );
+              //   }).toList(),
+              // ),
               const SizedBox(
                 height: 10,
               ),

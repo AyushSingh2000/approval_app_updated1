@@ -36,7 +36,7 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
   List<String> manageItemBy = ['Batches', 'Serial Numbers', 'None'];
   Map<String, String> manageMap = {
     'Batches': 'N',
-    'Serial Numbers': 'Y  ',
+    'Serial Numbers': 'Y',
     'None': '0'
   };
   List<String> manageMethod = ['On Every Transaction', 'On Release'];

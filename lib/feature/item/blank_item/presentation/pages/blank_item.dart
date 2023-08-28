@@ -43,6 +43,13 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
 
   List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
+  final GlobalKey add3 = GlobalKey();
+  void initState() {
+      super.initState();
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        ShowCaseWidget.of(context).startShowCase([add3]);
+      });
+    }
   @override
   Widget build(BuildContext context) {
     BlankItemController ac = Get.put(BlankItemController());
@@ -85,9 +92,16 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
                       MaterialPageRoute(builder: (context) => ItemsAddPage()));
                   // Get.to(() => CustomerPage());
                 },
-                icon: Icon(
-                  Icons.add,
-                  size: 27,
+                icon: Showcase(
+                  key: add3,
+                  description: 'Tap to Add Items',
+                  overlayOpacity: 0.5,
+                  targetShapeBorder: const CircleBorder(),
+                  targetPadding: const EdgeInsets.all(8),
+                  child: Icon(
+                    Icons.add,
+                    size: 27,
+                  ),
                 ))
           ],
         ),

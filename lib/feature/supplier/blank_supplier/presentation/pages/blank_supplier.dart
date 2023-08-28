@@ -43,6 +43,15 @@ class _BlankSupplierScreenState extends State<BlankSupplierScreen> {
 
   List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
+  final GlobalKey add2 = GlobalKey();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ShowCaseWidget.of(context).startShowCase([add2]);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     BlankSupplierController ac = Get.put(BlankSupplierController());
@@ -85,9 +94,16 @@ class _BlankSupplierScreenState extends State<BlankSupplierScreen> {
                       MaterialPageRoute(builder: (context) => SupplierPage()));
                   // Get.to(() => CustomerPage());
                 },
-                icon: Icon(
-                  Icons.add,
-                  size: 27,
+                icon: Showcase(
+                  key: add2,
+                  description: 'Tap to Add Supplier',
+                  overlayOpacity: 0.5,
+                  targetShapeBorder: const CircleBorder(),
+                  targetPadding: const EdgeInsets.all(8),
+                  child: Icon(
+                    Icons.add,
+                    size: 27,
+                  ),
                 ))
           ],
         ),

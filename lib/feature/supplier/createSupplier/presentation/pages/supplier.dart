@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/feature/supplier/createSupplier/presentation/pages/supplier_add_page1.dart';
-// import 'package:new_app/feature/customer/presentation/pages/customer_add_page1.dart';
+// import 'package:new_app/feature/customer/presentation/pages/rejected_add_page1.dart';
 // import 'package:new_app/feature/supplier/presentation/pages/supplier_add_page1.dart';
 
 class Supplier_Add extends StatefulWidget {

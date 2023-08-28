@@ -11,7 +11,7 @@ class LoginController extends GetxController {
   var pageNumber = 0.obs;
   RxBool password_visible = true.obs;
 
-  var companyDB = "";
+  var companyDB = "TESTAC0718";
   var username = "";
   var password = "";
   var databaseList = <String>[].obs;
@@ -49,7 +49,7 @@ class LoginController extends GetxController {
           PostResponseType(postResponseEnum: PostResponseEnum.success);
       loginResponseModel = res;
 
-      for(CompanyList list in res.companyList!){
+      for (CompanyList list in res.companyList!) {
         databaseList.value.add(list.databaseList!);
       }
 

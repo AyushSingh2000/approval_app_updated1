@@ -12,7 +12,6 @@ import 'package:new_app/ui/TextField/customTextField.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:quickalert/quickalert.dart';
 
-
 import '../../../approved_bp/controller/approved_bp_controller.dart';
 import '../../../../login/controller/login_controller.dart';
 import '../../data/model/BP_post_1.dart';
@@ -25,7 +24,7 @@ class CustomerPage_3 extends StatefulWidget {
 }
 
 class _CustomerPage_3State extends State<CustomerPage_3> {
-  LoginController lc = Get.put(LoginController());
+  // LoginController lc = Get.put(LoginController());
   ApprovedBpController ac =
       Get.put<ApprovedBpController>(ApprovedBpController());
 
@@ -137,7 +136,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
   @override
   Widget build(BuildContext context) {
     print("From Cutomer Page 3");
-    print(lc.databaseList);
+    // print(lc.databaseList);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarmainblue,
@@ -158,7 +157,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                     (element) => element.toString()).toList();
                 final bpcountyList = customerController.BPCountyList.map(
                     (element) => element.toString()).toList();
-                final databaseList = lc.databaseList;
+
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -318,76 +317,6 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                       onChanged: (p0) =>
                           customerController.Adrs_Zip_Code.value = p0,
                     ), //Zip Code
-
-                    const SizedBox(height: 16.0),
-
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 0),
-                      height: 60,
-                      child: DropdownButtonFormField<String>(
-                        hint: const Text(
-                          'Select Database',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 225, 225, 225),
-                          labelText: 'Database',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        value: null,
-                        onChanged: (String? newValue) {
-                          if (newValue != null) {
-                            if (customerController.database.value
-                                .contains(newValue)) {
-                              customerController.database.value
-                                  .remove(newValue);
-                            } else {
-                              customerController.database.value.add(newValue);
-                            }
-                            customerController.database.refresh();
-                            customerController.dbString.value =
-                                customerController.database.join(';');
-                          }
-                        },
-                        items: databaseList.map((option) {
-                          return DropdownMenuItem<String>(
-                            value: option,
-                            child: Row(
-                              children: [
-                                Icon(
-                                  customerController.database.value
-                                          .contains(option)
-                                      ? Icons.check_box
-                                      : Icons.check_box_outline_blank,
-                                  color: customerController.database.value
-                                          .contains(option)
-                                      ? Colors.blue
-                                      : Colors.black,
-                                ),
-                                SizedBox(width: 8),
-                                Text(option),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    Wrap(
-                      children: customerController.database.value
-                          .map((selectedOption) {
-                        return Chip(
-                          label: Text(selectedOption),
-                          onDeleted: () {
-                            customerController.database.value
-                                .remove(selectedOption);
-                            customerController.database.refresh();
-                          },
-                        );
-                      }).toList(),
-                    )
                   ],
                 );
               }),

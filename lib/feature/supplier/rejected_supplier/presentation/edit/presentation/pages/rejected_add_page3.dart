@@ -1,36 +1,37 @@
-import 'package:country_state_picker/components/index.dart';
-import 'package:country_state_picker/country_state_picker.dart';
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:new_app/core/post_enum_response.dart';
-import 'package:new_app/feature/supplier/unapproved_supplier/controller/unapproved_supplier_controller.dart';
+import 'package:new_app/feature/customer/rejected_bp/presentation/edit/controller/edit_rejected_controller.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:quickalert/quickalert.dart';
 
-import '../../../../customer/approved_bp/controller/approved_bp_controller.dart';
-import '../../../../login/controller/login_controller.dart';
-import '../../controller/supplier_controller.dart';
-import '../../data/model/supplier_post_1.dart';
+import '../../../../../../login/controller/login_controller.dart';
+import '../../controller/edit_rejected_controller.dart';
+import '../../data/model/rejected_model.dart';
 
-class SupplierPage_3 extends StatefulWidget {
-  const SupplierPage_3({super.key});
+class EditRejectedSupplierPage3 extends StatefulWidget {
+  const EditRejectedSupplierPage3({super.key});
 
   @override
-  State<SupplierPage_3> createState() => _SupplierPage_3State();
+  State<EditRejectedSupplierPage3> createState() =>
+      _EditRejectedSupplierPage3State();
 }
 
-class _SupplierPage_3State extends State<SupplierPage_3> {
-  // LoginController lc = Get.put(LoginController());
-  // SupplierController ac = Get.put<SupplierController>(SupplierController());
-  UnApprovedSupplierController uac =
-      Get.put<UnApprovedSupplierController>(UnApprovedSupplierController());
+class _EditRejectedSupplierPage3State extends State<EditRejectedSupplierPage3> {
+  LoginController lc = Get.put(LoginController());
+  // ApprovedBpController ac =
+  //     Get.put<ApprovedBpController>(ApprovedBpController());
 
   int count = 0;
-  final SupplierController customerController = Get.find<SupplierController>();
+  final EditRejectedController_Supplier customerController =
+      Get.find<EditRejectedController_Supplier>();
   // void add_address(bool checked) {
   //   bPAddresses addresslist1 = bPAddresses(
   //     AddressName: "ABC CHEMICAL EXPORTS PVT LTD",
@@ -83,7 +84,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
   // }
 
   void add_address(bool checked) {
-    bPAddresses_supplier addresslist1 = bPAddresses_supplier(
+    bPAddresses_rejected addresslist1 = bPAddresses_rejected(
       AddressName: customerController.Adrs_Building_Floor_Room.value,
       AddressType: customerController.Adrs_Address_Type.value,
       AddressName2: customerController.blank.value,
@@ -99,7 +100,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
     );
     customerController.addresslist.add(addresslist1);
     if (checked) {
-      bPAddresses_supplier addresslist2 = bPAddresses_supplier(
+      bPAddresses_rejected addresslist2 = bPAddresses_rejected(
         AddressName: customerController.Adrs_Building_Floor_Room.value,
         AddressType: customerController.Adrs_s2_Address_Type.value,
         AddressName2: customerController.blank.value,
@@ -115,7 +116,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
       );
       customerController.addresslist.add(addresslist2);
     } else {
-      bPAddresses_supplier addresslist2 = bPAddresses_supplier(
+      bPAddresses_rejected addresslist2 = bPAddresses_rejected(
         AddressName: customerController.Adrs_s2_Building_Floor_Room.value,
         AddressType: customerController.Adrs_s2_Address_Type.value,
         AddressName2: customerController.blank.value,
@@ -136,8 +137,11 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
   bool isChecked = true;
   @override
   Widget build(BuildContext context) {
+    print("From Cutomer Page 3");
+    print(lc.databaseList);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           'Add address',
         ),
@@ -155,7 +159,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                     (element) => element.toString()).toList();
                 final bpcountyList = customerController.BPCountyList.map(
                     (element) => element.toString()).toList();
-
+                final databaseList = lc.databaseList;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -198,13 +202,16 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                         },
                       ),
                     ),
+
                     const SizedBox(height: 16.0),
+
                     CustomTextField(
                       hintText: 'Address ID',
                       onChanged: (p0) =>
                           customerController.Adrs_AddressID.value = p0,
                     ),
-                    const SizedBox(height: 16.0),
+                    SizedBox(height: 16.0),
+
                     CustomTextField(
                       hintText: 'Building/Floor/Room',
                       onChanged: (p0) => customerController
@@ -311,8 +318,77 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                       hintText: 'Zip',
                       onChanged: (p0) =>
                           customerController.Adrs_Zip_Code.value = p0,
+                    ), //Zip Code
+
+                    const SizedBox(height: 16.0),
+
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 0),
+                      height: 60,
+                      child: DropdownButtonFormField<String>(
+                        hint: const Text(
+                          'Select Database',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 225, 225, 225),
+                          labelText: 'Database',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        value: null,
+                        onChanged: (String? newValue) {
+                          if (newValue != null) {
+                            if (customerController.database.value
+                                .contains(newValue)) {
+                              customerController.database.value
+                                  .remove(newValue);
+                            } else {
+                              customerController.database.value.add(newValue);
+                            }
+                            customerController.database.refresh();
+                            customerController.dbString.value =
+                                customerController.database.join(';');
+                          }
+                        },
+                        items: databaseList.map((option) {
+                          return DropdownMenuItem<String>(
+                            value: option,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  customerController.database.value
+                                          .contains(option)
+                                      ? Icons.check_box
+                                      : Icons.check_box_outline_blank,
+                                  color: customerController.database.value
+                                          .contains(option)
+                                      ? Colors.blue
+                                      : Colors.black,
+                                ),
+                                SizedBox(width: 8),
+                                Text(option),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
                     ),
-                    //AddressID
+                    Wrap(
+                      children: customerController.database.value
+                          .map((selectedOption) {
+                        return Chip(
+                          label: Text(selectedOption),
+                          onDeleted: () {
+                            customerController.database.value
+                                .remove(selectedOption);
+                            customerController.database.refresh();
+                          },
+                        );
+                      }).toList(),
+                    )
                   ],
                 );
               }),
@@ -335,6 +411,10 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
               const SizedBox(height: 25.0),
               if (!isChecked)
                 Obx(() {
+                  // final bpcountryList = customerController.BPCountriesList.map(
+                  //     (element) => element.toString()).toList();
+                  // final bpstateList = customerController.BPStatestempList.map(
+                  //     (element) => element.toString()).toList();
                   final bpcountryList = customerController.BPCountriesList.map(
                       (element) => element.toString()).toList();
                   final bpstateList = customerController.BPStatestempList.map(
@@ -345,7 +425,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Billing Address',
+                        'Shipping Address',
                         style: TextStyle(fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(height: 16.0),
@@ -384,13 +464,16 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                           },
                         ),
                       ),
+
                       const SizedBox(height: 16.0),
+
                       CustomTextField(
                         hintText: 'Address ID',
                         onChanged: (p0) =>
                             customerController.Adrs_s2_AddressID.value = p0,
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
+
                       CustomTextField(
                         hintText: 'Building/Floor/Room',
                         onChanged: (p0) => customerController
@@ -501,7 +584,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                         hintText: 'Zip',
                         onChanged: (p0) =>
                             customerController.Adrs_s2_Zip_Code.value = p0,
-                      ), //AddressID
+                      ), //Zip Code
                     ],
                   );
                 }),
@@ -514,12 +597,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                   borderRadius: 12,
                   backgroundColor: Colors.blue,
                   textColor: Colors.white,
-                  title: Text(
-                    'Back',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
+                  title: Text('Back'),
                   onPressed: () {
                     Get.back();
                   },
@@ -534,12 +612,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                     borderRadius: 12,
                     backgroundColor: Colors.blue,
                     textColor: Colors.white,
-                    title: Text(
-                      'Submit',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
+                    title: Text('Submit'),
                     onPressed: () async {
                       customerController.addresslist.value = [];
                       add_address(isChecked);
@@ -559,14 +632,14 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
 
                         return;
                       } else {
-                        await uac.getUnApprovedSupplierData();
-                        uac.filterData('');
+                        // await ac.getApprovedCustomerData();
+                        // ac.filterData('');
                         await QuickAlert.show(
                           context: context,
                           type: QuickAlertType.success,
                           text: res.message,
                         );
-                        // ac.getApprovalStatusData();
+
                         Navigator.popUntil(context, (route) {
                           return count++ == 3;
                         });

@@ -3,39 +3,70 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:new_app/feature/supplier/createSupplier/presentation/pages/supplier_add_page2.dart';
+import 'package:new_app/feature/customer/createCustomer/controller/customer_controller.dart';
+import 'package:new_app/feature/customer/rejected_bp/controller/rejected_bp_controller.dart';
+// import 'package:new_app/feature/customer/presentation/pages/rejected_add_page2.dart';
+import 'package:new_app/ui/Buttons/buttonBS.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
-import '../../../../../ui/Buttons/buttonBS.dart';
-import '../../../../../ui/TextField/customTextField.dart';
-import '../../../../login/controller/login_controller.dart';
-import '../../controller/supplier_controller.dart';
+import '../../../../../../../ui/TextField/customTextField.dart';
+import '../../controller/edit_rejected_controller.dart';
+import 'rejected_add_page2.dart';
 
-class SupplierPage extends StatefulWidget {
-  SupplierPage({super.key});
+class EditRejectedCustomerPage extends StatefulWidget {
+  final List list;
+  EditRejectedCustomerPage({super.key, required this.list});
 
   @override
-  State<SupplierPage> createState() => _SupplierPageState();
+  State<EditRejectedCustomerPage> createState() =>
+      _EditRejectedCustomerPageState();
 }
 
-class _SupplierPageState extends State<SupplierPage> {
-  LoginController lc = Get.put(LoginController());
-  SupplierController customerController = Get.put(SupplierController());
-
-  List<String> list1 = ['createCustomer', 'vendor'];
+class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
+  List<String> list1 = ['customer', 'vendor'];
   Map<String, String> list1_1 = {
-    'createCustomer': 'cCustomer',
+    'customer': 'cCustomer',
     'vendor': 'cSupplier'
   };
   List<String> list2 = ['Approved', 'Un-Approved', 'Rejected	', 'On-Hold'];
   List<String> list3 = ['yes', 'no'];
   Map<String, String> list3_1 = {'yes': 'tYES', 'no': 'tNO'};
 
+  // TextEditingController seriesController = new TextEditingController();
+  // TextEditingController nameController = new TextEditingController();
+  // TextEditingController foreignController = new TextEditingController();
+  // TextEditingController groupController = new TextEditingController();
+  // TextEditingController currencyController = new TextEditingController();
+  // TextEditingController taxIdController = new TextEditingController();
+  // TextEditingController employeeController = new TextEditingController();
+  // TextEditingController telephoneController = new TextEditingController();
+  // TextEditingController numberController = new TextEditingController();
+  // TextEditingController emailController = new TextEditingController();
+  // TextEditingController websiteController = new TextEditingController();
+  // TextEditingController addressController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    EditRejectedController customerController =
+        Get.put(EditRejectedController());
+    CustomerController cc = Get.put(CustomerController());
+    RejectedCustomerController rc = Get.put(RejectedCustomerController());
+
+    // nameController.text = rc.GetBPDetailsList[0].CardName!;
+    // currencyController.text = rc.GetBPDetailsList[0].Currency!;
+    // employeeController.text = rc.GetBPDetailsList[0].SalEmpNam!;
+    // telephoneController.text = rc.GetBPDetailsList[0].Phone1!;
+    // numberController.text = rc.GetBPDetailsList[0].Phone2!;
+    // emailController.text = rc.GetBPDetailsList[0].E_Mail!;
+    // websiteController.text = rc.GetBPDetailsList[0].IntrntSite!;
+    // websiteController.text = rc.GetBPDetailsList[0].IntrntSite!;
+
+    print('from edit page 1:${rc.GetBPDetailsList[0].CardName}');
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
-          'Supplier',
+          'Edit',
         ),
         elevation: 0,
         // backgroundColor: AppColors.statusColorPol,
@@ -91,21 +122,6 @@ class _SupplierPageState extends State<SupplierPage> {
                   ),
                 ),
 
-//series
-//                 const SizedBox(height: 16.0),
-//
-//                 CustomTextField(
-//                   hintText: customerController.BPSeriesMapData[
-//                               customerController.Series.value] ==
-//                           null
-//                       ? 'Series Code'
-//                       : customerController
-//                           .BPSeriesMapData[customerController.Series.value]
-//                           .toString(),
-//                   keyboardType: TextInputType.none,
-//                   enable: false,
-//                   onChanged: (p0) => customerController.Code.value = p0,
-//                 ), //code
                 const SizedBox(height: 16.0),
 
                 CustomTextField(
@@ -113,44 +129,6 @@ class _SupplierPageState extends State<SupplierPage> {
                   onChanged: (p0) => customerController.Name.value = p0,
                 ), //name
                 const SizedBox(height: 16.0),
-
-                //cardtype
-                // Container(
-                //   margin: const EdgeInsets.symmetric(vertical: 0),
-                //   height: 60,
-                //   child: TextDropdownFormField(
-                //     decoration: InputDecoration(
-                //       // enabled: false,
-                //       labelText: list1.isEmpty
-                //           ? 'No Card type Found'
-                //           : 'Select Card type',
-                //       fillColor: Colors.grey[200],
-                //       suffixIcon: Padding(
-                //         padding: const EdgeInsets.all(18.0),
-                //         child: Icon(
-                //           Icons.arrow_drop_down,
-                //           color: Colors.black.withOpacity(0.6),
-                //         ),
-                //       ),
-                //
-                //       border: OutlineInputBorder(
-                //           borderSide: BorderSide.none,
-                //           borderRadius: BorderRadius.circular(9)),
-                //       // hintText: 'Select State',
-                //       filled: true,
-                //       hintStyle: const TextStyle(
-                //           fontWeight: FontWeight.bold, color: Colors.black),
-                //       contentPadding:
-                //           const EdgeInsets.only(left: 12, right: 12, top: 20),
-                //       isCollapsed: true,
-                //     ),
-                //     options: list1,
-                //     onChanged: (dynamic newValue) {
-                //       customerController.Cardtype.value = list1_1[newValue]!;
-                //     },
-                //   ),
-                // ),
-                // const SizedBox(height: 16.0),
 
                 CustomTextField(
                   hintText: 'Foreign Name',
@@ -196,31 +174,6 @@ class _SupplierPageState extends State<SupplierPage> {
                 ), //group
 
                 const SizedBox(height: 16.0),
-
-                // DropdownButtonFormField<String>(
-                //   hint: const Text(
-                //     'All Currencies',
-                //     style: TextStyle(color: Colors.black),
-                //   ),
-                //   decoration: InputDecoration(
-                //     filled: true, //<-- SEE HERE
-                //     fillColor: const Color.fromARGB(255, 225, 225, 225),
-                //     labelText: 'Currency',
-                //     border: OutlineInputBorder(
-                //         borderRadius: BorderRadius.circular(12)),
-                //   ),
-                //   onChanged: (newValue) {
-                //     customerController.Currencies.value =
-                //         customerController.BPCurrenciesMapData[newValue];
-                //   },
-                //   items:
-                //       customerController.BPCurrenciesList.map((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(value),
-                //     );
-                //   }).toList(),
-                // ),
 
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 0),
@@ -305,11 +258,6 @@ class _SupplierPageState extends State<SupplierPage> {
                 ),
                 const SizedBox(height: 16.0),
 
-                // CustomTextField(
-                //   hintText: 'Telephone',
-                //   onChanged: (p0) => customerController.Telephone.value = p0,
-                // ), //telephone
-
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 3),
                   child: IntlPhoneField(
@@ -333,8 +281,6 @@ class _SupplierPageState extends State<SupplierPage> {
                     },
                   ),
                 ),
-
-                // const SizedBox(height: 5.0),
 
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 3),
@@ -360,12 +306,6 @@ class _SupplierPageState extends State<SupplierPage> {
                   ),
                 ),
 
-                // CustomTextField(
-                //   hintText: 'Mobile no.',
-                //   onChanged: (p0) => customerController.Mobile.value = p0,
-                // ), //mobile number
-                // const SizedBox(height: 16.0),
-
                 CustomTextField(
                   hintText: 'Email',
                   onChanged: (p0) => customerController.Email.value = p0,
@@ -382,126 +322,8 @@ class _SupplierPageState extends State<SupplierPage> {
                   hintText: 'Address in arabic ',
                   onChanged: (p0) =>
                       customerController.Arabic_address.value = p0,
-                ),
-                const SizedBox(height: 16.0),
-
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 0),
-                  height: 60,
-                  child: DropdownButtonFormField<String>(
-                    hint: const Text(
-                      'Select Database',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color.fromARGB(255, 225, 225, 225),
-                      labelText: 'Database',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    value: null,
-                    onChanged: (String? newValue) {
-                      if (newValue != null) {
-                        if (customerController.database.value
-                            .contains(newValue)) {
-                          customerController.database.value.remove(newValue);
-                        } else {
-                          customerController.database.value.add(newValue);
-                        }
-                        customerController.database.refresh();
-                        customerController.dbString.value =
-                            customerController.database.join(';');
-                      }
-                    },
-                    items: lc.databaseList.map((option) {
-                      return DropdownMenuItem<String>(
-                        value: option,
-                        child: Row(
-                          children: [
-                            Icon(
-                              customerController.database.value.contains(option)
-                                  ? Icons.check_box
-                                  : Icons.check_box_outline_blank,
-                              color: customerController.database.value
-                                      .contains(option)
-                                  ? Colors.blue
-                                  : Colors.black,
-                            ),
-                            SizedBox(width: 8),
-                            Text(option),
-                          ],
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-                Wrap(
-                  children:
-                      customerController.database.value.map((selectedOption) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Chip(
-                        label: Text(selectedOption),
-                        onDeleted: () {
-                          customerController.database.value
-                              .remove(selectedOption);
-                          customerController.database.refresh();
-                        },
-                      ),
-                    );
-                  }).toList(),
                 ), //mobile number
                 const SizedBox(height: 16.0),
-
-                // DropdownButtonFormField<String>(
-                //   hint: Text(
-                //     'Select Status',
-                //     style: TextStyle(color: Colors.black),
-                //   ),
-                //   decoration: InputDecoration(
-                //     filled: true, //<-- SEE HERE
-                //     fillColor: const Color.fromARGB(255, 225, 225, 225),
-                //     labelText: 'Status',
-                //     border: OutlineInputBorder(
-                //         borderRadius: BorderRadius.circular(12)),
-                //   ),
-                //   onChanged: (newValue) {
-                //     customerController.Status.value = newValue!;
-                //   },
-                //   items: list2.map((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(value),
-                //     );
-                //   }).toList(),
-                // ), //status
-                // const SizedBox(height: 16.0),
-                //
-                // DropdownButtonFormField<String>(
-                //   hint: Text(
-                //     'Select Active',
-                //     style: TextStyle(color: Colors.black),
-                //   ),
-                //   decoration: InputDecoration(
-                //     filled: true, //<-- SEE HERE
-                //     fillColor: const Color.fromARGB(255, 225, 225, 225),
-                //     labelText: 'Active',
-                //     border: OutlineInputBorder(
-                //         borderRadius: BorderRadius.circular(12)),
-                //   ),
-                //   onChanged: (newValue) {
-                //     customerController.Active.value = list3_1[newValue]!;
-                //   },
-                //   items: list3.map((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(value),
-                //     );
-                //   }).toList(),
-                // ),
-                // const SizedBox(height: 16.0),
 
                 const SizedBox(height: 16.0),
 
@@ -514,17 +336,13 @@ class _SupplierPageState extends State<SupplierPage> {
                       borderRadius: 12,
                       backgroundColor: Colors.blue,
                       textColor: Colors.white,
-                      title: Text(
-                        'Next',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
+                      title: Text('Next'),
                       onPressed: () {
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
-                                builder: (context) => const SupplierPage_2()));
+                                builder: (context) =>
+                                    const EditRejectedCustomerPage2()));
                         // Get.to(() => const CustomerPage_2());
                       },
                     )

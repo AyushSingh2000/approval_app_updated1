@@ -3,11 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-// import 'package:new_app/feature/customer/presentation/pages/customer_add_page2.dart';
+// import 'package:new_app/feature/customer/presentation/pages/rejected_add_page2.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
+import '../../../../login/controller/login_controller.dart';
 import '../../controller/customer_controller.dart';
 import 'customer_add_page2.dart';
 
@@ -27,6 +28,7 @@ class _CustomerPageState extends State<CustomerPage> {
   List<String> list2 = ['Approved', 'Un-Approved', 'Rejected	', 'On-Hold'];
   List<String> list3 = ['yes', 'no'];
   Map<String, String> list3_1 = {'yes': 'tYES', 'no': 'tNO'};
+  LoginController lc = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -385,6 +387,76 @@ class _CustomerPageState extends State<CustomerPage> {
                 ), //mobile number
                 const SizedBox(height: 16.0),
 
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  height: 60,
+                  child: DropdownButtonFormField<String>(
+                    hint: const Text(
+                      'Select Database',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: const Color.fromARGB(255, 225, 225, 225),
+                      labelText: 'Database',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    value: null,
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        if (customerController.database.value
+                            .contains(newValue)) {
+                          customerController.database.value.remove(newValue);
+                        } else {
+                          customerController.database.value.add(newValue);
+                        }
+                        customerController.database.refresh();
+                        customerController.dbString.value =
+                            customerController.database.join(';');
+                        print(customerController.dbString.value);
+                      }
+                    },
+                    items: lc.databaseList.map((option) {
+                      return DropdownMenuItem<String>(
+                        value: option,
+                        child: Row(
+                          children: [
+                            Icon(
+                              customerController.database.value.contains(option)
+                                  ? Icons.check_box
+                                  : Icons.check_box_outline_blank,
+                              color: customerController.database.value
+                                      .contains(option)
+                                  ? Colors.blue
+                                  : Colors.black,
+                            ),
+                            SizedBox(width: 8),
+                            Text(option),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Wrap(
+                  children:
+                      customerController.database.value.map((selectedOption) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Chip(
+                        label: Text(selectedOption),
+                        onDeleted: () {
+                          customerController.database.value
+                              .remove(selectedOption);
+                          customerController.database.refresh();
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 16.0),
                 // DropdownButtonFormField<String>(
                 //   hint: Text(
                 //     'Select Status',

@@ -32,7 +32,7 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
-          title: Text('UnApproved Item List'),
+          title: Text('UnApproved Items'),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),

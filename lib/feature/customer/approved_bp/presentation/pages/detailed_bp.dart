@@ -39,7 +39,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: AppColors.appbarmainblue,
-          title: const Text('BP Master Details'),
+          title: const Text('Customer Details'),
         ),
         body: Container(
           decoration: const BoxDecoration(

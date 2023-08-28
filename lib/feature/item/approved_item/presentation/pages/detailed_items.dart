@@ -42,7 +42,7 @@ class _DetailedApprovedItemScreenState
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
-          title: const Text('Item Master Details'),
+          title: const Text('Item Details'),
         ),
         body: Container(
           decoration: const BoxDecoration(

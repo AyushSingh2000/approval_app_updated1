@@ -41,7 +41,7 @@ class _RejectedBPScreenState extends State<RejectedBPScreen> {
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
-          title: Text('Approved BP List'),
+          title: Text('Rejected Customer'),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),

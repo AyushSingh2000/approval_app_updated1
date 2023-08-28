@@ -39,7 +39,7 @@ class _DetailedBlankScreenState extends State<DetailedBlankScreen> {
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
-          title: const Text('Blank Details'),
+          title: const Text('Customer Details'),
         ),
         body: Container(
           decoration: const BoxDecoration(
@@ -124,7 +124,6 @@ class _DetailedBlankScreenState extends State<DetailedBlankScreen> {
                                                       vertical: 0,
                                                       horizontal: 20),
                                               child: ListView(
-                                                
                                                 children: [
                                                   DetailsCard(
                                                     title: "Details",
@@ -636,9 +635,9 @@ class _DetailedBlankScreenState extends State<DetailedBlankScreen> {
                                                                 },
                                                               ],
                                                             ),
-                                                            ac.GetBPDetailsList[0]
-                                                                        .CustomerAddress?[1] !=
-                                                                    null
+                                                            ac.GetBPDetailsList[0].CustomerAddress
+                                                                        ?.length ==
+                                                                    2
                                                                 ? DetailsCard(
                                                                     title:
                                                                         "Shipping Address",

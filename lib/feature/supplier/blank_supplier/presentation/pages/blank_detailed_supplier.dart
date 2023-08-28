@@ -43,7 +43,7 @@ class _DetailedSupplierBlankScreenState
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
-          title: const Text('Blank Details'),
+          title: const Text('Supplier Details'),
         ),
         body: Container(
           decoration: const BoxDecoration(

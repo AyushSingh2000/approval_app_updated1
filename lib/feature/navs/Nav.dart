@@ -67,7 +67,7 @@ class _NavScreenState extends State<NavScreen> {
                     BottomNavigationBarItem(
                       icon: Icon(Icons.home_outlined),
                       activeIcon: Icon(Icons.home),
-                      label: 'Blank',
+                      label: 'Customer',
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.people_outline),
@@ -92,7 +92,7 @@ class _NavScreenState extends State<NavScreen> {
                         BottomNavigationBarItem(
                           icon: Icon(Icons.home_outlined),
                           activeIcon: Icon(Icons.home),
-                          label: 'Blank',
+                          label: 'Supplier',
                         ),
                         BottomNavigationBarItem(
                           icon: Icon(Icons.people_outline),
@@ -116,7 +116,7 @@ class _NavScreenState extends State<NavScreen> {
                         BottomNavigationBarItem(
                           icon: Icon(Icons.home_outlined),
                           activeIcon: Icon(Icons.home),
-                          label: 'Blank',
+                          label: 'Item',
                         ),
                         BottomNavigationBarItem(
                           icon: Icon(Icons.home_outlined),

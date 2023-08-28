@@ -41,7 +41,7 @@ class _RejectedSupplierScreenState extends State<RejectedSupplierScreen> {
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
-          title: Text('Approved BP List'),
+          title: Text('Rejected Suppliers'),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),

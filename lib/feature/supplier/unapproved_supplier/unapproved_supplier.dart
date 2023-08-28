@@ -36,7 +36,7 @@ class _UnApprovedSupplierScreenState extends State<UnApprovedSupplierScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarmainblue,
-        title: Text('UnApproved BP List'),
+        title: Text('Un-Approved Suppliers'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),

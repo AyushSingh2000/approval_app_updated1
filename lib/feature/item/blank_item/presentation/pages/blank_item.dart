@@ -58,7 +58,7 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
-          title: Text('Approved BP List'),
+          title: Text('Items'),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),

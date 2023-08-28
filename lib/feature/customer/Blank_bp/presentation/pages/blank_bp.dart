@@ -55,7 +55,7 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
-          title: const Text('Approved BP List'),
+          title: const Text('Customers'),
           backgroundColor: AppColors.appbarmainblue,
           actions: [
             Padding(

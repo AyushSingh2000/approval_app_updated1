@@ -29,7 +29,7 @@ class _RejectedItemScreenState extends State<RejectedItemScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: AppColors.appbarmainblue,
-          title: Text('Approved Item List'),
+          title: Text('Rejected Items'),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),

@@ -34,7 +34,7 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarmainblue,
-        title: Text('UnApproved BP List'),
+        title: Text('Un-Approved Customers'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),

@@ -42,7 +42,7 @@ class _DetailedRejectedScreenState extends State<DetailedRejectedScreen> {
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
-          title: const Text('Blank Details'),
+          title: const Text('Customer Details'),
         ),
         body: Container(
           decoration: const BoxDecoration(

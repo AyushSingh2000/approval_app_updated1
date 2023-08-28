@@ -58,7 +58,7 @@ class _BlankSupplierScreenState extends State<BlankSupplierScreen> {
         backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
-          title: Text('Approved BP List'),
+          title: Text('Suppliers'),
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 10.0),

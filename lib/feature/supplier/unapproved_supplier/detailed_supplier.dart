@@ -42,7 +42,7 @@ class _DetailedSupplierScreenState extends State<DetailedSupplierScreen> {
         appBar: AppBar(
           backgroundColor: AppColors.appbarmainblue,
           elevation: 0,
-          title: const Text('BP Master Details'),
+          title: const Text('Supplier Details'),
         ),
         body: Container(
           decoration: const BoxDecoration(

@@ -44,15 +44,19 @@ class RejectedSupplierDataSourceImpl
   }
 
   @override
-  Future<List<SupplierDetail_Rejected>> getSupplierRejectedData() async {
+  Future<List<SupplierDetail_Rejected>> getSupplierRejectedData(
+      String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getSupplierRejectedListURL;
+      String URL = URLConst.getSupplierRejectedListURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

@@ -1,8 +1,10 @@
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/feature/login/controller/login_controller.dart';
 
 import '../../../../ui/TextField/customTextField.dart';
 import '../../../../ui/widgets/card.dart';
@@ -23,6 +25,8 @@ class UnApprovedSupplierScreen extends StatefulWidget {
 class _UnApprovedSupplierScreenState extends State<UnApprovedSupplierScreen> {
   List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
+
+  LoginController lc = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -157,6 +161,59 @@ class _UnApprovedSupplierScreenState extends State<UnApprovedSupplierScreen> {
                         ),
                       )
                     : SizedBox(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, bottom: 5),
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Select Database',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      )),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  height: 60,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: TextDropdownFormField(
+                    decoration: InputDecoration(
+                      // enabled: false,
+                      labelText: ac.selectDb.value,
+                      enabled: true,
+                      fillColor: Colors.grey[200],
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9)),
+                      // hintText: 'Select State',
+                      filled: true,
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      contentPadding:
+                          const EdgeInsets.only(left: 12, right: 12, top: 20),
+                      isCollapsed: true,
+                    ),
+                    options: lc.databaseList,
+                    onChanged: (dynamic newValue) {
+                      ac.selectDb.value = newValue;
+                      Future.delayed(Duration(milliseconds: 100), () async {
+                        ac.initialDataLoading.value = true;
+                        await ac.getUnApprovedSupplierData();
+                        ac.initialDataLoading.value = false;
+                        ac.filterData('');
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
                 Obx(
                   () => Expanded(
                     child: ListView.builder(

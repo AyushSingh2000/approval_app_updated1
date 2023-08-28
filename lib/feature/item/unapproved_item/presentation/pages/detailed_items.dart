@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/feature/login/controller/login_controller.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/widgets/detailed_card.dart';
@@ -27,6 +28,7 @@ class _DetailedUnApprovedItemScreenState
   UnApprovedItemController ac = Get.put(UnApprovedItemController());
   ApprovedItemController apc = Get.put(ApprovedItemController());
   RejectedItemController rc = Get.put(RejectedItemController());
+  LoginController lc = Get.put(LoginController());
   @override
   void dispose() {
     // TODO: implement dispose
@@ -231,173 +233,196 @@ class _DetailedUnApprovedItemScreenState
                                             const SizedBox(
                                               height: 20,
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Obx(
-                                                  () => SizedBox(
-                                                    height: 50,
-                                                    width: width * 0.33,
-                                                    child: ElevatedButton(
-                                                      style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStateProperty
-                                                                .all<Color>(
-                                                          AppColors.mainblue,
-                                                        ),
-                                                        shape: MaterialStateProperty
-                                                            .all<
-                                                                RoundedRectangleBorder>(
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        12),
-                                                            // side: const BorderSide(color: Colors.red),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      // backgroundColor:
-                                                      //     const Color.fromARGB(
-                                                      //         255, 33, 79, 243),
-                                                      // textColor: Colors.white,
-                                                      // fontWeight: Fonconst Color.fromARGB(255, 178, 144, 144),
-                                                      // paddingAll: 16,
-                                                      // borderRadius: 10,
-                                                      // fontSize: 16,
-                                                      onPressed: () async {
-                                                        ac.load1.value = true;
-                                                        var res = await ac
-                                                            .updateItemDetailsData(
-                                                                widget.code,
-                                                                "Approved");
-                                                        ac.load1.value = false;
+                                            lc.ItemStatus.value == "Approve"
+                                                ? Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      Obx(
+                                                        () => SizedBox(
+                                                          height: 50,
+                                                          width: width * 0.33,
+                                                          child: ElevatedButton(
+                                                            style: ButtonStyle(
+                                                              backgroundColor:
+                                                                  MaterialStateProperty
+                                                                      .all<
+                                                                          Color>(
+                                                                AppColors
+                                                                    .mainblue,
+                                                              ),
+                                                              shape: MaterialStateProperty
+                                                                  .all<
+                                                                      RoundedRectangleBorder>(
+                                                                RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12),
+                                                                  // side: const BorderSide(color: Colors.red),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            // backgroundColor:
+                                                            //     const Color.fromARGB(
+                                                            //         255, 33, 79, 243),
+                                                            // textColor: Colors.white,
+                                                            // fontWeight: Fonconst Color.fromARGB(255, 178, 144, 144),
+                                                            // paddingAll: 16,
+                                                            // borderRadius: 10,
+                                                            // fontSize: 16,
+                                                            onPressed:
+                                                                () async {
+                                                              ac.load1.value =
+                                                                  true;
+                                                              var res = await ac
+                                                                  .updateItemDetailsData(
+                                                                      widget
+                                                                          .code,
+                                                                      "Approved");
+                                                              ac.load1.value =
+                                                                  false;
 
-                                                        if (ac.res.value ==
-                                                            "Success") {
-                                                          await ac
-                                                              .getUnApprovedItemData();
-                                                          await apc
-                                                              .getApprovedItemData();
-                                                          ac.filterData('');
-                                                          apc.filterData('');
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                                  const SnackBar(
-                                                                      content: Text(
-                                                                          'Successfully Approved')));
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        } else {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                                  const SnackBar(
-                                                                      content: Text(
-                                                                          'An error has occurred')));
-                                                        }
-                                                      },
-                                                      child: ac.load1.value ==
-                                                              true
-                                                          ? const CircularProgressIndicator(
-                                                              strokeWidth: 1,
-                                                              color:
-                                                                  Colors.white,
-                                                            )
-                                                          : const Text(
-                                                              'Approve',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Obx(
-                                                  () => SizedBox(
-                                                    height: 50,
-                                                    width: width * 0.33,
-                                                    child: ElevatedButton(
-                                                      style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStateProperty
-                                                                .all<Color>(
-                                                          AppColors.appgrey,
-                                                        ),
-                                                        shape: MaterialStateProperty
-                                                            .all<
-                                                                RoundedRectangleBorder>(
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        12),
-                                                            // side: const BorderSide(color: Colors.red),
+                                                              if (ac.res
+                                                                      .value ==
+                                                                  "Success") {
+                                                                await ac
+                                                                    .getUnApprovedItemData();
+                                                                await apc
+                                                                    .getApprovedItemData();
+                                                                ac.filterData(
+                                                                    '');
+                                                                apc.filterData(
+                                                                    '');
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(const SnackBar(
+                                                                        content:
+                                                                            Text('Successfully Approved')));
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(const SnackBar(
+                                                                        content:
+                                                                            Text('An error has occurred')));
+                                                              }
+                                                            },
+                                                            child: ac.load1
+                                                                        .value ==
+                                                                    true
+                                                                ? const CircularProgressIndicator(
+                                                                    strokeWidth:
+                                                                        1,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  )
+                                                                : const Text(
+                                                                    'Approve',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
                                                           ),
                                                         ),
                                                       ),
-                                                      // backgroundColor:
-                                                      //     const Color.fromARGB(
-                                                      //         255, 228, 228, 228),
-                                                      // textColor:
-                                                      //     const Color.fromARGB(
-                                                      //         255, 33, 79, 243),
-                                                      // fontWeight: FontWeight.w500,
-                                                      // paddingAll: 16,
-                                                      // borderRadius: 10,
-                                                      // fontSize: 16,
-                                                      onPressed: () async {
-                                                        ac.load2.value = true;
-                                                        var res = await ac
-                                                            .updateItemDetailsData(
-                                                                widget.code,
-                                                                "Rejected");
-                                                        ac.load2.value = false;
-                                                        if (ac.res.value ==
-                                                            "Success") {
-                                                          await ac
-                                                              .getUnApprovedItemData();
-                                                          await rc
-                                                              .getRejectedItemData();
-                                                          ac.filterData('');
-                                                          rc.filterData('');
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                                  const SnackBar(
-                                                                      content: Text(
-                                                                          'Successfully Rejected')));
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        } else {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                                  const SnackBar(
-                                                                      content: Text(
-                                                                          'An error has occurred')));
-                                                        }
-                                                      },
-                                                      child: ac.load2.value ==
-                                                              true
-                                                          ? const CircularProgressIndicator(
-                                                              strokeWidth: 1,
-                                                              color:
-                                                                  Colors.black,
-                                                            )
-                                                          : const Text(
-                                                              'Reject',
-                                                              style: TextStyle(
-                                                                  color: AppColors
-                                                                      .gradientColor1),
+                                                      Obx(
+                                                        () => SizedBox(
+                                                          height: 50,
+                                                          width: width * 0.33,
+                                                          child: ElevatedButton(
+                                                            style: ButtonStyle(
+                                                              backgroundColor:
+                                                                  MaterialStateProperty
+                                                                      .all<
+                                                                          Color>(
+                                                                AppColors
+                                                                    .appgrey,
+                                                              ),
+                                                              shape: MaterialStateProperty
+                                                                  .all<
+                                                                      RoundedRectangleBorder>(
+                                                                RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12),
+                                                                  // side: const BorderSide(color: Colors.red),
+                                                                ),
+                                                              ),
                                                             ),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
+                                                            // backgroundColor:
+                                                            //     const Color.fromARGB(
+                                                            //         255, 228, 228, 228),
+                                                            // textColor:
+                                                            //     const Color.fromARGB(
+                                                            //         255, 33, 79, 243),
+                                                            // fontWeight: FontWeight.w500,
+                                                            // paddingAll: 16,
+                                                            // borderRadius: 10,
+                                                            // fontSize: 16,
+                                                            onPressed:
+                                                                () async {
+                                                              ac.load2.value =
+                                                                  true;
+                                                              var res = await ac
+                                                                  .updateItemDetailsData(
+                                                                      widget
+                                                                          .code,
+                                                                      "Rejected");
+                                                              ac.load2.value =
+                                                                  false;
+                                                              if (ac.res
+                                                                      .value ==
+                                                                  "Success") {
+                                                                await ac
+                                                                    .getUnApprovedItemData();
+                                                                await rc
+                                                                    .getRejectedItemData();
+                                                                ac.filterData(
+                                                                    '');
+                                                                rc.filterData(
+                                                                    '');
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(const SnackBar(
+                                                                        content:
+                                                                            Text('Successfully Rejected')));
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(const SnackBar(
+                                                                        content:
+                                                                            Text('An error has occurred')));
+                                                              }
+                                                            },
+                                                            child: ac.load2
+                                                                        .value ==
+                                                                    true
+                                                                ? const CircularProgressIndicator(
+                                                                    strokeWidth:
+                                                                        1,
+                                                                    color: Colors
+                                                                        .black,
+                                                                  )
+                                                                : const Text(
+                                                                    'Reject',
+                                                                    style: TextStyle(
+                                                                        color: AppColors
+                                                                            .gradientColor1),
+                                                                  ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
+                                                : SizedBox()
                                           ],
                                         ),
                                       ),

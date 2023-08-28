@@ -11,7 +11,7 @@ class BlankSupplierController extends GetxController {
   var GetBlankStatusList = <GetSupplierBlankModal>[].obs;
   RxList<GetSupplierBlankModal> filteredData = <GetSupplierBlankModal>[].obs;
   var GetSupplierDetailsList = <CardDetail>[].obs;
-
+  var selectDb = 'TESTAC0718'.obs;
   var cardCode = ''.obs;
 
   var initialDataLoading = false.obs;
@@ -77,7 +77,8 @@ class BlankSupplierController extends GetxController {
   }
 
   Future<void> getBlankSupplierData() async {
-    final data = await blankSupplierDataSourceImpl.getSupplierBlankData();
+    final data = await blankSupplierDataSourceImpl
+        .getSupplierBlankData(selectDb.toString());
     print('//|||||||||||||||||||${data}');
     final List<GetSupplierBlankModal> approvalStatusList = data
         .map((item) => GetSupplierBlankModal(bpmasterDetails: [item]))

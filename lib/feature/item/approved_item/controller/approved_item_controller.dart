@@ -11,7 +11,7 @@ class ApprovedItemController extends GetxController {
   var GetApprovedStatusList = <GetItemApprovedModal>[].obs;
   RxList<GetItemApprovedModal> filteredData = <GetItemApprovedModal>[].obs;
   var GetItemDetailsList = <ItemDetail>[].obs;
-
+  var selectDb = 'TESTAC0718'.obs;
   var itemCode = ''.obs;
 
   var initialDataLoading = false.obs;
@@ -77,7 +77,8 @@ class ApprovedItemController extends GetxController {
   }
 
   Future<void> getApprovedItemData() async {
-    final data = await approvedItemDataSourceImpl.getItemApprovedData();
+    final data = await approvedItemDataSourceImpl
+        .getItemApprovedData(selectDb.toString());
     print('//|||||||||||||||||||${data}');
     final List<GetItemApprovedModal> approvalStatusList = data
         .map((item) => GetItemApprovedModal(itemmasterDetails: [item]))

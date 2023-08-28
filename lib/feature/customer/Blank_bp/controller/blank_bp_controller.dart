@@ -13,6 +13,8 @@ class BlankCustomerController extends GetxController {
 
   var cardCode = ''.obs;
 
+  var selectDb = 'TESTAC0718'.obs;
+
   var initialDataLoading = false.obs;
   var detailsDataLoading = false.obs;
 
@@ -78,7 +80,8 @@ class BlankCustomerController extends GetxController {
   }
 
   Future<void> getBlankCustomerData() async {
-    final data = await blankBpDataSourceImpl.getCustomerBlankData();
+    final data =
+        await blankBpDataSourceImpl.getCustomerBlankData(selectDb.value);
     print('//|||||||||||||||||||${data}');
     final List<GetCustomerBlankModal> approvalStatusList = data
         .map((item) => GetCustomerBlankModal(bpmasterDetails: [item]))

@@ -78,15 +78,19 @@ class ApprovedBpDataSourceImpl implements ApprovedBpDataSourceRepository {
   }
 
   @override
-  Future<List<BpDetail>> getCustomerApprovedData2() async {
+  Future<List<BpDetail>> getCustomerApprovedData2(String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getCustomerListApprovedURL2;
+      String URL = URLConst.getCustomerListApprovedURL2 + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

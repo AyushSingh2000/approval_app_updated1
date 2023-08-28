@@ -14,6 +14,9 @@ class LoginController extends GetxController {
   var companyDB = "TESTAC0718";
   var username = "";
   var password = "";
+  var VendorStatus = "".obs;
+  var CustomerStatus = "".obs;
+  var ItemStatus = "".obs;
   var databaseList = <String>[].obs;
   var loginLoading = false.obs;
 
@@ -48,6 +51,12 @@ class LoginController extends GetxController {
       loginPostResponse =
           PostResponseType(postResponseEnum: PostResponseEnum.success);
       loginResponseModel = res;
+      print('Vendor from server  ${loginResponseModel?.Vendor}');
+      print('Customer from server ${loginResponseModel?.Customer}');
+      print('Item from server ${loginResponseModel?.ItemMaster}');
+      VendorStatus.value = loginResponseModel!.Vendor!;
+      CustomerStatus.value = loginResponseModel!.Customer!;
+      ItemStatus.value = loginResponseModel!.ItemMaster!;
 
       for (CompanyList list in res.companyList!) {
         databaseList.value.add(list.databaseList!);

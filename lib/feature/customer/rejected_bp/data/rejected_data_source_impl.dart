@@ -43,15 +43,18 @@ class RejectedBpDataSourceImpl implements RejectedBpDataSourceRepository {
   }
 
   @override
-  Future<List<BpDetail_Rejected>> getCustomerRejectedData() async {
+  Future<List<BpDetail_Rejected>> getCustomerRejectedData(String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getCustomerListRejectedURL;
+      String URL = URLConst.getCustomerListRejectedURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

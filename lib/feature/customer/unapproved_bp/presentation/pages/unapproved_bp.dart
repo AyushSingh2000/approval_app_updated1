@@ -1,3 +1,4 @@
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,6 +8,7 @@ import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../../../../ui/widgets/card.dart';
+import '../../../../login/controller/login_controller.dart';
 import '../../controller/unapproved_bp_controller.dart';
 import '../pages/detailed_bp.dart';
 import '../../../approved_bp/controller/approved_bp_controller.dart';
@@ -21,6 +23,7 @@ class UnApprovedBPScreen extends StatefulWidget {
 class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
   List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   String selectedValue = '';
+  final LoginController lc = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,6 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
     ac.filteredData_unApproved.refresh();
     ac.searchToggle.value = false;
     ac.searchToggle.refresh();
-    // ac.getApprovalStatusData();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarmainblue,
@@ -58,7 +60,7 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
                 },
                 child: Container(
                     height: 30, width: 25, child: Icon(Icons.search))),
-          )
+          ),
         ],
       ),
       body: Obx(() => ac.initialDataLoading.value == true
@@ -156,6 +158,59 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
                         ),
                       )
                     : SizedBox(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, bottom: 5),
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Select Database',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      )),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 0),
+                  height: 60,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: TextDropdownFormField(
+                    decoration: InputDecoration(
+                      // enabled: false,
+                      labelText: ac.selectDb.value,
+                      enabled: true,
+                      fillColor: Colors.grey[200],
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+
+                      border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9)),
+                      // hintText: 'Select State',
+                      filled: true,
+                      hintStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      contentPadding:
+                          const EdgeInsets.only(left: 12, right: 12, top: 20),
+                      isCollapsed: true,
+                    ),
+                    options: lc.databaseList,
+                    onChanged: (dynamic newValue) {
+                      ac.selectDb.value = newValue;
+                      Future.delayed(Duration(milliseconds: 100), () async {
+                        ac.initialDataLoading.value = true;
+                        await ac.getUn_ApprovedCustomerData();
+                        ac.initialDataLoading.value = false;
+                        ac.filterData_UN('');
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
                 Obx(
                   () => Expanded(
                     child: ListView.builder(

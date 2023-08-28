@@ -46,15 +46,18 @@ class UnApprovedItemDataSourceImpl
   }
 
   @override
-  Future<List<ItemDetail_UnApproved>> getItemUnApprovedData() async {
+  Future<List<ItemDetail_UnApproved>> getItemUnApprovedData(String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getItemUnApprovedListURL;
+      String URL = URLConst.getItemUnApprovedListURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
       print(response.body);
+      if (response.statusCode == 500) {
+        return [];
+      }
 
       if (response.statusCode == 200 || response.statusCode == 202) {
         final jsonResponse = jsonDecode(response.body);

@@ -10,7 +10,7 @@ class BlankItemController extends GetxController {
   var GetBlankStatusList = <GetItemBlankModal>[].obs;
   RxList<GetItemBlankModal> filteredData = <GetItemBlankModal>[].obs;
   var GetItemDetailsList = <ItemDetail_blank>[].obs;
-
+  var selectDb = 'TESTAC0718'.obs;
   var cardCode = ''.obs;
 
   var initialDataLoading = false.obs;
@@ -76,7 +76,8 @@ class BlankItemController extends GetxController {
   }
 
   Future<void> getBlankItemData() async {
-    final data = await blankItemDataSourceImpl.getItemBlankData();
+    final data =
+        await blankItemDataSourceImpl.getItemBlankData(selectDb.toString());
     print('//|||||||||||||||||||${data}');
     final List<GetItemBlankModal> approvalStatusList = data
         .map((item) => GetItemBlankModal(itemmasterDetails: [item]))

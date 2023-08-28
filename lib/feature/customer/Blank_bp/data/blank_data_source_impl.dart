@@ -43,14 +43,17 @@ class BlankBpDataSourceImpl implements BlankBpDataSourceRepository {
   }
 
   @override
-  Future<List<BpDetail_Blank>> getCustomerBlankData() async {
+  Future<List<BpDetail_Blank>> getCustomerBlankData(String db) async {
     try {
       // String URL = URLConst.baseURL + URLConst.getBPSalesEmployeeURL;
-      String URL = URLConst.getCustomerListBlankURL;
+      String URL = URLConst.getCustomerListBlankURL + db.toString();
 
       var response = await http.get(
         Uri.parse(URL),
       );
+      if (response.statusCode == 500) {
+        return [];
+      }
       print(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 202) {

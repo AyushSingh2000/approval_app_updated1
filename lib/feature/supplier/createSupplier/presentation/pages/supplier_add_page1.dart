@@ -1,4 +1,5 @@
 import 'package:dropdown_plus/dropdown_plus.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,7 @@ class _SupplierPageState extends State<SupplierPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           'Supplier',
         ),
@@ -426,7 +428,7 @@ class _SupplierPageState extends State<SupplierPage> {
                                   : Icons.check_box_outline_blank,
                               color: customerController.database.value
                                       .contains(option)
-                                  ? Colors.blue
+                                  ? AppColors.appbarmainblue
                                   : Colors.black,
                             ),
                             SizedBox(width: 8),
@@ -512,7 +514,7 @@ class _SupplierPageState extends State<SupplierPage> {
                       height: 40,
                       width: 100,
                       borderRadius: 12,
-                      backgroundColor: Colors.blue,
+                      backgroundColor: AppColors.appbarmainblue,
                       textColor: Colors.white,
                       title: Text(
                         'Next',

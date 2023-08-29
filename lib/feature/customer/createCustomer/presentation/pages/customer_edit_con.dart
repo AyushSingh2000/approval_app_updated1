@@ -202,8 +202,11 @@ class _CustomerEditPageState extends State<CustomerEditPage> {
                   customer_Controller.contactemployee.refresh();
                   Get.back();
                 },
-                title: Text('Update'),
-                backgroundColor: Colors.blue,
+                title: Text(
+                  'Update',
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: AppColors.appbarmainblue,
                 width: 100,
                 height: 40,
                 textColor: Colors.white,

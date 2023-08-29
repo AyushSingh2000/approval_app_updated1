@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,7 @@ class _SupplierPage_2State extends State<SupplierPage_2> {
         Get.put(SupplierController());
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           'Contacts',
         ),
@@ -56,7 +58,7 @@ class _SupplierPage_2State extends State<SupplierPage_2> {
                           children: [
                             const Icon(
                               Icons.person,
-                              color: Colors.blue,
+                              color: AppColors.appbarmainblue,
                             ),
                             const SizedBox(
                               width: 5,
@@ -91,7 +93,7 @@ class _SupplierPage_2State extends State<SupplierPage_2> {
                 ButtonBS(
                   height: 40,
                   borderRadius: 12,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.appbarmainblue,
                   textColor: Colors.white,
                   title: Text(
                     'Back',
@@ -106,7 +108,7 @@ class _SupplierPage_2State extends State<SupplierPage_2> {
                 ButtonBS(
                   height: 40,
                   borderRadius: 12,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.appbarmainblue,
                   textColor: Colors.white,
                   title: Text(
                     'Next',

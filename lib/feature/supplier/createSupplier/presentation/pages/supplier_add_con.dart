@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../controller/supplier_controller.dart';
 import '../../data/model/supplier_post_1.dart';
@@ -99,6 +100,7 @@ class _SupplierPage_2_1State extends State<SupplierPage_2_1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           ' Add Contact',
         ),
@@ -270,7 +272,8 @@ class _SupplierPage_2_1State extends State<SupplierPage_2_1> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                    borderSide:
+                        BorderSide(color: AppColors.appbarmainblue, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
@@ -306,7 +309,8 @@ class _SupplierPage_2_1State extends State<SupplierPage_2_1> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                    borderSide:
+                        BorderSide(color: AppColors.appbarmainblue, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
@@ -366,7 +370,7 @@ class _SupplierPage_2_1State extends State<SupplierPage_2_1> {
               // ),
               const Text(
                 '* fields are required',
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: AppColors.appbarmainblue),
               ),
               const SizedBox(
                 height: 10,
@@ -383,7 +387,8 @@ class _SupplierPage_2_1State extends State<SupplierPage_2_1> {
                     const snackBar = SnackBar(
                       content: Text(
                         'Fill all required field',
-                        style: TextStyle(color: Colors.blue, fontSize: 16),
+                        style: TextStyle(
+                            color: AppColors.appbarmainblue, fontSize: 16),
                       ),
                       duration: Duration(milliseconds: 1000),
                       backgroundColor: Color.fromARGB(255, 220, 220, 220),
@@ -397,7 +402,7 @@ class _SupplierPage_2_1State extends State<SupplierPage_2_1> {
                     color: Colors.white,
                   ),
                 ),
-                backgroundColor: Colors.blue,
+                backgroundColor: AppColors.appbarmainblue,
                 width: 100,
                 height: 40,
                 textColor: Colors.white,

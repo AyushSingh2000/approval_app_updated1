@@ -514,9 +514,12 @@ class _CustomerPageState extends State<CustomerPage> {
                       height: 40,
                       width: 100,
                       borderRadius: 12,
-                      backgroundColor: Colors.blue,
+                      backgroundColor: AppColors.mainblue,
                       textColor: Colors.white,
-                      title: Text('Next'),
+                      title: Text(
+                        'Next',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       onPressed: () {
                         Navigator.push(
                             context,

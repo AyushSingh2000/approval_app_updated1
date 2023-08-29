@@ -27,9 +27,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Approval App',
       theme: ThemeData(
+          primaryColorLight: AppColors.appbarmainblue,
           fontFamily: "Inter",
           primaryColor: AppColors.primary,
           textSelectionTheme: const TextSelectionThemeData(
+              cursorColor: AppColors.appbarmainblue,
               selectionHandleColor: Colors.transparent)),
       home: const SplashPage(),
     );

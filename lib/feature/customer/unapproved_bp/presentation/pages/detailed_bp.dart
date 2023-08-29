@@ -63,6 +63,7 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                   : Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [

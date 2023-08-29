@@ -58,10 +58,14 @@ class LoginController extends GetxController {
       CustomerStatus.value = loginResponseModel!.Customer!;
       ItemStatus.value = loginResponseModel!.ItemMaster!;
 
+      Set<String> temp = Set<String>();
       for (CompanyList list in res.companyList!) {
-        databaseList.value.add(list.databaseList!);
+        temp.add(list.databaseList!);
       }
 
+      for (String item in temp) {
+        databaseList.value.add(item);
+      }
       if (DEBUG) {
         print("From login Controller");
         print(databaseList);

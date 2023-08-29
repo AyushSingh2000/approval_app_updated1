@@ -25,7 +25,7 @@ class SupplierPage_3 extends StatefulWidget {
 }
 
 class _SupplierPage_3State extends State<SupplierPage_3> {
-  // LoginController lc = Get.put(LoginController());
+  LoginController lc = Get.put(LoginController());
   // SupplierController ac = Get.put<SupplierController>(SupplierController());
   UnApprovedSupplierController uac =
       Get.put<UnApprovedSupplierController>(UnApprovedSupplierController());
@@ -571,16 +571,17 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                         );
                         customerController.sendEmail(
                             subject:
-                                ' Request for Supplier Master Creation Approval | Requested By  ---',
+                                ' Request for Supplier Master Creation Approval | Requested By  ${lc.userBy}',
                             message:
                                 'I have made a new Supplier Master creation request and request to approve the same, below are the details of the Supplier for your immediate reference.',
                             cvi: 'Supplier',
                             reqestOrApproval: 'Requested By',
                             cardCode: res.message,
                             cardName: customerController.Name.value.toString(),
-                            groupName: '--',
-                            db: 'TESTAC0718',
-                            requestedBy: '--');
+                            groupName:
+                                '${customerController.GroupName.value.toString()}',
+                            db: '${customerController.dbString.toString()}',
+                            requestedBy: '${lc.userBy}');
                         // ac.getApprovalStatusData();
                         Navigator.popUntil(context, (route) {
                           return count++ == 3;

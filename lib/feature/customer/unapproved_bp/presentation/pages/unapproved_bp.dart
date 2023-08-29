@@ -232,25 +232,39 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
                                     Navigator.push(
                                         context,
                                         CupertinoPageRoute(
-                                            builder: (context) => DetailedBpScreen(
-                                                name: ac
-                                                        .filteredData_unApproved[
-                                                            index]
-                                                        .bpmasterDetails[0]
-                                                        .CardName ??
-                                                    '',
-                                                code: ac
-                                                        .filteredData_unApproved[
-                                                            index]
-                                                        .bpmasterDetails[0]
-                                                        .CardCode ??
-                                                    '',
-                                                group: ac
-                                                        .filteredData_unApproved[
-                                                            index]
-                                                        .bpmasterDetails[0]
-                                                        .GroupName ??
-                                                    '')));
+                                            builder: (context) =>
+                                                DetailedBpScreen(
+                                                  name: ac
+                                                          .filteredData_unApproved[
+                                                              index]
+                                                          .bpmasterDetails[0]
+                                                          .CardName ??
+                                                      '',
+                                                  code: ac
+                                                          .filteredData_unApproved[
+                                                              index]
+                                                          .bpmasterDetails[0]
+                                                          .CardCode ??
+                                                      '',
+                                                  group: ac
+                                                          .filteredData_unApproved[
+                                                              index]
+                                                          .bpmasterDetails[0]
+                                                          .GroupName ??
+                                                      '',
+                                                  requestedBy: ac
+                                                          .filteredData_unApproved[
+                                                              index]
+                                                          .bpmasterDetails[0]
+                                                          .RequestedBy ??
+                                                      '',
+                                                  db: ac
+                                                          .filteredData_unApproved[
+                                                              index]
+                                                          .bpmasterDetails[0]
+                                                          .ApplyDBs ??
+                                                      '',
+                                                )));
                                     ac.searchToggle.value = false;
                                     ac.searchToggle.refresh();
                                     Future.delayed(Duration(milliseconds: 500),

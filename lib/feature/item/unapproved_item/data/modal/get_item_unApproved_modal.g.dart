@@ -26,6 +26,7 @@ ItemDetail_UnApproved _$ItemDetail_UnApprovedFromJson(
       ItemCode: json['ItemCode'] as String?,
       ItemName: json['ItemName'] as String?,
       GroupName: json['GroupName'] as String?,
+      ApplyDBs: json['ApplyDBs'] as String?,
       RequestedBy: json['RequestedBy'],
       ApprovalStatus: json['ApprovalStatus'] as String?,
     );
@@ -36,6 +37,7 @@ Map<String, dynamic> _$ItemDetail_UnApprovedToJson(
       'ItemCode': instance.ItemCode,
       'ItemName': instance.ItemName,
       'GroupName': instance.GroupName,
+      'ApplyDBs': instance.ApplyDBs,
       'RequestedBy': instance.RequestedBy,
       'ApprovalStatus': instance.ApprovalStatus,
     };

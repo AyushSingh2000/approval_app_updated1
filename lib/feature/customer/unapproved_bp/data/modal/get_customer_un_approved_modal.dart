@@ -19,6 +19,7 @@ class BpDetail_UN {
   String? CardCode;
   String? CardName;
   String? GroupName;
+  String? ApplyDBs;
   String? LicTradNum;
   dynamic RequestedBy;
   String? ApprovalStatus;
@@ -27,6 +28,7 @@ class BpDetail_UN {
       {this.CardCode,
       this.CardName,
       this.GroupName,
+      this.ApplyDBs,
       this.LicTradNum,
       this.RequestedBy,
       this.ApprovalStatus});

@@ -24,7 +24,7 @@ class CustomerPage_3 extends StatefulWidget {
 }
 
 class _CustomerPage_3State extends State<CustomerPage_3> {
-  // LoginController lc = Get.put(LoginController());
+  LoginController lc = Get.put(LoginController());
   ApprovedBpController ac =
       Get.put<ApprovedBpController>(ApprovedBpController());
 
@@ -579,7 +579,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                         );
                         customerController.sendEmail(
                             subject:
-                                ' Request for Customer Master Creation Approval | Requested By ---',
+                                ' Request for Customer Master Creation Approval | Requested By ${lc.userBy}',
                             message:
                                 'I have made a new Customer Master creation request and request to approve the same, below are the details of the customer for your immediate reference.',
                             cvi: 'Customer',
@@ -588,8 +588,8 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                             cardName: customerController.Name.value.toString(),
                             groupName:
                                 customerController.GroupName.value.toString(),
-                            db: 'TESTAC0718',
-                            requestedBy: '--');
+                            db: customerController.dbString.toString(),
+                            requestedBy: '${lc.userBy}');
 
                         Navigator.popUntil(context, (route) {
                           return count++ == 3;

@@ -250,6 +250,16 @@ class _UnApprovedSupplierScreenState extends State<UnApprovedSupplierScreen> {
                                                           .bpmasterDetails[0]
                                                           .GroupName ??
                                                       '',
+                                                  requestedBy: ac
+                                                          .filteredData[index]
+                                                          .bpmasterDetails[0]
+                                                          .RequestedBy ??
+                                                      '',
+                                                  db: ac
+                                                          .filteredData[index]
+                                                          .bpmasterDetails[0]
+                                                          .ApplyDBs ??
+                                                      '',
                                                 )));
                                     ac.searchToggle.value = false;
                                     ac.searchToggle.refresh();

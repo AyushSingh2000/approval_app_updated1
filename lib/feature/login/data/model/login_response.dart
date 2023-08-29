@@ -2,6 +2,7 @@ class LoginResponseModel {
   String? status;
   String? message;
   String? data;
+  String? UserName;
   String? Vendor;
   String? Customer;
   String? ItemMaster;
@@ -12,6 +13,7 @@ class LoginResponseModel {
       {this.status,
       this.message,
       this.data,
+      this.UserName,
       this.Vendor,
       this.Customer,
       this.ItemMaster,
@@ -22,6 +24,7 @@ class LoginResponseModel {
     status = json['status'];
     message = json['message'];
     data = json['data'];
+    UserName = json['UserName'];
     Vendor = json['Vendor'];
     Customer = json['Customer'];
     ItemMaster = json['ItemMaster'];
@@ -39,6 +42,7 @@ class LoginResponseModel {
     data['status'] = this.status;
     data['message'] = this.message;
     data['data'] = this.data;
+    data['UserName'] = this.UserName;
     data['Vendor'] = this.Vendor;
     data['Customer'] = this.Customer;
     data['ItemMaster'] = this.ItemMaster;

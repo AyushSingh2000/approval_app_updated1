@@ -19,6 +19,7 @@ class ItemDetail_UnApproved {
   String? ItemCode;
   String? ItemName;
   String? GroupName;
+  String? ApplyDBs;
   dynamic RequestedBy;
   String? ApprovalStatus;
 
@@ -26,6 +27,7 @@ class ItemDetail_UnApproved {
       {this.ItemCode,
       this.ItemName,
       this.GroupName,
+      this.ApplyDBs,
       this.RequestedBy,
       this.ApprovalStatus});
 

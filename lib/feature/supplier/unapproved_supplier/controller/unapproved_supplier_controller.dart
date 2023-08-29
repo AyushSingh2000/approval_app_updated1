@@ -16,7 +16,7 @@ class UnApprovedSupplierController extends GetxController {
   var GetSupplierDetailsList = <CardDetail>[].obs;
   var selectDb = 'TESTAC0718'.obs;
   var cardCode = ''.obs;
-
+  var remarks = ''.obs;
   var initialDataLoading = false.obs;
   var detailsDataLoading = false.obs;
 
@@ -132,6 +132,7 @@ class UnApprovedSupplierController extends GetxController {
           'template_id': templateId,
           'user_id': useId,
           'template_params': {
+            'sender_email': 'nihal.vish29@gmail.com',
             'user_subject': subject,
             'user_message': message,
             'cvi': cvi,
@@ -141,6 +142,48 @@ class UnApprovedSupplierController extends GetxController {
             'group': groupName,
             'db': db,
             'by': requestedBy
+          }
+        }));
+    print("--------------------------------${response.body}");
+  }
+
+  Future sendEmail_Rejected({
+    required String subject,
+    required String message,
+    required String cvi,
+    required String reqestOrApproval,
+    required String cardCode,
+    required String cardName,
+    required String groupName,
+    required String db,
+    required String requestedBy,
+  }) async {
+    final serviceId = 'service_a3rntkf';
+    final templateId = 'template_jc47wxo';
+    final useId = '0Krm41mNV9xIYO2y_';
+
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final response = await http.post(url,
+        headers: {
+          'origin': 'http://localhost',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode({
+          'service_id': serviceId,
+          'template_id': templateId,
+          'user_id': useId,
+          'template_params': {
+            'sender_email': 'nihal.vish29@gmail.com',
+            'user_subject': subject,
+            'user_message': message,
+            'cvi': cvi,
+            'RequestOrApprove': reqestOrApproval,
+            'code': cardCode,
+            'name': cardName,
+            'group': groupName,
+            'db': db,
+            'by': requestedBy,
+            'remarks': remarks.value.toString(),
           }
         }));
     print("--------------------------------${response.body}");

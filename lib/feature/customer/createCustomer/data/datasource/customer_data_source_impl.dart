@@ -29,7 +29,6 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
       print('123456${response.body}');
 
       if (response.statusCode == 200 || response.statusCode == 202) {
-
         final jsonResponse = jsonDecode(response.body);
         print(response.statusCode);
         if (jsonResponse["Status"] == "failure") {
@@ -41,7 +40,8 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
         }
 
         return Right(PostResponseType(
-            postResponseEnum: PostResponseEnum.success, message: "Success"));
+            postResponseEnum: PostResponseEnum.success,
+            message: jsonResponse["CardCode"]));
       }
 
       return left(
@@ -338,7 +338,5 @@ class CustomerDataSourceImpl implements CustomerDataSourceRepository {
 
       return data;
     }
-
-    
   }
 }

@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import '../data/datasource/item_data_source_impl.dart';
 import '../data/model/item_series.dart';
 import '../data/model/item_substitution.dart';
 import 'package:new_app/feature/item/createItem/data/model/original_item.dart';
-
+import 'package:http/http.dart' as http;
 import '../../../../core/post_enum_response.dart';
 
 class ItemsController extends GetxController {
@@ -94,6 +96,7 @@ class ItemsController extends GetxController {
   var Remark_ = ''.obs;
 
   var catalog_status = ''.obs;
+  var Item_Group_Name = ''.obs;
   var bp_catalog_status = ''.obs;
   var alternative_status = ''.obs;
   var initialDataLoading = false.obs;
@@ -373,5 +376,46 @@ class ItemsController extends GetxController {
 
     postAlternativeItemLoading.value = false;
     return result;
+  }
+
+  Future sendEmail({
+    required String subject,
+    required String message,
+    required String cvi,
+    required String reqestOrApproval,
+    required String cardCode,
+    required String cardName,
+    required String groupName,
+    required String db,
+    required String requestedBy,
+  }) async {
+    final serviceId = 'service_a3rntkf';
+    final templateId = 'template_qwgcwr7';
+    final useId = '0Krm41mNV9xIYO2y_';
+
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final response = await http.post(url,
+        headers: {
+          'origin': 'http://localhost',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode({
+          'service_id': serviceId,
+          'template_id': templateId,
+          'user_id': useId,
+          'template_params': {
+            'sender_email': 'nihal.vish29@gmail.com',
+            'user_subject': subject,
+            'user_message': message,
+            'cvi': cvi,
+            'RequestOrApprove': reqestOrApproval,
+            'code': cardCode,
+            'name': cardName,
+            'group': groupName,
+            'db': db,
+            'by': requestedBy,
+          }
+        }));
+    print("--------------------------------${response.body}");
   }
 }

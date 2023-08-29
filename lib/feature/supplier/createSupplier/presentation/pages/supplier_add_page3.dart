@@ -566,6 +566,18 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                           type: QuickAlertType.success,
                           text: res.message,
                         );
+                        customerController.sendEmail(
+                            subject:
+                                ' Request for Supplier Master Creation Approval | Requested By  ---',
+                            message:
+                                'I have made a new Supplier Master creation request and request to approve the same, below are the details of the Supplier for your immediate reference.',
+                            cvi: 'Supplier',
+                            reqestOrApproval: 'Requested By',
+                            cardCode: res.message,
+                            cardName: customerController.Name.value.toString(),
+                            groupName: '--',
+                            db: 'TESTAC0718',
+                            requestedBy: '--');
                         // ac.getApprovalStatusData();
                         Navigator.popUntil(context, (route) {
                           return count++ == 3;

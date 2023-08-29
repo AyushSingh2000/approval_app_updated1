@@ -209,6 +209,22 @@ class _Items2State extends State<Items2> {
                                 Navigator.popUntil(context, (route) {
                                   return count++ == 2;
                                 });
+                                itemsController.sendEmail(
+                                    subject:
+                                        ' Request for Customer Master Creation Approval | Requested By ---',
+                                    message:
+                                        'I have made a new Customer Master creation request and request to approve the same, below are the details of the customer for your immediate reference.',
+                                    cvi: 'Customer',
+                                    reqestOrApproval: 'Requested By',
+                                    cardCode: itemsController.cardCode.value
+                                        .toString(),
+                                    cardName: itemsController.Item_Name.value
+                                        .toString(),
+                                    groupName: itemsController
+                                        .Item_Group_Code.value
+                                        .toString(),
+                                    db: 'TESTAC0718',
+                                    requestedBy: '--');
                                 //
                                 // Future.delayed(Duration(seconds: 2), () {
                                 //   Navigator.push(

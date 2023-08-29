@@ -39,7 +39,8 @@ class SupplierDataSourceImpl implements SupplierDataSourceRepository {
         }
 
         return Right(PostResponseType(
-            postResponseEnum: PostResponseEnum.success, message: "Success"));
+            postResponseEnum: PostResponseEnum.success,
+            message: jsonResponse["CardCode"]));
       }
 
       return left(

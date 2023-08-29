@@ -191,6 +191,7 @@ class _CustomerPageState extends State<CustomerPage> {
                     ),
                     options: customerController.BPGroupCodeList,
                     onChanged: (dynamic newValue) {
+                      customerController.GroupName.value = newValue;
                       customerController.GroupCode.value =
                           customerController.BPGroupCodeMapData[newValue];
                     },

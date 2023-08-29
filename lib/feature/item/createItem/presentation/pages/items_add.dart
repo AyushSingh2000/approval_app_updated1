@@ -193,6 +193,7 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                       ),
                       options: itemsController.itemGroupList,
                       onChanged: (dynamic newValue) {
+                        itemsController.Item_Group_Name.value = newValue;
                         itemsController.Item_Group_Code.value =
                             itemsController.itemGroupMapData[newValue];
                       },

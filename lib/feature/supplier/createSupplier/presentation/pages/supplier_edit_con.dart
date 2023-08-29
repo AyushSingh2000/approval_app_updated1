@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/Buttons/buttonBS.dart';
 import '../../../../../ui/TextField/customTextField.dart';
@@ -25,6 +26,7 @@ class _SupplierEditPageState extends State<SupplierEditPage> {
         Get.put<CustomerController>(CustomerController());
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           ' Edit contact',
         ),
@@ -190,7 +192,7 @@ class _SupplierEditPageState extends State<SupplierEditPage> {
               ),
               // const Text(
               //   '* fields are required',
-              //   style: TextStyle(color: Colors.blue),
+              //   style: TextStyle(color: AppColors.appbarmainblue),
               // ),
               // const SizedBox(
               //   height: 10,
@@ -206,7 +208,7 @@ class _SupplierEditPageState extends State<SupplierEditPage> {
                     color: Colors.white,
                   ),
                 ),
-                backgroundColor: Colors.blue,
+                backgroundColor: AppColors.appbarmainblue,
                 width: 100,
                 height: 40,
                 textColor: Colors.white,

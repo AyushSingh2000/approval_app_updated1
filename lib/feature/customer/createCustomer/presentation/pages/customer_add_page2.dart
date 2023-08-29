@@ -58,7 +58,7 @@ class _CustomerPage_2State extends State<CustomerPage_2> {
                           children: [
                             const Icon(
                               Icons.person,
-                              color: Colors.blue,
+                              color: AppColors.appbarmainblue,
                             ),
                             const SizedBox(
                               width: 5,
@@ -93,9 +93,12 @@ class _CustomerPage_2State extends State<CustomerPage_2> {
                 ButtonBS(
                   height: 40,
                   borderRadius: 12,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.appbarmainblue,
                   textColor: Colors.white,
-                  title: Text('Back'),
+                  title: Text(
+                    'Back',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () {
                     Get.back();
                   },
@@ -103,9 +106,12 @@ class _CustomerPage_2State extends State<CustomerPage_2> {
                 ButtonBS(
                   height: 40,
                   borderRadius: 12,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.appbarmainblue,
                   textColor: Colors.white,
-                  title: Text('Next'),
+                  title: Text(
+                    'Next',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () {
                     Navigator.push(
                         context,

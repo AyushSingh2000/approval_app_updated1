@@ -200,6 +200,7 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                     ),
                   ),
                   CheckboxListTile(
+                    activeColor: AppColors.appbarmainblue,
                     title: const Text('Inventory Item'),
                     value: itemsController.Inventory_Item.value,
                     onChanged: (newValue) {
@@ -217,6 +218,7 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                     },
                   ),
                   CheckboxListTile(
+                    activeColor: AppColors.appbarmainblue,
                     title: const Text('Sales Item'),
                     value: itemsController.Sales_Item.value,
                     onChanged: (newValue) {
@@ -224,6 +226,7 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                     },
                   ),
                   CheckboxListTile(
+                    activeColor: AppColors.appbarmainblue,
                     title: const Text('Purchase Item'),
                     value: itemsController.Purchase_Item.value,
                     onChanged: (newValue) {

@@ -327,6 +327,7 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                   'Same as billing address',
                 ),
                 leading: Checkbox(
+                  activeColor: AppColors.appbarmainblue,
                   value: isChecked,
                   materialTapTargetSize: MaterialTapTargetSize.padded,
                   onChanged: (bool? value) {
@@ -523,24 +524,33 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                 ButtonBS(
                   height: 40,
                   borderRadius: 12,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.appbarmainblue,
                   textColor: Colors.white,
-                  title: Text('Back'),
+                  title: Text(
+                    'Back',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () {
                     Get.back();
                   },
                 ),
                 Obx(() {
                   if (customerController.postCustomerDataLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: CircularProgressIndicator(
+                      strokeWidth: 1,
+                    ));
                   }
 
                   return ButtonBS(
                     height: 40,
                     borderRadius: 12,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: AppColors.appbarmainblue,
                     textColor: Colors.white,
-                    title: Text('Submit'),
+                    title: Text(
+                      'Submit',
+                      style: TextStyle(color: Colors.white),
+                    ),
                     onPressed: () async {
                       customerController.addresslist.value = [];
                       add_address(isChecked);

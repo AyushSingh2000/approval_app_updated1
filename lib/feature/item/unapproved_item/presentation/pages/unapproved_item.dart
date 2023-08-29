@@ -23,6 +23,7 @@ class UnApprovedItemScreen extends StatefulWidget {
 
 class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
   LoginController lc = Get.put(LoginController());
+  List<String> sort = ['CardName', 'CardCode', 'GroupName', 'RequestedBy'];
   @override
   Widget build(BuildContext context) {
     final UnApprovedItemController ac = Get.put(UnApprovedItemController());
@@ -41,6 +42,16 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
               padding: const EdgeInsets.only(right: 10.0),
               child: GestureDetector(
                   onTap: () {
+                    ac.sortToggle.value = !ac.sortToggle.value;
+                    ac.sortToggle.refresh();
+                  },
+                  child: Container(
+                      height: 30, width: 25, child: Icon(Icons.sort))),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: GestureDetector(
+                  onTap: () {
                     ac.filteredData.assignAll(ac.GetUnApprovedStatusList);
 
                     ac.searchToggle.value = !ac.searchToggle.value;
@@ -55,6 +66,7 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
             ? Center(child: CircularProgressIndicator())
             : Column(
                 children: [
+
                   ac.searchToggle == true
                       ? Padding(
                           padding: const EdgeInsets.only(
@@ -71,6 +83,89 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
                           ),
                         )
                       : SizedBox(),
+                      ac.sortToggle == true
+                      ? Container(
+                          margin: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: const Color.fromARGB(255, 226, 226, 226)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text('sort by'),
+                              DropdownButton<String>(
+                                value: ac.selectedValue_approved.value == ''
+                                    ? sort[0]
+                                    : ac.selectedValue_approved.value,
+                                onChanged: (newValue) {
+                                  ac.selectedValue_approved.value = newValue!;
+                                  print(ac.selectedValue_approved.value);
+                                  ac.filteredData.sort((a, b) {
+                                    var aValue, bValue;
+
+                                    // Determine which field to sort by based on selectedValue
+                                    switch (ac.selectedValue_approved.value) {
+                                      case 'CardName':
+                                        aValue =
+                                            a.itemmasterDetails[0].ItemName;
+                                        bValue =
+                                            b.itemmasterDetails[0].ItemName;
+                                        break;
+                                      case 'CardCode':
+                                        aValue =
+                                            a.itemmasterDetails[0].ItemCode;
+                                        bValue =
+                                            b.itemmasterDetails[0].ItemCode;
+
+                                        break;
+                                      case 'GroupName':
+                                        aValue =
+                                            a.itemmasterDetails[0].GroupName;
+                                        bValue =
+                                            b.itemmasterDetails[0].GroupName;
+                                        break;
+                                      case 'RequestedBy':
+                                        aValue =
+                                            a.itemmasterDetails[0].RequestedBy;
+                                        bValue =
+                                            b.itemmasterDetails[0].RequestedBy;
+                                        break;
+                                      default:
+                                        aValue = a.itemmasterDetails[0]
+                                            .ItemCode; // Default to CardName if none selected
+                                        bValue =
+                                            b.itemmasterDetails[0].ItemCode;
+                                    }
+
+                                    // For other fields, sort in ascending order
+                                    final comparisonResult =
+                                        aValue != null && bValue != null
+                                            ? aValue
+                                                .toString()
+                                                .compareTo(bValue.toString())
+                                            : 0;
+
+                                    return comparisonResult;
+                                  });
+                                },
+                                icon: Icon(Icons.sort),
+                                borderRadius: BorderRadius.circular(12),
+                                dropdownColor:
+                                    const Color.fromARGB(255, 230, 230, 230),
+                                items: sort.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: Text('Select an option'),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox(),
+
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, bottom: 5),
                     child: Align(

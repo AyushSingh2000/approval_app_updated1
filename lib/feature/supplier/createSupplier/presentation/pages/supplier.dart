@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/feature/supplier/createSupplier/presentation/pages/supplier_add_page1.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 // import 'package:new_app/feature/customer/presentation/pages/rejected_add_page1.dart';
 // import 'package:new_app/feature/supplier/presentation/pages/supplier_add_page1.dart';
 
@@ -16,6 +17,7 @@ class _Supplier_AddState extends State<Supplier_Add> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: Text('Supplier list'),
         actions: [
           IconButton(

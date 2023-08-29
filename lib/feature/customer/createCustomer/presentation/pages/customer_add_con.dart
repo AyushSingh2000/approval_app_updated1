@@ -274,7 +274,8 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                    borderSide:
+                        BorderSide(color: AppColors.appbarmainblue, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
@@ -310,7 +311,8 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                    borderSide:
+                        BorderSide(color: AppColors.appbarmainblue, width: 1.0),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
@@ -318,6 +320,7 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
                 onTap: () async {
                   final currentDate = anniDate.value ?? DateTime.now();
                   final pickedDate = await showDatePicker(
+                    
                     context: context,
                     initialDate: currentDate,
                     firstDate: DateTime(1900),
@@ -370,7 +373,7 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
               ),
               const Text(
                 '* fields are required',
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: AppColors.appbarmainblue),
               ),
               const SizedBox(
                 height: 10,
@@ -387,7 +390,8 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
                     const snackBar = SnackBar(
                       content: Text(
                         'Fill all required field',
-                        style: TextStyle(color: Colors.blue, fontSize: 16),
+                        style: TextStyle(
+                            color: AppColors.appbarmainblue, fontSize: 16),
                       ),
                       duration: Duration(milliseconds: 1000),
                       backgroundColor: Color.fromARGB(255, 220, 220, 220),
@@ -395,8 +399,11 @@ class _CustomerPage_2_1State extends State<CustomerPage_2_1> {
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   }
                 },
-                title: Text('Add'),
-                backgroundColor: Colors.blue,
+                title: Text(
+                  'Add',
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: AppColors.appbarmainblue,
                 width: 100,
                 height: 40,
                 textColor: Colors.white,

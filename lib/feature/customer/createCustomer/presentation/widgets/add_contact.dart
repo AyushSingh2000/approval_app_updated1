@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../controller/customer_controller.dart';
 
@@ -15,20 +16,20 @@ class AddContactDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: nameController,
-              decoration: InputDecoration(labelText: 'Name'),
+              decoration: const InputDecoration(labelText: 'Name'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 String name = nameController.text;
@@ -40,7 +41,7 @@ class AddContactDialog extends StatelessWidget {
                   Navigator.of(context).pop();
                 }
               },
-              child: Text('Add'),
+              child: const Text('Add'),
             ),
           ],
         ),
@@ -82,7 +83,7 @@ class _dropdownformState extends State<dropdownform> {
         widget.dropdownitems.isNotEmpty ? widget.dropdownitems[0] : 'select';
     return DropdownButtonFormField<String>(
       isExpanded: true,
-      hint: Text(
+      hint: const Text(
         'Select items',
         style: TextStyle(color: Colors.black),
       ),
@@ -131,7 +132,7 @@ class _addressState extends State<address> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(widget.adress_type),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
 
           const textfieldinput('Building/Floor/Room'), //Building/Floor/Room
           const SizedBox(height: 16.0),
@@ -168,22 +169,26 @@ Future<bool> showConfirmationDialog(BuildContext context) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Confirmation'),
-        content: Text('Do you want to proceed?'),
+        title: const Text('Confirmation'),
+        content: const Text('Do you want to proceed?'),
         actions: <Widget>[
           TextButton(
             onPressed: () {
               Navigator.of(context)
                   .pop(true); // Return true when "Yes" is pressed
             },
-            child: Text('Yes'),
+            child: const Text(
+              'Yes',
+              style: TextStyle(color: AppColors.appbarmainblue),
+            ),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context)
                   .pop(false); // Return false when "No" is pressed
             },
-            child: Text('No'),
+            child: const Text('No',
+                style: TextStyle(color: AppColors.appbarmainblue)),
           ),
         ],
       );

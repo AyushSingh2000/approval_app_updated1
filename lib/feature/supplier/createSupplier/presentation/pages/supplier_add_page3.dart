@@ -1,4 +1,5 @@
 import 'package:country_state_picker/components/index.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:country_state_picker/country_state_picker.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
@@ -138,6 +139,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           'Add address',
         ),
@@ -323,6 +325,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                   'Same as billing address',
                 ),
                 leading: Checkbox(
+                  activeColor: AppColors.appbarmainblue,
                   value: isChecked,
                   materialTapTargetSize: MaterialTapTargetSize.padded,
                   onChanged: (bool? value) {
@@ -512,7 +515,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                 ButtonBS(
                   height: 40,
                   borderRadius: 12,
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.appbarmainblue,
                   textColor: Colors.white,
                   title: Text(
                     'Back',
@@ -532,7 +535,7 @@ class _SupplierPage_3State extends State<SupplierPage_3> {
                   return ButtonBS(
                     height: 40,
                     borderRadius: 12,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: AppColors.appbarmainblue,
                     textColor: Colors.white,
                     title: Text(
                       'Submit',

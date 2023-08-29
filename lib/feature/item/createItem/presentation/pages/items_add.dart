@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../controller/items_controller.dart';
@@ -17,7 +18,7 @@ class ItemsAddPage extends StatefulWidget {
 
 class _ItemsAddPageState extends State<ItemsAddPage> {
   ItemsController itemsController = Get.put(ItemsController());
-
+  ItemsController items_Controller = Get.find<ItemsController>();
   // InputDecoration buildTextFieldDecoration(String labelText,
   //     {bool hasDropdown = false}) {
   //   return InputDecoration(
@@ -34,11 +35,13 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
   // }
 
   List<String> manageItemBy = ['Batches', 'Serial Numbers', 'None'];
+  List<String> manageItemBy2 = ['None'];
   Map<String, String> manageMap = {
     'Batches': 'N',
     'Serial Numbers': 'Y',
     'None': '0'
   };
+
   List<String> manageMethod = ['On Every Transaction', 'On Release'];
   Map<String, String> manageMethodMap = {
     'On Every Transaction': 'A',
@@ -49,6 +52,9 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
     'Standard',
     'Moving Average',
     'Serial/Batch'
+  ];
+  List<String> ValuationMethod2 = [
+    'FIFO',
   ];
 
   Map<String, String> ValuationMap = {
@@ -77,11 +83,13 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
     'DG': 'DG',
     'Non-DG': 'Non-DG',
   };
-
+  bool isChecked = true;
+  bool isbox = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text(
           "Items",
         ),
@@ -195,6 +203,16 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                     value: itemsController.Inventory_Item.value,
                     onChanged: (newValue) {
                       itemsController.Inventory_Item.value = newValue!;
+                      setState(() {
+                        if (newValue == true) {
+                          isbox = false;
+                          isChecked = true;
+                        } else {
+                          isbox = true;
+                          isChecked = false;
+                        }
+                        print(isbox);
+                      });
                     },
                   ),
                   CheckboxListTile(
@@ -387,7 +405,6 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                     height: 60,
                     child: TextDropdownFormField(
                       decoration: InputDecoration(
-                        // enabled: false,
                         labelText: 'Manage Item by',
                         fillColor: Colors.grey[200],
                         suffixIcon: Padding(
@@ -409,50 +426,59 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                             const EdgeInsets.only(left: 12, right: 12, top: 20),
                         isCollapsed: true,
                       ),
-                      options: manageItemBy,
+                      options: !isbox ? manageItemBy : manageItemBy2,
                       onChanged: (dynamic newValue) {
                         itemsController.Manage_Item_by.value =
                             manageMap[newValue]!;
+                        setState(() {
+                          if (newValue != "None") {
+                            isChecked = true;
+                          } else {
+                            isChecked = false;
+                          }
+                        });
                       },
                     ),
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 0),
-                    height: 60,
-                    child: TextDropdownFormField(
-                      decoration: InputDecoration(
-                        // enabled: false,
-                        labelText: 'Management Method',
-                        fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
+                  if (isChecked)
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 0),
+                      height: 60,
+                      child: TextDropdownFormField(
+                        decoration: InputDecoration(
+                          // enabled: false,
+                          labelText: 'Management Method',
+                          fillColor: Colors.grey[200],
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Icon(
+                              Icons.arrow_drop_down,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
                           ),
-                        ),
 
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
-                        filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
-                        contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(9)),
+                          // hintText: 'Select State',
+                          filled: true,
+                          hintStyle: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                          contentPadding: const EdgeInsets.only(
+                              left: 12, right: 12, top: 20),
+                          isCollapsed: true,
+                        ),
+                        options: manageMethod,
+                        onChanged: (dynamic newValue) {
+                          itemsController.Management_Method.value =
+                              manageMethodMap[newValue]!;
+                        },
                       ),
-                      options: manageMethod,
-                      onChanged: (dynamic newValue) {
-                        itemsController.Management_Method.value =
-                            manageMethodMap[newValue]!;
-                      },
                     ),
-                  ),
+
                   const SizedBox(
                     height: 16,
                   ),
@@ -483,7 +509,7 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                             const EdgeInsets.only(left: 12, right: 12, top: 20),
                         isCollapsed: true,
                       ),
-                      options: ValuationMethod,
+                      options: !isbox ? ValuationMethod : ValuationMethod2,
                       onChanged: (dynamic newValue) {
                         itemsController.Valuation_Method.value =
                             ValuationMap[newValue]!;
@@ -619,7 +645,7 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                       padding: const EdgeInsets.all(16.0),
                       child: ButtonBS(
                         borderRadius: 12,
-                        backgroundColor: Colors.blue,
+                        backgroundColor: AppColors.appbarmainblue,
                         height: 40,
                         width: 80,
                         textColor: Colors.white,

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 
 import '../../../approved_item/controller/approved_item_controller.dart';
 import '../../controller/items_controller.dart';
@@ -41,6 +42,7 @@ class _Items4State extends State<Items4> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text("Alternatives Items"),
         centerTitle: true,
       ),
@@ -165,7 +167,7 @@ class _Items4State extends State<Items4> {
                         ),
                       ),
                       textColor: Colors.white,
-                      backgroundColor: Colors.blue,
+                      backgroundColor: AppColors.mainblue,
                       borderRadius: 12,
                       height: 40,
                       onPressed: () {
@@ -187,7 +189,7 @@ class _Items4State extends State<Items4> {
                                 ),
                               ),
                               textColor: Colors.white,
-                              backgroundColor: Colors.blue,
+                              backgroundColor: AppColors.mainblue,
                               borderRadius: 12,
                               height: 40,
                               onPressed: () async {

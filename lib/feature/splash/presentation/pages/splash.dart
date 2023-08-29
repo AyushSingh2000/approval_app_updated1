@@ -29,7 +29,7 @@ class SplashPageState extends State<SplashPage> {
       });
     });
     await Future.delayed(const Duration(seconds: 3), () {
-      Get.off(LoginPage());
+      Get.off(const LoginPage());
     });
   }
 
@@ -47,7 +47,7 @@ class SplashPageState extends State<SplashPage> {
               left: animate ? width - 125 : -50,
               duration: const Duration(milliseconds: 2500),
               child: const CircleAvatar(
-                backgroundColor: Colors.lightBlueAccent,
+                backgroundColor: Color.fromARGB(255, 111, 75, 2),
                 radius: 125,
               )),
           AnimatedPositioned(
@@ -56,7 +56,7 @@ class SplashPageState extends State<SplashPage> {
               left: animate ? -100 : width - 50,
               duration: const Duration(milliseconds: 2500),
               child: const CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 54, 85, 172),
+                backgroundColor: Color.fromARGB(255, 85, 73, 174),
                 radius: 180,
               )),
           BackdropFilter(
@@ -71,30 +71,73 @@ class SplashPageState extends State<SplashPage> {
               opacity: animate ? 1 : 0,
               curve: Curves.easeInExpo,
               duration: const Duration(milliseconds: 2000),
-              child: Image.asset('lib/ui/assets/splash.png'),
+              child: Image.asset(
+                'lib/ui/assets/splash.png',
+              ),
             ),
           ),
           AnimatedPositioned(
             curve: Curves.easeInOut,
-            top: animate ? height*0.15 : height*0.12,
-           
+            top: animate ? height * 0.1 : height * 0.08,
             duration: const Duration(milliseconds: 2500),
             child: AnimatedOpacity(
               opacity: animate ? 1 : 0,
               duration: const Duration(milliseconds: 1500),
-              child: Text('Approval App',style: TextStyle(fontSize: height*0.05,fontWeight: FontWeight.bold,fontFamily: 'Inter'),),
+              child: SizedBox(
+                  width: width * 0.6,
+                  child: Image.asset(
+                    "lib/ui/assets/logosplash.png",
+                  )),
             ),
           ),
           AnimatedPositioned(
             curve: Curves.easeInOut,
-            top: animate ? height*0.8 : height*0.85,
-           
+            top: animate ? height * 0.22 : height * 0.19,
             duration: const Duration(milliseconds: 2500),
             child: AnimatedOpacity(
               opacity: animate ? 1 : 0,
               duration: const Duration(milliseconds: 1500),
-              child: Text('Streamline and accelerate \n approvals with our intuitive \n and efficient management app.',style: TextStyle(fontSize:height*0.02,fontWeight: FontWeight.normal,fontFamily: 'Inter'),
-              textAlign: TextAlign.center,),
+              child: Text(
+                'Approval 360',
+                style: TextStyle(
+                    fontSize: height * 0.05,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Inter'),
+              ),
+            ),
+          ),
+          AnimatedPositioned(
+            curve: Curves.easeInOut,
+            top: animate ? height * 0.75 : height * 0.80,
+            duration: const Duration(milliseconds: 2500),
+            child: AnimatedOpacity(
+              opacity: animate ? 1 : 0,
+              duration: const Duration(milliseconds: 1500),
+              child: Text(
+                'Streamline and accelerate \n approvals with our intuitive \n and efficient management app.',
+                style: TextStyle(
+                    fontSize: height * 0.02,
+                    fontWeight: FontWeight.normal,
+                    fontFamily: 'Inter'),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          AnimatedPositioned(
+            curve: Curves.easeInOut,
+            top: animate ? height * 0.85 : height * 0.90,
+            duration: const Duration(milliseconds: 2500),
+            child: AnimatedOpacity(
+              opacity: animate ? 1 : 0,
+              duration: const Duration(milliseconds: 1500),
+              child: Text(
+                'powered by tekroi',
+                style: TextStyle(
+                    fontSize: height * 0.02,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Inter'),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         ],

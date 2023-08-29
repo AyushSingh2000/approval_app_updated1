@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import '../pages/items_add4.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
@@ -43,6 +44,7 @@ class _Items3State extends State<Items3> {
     ItemsController itemsController = Get.put(ItemsController());
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text("BP Catalog Numbers"),
         centerTitle: true,
       ),
@@ -213,7 +215,7 @@ class _Items3State extends State<Items3> {
                         ),
                       ),
                       textColor: Colors.white,
-                      backgroundColor: Colors.blue,
+                      backgroundColor: AppColors.mainblue,
                       borderRadius: 12,
                       height: 40,
                       onPressed: () {
@@ -235,7 +237,7 @@ class _Items3State extends State<Items3> {
                                 ),
                               ),
                               textColor: Colors.white,
-                              backgroundColor: Colors.blue,
+                              backgroundColor: AppColors.mainblue,
                               borderRadius: 12,
                               height: 40,
                               onPressed: () async {

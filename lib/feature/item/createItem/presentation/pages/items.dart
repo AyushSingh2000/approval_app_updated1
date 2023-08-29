@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import '../pages/items_add.dart';
-
 
 class ItemsPage extends StatefulWidget {
   const ItemsPage({super.key});
@@ -16,6 +16,7 @@ class _ItemsPageState extends State<ItemsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: Text('Items List'),
         actions: [
           IconButton(

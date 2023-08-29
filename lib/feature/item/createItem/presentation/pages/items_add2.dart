@@ -4,6 +4,7 @@ import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import '../pages/items_add3.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
@@ -43,6 +44,7 @@ class _Items2State extends State<Items2> {
     print('sdfghj${itemsController.cardCode.value}');
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
         title: const Text("Item Warehouses"),
         centerTitle: true,
       ),
@@ -170,7 +172,7 @@ class _Items2State extends State<Items2> {
                       ),
                     ),
                     textColor: Colors.white,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: AppColors.mainblue,
                     borderRadius: 12,
                     height: 40,
                     onPressed: () {
@@ -191,7 +193,7 @@ class _Items2State extends State<Items2> {
                               ),
                             ),
                             textColor: Colors.white,
-                            backgroundColor: Colors.blue,
+                            backgroundColor: AppColors.mainblue,
                             borderRadius: 12,
                             height: 40,
                             onPressed: () async {

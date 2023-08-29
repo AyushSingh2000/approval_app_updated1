@@ -17,6 +17,7 @@ class LoginController extends GetxController {
   var VendorStatus = "".obs;
   var CustomerStatus = "".obs;
   var ItemStatus = "".obs;
+  var userBy = "".obs;
   var databaseList = <String>[].obs;
   var loginLoading = false.obs;
 
@@ -57,11 +58,16 @@ class LoginController extends GetxController {
       VendorStatus.value = loginResponseModel!.Vendor!;
       CustomerStatus.value = loginResponseModel!.Customer!;
       ItemStatus.value = loginResponseModel!.ItemMaster!;
+      userBy.value = loginResponseModel!.UserName!;
 
+      Set<String> temp = Set<String>();
       for (CompanyList list in res.companyList!) {
-        databaseList.value.add(list.databaseList!);
+        temp.add(list.databaseList!);
       }
 
+      for (String item in temp) {
+        databaseList.value.add(item);
+      }
       if (DEBUG) {
         print("From login Controller");
         print(databaseList);

@@ -4,6 +4,7 @@ import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/feature/login/controller/login_controller.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
 import '../pages/items_add3.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
@@ -35,6 +36,7 @@ class _Items2State extends State<Items2> {
   }
 
   ItemsController itemsController = Get.find<ItemsController>();
+  LoginController lc = Get.put(LoginController());
   List<String> demo = ['hello', 'hello', 'hello'];
 
   int count = 0;
@@ -211,7 +213,7 @@ class _Items2State extends State<Items2> {
                                 });
                                 itemsController.sendEmail(
                                     subject:
-                                        ' Request for Customer Master Creation Approval | Requested By ---',
+                                        ' Request for Customer Master Creation Approval | Requested By ${lc.userBy}',
                                     message:
                                         'I have made a new Customer Master creation request and request to approve the same, below are the details of the customer for your immediate reference.',
                                     cvi: 'Customer',
@@ -224,7 +226,7 @@ class _Items2State extends State<Items2> {
                                         .Item_Group_Code.value
                                         .toString(),
                                     db: 'TESTAC0718',
-                                    requestedBy: '--');
+                                    requestedBy: '${lc.userBy}');
                                 //
                                 // Future.delayed(Duration(seconds: 2), () {
                                 //   Navigator.push(

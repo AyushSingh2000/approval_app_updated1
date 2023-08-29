@@ -67,6 +67,7 @@ class SupplierController extends GetxController {
   var Active = ''.obs;
   var BpCountries = ''.obs;
   var blank = ''.obs;
+  var GroupName = ''.obs;
 
   var database = <String>[].obs;
   var dbString = ''.obs;

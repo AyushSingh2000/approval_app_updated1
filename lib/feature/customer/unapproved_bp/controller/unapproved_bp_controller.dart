@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import '../data/unapproved_data_source_impl.dart';
 import '../data/modal/get_bp_details_modal.dart';
@@ -101,5 +103,44 @@ class UnApprovedBpController extends GetxController {
     final data = await approvedBPDataSourceImpl.updateBPStatusData(
         cardCode.toString(), status.toString());
     res.value = data;
+  }
+
+  Future sendEmail(
+      {required String subject,
+      required String message,
+      required String cvi,
+      required String reqestOrApproval,
+      required String cardCode,
+      required String cardName,
+      required String groupName,
+      required String db,
+      required String requestedBy}) async {
+    final serviceId = 'service_a3rntkf';
+    final templateId = 'template_qwgcwr7';
+    final useId = '0Krm41mNV9xIYO2y_';
+
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final response = await http.post(url,
+        headers: {
+          'origin': 'http://localhost',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode({
+          'service_id': serviceId,
+          'template_id': templateId,
+          'user_id': useId,
+          'template_params': {
+            'user_subject': subject,
+            'user_message': message,
+            'cvi': cvi,
+            'RequestOrApprove': reqestOrApproval,
+            'code': cardCode,
+            'name': cardName,
+            'group': groupName,
+            'db': db,
+            'by': requestedBy
+          }
+        }));
+    print("--------------------------------${response.body}");
   }
 }

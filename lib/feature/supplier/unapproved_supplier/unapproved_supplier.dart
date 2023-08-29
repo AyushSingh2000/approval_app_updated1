@@ -245,6 +245,11 @@ class _UnApprovedSupplierScreenState extends State<UnApprovedSupplierScreen> {
                                                           .bpmasterDetails[0]
                                                           .CardCode ??
                                                       '',
+                                                  group: ac
+                                                          .filteredData[index]
+                                                          .bpmasterDetails[0]
+                                                          .GroupName ??
+                                                      '',
                                                 )));
                                     ac.searchToggle.value = false;
                                     ac.searchToggle.refresh();

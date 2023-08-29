@@ -232,21 +232,25 @@ class _UnApprovedBPScreenState extends State<UnApprovedBPScreen> {
                                     Navigator.push(
                                         context,
                                         CupertinoPageRoute(
-                                            builder: (context) =>
-                                                DetailedBpScreen(
-                                                  name: ac
-                                                          .filteredData_unApproved[
-                                                              index]
-                                                          .bpmasterDetails[0]
-                                                          .CardName ??
-                                                      '',
-                                                  code: ac
-                                                          .filteredData_unApproved[
-                                                              index]
-                                                          .bpmasterDetails[0]
-                                                          .CardCode ??
-                                                      '',
-                                                )));
+                                            builder: (context) => DetailedBpScreen(
+                                                name: ac
+                                                        .filteredData_unApproved[
+                                                            index]
+                                                        .bpmasterDetails[0]
+                                                        .CardName ??
+                                                    '',
+                                                code: ac
+                                                        .filteredData_unApproved[
+                                                            index]
+                                                        .bpmasterDetails[0]
+                                                        .CardCode ??
+                                                    '',
+                                                group: ac
+                                                        .filteredData_unApproved[
+                                                            index]
+                                                        .bpmasterDetails[0]
+                                                        .GroupName ??
+                                                    '')));
                                     ac.searchToggle.value = false;
                                     ac.searchToggle.refresh();
                                     Future.delayed(Duration(milliseconds: 500),

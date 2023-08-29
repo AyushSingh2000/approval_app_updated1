@@ -14,7 +14,9 @@ import '../../controller/unapproved_bp_controller.dart';
 class DetailedBpScreen extends StatefulWidget {
   final String name;
   final String code;
-  const DetailedBpScreen({Key? key, required this.name, required this.code})
+  final String group;
+  const DetailedBpScreen(
+      {Key? key, required this.name, required this.code, required this.group})
       : super(key: key);
 
   @override
@@ -273,6 +275,25 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                                       Navigator.of(
                                                                               context)
                                                                           .pop();
+                                                                      uac.sendEmail(
+                                                                          subject:
+                                                                              'Customer Master Creation Approval Confirmation | Approved By ---',
+                                                                          message:
+                                                                              'We have approved the new Customer Master and below are the details of the customer for your immediate reference',
+                                                                          cvi:
+                                                                              'Customer',
+                                                                          reqestOrApproval:
+                                                                              'Approved By',
+                                                                          cardCode:
+                                                                              '${widget.code}',
+                                                                          cardName:
+                                                                              '${widget.name}',
+                                                                          groupName:
+                                                                              '${widget.group}',
+                                                                          db:
+                                                                              'TESTAC0718',
+                                                                          requestedBy:
+                                                                              '--');
                                                                     } else {
                                                                       ScaffoldMessenger.of(
                                                                               context)
@@ -381,6 +402,25 @@ class _DetailedBpScreenState extends State<DetailedBpScreen> {
                                                                       Navigator.of(
                                                                               context)
                                                                           .pop();
+                                                                      uac.sendEmail(
+                                                                          subject:
+                                                                              ' Customer Master Creation Request Rejected | Rejected By --',
+                                                                          message:
+                                                                              'We have rejected the new Customer Master and below are the details of the customer along with the comments for your immediate reference.',
+                                                                          cvi:
+                                                                              'Customer',
+                                                                          reqestOrApproval:
+                                                                              'Approved By',
+                                                                          cardCode:
+                                                                              '${widget.code}',
+                                                                          cardName:
+                                                                              '${widget.name}',
+                                                                          groupName:
+                                                                              '${widget.group}',
+                                                                          db:
+                                                                              'TESTAC0718',
+                                                                          requestedBy:
+                                                                              '--');
                                                                     } else {
                                                                       ScaffoldMessenger.of(
                                                                               context)

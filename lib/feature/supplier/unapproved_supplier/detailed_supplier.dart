@@ -15,8 +15,9 @@ import 'controller/unapproved_supplier_controller.dart';
 class DetailedSupplierScreen extends StatefulWidget {
   final String name;
   final String code;
+  final String group;
   const DetailedSupplierScreen(
-      {Key? key, required this.name, required this.code})
+      {Key? key, required this.name, required this.code, required this.group})
       : super(key: key);
 
   @override
@@ -264,6 +265,25 @@ class _DetailedSupplierScreenState extends State<DetailedSupplierScreen> {
                                                                       Navigator.of(
                                                                               context)
                                                                           .pop();
+                                                                      ac.sendEmail(
+                                                                          subject:
+                                                                              'Supplier Master Creation Approval Confirmation | Approved By --',
+                                                                          message:
+                                                                              'We have approved the new Supplier Master and below are the details of the Supplier for your immediate reference. ',
+                                                                          cvi:
+                                                                              'Supplier',
+                                                                          reqestOrApproval:
+                                                                              'Approved By',
+                                                                          cardCode:
+                                                                              '${widget.code}',
+                                                                          cardName:
+                                                                              '${widget.name}',
+                                                                          groupName:
+                                                                              '${widget.group}',
+                                                                          db:
+                                                                              'TESTAC0718',
+                                                                          requestedBy:
+                                                                              '--');
                                                                     } else {
                                                                       ScaffoldMessenger.of(
                                                                               context)
@@ -356,6 +376,25 @@ class _DetailedSupplierScreenState extends State<DetailedSupplierScreen> {
                                                                       Navigator.of(
                                                                               context)
                                                                           .pop();
+                                                                      ac.sendEmail(
+                                                                          subject:
+                                                                              ' Supplier Master Creation Request Rejected | Rejected By --',
+                                                                          message:
+                                                                              'We have rejected the new Supplier Master and below are the details of the Supplier along with the comments for your immediate reference.',
+                                                                          cvi:
+                                                                              'Supplier',
+                                                                          reqestOrApproval:
+                                                                              'Approved By',
+                                                                          cardCode:
+                                                                              '${widget.code}',
+                                                                          cardName:
+                                                                              '${widget.name}',
+                                                                          groupName:
+                                                                              '${widget.group}',
+                                                                          db:
+                                                                              'TESTAC0718',
+                                                                          requestedBy:
+                                                                              '--');
                                                                     } else {
                                                                       ScaffoldMessenger.of(
                                                                               context)

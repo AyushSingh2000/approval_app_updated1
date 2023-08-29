@@ -141,17 +141,21 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
                                   CupertinoPageRoute(
                                       builder: (context) =>
                                           DetailedUnApprovedItemScreen(
-                                            name: ac
-                                                    .filteredData[index]
-                                                    .itemmasterDetails[0]
-                                                    .ItemName ??
-                                                '',
-                                            code: ac
-                                                    .filteredData[index]
-                                                    .itemmasterDetails[0]
-                                                    .ItemCode ??
-                                                '',
-                                          )));
+                                              name: ac
+                                                      .filteredData[index]
+                                                      .itemmasterDetails[0]
+                                                      .ItemName ??
+                                                  '',
+                                              code: ac
+                                                      .filteredData[index]
+                                                      .itemmasterDetails[0]
+                                                      .ItemCode ??
+                                                  '',
+                                              group: ac
+                                                      .filteredData[index]
+                                                      .itemmasterDetails[0]
+                                                      .GroupName ??
+                                                  '')));
                               ac.searchToggle.value = false;
                               ac.searchToggle.refresh();
                               ac.filterData('');

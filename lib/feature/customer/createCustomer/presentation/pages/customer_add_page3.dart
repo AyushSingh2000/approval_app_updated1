@@ -567,6 +567,19 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
                           type: QuickAlertType.success,
                           text: res.message,
                         );
+                        customerController.sendEmail(
+                            subject:
+                                ' Request for Customer Master Creation Approval | Requested By ---',
+                            message:
+                                'I have made a new Customer Master creation request and request to approve the same, below are the details of the customer for your immediate reference.',
+                            cvi: 'Customer',
+                            reqestOrApproval: 'Requested By',
+                            cardCode: res.message,
+                            cardName: customerController.Name.value.toString(),
+                            groupName:
+                                customerController.GroupName.value.toString(),
+                            db: 'TESTAC0718',
+                            requestedBy: '--');
 
                         Navigator.popUntil(context, (route) {
                           return count++ == 3;

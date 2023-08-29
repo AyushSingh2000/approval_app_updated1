@@ -65,292 +65,296 @@ class _DetailedUnApprovedItemScreenState
                   ? const Center(child: CircularProgressIndicator())
                   : Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            widget.name,
-                            style: const TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 10,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            widget.code,
-                            style: const TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w300,
-                                color: AppColors.appbarmainblue),
-                          ),
-                          const SizedBox(height: 20.0),
-                          DefaultTabController(
-                            length: 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                const TabBar(
-                                  indicator: BoxDecoration(
-                                      color: AppColors.appgrey,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  indicatorColor: AppColors.appbarmainblue,
-                                  labelColor: AppColors
-                                      .appbarmainblue, //  // Color of the selected tab
-                                  unselectedLabelColor: Color(0xffd4d5d9),
-                                  tabs: [
-                                    Tab(text: "Item"),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Container(
-                                  height: height *
-                                      0.63, // Adjust the height as needed
-                                  child: TabBarView(
-                                    children: [
-                                      // Content for Tab 1
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 0, horizontal: 20),
-                                        child: ListView(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: DetailsCard(
-                                                title: "Details",
-                                                subtitleData: [
-                                                  {
-                                                    'subtitle': 'Code',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .ItemCode ??
-                                                            "-"
-                                                  },
-                                                  {
-                                                    'subtitle': 'Name',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .ItemName ??
-                                                            "-"
-                                                  },
-                                                  {
-                                                    'subtitle': 'Foreign Name',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .FrgnName ??
-                                                            "-"
-                                                  },
-                                                  {
-                                                    'subtitle': 'Item Type',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .ItmsGrpNam ??
-                                                            "-"
-                                                  }, //Doubt
-                                                  {
-                                                    'subtitle': 'Item Group',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .GroupName ??
-                                                            "-"
-                                                  },
-                                                  {
-                                                    'subtitle':
-                                                        'Inventory Item',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .InvntItem ??
-                                                            "-"
-                                                  }, //Doubt
-                                                  {
-                                                    'subtitle': 'Sales Item',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .SellItem ??
-                                                            "-"
-                                                  }, //Doubt
-                                                  {
-                                                    'subtitle': 'Purchase Item',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .PrchseItem ??
-                                                            "-"
-                                                  }, //Doubt
-                                                  //Sales UOM and Purchase UOM not found
-                                                  {
-                                                    'subtitle': 'Inventory UoM',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .InvntryUom ??
-                                                            "-"
-                                                  },
-                                                  //Manufacturing Catolog No not found,
-                                                  {
-                                                    'subtitle':
-                                                        'Manage Item By Batches',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .ManBtchNum ??
-                                                            "-"
-                                                  },
-                                                  {
-                                                    'subtitle':
-                                                        'Manage Item By Serial',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .ManSerNum ??
-                                                            "-"
-                                                  },
-                                                  //Management Method
-                                                  {
-                                                    'subtitle':
-                                                        'On Every Transaction',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .MngMethod1 ??
-                                                            "-"
-                                                  },
-                                                  {
-                                                    'subtitle': 'On Release',
-                                                    'text':
-                                                        ac.GetItemDetailsList[0]
-                                                                .MngMethod ??
-                                                            "-"
-                                                  },
-                                                  // Valuation Method and Remaining no found
-                                                  // {'subtitle': 'Website', 'text': ac.GetItemDetailsList[0].IntrntSite ?? "-"},
-                                                ],
+                            Text(
+                              widget.name,
+                              style: const TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              widget.code,
+                              style: const TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w300,
+                                  color: AppColors.appbarmainblue),
+                            ),
+                            const SizedBox(height: 20.0),
+                            DefaultTabController(
+                              length: 1,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  const TabBar(
+                                    indicator: BoxDecoration(
+                                        color: AppColors.appgrey,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
+                                    indicatorColor: AppColors.appbarmainblue,
+                                    labelColor: AppColors
+                                        .appbarmainblue, //  // Color of the selected tab
+                                    unselectedLabelColor: Color(0xffd4d5d9),
+                                    tabs: [
+                                      Tab(text: "Item"),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    height: height *
+                                        0.63, // Adjust the height as needed
+                                    child: TabBarView(
+                                      children: [
+                                        // Content for Tab 1
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 0, horizontal: 20),
+                                          child: ListView(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8.0),
+                                                child: DetailsCard(
+                                                  title: "Details",
+                                                  subtitleData: [
+                                                    {
+                                                      'subtitle': 'Code',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .ItemCode ??
+                                                              "-"
+                                                    },
+                                                    {
+                                                      'subtitle': 'Name',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .ItemName ??
+                                                              "-"
+                                                    },
+                                                    {
+                                                      'subtitle':
+                                                          'Foreign Name',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .FrgnName ??
+                                                              "-"
+                                                    },
+                                                    {
+                                                      'subtitle': 'Item Type',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .ItmsGrpNam ??
+                                                              "-"
+                                                    }, //Doubt
+                                                    {
+                                                      'subtitle': 'Item Group',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .GroupName ??
+                                                              "-"
+                                                    },
+                                                    {
+                                                      'subtitle':
+                                                          'Inventory Item',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .InvntItem ??
+                                                              "-"
+                                                    }, //Doubt
+                                                    {
+                                                      'subtitle': 'Sales Item',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .SellItem ??
+                                                              "-"
+                                                    }, //Doubt
+                                                    {
+                                                      'subtitle':
+                                                          'Purchase Item',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .PrchseItem ??
+                                                              "-"
+                                                    }, //Doubt
+                                                    //Sales UOM and Purchase UOM not found
+                                                    {
+                                                      'subtitle':
+                                                          'Inventory UoM',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .InvntryUom ??
+                                                              "-"
+                                                    },
+                                                    //Manufacturing Catolog No not found,
+                                                    {
+                                                      'subtitle':
+                                                          'Manage Item By Batches',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .ManBtchNum ??
+                                                              "-"
+                                                    },
+                                                    {
+                                                      'subtitle':
+                                                          'Manage Item By Serial',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .ManSerNum ??
+                                                              "-"
+                                                    },
+                                                    //Management Method
+                                                    {
+                                                      'subtitle':
+                                                          'On Every Transaction',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .MngMethod1 ??
+                                                              "-"
+                                                    },
+                                                    {
+                                                      'subtitle': 'On Release',
+                                                      'text':
+                                                          ac.GetItemDetailsList[0]
+                                                                  .MngMethod ??
+                                                              "-"
+                                                    },
+                                                    // Valuation Method and Remaining no found
+                                                    // {'subtitle': 'Website', 'text': ac.GetItemDetailsList[0].IntrntSite ?? "-"},
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            lc.ItemStatus.value == "Approve"
-                                                ? Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      Obx(
-                                                        () => SizedBox(
-                                                          height: 50,
-                                                          width: width * 0.33,
-                                                          child: ElevatedButton(
-                                                            style: ButtonStyle(
-                                                              backgroundColor:
-                                                                  MaterialStateProperty
-                                                                      .all<
-                                                                          Color>(
-                                                                AppColors
-                                                                    .mainblue,
-                                                              ),
-                                                              shape: MaterialStateProperty
-                                                                  .all<
-                                                                      RoundedRectangleBorder>(
-                                                                RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  // side: const BorderSide(color: Colors.red),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              lc.ItemStatus.value == "Approve"
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        Obx(
+                                                          () => SizedBox(
+                                                            height: 50,
+                                                            width: width * 0.33,
+                                                            child:
+                                                                ElevatedButton(
+                                                              style:
+                                                                  ButtonStyle(
+                                                                backgroundColor:
+                                                                    MaterialStateProperty
+                                                                        .all<
+                                                                            Color>(
+                                                                  AppColors
+                                                                      .mainblue,
+                                                                ),
+                                                                shape: MaterialStateProperty
+                                                                    .all<
+                                                                        RoundedRectangleBorder>(
+                                                                  RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            12),
+                                                                    // side: const BorderSide(color: Colors.red),
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            // backgroundColor:
-                                                            //     const Color.fromARGB(
-                                                            //         255, 33, 79, 243),
-                                                            // textColor: Colors.white,
-                                                            // fontWeight: Fonconst Color.fromARGB(255, 178, 144, 144),
-                                                            // paddingAll: 16,
-                                                            // borderRadius: 10,
-                                                            // fontSize: 16,
-                                                            onPressed:
-                                                                () async {
-                                                              ac.load1.value =
-                                                                  true;
-                                                              var res = await ac
-                                                                  .updateItemDetailsData(
-                                                                      widget
-                                                                          .code,
-                                                                      "Approved");
-                                                              ac.load1.value =
-                                                                  false;
+                                                              // backgroundColor:
+                                                              //     const Color.fromARGB(
+                                                              //         255, 33, 79, 243),
+                                                              // textColor: Colors.white,
+                                                              // fontWeight: Fonconst Color.fromARGB(255, 178, 144, 144),
+                                                              // paddingAll: 16,
+                                                              // borderRadius: 10,
+                                                              // fontSize: 16,
+                                                              onPressed:
+                                                                  () async {
+                                                                ac.load1.value =
+                                                                    true;
+                                                                var res = await ac
+                                                                    .updateItemDetailsData(
+                                                                        widget
+                                                                            .code,
+                                                                        "Approved");
+                                                                ac.load1.value =
+                                                                    false;
 
-                                                              if (ac.res
-                                                                      .value ==
-                                                                  "Success") {
-                                                                await ac
-                                                                    .getUnApprovedItemData();
-                                                                await apc
-                                                                    .getApprovedItemData();
-                                                                ac.filterData(
-                                                                    '');
-                                                                apc.filterData(
-                                                                    '');
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(const SnackBar(
-                                                                        content:
-                                                                            Text('Successfully Approved')));
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                                ac.sendEmail(
-                                                                    subject:
-                                                                        ' Item Master Creation Approval Confirmation | Approved By --',
-                                                                    message:
-                                                                        'We have approved the new Item Master and below are the details of the Item Master for your immediate reference. ',
-                                                                    cvi:
-                                                                        'Item Master',
-                                                                    reqestOrApproval:
-                                                                        'Approved By',
-                                                                    cardCode:
-                                                                        '${widget.code}',
-                                                                    cardName:
-                                                                        '${widget.name}',
-                                                                    groupName:
-                                                                        '${widget.group}',
-                                                                    db:
-                                                                        'TESTAC0718',
-                                                                    requestedBy:
-                                                                        '--');
-                                                              } else {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(const SnackBar(
-                                                                        content:
-                                                                            Text('An error has occurred')));
-                                                              }
-                                                            },
-                                                            child: ac.load1
+                                                                if (ac.res
                                                                         .value ==
-                                                                    true
-                                                                ? const CircularProgressIndicator(
-                                                                    strokeWidth:
-                                                                        1,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  )
-                                                                : const Text(
-                                                                    'Approve',
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white),
-                                                                  ),
+                                                                    "Success") {
+                                                                  await ac
+                                                                      .getUnApprovedItemData();
+                                                                  await apc
+                                                                      .getApprovedItemData();
+                                                                  ac.filterData(
+                                                                      '');
+                                                                  apc.filterData(
+                                                                      '');
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(const SnackBar(
+                                                                          content:
+                                                                              Text('Successfully Approved')));
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                  ac.sendEmail(
+                                                                      subject:
+                                                                          ' Item Master Creation Approval Confirmation | Approved By --',
+                                                                      message:
+                                                                          'We have approved the new Item Master and below are the details of the Item Master for your immediate reference. ',
+                                                                      cvi:
+                                                                          'Item Master',
+                                                                      reqestOrApproval:
+                                                                          'Approved By',
+                                                                      cardCode:
+                                                                          '${widget.code}',
+                                                                      cardName:
+                                                                          '${widget.name}',
+                                                                      groupName:
+                                                                          '${widget.group}',
+                                                                      db:
+                                                                          'TESTAC0718',
+                                                                      requestedBy:
+                                                                          '--');
+                                                                } else {
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(const SnackBar(
+                                                                          content:
+                                                                              Text('An error has occurred')));
+                                                                }
+                                                              },
+                                                              child: ac.load1
+                                                                          .value ==
+                                                                      true
+                                                                  ? const CircularProgressIndicator(
+                                                                      strokeWidth:
+                                                                          1,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    )
+                                                                  : const Text(
+                                                                      'Approve',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              Colors.white),
+                                                                    ),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Obx(
-                                                        () => SizedBox(
+                                                        SizedBox(
                                                           height: 50,
                                                           width: width * 0.33,
                                                           child: ElevatedButton(
@@ -386,92 +390,128 @@ class _DetailedUnApprovedItemScreenState
                                                             // fontSize: 16,
                                                             onPressed:
                                                                 () async {
-                                                              ac.load2.value =
-                                                                  true;
-                                                              var res = await ac
-                                                                  .updateItemDetailsData(
-                                                                      widget
-                                                                          .code,
-                                                                      "Rejected");
-                                                              ac.load2.value =
-                                                                  false;
-                                                              if (ac.res
-                                                                      .value ==
-                                                                  "Success") {
-                                                                await ac
-                                                                    .getUnApprovedItemData();
-                                                                await rc
-                                                                    .getRejectedItemData();
-                                                                ac.filterData(
-                                                                    '');
-                                                                rc.filterData(
-                                                                    '');
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(const SnackBar(
-                                                                        content:
-                                                                            Text('Successfully Rejected')));
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                                ac.sendEmail(
-                                                                    subject:
-                                                                        ' Item Master Creation Request Rejected | Rejected By --',
-                                                                    message:
-                                                                        'We have rejected the new Item Master and below are the details of the Item Master along with the comments for your immediate reference',
-                                                                    cvi:
-                                                                        'Item Master',
-                                                                    reqestOrApproval:
-                                                                        'Approved By',
-                                                                    cardCode:
-                                                                        '${widget.code}',
-                                                                    cardName:
-                                                                        '${widget.name}',
-                                                                    groupName:
-                                                                        '${widget.group}',
-                                                                    db:
-                                                                        'TESTAC0718',
-                                                                    requestedBy:
-                                                                        '--');
-                                                              } else {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(const SnackBar(
-                                                                        content:
-                                                                            Text('An error has occurred')));
-                                                              }
+                                                              Get.defaultDialog(
+                                                                title:
+                                                                    'Attention!',
+                                                                content: Column(
+                                                                  children: [
+                                                                    Container(
+                                                                        margin: const EdgeInsets.symmetric(
+                                                                            vertical:
+                                                                                10),
+                                                                        // height: 50,
+                                                                        decoration: BoxDecoration(
+                                                                            color: Colors.grey[
+                                                                                200],
+                                                                            borderRadius: BorderRadius.circular(
+                                                                                9)),
+                                                                        child:
+                                                                            TextFormField(
+                                                                          maxLines:
+                                                                              5,
+                                                                          decoration:
+                                                                              InputDecoration(
+                                                                            border:
+                                                                                InputBorder.none,
+                                                                            hintText:
+                                                                                'Remarks',
+                                                                            hintStyle:
+                                                                                TextStyle(color: Colors.grey.withOpacity(0.8)),
+                                                                            contentPadding:
+                                                                                const EdgeInsets.only(left: 12, top: 12),
+                                                                          ),
+                                                                          onChanged:
+                                                                              (value) {
+                                                                            ac.remarks.value =
+                                                                                value;
+                                                                          },
+                                                                        )),
+                                                                    SizedBox(
+                                                                        height:
+                                                                            16),
+                                                                    Obx(
+                                                                      () => Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Center(
+                                                                            child: ElevatedButton(
+                                                                                onPressed: () async {
+                                                                                  ac.load2.value = true;
+                                                                                  var res = await ac.updateItemDetailsData(widget.code, "Rejected");
+                                                                                  ac.load2.value = false;
+                                                                                  if (ac.res.value == "Success") {
+                                                                                    await ac.getUnApprovedItemData();
+                                                                                    await rc.getRejectedItemData();
+                                                                                    ac.filterData('');
+                                                                                    rc.filterData('');
+                                                                                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Successfully Rejected')));
+                                                                                    Navigator.of(context).pop();
+                                                                                    ac.sendEmail_Rejected(subject: ' Item Master Creation Request Rejected | Rejected By --', message: 'We have rejected the new Item Master and below are the details of the Item Master along with the comments for your immediate reference', cvi: 'Item Master', reqestOrApproval: 'Approved By', cardCode: '${widget.code}', cardName: '${widget.name}', groupName: '${widget.group}', db: 'TESTAC0718', requestedBy: '--');
+                                                                                  } else {
+                                                                                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('An error has occurred')));
+                                                                                  }
+                                                                                },
+                                                                                style: ButtonStyle(
+                                                                                  backgroundColor: MaterialStateProperty.all<Color>(
+                                                                                    AppColors.mainblue,
+                                                                                  ),
+                                                                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                                                    RoundedRectangleBorder(
+                                                                                      borderRadius: BorderRadius.circular(12),
+                                                                                      // side: const BorderSide(color: Colors.red),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                                child: ac.load2.value == true
+                                                                                    ? const CircularProgressIndicator(
+                                                                                        strokeWidth: 1,
+                                                                                        color: Colors.white,
+                                                                                      )
+                                                                                    : const Text(
+                                                                                        'Confirm',
+                                                                                        style: TextStyle(
+                                                                                          fontSize: 16,
+                                                                                          fontWeight: FontWeight.w600,
+                                                                                          fontFamily: "Nunito",
+                                                                                          color: Colors.white,
+                                                                                        ),
+                                                                                      )),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              );
+
+                                                              /*
+
+
+                                                                 */
                                                             },
-                                                            child: ac.load2
-                                                                        .value ==
-                                                                    true
-                                                                ? const CircularProgressIndicator(
-                                                                    strokeWidth:
-                                                                        1,
-                                                                    color: Colors
-                                                                        .black,
-                                                                  )
-                                                                : const Text(
-                                                                    'Reject',
-                                                                    style: TextStyle(
-                                                                        color: AppColors
-                                                                            .gradientColor1),
-                                                                  ),
+                                                            child: const Text(
+                                                              'Reject',
+                                                              style: TextStyle(
+                                                                  color: AppColors
+                                                                      .gradientColor1),
+                                                            ),
                                                           ),
                                                         ),
-                                                      )
-                                                    ],
-                                                  )
-                                                : SizedBox()
-                                          ],
+                                                      ],
+                                                    )
+                                                  : SizedBox()
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     )),
             ),

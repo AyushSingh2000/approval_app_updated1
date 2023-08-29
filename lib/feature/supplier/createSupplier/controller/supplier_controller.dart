@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:new_app/core/post_enum_response.dart';
 // import 'package:new_app/core/utils/extensions/string_extension.dart';
-
+import 'package:http/http.dart' as http;
 import '../../../customer/approved_bp/data/modal/get_bp_approval_status_modal.dart';
 import '../data/datasource/supplier_data_source_impl.dart';
 import '../data/model/supplier_post_1.dart';
@@ -276,5 +278,46 @@ class SupplierController extends GetxController {
 
     postCustomerDataLoading.value = false;
     return result;
+  }
+
+  Future sendEmail({
+    required String subject,
+    required String message,
+    required String cvi,
+    required String reqestOrApproval,
+    required String cardCode,
+    required String cardName,
+    required String groupName,
+    required String db,
+    required String requestedBy,
+  }) async {
+    final serviceId = 'service_a3rntkf';
+    final templateId = 'template_qwgcwr7';
+    final useId = '0Krm41mNV9xIYO2y_';
+
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final response = await http.post(url,
+        headers: {
+          'origin': 'http://localhost',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode({
+          'service_id': serviceId,
+          'template_id': templateId,
+          'user_id': useId,
+          'template_params': {
+            'sender_email': 'nihal.vish29@gmail.com',
+            'user_subject': subject,
+            'user_message': message,
+            'cvi': cvi,
+            'RequestOrApprove': reqestOrApproval,
+            'code': cardCode,
+            'name': cardName,
+            'group': groupName,
+            'db': db,
+            'by': requestedBy
+          }
+        }));
+    print("--------------------------------${response.body}");
   }
 }

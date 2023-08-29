@@ -15,9 +15,16 @@ class DetailedUnApprovedItemScreen extends StatefulWidget {
   final String name;
   final String code;
   final String group;
-  const DetailedUnApprovedItemScreen(
-      {Key? key, required this.name, required this.code, required this.group})
-      : super(key: key);
+  final String requestedBy;
+  final String db;
+  const DetailedUnApprovedItemScreen({
+    Key? key,
+    required this.name,
+    required this.code,
+    required this.group,
+    required this.requestedBy,
+    required this.db,
+  }) : super(key: key);
 
   @override
   State<DetailedUnApprovedItemScreen> createState() =>
@@ -310,24 +317,24 @@ class _DetailedUnApprovedItemScreenState
                                                                           context)
                                                                       .pop();
                                                                   ac.sendEmail(
-                                                                      subject:
-                                                                          ' Item Master Creation Approval Confirmation | Approved By --',
-                                                                      message:
-                                                                          'We have approved the new Item Master and below are the details of the Item Master for your immediate reference. ',
-                                                                      cvi:
-                                                                          'Item Master',
-                                                                      reqestOrApproval:
-                                                                          'Approved By',
-                                                                      cardCode:
-                                                                          '${widget.code}',
-                                                                      cardName:
-                                                                          '${widget.name}',
-                                                                      groupName:
-                                                                          '${widget.group}',
-                                                                      db:
-                                                                          'TESTAC0718',
-                                                                      requestedBy:
-                                                                          '--');
+                                                                    subject:
+                                                                        ' Item Master Creation Approval Confirmation | Approved By ${lc.userBy}',
+                                                                    message:
+                                                                        'We have approved the new Item Master and below are the details of the Item Master for your immediate reference. ',
+                                                                    cvi:
+                                                                        'Item Master',
+                                                                    reqestOrApproval:
+                                                                        'Approved By',
+                                                                    cardCode:
+                                                                        '${widget.code}',
+                                                                    cardName:
+                                                                        '${widget.name}',
+                                                                    groupName:
+                                                                        '${widget.group}',
+                                                                    db: '${widget.db}',
+                                                                    requestedBy:
+                                                                        '${widget.requestedBy}',
+                                                                  );
                                                                 } else {
                                                                   ScaffoldMessenger.of(
                                                                           context)
@@ -447,7 +454,7 @@ class _DetailedUnApprovedItemScreenState
                                                                                     rc.filterData('');
                                                                                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Successfully Rejected')));
                                                                                     Navigator.of(context).pop();
-                                                                                    ac.sendEmail_Rejected(subject: ' Item Master Creation Request Rejected | Rejected By --', message: 'We have rejected the new Item Master and below are the details of the Item Master along with the comments for your immediate reference', cvi: 'Item Master', reqestOrApproval: 'Approved By', cardCode: '${widget.code}', cardName: '${widget.name}', groupName: '${widget.group}', db: 'TESTAC0718', requestedBy: '--');
+                                                                                    ac.sendEmail_Rejected(subject: ' Item Master Creation Request Rejected | Rejected By ${lc.userBy}', message: 'We have rejected the new Item Master and below are the details of the Item Master along with the comments for your immediate reference', cvi: 'Item Master', reqestOrApproval: 'Approved By', cardCode: '${widget.code}', cardName: '${widget.name}', groupName: '${widget.group}', db: '${widget.db}', requestedBy: '${widget.requestedBy}');
                                                                                   } else {
                                                                                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('An error has occurred')));
                                                                                   }

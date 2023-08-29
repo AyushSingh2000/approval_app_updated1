@@ -66,7 +66,6 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
             ? Center(child: CircularProgressIndicator())
             : Column(
                 children: [
-
                   ac.searchToggle == true
                       ? Padding(
                           padding: const EdgeInsets.only(
@@ -83,7 +82,7 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
                           ),
                         )
                       : SizedBox(),
-                      ac.sortToggle == true
+                  ac.sortToggle == true
                       ? Container(
                           margin: EdgeInsets.all(16),
                           decoration: BoxDecoration(
@@ -165,7 +164,6 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
                           ),
                         )
                       : SizedBox(),
-
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, bottom: 5),
                     child: Align(
@@ -236,21 +234,32 @@ class _UnApprovedItemScreenState extends State<UnApprovedItemScreen> {
                                   CupertinoPageRoute(
                                       builder: (context) =>
                                           DetailedUnApprovedItemScreen(
-                                              name: ac
-                                                      .filteredData[index]
-                                                      .itemmasterDetails[0]
-                                                      .ItemName ??
-                                                  '',
-                                              code: ac
-                                                      .filteredData[index]
-                                                      .itemmasterDetails[0]
-                                                      .ItemCode ??
-                                                  '',
-                                              group: ac
-                                                      .filteredData[index]
-                                                      .itemmasterDetails[0]
-                                                      .GroupName ??
-                                                  '')));
+                                            name: ac
+                                                    .filteredData[index]
+                                                    .itemmasterDetails[0]
+                                                    .ItemName ??
+                                                '',
+                                            code: ac
+                                                    .filteredData[index]
+                                                    .itemmasterDetails[0]
+                                                    .ItemCode ??
+                                                '',
+                                            group: ac
+                                                    .filteredData[index]
+                                                    .itemmasterDetails[0]
+                                                    .GroupName ??
+                                                '',
+                                            requestedBy: ac
+                                                    .filteredData[index]
+                                                    .itemmasterDetails[0]
+                                                    .RequestedBy ??
+                                                '',
+                                            db: ac
+                                                    .filteredData[index]
+                                                    .itemmasterDetails[0]
+                                                    .ApplyDBs ??
+                                                '',
+                                          )));
                               ac.searchToggle.value = false;
                               ac.searchToggle.refresh();
                               ac.filterData('');

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/feature/home_screen/presentation/homescreen.dart';
 import 'package:new_app/feature/login/controller/login_controller.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../login/presentation/pages/login.dart';
@@ -108,6 +109,7 @@ class SplashPageState extends State<SplashPage> {
               child: Text(
                 'APPROVAL 360',
                 style: TextStyle(
+                  color: AppColors.appbarmainblue,
                     fontSize: height * 0.05,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Inter'),

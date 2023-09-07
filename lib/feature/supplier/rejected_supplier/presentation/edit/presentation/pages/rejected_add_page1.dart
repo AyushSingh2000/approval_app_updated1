@@ -61,7 +61,7 @@ class _EditRejectedSupplierPageState extends State<EditRejectedSupplierPage> {
     // websiteController.text = rc.GetBPDetailsList[0].IntrntSite!;
     // websiteController.text = rc.GetBPDetailsList[0].IntrntSite!;
 
-    print('from edit page 1:${rc.GetBPDetailsList[0].CardName}');
+    // print('from edit page 1:${rc.GetBPDetailsList[0].CardName}');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarmainblue,

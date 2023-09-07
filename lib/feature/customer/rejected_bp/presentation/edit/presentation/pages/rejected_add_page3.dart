@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:new_app/core/post_enum_response.dart';
+import 'package:new_app/feature/customer/rejected_bp/controller/rejected_bp_controller.dart';
 import 'package:new_app/feature/customer/rejected_bp/presentation/edit/controller/edit_rejected_controller.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/TextField/customTextField.dart';
@@ -29,6 +30,7 @@ class _EditRejectedCustomerPage3State extends State<EditRejectedCustomerPage3> {
   //     Get.put<ApprovedBpController>(ApprovedBpController());
 
   int count = 0;
+  RejectedCustomerController ac = Get.put(RejectedCustomerController());
   final EditRejectedController customerController =
       Get.find<EditRejectedController>();
   // void add_address(bool checked) {
@@ -205,14 +207,18 @@ class _EditRejectedCustomerPage3State extends State<EditRejectedCustomerPage3> {
                     const SizedBox(height: 16.0),
 
                     CustomTextField(
-                      hintText: 'Address ID',
+                      hintText:
+                          ac.GetBPDetailsList[0].CustomerAddress?[0].Address ??
+                              'Address ID',
                       onChanged: (p0) =>
                           customerController.Adrs_AddressID.value = p0,
                     ),
                     SizedBox(height: 16.0),
 
                     CustomTextField(
-                      hintText: 'Building/Floor/Room',
+                      hintText:
+                          ac.GetBPDetailsList[0].CustomerAddress?[0].Building ??
+                              'Building/Floor/Room',
                       onChanged: (p0) => customerController
                           .Adrs_Building_Floor_Room.value = p0,
                     ), //Building/Floor/Room

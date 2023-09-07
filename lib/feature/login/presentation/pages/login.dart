@@ -1,4 +1,5 @@
 import 'package:dropdown_plus/dropdown_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,6 +35,12 @@ class _LoginPageState extends State<LoginPage> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+  }
+
+  static const boolSharedPreference = "login";
+  static Future setBool() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool(boolSharedPreference, true);
   }
 
   @override
@@ -254,6 +261,12 @@ class _LoginPageState extends State<LoginPage> {
                                       return;
                                     } else {
                                       // print(loginController.)
+
+                                      final prefs =
+                                          await SharedPreferences.getInstance();
+
+                                      prefs.setBool('login', true);
+
                                       Get.off(const HomeScreen());
                                     }
                                   },

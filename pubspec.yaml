@@ -50,6 +50,7 @@ dependencies:
   country_state_picker: ^0.0.5
   showcaseview: ^2.0.3
   url_launcher: ^6.1.12
+  shared_preferences: ^2.2.1
 
 dev_dependencies:
   flutter_test:

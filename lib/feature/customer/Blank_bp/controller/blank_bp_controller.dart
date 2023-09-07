@@ -13,6 +13,7 @@ class BlankCustomerController extends GetxController {
 
   var cardCode = ''.obs;
 
+  // var selectDb = 'TESTACAE01'.obs;
   var selectDb = 'TESTAC0718'.obs;
 
   var initialDataLoading = false.obs;

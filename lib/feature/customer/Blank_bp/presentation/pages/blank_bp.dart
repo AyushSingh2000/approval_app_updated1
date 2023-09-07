@@ -250,6 +250,7 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                       options: lc.databaseList,
                       onChanged: (dynamic newValue) {
                         ac.selectDb.value = newValue;
+                        
                         Future.delayed(Duration(milliseconds: 100), () async {
                           ac.initialDataLoading.value = true;
                           await ac.getBlankCustomerData();

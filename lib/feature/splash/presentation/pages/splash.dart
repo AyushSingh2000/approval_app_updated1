@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/feature/home_screen/presentation/homescreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../login/presentation/pages/login.dart';
 
@@ -15,12 +17,16 @@ class SplashPage extends StatefulWidget {
 
 class SplashPageState extends State<SplashPage> {
   bool animate = false;
+  bool logindetail = false;
 
   @override
   void initState() {
     unawaited(_checkSplash());
+    getlogin();
     super.initState();
   }
+
+ 
 
   Future<void> _checkSplash() async {
     await Future.delayed(const Duration(milliseconds: 100), () {
@@ -29,7 +35,7 @@ class SplashPageState extends State<SplashPage> {
       });
     });
     await Future.delayed(const Duration(seconds: 3), () {
-      Get.off(const LoginPage());
+      logindetail==false?Get.off(const LoginPage()):Get.off(const HomeScreen());
     });
   }
 
@@ -98,7 +104,7 @@ class SplashPageState extends State<SplashPage> {
               opacity: animate ? 1 : 0,
               duration: const Duration(milliseconds: 1500),
               child: Text(
-                'Approval 360',
+                'APPROVAL 360',
                 style: TextStyle(
                     fontSize: height * 0.05,
                     fontWeight: FontWeight.bold,
@@ -143,5 +149,9 @@ class SplashPageState extends State<SplashPage> {
         ],
       ),
     );
+  }
+   void getlogin() async {
+    var prefs = await SharedPreferences.getInstance();
+    logindetail = prefs.getBool('login')!;
   }
 }

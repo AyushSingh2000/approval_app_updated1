@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/feature/home_screen/presentation/homescreen.dart';
+import 'package:new_app/feature/login/controller/login_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../login/presentation/pages/login.dart';
@@ -18,6 +19,7 @@ class SplashPage extends StatefulWidget {
 class SplashPageState extends State<SplashPage> {
   bool animate = false;
   bool logindetail = false;
+  LoginController loginController = Get.put(LoginController());
 
   @override
   void initState() {
@@ -152,6 +154,23 @@ class SplashPageState extends State<SplashPage> {
   }
    void getlogin() async {
     var prefs = await SharedPreferences.getInstance();
-    logindetail = prefs.getBool('login')!;
+    var companyDB = prefs.getString("companyDB");
+    var username = prefs.getString("username");
+    var VendorStatus = prefs.getString("VendorStatus");
+    var CustomerStatus = prefs.getString("CustomerStatus");
+    var ItemStatus = prefs.getString("ItemStatus");
+    var userBy = prefs.getString("userBy");
+    var databaseList = prefs.getStringList("databaseList");
+
+    if(companyDB!=null || username!=null || VendorStatus!=null || CustomerStatus!=null || ItemStatus!=null || userBy!=null || databaseList!=null){
+      logindetail=true;
+      loginController.companyDB = companyDB!;
+      loginController.username = username!;
+      loginController.VendorStatus.value = VendorStatus!;
+      loginController.CustomerStatus.value = CustomerStatus!;
+      loginController.ItemStatus.value = ItemStatus!;
+      loginController.userBy.value = userBy!;
+      loginController.databaseList.value = databaseList!;
+    }
   }
 }

@@ -37,11 +37,11 @@ class _LoginPageState extends State<LoginPage> {
     ]);
   }
 
-  static const boolSharedPreference = "login";
-  static Future setBool() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool(boolSharedPreference, true);
-  }
+  // static const boolSharedPreference = "login";
+  // static Future setBool() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   prefs.setBool(boolSharedPreference, true);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -260,12 +260,19 @@ class _LoginPageState extends State<LoginPage> {
 
                                       return;
                                     } else {
-                                      // print(loginController.)
 
                                       final prefs =
                                           await SharedPreferences.getInstance();
+                                      prefs.setString("companyDB", loginController.companyDB);
+                                      prefs.setString("username", loginController.username);
+                                      prefs.setString("VendorStatus", loginController.VendorStatus.value);
+                                      prefs.setString("CustomerStatus", loginController.CustomerStatus.value);
+                                      prefs.setString("ItemStatus", loginController.ItemStatus.value);
+                                      prefs.setString("userBy", loginController.userBy.value);
+                                      prefs.setStringList("databaseList", loginController.databaseList.value);
 
-                                      prefs.setBool('login', true);
+
+                                      // prefs.setBool('login', true);
 
                                       Get.off(const HomeScreen());
                                     }

@@ -53,6 +53,7 @@ dependencies:
   shared_preferences: ^2.2.1
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.13.1"
   flutter_test:
     sdk: flutter
 
@@ -79,6 +80,10 @@ flutter:
   assets:
     - lib/ui/assets/
 
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "lib/ui/assets/LOGO.jpg"
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

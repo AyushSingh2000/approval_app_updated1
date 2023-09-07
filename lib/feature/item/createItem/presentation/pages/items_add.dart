@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,11 @@ class ItemsAddPage extends StatefulWidget {
 class _ItemsAddPageState extends State<ItemsAddPage> {
   ItemsController itemsController = Get.put(ItemsController());
   ItemsController items_Controller = Get.find<ItemsController>();
+  DropdownEditingController<String> manageitem =
+      DropdownEditingController<String>();
+  DropdownEditingController<String> valuation =
+      DropdownEditingController<String>();
+
   // InputDecoration buildTextFieldDecoration(String labelText,
   //     {bool hasDropdown = false}) {
   //   return InputDecoration(
@@ -87,6 +94,8 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
   bool isbox = false;
   @override
   Widget build(BuildContext context) {
+    manageitem.value = 'None';
+    valuation.value = 'FIFO';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarmainblue,
@@ -408,6 +417,8 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
                     child: TextDropdownFormField(
+                      
+                      controller: manageitem,
                       decoration: InputDecoration(
                         labelText: 'Manage Item by',
                         fillColor: Colors.grey[200],
@@ -490,8 +501,10 @@ class _ItemsAddPageState extends State<ItemsAddPage> {
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
                     child: TextDropdownFormField(
+                      controller: valuation,
                       decoration: InputDecoration(
                         // enabled: false,
+                        
                         labelText: 'Valuation Method',
                         fillColor: Colors.grey[200],
                         suffixIcon: Padding(

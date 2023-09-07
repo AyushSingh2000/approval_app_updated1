@@ -2,7 +2,9 @@ import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/feature/item/rejected_item/controller/rejected_item_controller.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
+import 'package:new_app/ui/colors/app_colors.dart';
 import '../../../../../../../ui/TextField/customTextField.dart';
 import '../../controller/edit_rejected_controller.dart';
 import 'items_add2.dart';
@@ -18,6 +20,7 @@ class editRejectedItemsPage extends StatefulWidget {
 class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
   EditRejectedItemsController itemsController =
       Get.put(EditRejectedItemsController());
+  RejectedItemController ac = Get.put(RejectedItemController());
 
   // InputDecoration buildTextFieldDecoration(String labelText,
   //     {bool hasDropdown = false}) {
@@ -83,6 +86,8 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.appbarmainblue,
+        elevation: 0,
         title: const Text(
           "Edit",
         ),
@@ -139,7 +144,8 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
-                      hintText: 'Item Name',
+                      hintText:
+                          ac.GetItemDetailsList[0].ItemName ?? 'Item Name',
                       onChanged: (Value) {
                         itemsController.Item_Name.value = Value;
                       }),
@@ -147,7 +153,8 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                     height: 16,
                   ),
                   CustomTextField(
-                    hintText: 'Foreign Name',
+                    hintText:
+                        ac.GetItemDetailsList[0].FrgnName ?? 'Foreign Name',
                     onChanged: (po) {
                       itemsController.Foreign_Name.value = po;
                     },
@@ -192,6 +199,7 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                     ),
                   ),
                   CheckboxListTile(
+                    activeColor: AppColors.appbarmainblue,
                     title: const Text('Inventory Item'),
                     value: itemsController.Inventory_Item.value,
                     onChanged: (newValue) {
@@ -199,6 +207,7 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                     },
                   ),
                   CheckboxListTile(
+                    activeColor: AppColors.appbarmainblue,
                     title: const Text('Sales Item'),
                     value: itemsController.Sales_Item.value,
                     onChanged: (newValue) {
@@ -206,6 +215,7 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                     },
                   ),
                   CheckboxListTile(
+                    activeColor: AppColors.appbarmainblue,
                     title: const Text('Purchase Item'),
                     value: itemsController.Purchase_Item.value,
                     onChanged: (newValue) {

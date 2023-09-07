@@ -10,7 +10,10 @@ import 'package:showcaseview/showcaseview.dart';
 
 import '../../../../../ui/TextField/customTextField.dart';
 import '../../../../login/controller/login_controller.dart';
+import '../../../approved_bp/controller/approved_bp_controller.dart';
 import '../../../createCustomer/presentation/pages/customer_add_page1.dart';
+import '../../../rejected_bp/controller/rejected_bp_controller.dart';
+import '../../../unapproved_bp/controller/unapproved_bp_controller.dart';
 import '../../controller/blank_bp_controller.dart';
 import 'blank_detailed_bp.dart';
 
@@ -24,6 +27,9 @@ class BlankBPScreen extends StatefulWidget {
 class _BlankBPScreenState extends State<BlankBPScreen> {
   final LoginController lc = Get.find<LoginController>();
   BlankCustomerController ac = Get.put(BlankCustomerController());
+  UnApprovedBpController unApprovedBpController = Get.put<UnApprovedBpController>(UnApprovedBpController());
+  ApprovedBpController approvedBpController = Get.put(ApprovedBpController());
+  RejectedCustomerController rejectedCustomerController = Get.put(RejectedCustomerController());
 
   // @override
   // void dispose() {
@@ -218,6 +224,7 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                           style: TextStyle(fontWeight: FontWeight.w600),
                         )),
                   ),
+                  SizedBox(height: 10,),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
@@ -228,6 +235,7 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                         labelText: ac.selectDb.value,
                         enabled: true,
                         fillColor: Colors.grey[200],
+                        floatingLabelStyle: TextStyle(color: AppColors.mainblue),
                         suffixIcon: Padding(
                           padding: const EdgeInsets.all(18.0),
                           child: Icon(
@@ -250,11 +258,29 @@ class _BlankBPScreenState extends State<BlankBPScreen> {
                       options: lc.databaseList,
                       onChanged: (dynamic newValue) {
                         ac.selectDb.value = newValue;
-                        
+                        unApprovedBpController.selectDb.value = newValue;
+                        approvedBpController.selectDb.value = newValue;
+                        rejectedCustomerController.selectDb.value = newValue;
+
                         Future.delayed(Duration(milliseconds: 100), () async {
                           ac.initialDataLoading.value = true;
+                          unApprovedBpController.initialDataLoading.value = true;
+                          approvedBpController.initialDataLoading.value = true;
+                          rejectedCustomerController.initialDataLoading.value = true;
+
                           await ac.getBlankCustomerData();
+                          await unApprovedBpController.getUn_ApprovedCustomerData();
+                          await approvedBpController.getApprovedCustomerData();
+                          await rejectedCustomerController.getRejectedCustomerData();
+
+                          rejectedCustomerController.initialDataLoading.value = false;
+                          approvedBpController.initialDataLoading.value = false;
+                          unApprovedBpController.initialDataLoading.value = false;
                           ac.initialDataLoading.value = false;
+
+                          rejectedCustomerController.filterData('');
+                          approvedBpController.filterData('');
+                          unApprovedBpController.filterData_UN('');
                           ac.filterData('');
                         });
                       },

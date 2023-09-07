@@ -32,18 +32,18 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
   List<String> list3 = ['yes', 'no'];
   Map<String, String> list3_1 = {'yes': 'tYES', 'no': 'tNO'};
 
-  // TextEditingController seriesController = new TextEditingController();
-  // TextEditingController nameController = new TextEditingController();
-  // TextEditingController foreignController = new TextEditingController();
-  // TextEditingController groupController = new TextEditingController();
-  // TextEditingController currencyController = new TextEditingController();
-  // TextEditingController taxIdController = new TextEditingController();
-  // TextEditingController employeeController = new TextEditingController();
-  // TextEditingController telephoneController = new TextEditingController();
-  // TextEditingController numberController = new TextEditingController();
-  // TextEditingController emailController = new TextEditingController();
-  // TextEditingController websiteController = new TextEditingController();
-  // TextEditingController addressController = new TextEditingController();
+  // TextEditingController seriesController = TextEditingController();
+  // TextEditingController nameController = TextEditingController();
+  // TextEditingController foreignController = TextEditingController();
+  // TextEditingController groupController = TextEditingController();
+  // TextEditingController currencyController = TextEditingController();
+  // TextEditingController taxIdController = TextEditingController();
+  // TextEditingController employeeController = TextEditingController();
+  // TextEditingController telephoneController = TextEditingController();
+  // TextEditingController numberController = TextEditingController();
+  // TextEditingController emailController = TextEditingController();
+  // TextEditingController websiteController = TextEditingController();
+  // TextEditingController addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +125,8 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                 const SizedBox(height: 16.0),
 
                 CustomTextField(
-                  hintText: 'Name',
+                  hintText: rc.GetBPDetailsList[0].CardName ?? "Name",
+                  // controller: nameController,
                   onChanged: (p0) => customerController.Name.value = p0,
                 ), //name
                 const SizedBox(height: 16.0),
@@ -142,8 +143,14 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                   child: TextDropdownFormField(
                     decoration: InputDecoration(
                       // enabled: false,
-                      labelText: customerController.BPGroupCodeList.isEmpty
-                          ? 'No Group Found'
+                      labelText: rc.GetBPDetailsList[0].GroupCode != 0
+                          ? customerController.BPGroupCodeMapData.keys
+                              .firstWhere(
+                                  (k) =>
+                                      customerController
+                                          .BPGroupCodeMapData[k] ==
+                                      rc.GetBPDetailsList[0].GroupCode,
+                                  orElse: () => 'select group')
                           : 'Select Group',
                       fillColor: Colors.grey[200],
                       suffixIcon: Padding(
@@ -181,9 +188,19 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                   child: TextDropdownFormField(
                     decoration: InputDecoration(
                       // enabled: false,
-                      labelText: customerController.BPCurrenciesList.isEmpty
-                          ? 'No Currency Found'
-                          : customerController.BPCurrenciesList[0],
+                      labelText: rc.GetBPDetailsList[0].Currency != ''
+                          ? customerController.BPCurrenciesMapData.keys
+                              .firstWhere(
+                                  (k) =>
+                                      customerController
+                                          .BPCurrenciesMapData[k] ==
+                                      rc.GetBPDetailsList[0].Currency,
+                                  orElse: () =>
+                                      customerController.BPCurrenciesList[0])
+                          : 'Select currency',
+                      // labelText: customerController.BPCurrenciesList.isEmpty
+                      //     ? 'No Currency Found'
+                      //     : customerController.BPCurrenciesList[0],
                       fillColor: Colors.grey[200],
                       suffixIcon: Padding(
                         padding: const EdgeInsets.all(18.0),
@@ -226,9 +243,11 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                   child: TextDropdownFormField(
                     decoration: InputDecoration(
                       // enabled: false,
-                      labelText: customerController.BPSaleEmployeesList.isEmpty
-                          ? 'No Employee Found'
-                          : 'Select Employee',
+                      labelText:
+                          rc.GetBPDetailsList[0].SalEmpNam ?? 'Select Employee',
+                      // labelText: customerController.BPSaleEmployeesList.isEmpty
+                      //     ? 'No Employee Found'
+                      //     : 'Select Employee',
                       fillColor: Colors.grey[200],
                       suffixIcon: Padding(
                         padding: const EdgeInsets.all(18.0),
@@ -266,9 +285,10 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                     },
                     flagsButtonPadding: const EdgeInsets.all(8),
                     dropdownIconPosition: IconPosition.trailing,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(0),
-                      hintText: 'Telephone No.',
+                      hintText:
+                          rc.GetBPDetailsList[0].Phone1 ?? 'Telephone No.',
                       hintStyle: TextStyle(fontWeight: FontWeight.normal),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -290,9 +310,9 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                     },
                     flagsButtonPadding: const EdgeInsets.all(8),
                     dropdownIconPosition: IconPosition.trailing,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(0),
-                      hintText: 'Phone Number',
+                      hintText: rc.GetBPDetailsList[0].Phone2 ?? 'Phone Number',
                       hintStyle: TextStyle(fontWeight: FontWeight.normal),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -334,9 +354,11 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                       height: 40,
                       width: 100,
                       borderRadius: 12,
-                      backgroundColor: Colors.blue,
-                      textColor: Colors.white,
-                      title: Text('Next'),
+                      backgroundColor: AppColors.appbarmainblue,
+                      title: Text(
+                        'Next',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       onPressed: () {
                         Navigator.push(
                             context,

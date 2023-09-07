@@ -94,9 +94,11 @@ class _EditRejectedCustomerPage2State extends State<EditRejectedCustomerPage2> {
                 ButtonBS(
                   height: 40,
                   borderRadius: 12,
-                  backgroundColor: Colors.blue,
-                  textColor: Colors.white,
-                  title: Text('Back'),
+                  backgroundColor: AppColors.appbarmainblue,
+                  title: Text(
+                    'Back',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () {
                     Get.back();
                   },
@@ -104,9 +106,11 @@ class _EditRejectedCustomerPage2State extends State<EditRejectedCustomerPage2> {
                 ButtonBS(
                   height: 40,
                   borderRadius: 12,
-                  backgroundColor: Colors.blue,
-                  textColor: Colors.white,
-                  title: Text('Next'),
+                  backgroundColor: AppColors.appbarmainblue,
+                  title: Text(
+                    'Next',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () {
                     Navigator.push(
                         context,

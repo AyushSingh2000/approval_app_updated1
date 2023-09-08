@@ -110,6 +110,9 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
             ? Center(child: CircularProgressIndicator())
             : Column(
                 children: [
+                  SizedBox(
+                    height: 5,
+                  ),
                   ac.searchToggle == true
                       ? Padding(
                           padding: const EdgeInsets.only(
@@ -216,6 +219,9 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
                           'Select Database',
                           style: TextStyle(fontWeight: FontWeight.w600),
                         )),
+                  ),
+                  SizedBox(
+                    height: 5,
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),

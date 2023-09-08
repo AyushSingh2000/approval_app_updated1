@@ -110,6 +110,9 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
             ? Center(child: CircularProgressIndicator())
             : Column(
                 children: [
+                  SizedBox(
+                    height: 5,
+                  ),
                   ac.searchToggle == true
                       ? Padding(
                           padding: const EdgeInsets.only(
@@ -217,6 +220,9 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
                           style: TextStyle(fontWeight: FontWeight.w600),
                         )),
                   ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
@@ -224,6 +230,7 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
                     child: TextDropdownFormField(
                       decoration: InputDecoration(
                         // enabled: false,
+                        labelStyle: TextStyle(color: AppColors.appbarmainblue),
                         labelText: ac.selectDb.value,
                         enabled: true,
                         fillColor: Colors.grey[200],
@@ -261,59 +268,81 @@ class _BlankItemScreenState extends State<BlankItemScreen> {
                   SizedBox(
                     height: 5,
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        // itemCount: ac.GetBPApprovalStatusList.length,
-                        itemCount: ac.filteredData.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              // print(ac.GetBPApprovalStatusList[index]
-                              //     .bpmasterDetails[0].CardCode);
-                              ac.cardCode.value = ac.filteredData[index]
-                                      .itemmasterDetails[0].ItemCode ??
-                                  '';
+                  ac.filteredData.length != 0
+                      ? Expanded(
+                          child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              // itemCount: ac.GetBPApprovalStatusList.length,
+                              itemCount: ac.filteredData.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // print(ac.GetBPApprovalStatusList[index]
+                                    //     .bpmasterDetails[0].CardCode);
+                                    ac.cardCode.value = ac.filteredData[index]
+                                            .itemmasterDetails[0].ItemCode ??
+                                        '';
 
-                              // print(ac.cardCode.value);
-                              // ac.getBPDetailsData();
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                      builder: (context) =>
-                                          DetailedItemBlankScreen(
-                                            name: ac
-                                                    .filteredData[index]
-                                                    .itemmasterDetails[0]
-                                                    .ItemName ??
-                                                '',
-                                            code: ac
-                                                    .filteredData[index]
-                                                    .itemmasterDetails[0]
-                                                    .ItemCode ??
-                                                '',
-                                          )));
-                              ac.searchToggle.value = false;
-                              ac.searchToggle.refresh();
-                              ac.filterData('');
-                            },
-                            child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0, vertical: 5),
-                                child: ProfileCard(
-                                  cardName: ac.filteredData[index]
-                                          .itemmasterDetails[0].ItemName ??
-                                      '',
-                                  cardCode: ac.filteredData[index]
-                                          .itemmasterDetails[0].ItemCode ??
-                                      '',
-                                  groupName: ac.filteredData[index]
-                                          .itemmasterDetails[0].GroupName ??
-                                      '',
-                                )),
-                          );
-                        }),
-                  )
+                                    // print(ac.cardCode.value);
+                                    // ac.getBPDetailsData();
+                                    Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                            builder: (context) =>
+                                                DetailedItemBlankScreen(
+                                                  name: ac
+                                                          .filteredData[index]
+                                                          .itemmasterDetails[0]
+                                                          .ItemName ??
+                                                      '',
+                                                  code: ac
+                                                          .filteredData[index]
+                                                          .itemmasterDetails[0]
+                                                          .ItemCode ??
+                                                      '',
+                                                )));
+                                    ac.searchToggle.value = false;
+                                    ac.searchToggle.refresh();
+                                    ac.filterData('');
+                                  },
+                                  child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0, vertical: 5),
+                                      child: ProfileCard(
+                                        cardName: ac
+                                                .filteredData[index]
+                                                .itemmasterDetails[0]
+                                                .ItemName ??
+                                            '',
+                                        cardCode: ac
+                                                .filteredData[index]
+                                                .itemmasterDetails[0]
+                                                .ItemCode ??
+                                            '',
+                                        groupName: ac
+                                                .filteredData[index]
+                                                .itemmasterDetails[0]
+                                                .GroupName ??
+                                            '',
+                                      )),
+                                );
+                              }),
+                        )
+                      : Center(
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 210, 210, 210),
+                                  borderRadius: BorderRadius.circular(13)),
+                              height: 40,
+                              width: 200,
+                              child: Center(
+                                  child: Text(
+                                'Database is Empty',
+                                style:
+                                    TextStyle(color: AppColors.appbarmainblue),
+                              ))),
+                        )
                 ],
               )));
   }

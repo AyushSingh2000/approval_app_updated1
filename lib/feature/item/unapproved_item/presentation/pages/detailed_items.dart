@@ -403,7 +403,8 @@ class _DetailedUnApprovedItemScreenState
                                                                 content: Column(
                                                                   children: [
                                                                     Container(
-                                                                        margin: const EdgeInsets.symmetric(
+                                                                        margin: const EdgeInsets
+                                                                            .symmetric(
                                                                             vertical:
                                                                                 10),
                                                                         // height: 50,

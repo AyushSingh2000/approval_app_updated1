@@ -119,7 +119,6 @@ class CustomerController extends GetxController {
     await getBPCounty();
     BPStatestempList.assignAll(BPStatesList);
     BPStatesMaptempData.assignAll(BPStatesMapData);
-    // await getApprovalStatusData();
     initialDataLoading.value = false;
   }
 
@@ -145,18 +144,12 @@ class CustomerController extends GetxController {
     final data = await customerDataSourceImpl.getBPSeries();
     BPSeriesMapData.value = data;
     BPSeriesList.value = data.keys.toList();
-    // print(data);
-    // print(BPSeriesList);
   }
 
   Future<void> getBPGroupCode() async {
     final data = await customerDataSourceImpl.getBPGroupCode();
     BPGroupCodeMapData.value = data;
     BPGroupCodeList.value = data.keys.toList();
-
-    // print('qwertyuio${BPGroupCodeMapData}');
-    // print(BPGroupCodeList);
-    print(contactemployee);
   }
 
   Future<void> getBPCurrencies() async {

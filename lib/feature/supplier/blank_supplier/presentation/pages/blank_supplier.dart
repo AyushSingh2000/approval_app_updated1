@@ -225,7 +225,6 @@ class _BlankSupplierScreenState extends State<BlankSupplierScreen> {
                     child: TextDropdownFormField(
                       decoration: InputDecoration(
                         // enabled: false,
-                        labelStyle: TextStyle(color: AppColors.appbarmainblue),
                         labelText: ac.selectDb.value,
                         enabled: true,
                         fillColor: Colors.grey[200],

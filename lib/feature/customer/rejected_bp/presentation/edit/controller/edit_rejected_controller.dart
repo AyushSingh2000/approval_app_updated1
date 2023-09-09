@@ -13,13 +13,13 @@ class EditRejectedController extends GetxController {
   var BPSeriesList = <String>[].obs;
 
   var BPGroupCodeMapData = {}.obs;
-  var BPGroupCodeList = <String>[].obs;
+  var BPGroupCodeList = <String>["Select Group"].obs;
 
   var BPCurrenciesMapData = {}.obs;
   var BPCurrenciesList = <String>[].obs;
 
   var BPSaleEmployeesMapData = {}.obs;
-  var BPSaleEmployeesList = <String>[].obs;
+  var BPSaleEmployeesList = <String>['-No Sales Employee-'].obs;
 
   ///handeling country and state relations
 
@@ -48,11 +48,11 @@ class EditRejectedController extends GetxController {
   var Name = ''.obs;
   var Cardtype = ''.obs;
   var Foreign_name = ''.obs;
-  var Group = ''.obs;
+  var Group = 'Select Group'.obs;
   var GroupCode = 0.obs;
   var Currencies = '##'.obs;
   var Federal_tax_id = ''.obs;
-  var SaleEmployees = ''.obs;
+  var SaleEmployees = '-No Sales Employee-'.obs;
   var SaleEmployeesCode = 0.obs;
   var Telephone = ''.obs;
   var Mobile = ''.obs;
@@ -147,16 +147,14 @@ class EditRejectedController extends GetxController {
     final data = await editRejectedDataSourceImpl.getBPGroupCode();
     BPGroupCodeMapData.value = data;
     BPGroupCodeList.value = data.keys.toList();
-
-    // print('qwertyuio${BPGroupCodeMapData}');
-    // print(BPGroupCodeList);
-    print(contactemployee);
+    BPGroupCodeList.insert(0, "Select Group");
   }
 
   Future<void> getBPCurrencies() async {
     final data = await editRejectedDataSourceImpl.getBPCurrencies();
     BPCurrenciesMapData.value = data;
     BPCurrenciesList.value = data.keys.toList();
+    BPCurrenciesList.insert(0, "##");
 
     // print(data);
     // print(BPCurrenciesList);
@@ -165,7 +163,11 @@ class EditRejectedController extends GetxController {
   Future<void> getBPSaleEmployees() async {
     final data = await editRejectedDataSourceImpl.getBPSaleEmployees();
     BPSaleEmployeesMapData.value = data;
-    BPSaleEmployeesList.value = data.keys.toList();
+    for(String ele in data.keys.toList()){
+      if(BPSaleEmployeesList.contains(ele)==false){
+        BPSaleEmployeesList.value.add(ele);
+      }
+    }
 
     // print(data);
     // print(BPSaleEmployeesList);

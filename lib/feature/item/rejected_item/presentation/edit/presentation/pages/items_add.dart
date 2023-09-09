@@ -144,8 +144,7 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
-                      hintText:
-                          ac.GetItemDetailsList[0].ItemName ?? 'Item Name',
+                      hintText: 'Item Name',
                       onChanged: (Value) {
                         itemsController.Item_Name.value = Value;
                       }),
@@ -153,8 +152,7 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                     height: 16,
                   ),
                   CustomTextField(
-                    hintText:
-                        ac.GetItemDetailsList[0].FrgnName ?? 'Foreign Name',
+                    hintText: 'Foreign Name',
                     onChanged: (po) {
                       itemsController.Foreign_Name.value = po;
                     },

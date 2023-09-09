@@ -25,8 +25,8 @@ class DetailedRejectedScreen extends StatefulWidget {
 
 class _DetailedRejectedScreenState extends State<DetailedRejectedScreen> {
   RejectedCustomerController ac = Get.put(RejectedCustomerController());
-  ApprovedBpController apc = Get.put(ApprovedBpController());
-  UnApprovedBpController uac = Get.put(UnApprovedBpController());
+  // ApprovedBpController apc = Get.put(ApprovedBpController());
+  // UnApprovedBpController uac = Get.put(UnApprovedBpController());
 
   @override
   void dispose() {
@@ -53,8 +53,7 @@ class _DetailedRejectedScreenState extends State<DetailedRejectedScreen> {
                     Navigator.push(
                         context,
                         CupertinoPageRoute(
-                            builder: (context) => EditRejectedCustomerPage(
-                                list: ac.GetBPDetailsList.value)));
+                            builder: (context) => EditRejectedCustomerPage()));
                   },
                   icon: Icon(
                     Icons.edit_note_sharp,

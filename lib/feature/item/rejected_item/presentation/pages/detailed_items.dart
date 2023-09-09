@@ -27,8 +27,8 @@ class DetailedRejectedItemScreen extends StatefulWidget {
 class _DetailedRejectedItemScreenState
     extends State<DetailedRejectedItemScreen> {
   RejectedItemController ac = Get.put(RejectedItemController());
-  ApprovedItemController apc = Get.put(ApprovedItemController());
-  UnApprovedItemController uc = Get.put(UnApprovedItemController());
+  // ApprovedItemController apc = Get.put(ApprovedItemController());
+  // UnApprovedItemController uc = Get.put(UnApprovedItemController());
   @override
   void dispose() {
     super.dispose();
@@ -135,6 +135,7 @@ class _DetailedRejectedItemScreenState
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 0, horizontal: 20),
                                         child: ListView(
+                                          physics: BouncingScrollPhysics(),
                                           children: [
                                             Padding(
                                               padding:

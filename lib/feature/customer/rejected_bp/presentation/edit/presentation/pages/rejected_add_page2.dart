@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:new_app/feature/customer/approved_bp/data/modal/get_bp_details_modal.dart';
 import 'package:new_app/feature/customer/createCustomer/controller/customer_controller.dart';
+import 'package:new_app/feature/customer/createCustomer/data/model/BP_post_1.dart';
 import 'package:new_app/feature/customer/createCustomer/presentation/pages/customer_add_con.dart';
 import 'package:new_app/feature/customer/createCustomer/presentation/pages/customer_add_page3.dart';
 import 'package:new_app/feature/customer/createCustomer/presentation/pages/customer_edit_con.dart';
 import 'package:new_app/feature/customer/createCustomer/presentation/widgets/add_contact.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
+
+import '../../../../controller/rejected_bp_controller.dart';
 
 class EditRejectedCustomerPage2 extends StatefulWidget {
   const EditRejectedCustomerPage2({super.key});
@@ -19,10 +23,39 @@ class EditRejectedCustomerPage2 extends StatefulWidget {
 }
 
 class _EditRejectedCustomerPage2State extends State<EditRejectedCustomerPage2> {
+  final CustomerController customer_Controller = Get.put(CustomerController());
+  RejectedCustomerController rc = Get.put(RejectedCustomerController());
+
+  @override
+  void initState() {
+    if(rc.GetBPDetailsList!=null){
+      for(CardDetail ele in rc.GetBPDetailsList){
+        if(ele.ContactPersons!=null){
+          for(ContactPerson contactPerson in ele.ContactPersons!){
+            customer_Controller.contactemployee.add(
+                contactEmployees(
+                    CardCode: contactPerson.CardCode,
+                    FirstName: contactPerson.FirstName,
+                    MiddleName: contactPerson.MiddleName,
+                    LastName: contactPerson.LastName,
+                    Name: contactPerson.Name,
+                    Position: contactPerson.Designation,
+                    Address: contactPerson.Address,
+                    Phone1: contactPerson.Tel1,
+                    Phone2: contactPerson.Tel2,
+                    MobilePhone: contactPerson.Cellolar,
+                    E_Mail: contactPerson.E_MailL,
+                    Active: contactPerson.Active
+                )
+            );
+          }
+        }
+      }
+    }
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    final CustomerController customer_Controller =
-        Get.put(CustomerController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarmainblue,
@@ -59,7 +92,7 @@ class _EditRejectedCustomerPage2State extends State<EditRejectedCustomerPage2> {
                           children: [
                             const Icon(
                               Icons.person,
-                              color: Colors.blue,
+                              color: AppColors.appbarmainblue,
                             ),
                             const SizedBox(
                               width: 5,

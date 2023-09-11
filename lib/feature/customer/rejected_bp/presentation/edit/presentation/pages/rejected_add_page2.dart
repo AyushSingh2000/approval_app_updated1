@@ -54,6 +54,13 @@ class _EditRejectedCustomerPage2State extends State<EditRejectedCustomerPage2> {
     }
     super.initState();
   }
+
+  @override
+  void dispose() {
+    print("Dispose, was called");
+    customer_Controller.contactemployee.value = [];
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

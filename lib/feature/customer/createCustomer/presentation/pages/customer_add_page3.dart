@@ -14,6 +14,7 @@ import 'package:quickalert/quickalert.dart';
 
 import '../../../approved_bp/controller/approved_bp_controller.dart';
 import '../../../../login/controller/login_controller.dart';
+import '../../../rejected_bp/controller/rejected_bp_controller.dart';
 import '../../data/model/BP_post_1.dart';
 
 class CustomerPage_3 extends StatefulWidget {
@@ -25,61 +26,11 @@ class CustomerPage_3 extends StatefulWidget {
 
 class _CustomerPage_3State extends State<CustomerPage_3> {
   LoginController lc = Get.put(LoginController());
-  ApprovedBpController ac =
-      Get.put<ApprovedBpController>(ApprovedBpController());
+  ApprovedBpController ac = Get.put<ApprovedBpController>(ApprovedBpController());
+  // RejectedCustomerController rc = Get.put(RejectedCustomerController());
 
   int count = 0;
   final CustomerController customerController = Get.find<CustomerController>();
-  // void add_address(bool checked) {
-  //   bPAddresses addresslist1 = bPAddresses(
-  //     AddressName: "ABC CHEMICAL EXPORTS PVT LTD",
-  //     AddressType: "bo_BillTo",
-  //     AddressName2: "PHYSICAL ADDRESS: U2 058, P.O. BOX 8330",
-  //     AddressName3: "SAIF ZONE, SHARJAH",
-  //     BuildingFloorRoom: "",
-  //     Street: null,
-  //     Block: null,
-  //     ZipCode: null,
-  //     City: null,
-  //     Country: "AE",
-  //     State: null,
-  //     U_SCCode: null,
-  //   );
-  //   customerController.addresslist.add(addresslist1);
-  //   if (checked) {
-  //     bPAddresses addresslist2 = bPAddresses(
-  //       AddressName: "ABC CHEMICAL EXPORTS PVT LTD",
-  //       AddressType: "bo_ShipTo",
-  //       AddressName2: "PHYSICAL ADDRESS: U2 058, P.O. BOX 8330",
-  //       AddressName3: "SAIF ZONE, SHARJAH",
-  //       BuildingFloorRoom: "",
-  //       Street: null,
-  //       Block: null,
-  //       ZipCode: null,
-  //       City: null,
-  //       Country: "AE",
-  //       State: null,
-  //       U_SCCode: null,
-  //     );
-  //     customerController.addresslist.add(addresslist2);
-  //   } else {
-  //     bPAddresses addresslist2 = bPAddresses(
-  //       AddressName: "ABC CHEMICAL EXPORTS PVT LTD",
-  //       AddressType: "bo_ShipTo",
-  //       AddressName2: "PHYSICAL ADDRESS: U2 058, P.O. BOX 8330",
-  //       AddressName3: "SAIF ZONE, SHARJAH",
-  //       BuildingFloorRoom: "",
-  //       Street: null,
-  //       Block: null,
-  //       ZipCode: null,
-  //       City: null,
-  //       Country: "AE",
-  //       State: null,
-  //       U_SCCode: null,
-  //     );
-  //     customerController.addresslist.add(addresslist2);
-  //   }
-  // }
 
   void add_address(bool checked) {
     bPAddresses addresslist1 = bPAddresses(
@@ -135,8 +86,6 @@ class _CustomerPage_3State extends State<CustomerPage_3> {
   bool isChecked = true;
   @override
   Widget build(BuildContext context) {
-    print("From Cutomer Page 3");
-    // print(lc.databaseList);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.appbarmainblue,

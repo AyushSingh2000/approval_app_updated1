@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:new_app/feature/item/rejected_item/controller/rejected_item_controller.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
 import 'package:new_app/ui/colors/app_colors.dart';
+
 import '../../../../../../../ui/TextField/customTextField.dart';
 import '../../controller/edit_rejected_controller.dart';
 import 'items_add2.dart';
@@ -105,41 +106,73 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
 
               return Column(
                 children: [
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 0),
+                  //   height: 60,
+                  //   child: TextDropdownFormField(
+                  //     decoration: InputDecoration(
+                  //       // enabled: false,
+                  //       labelText: itemsController.itemSeriesList.isEmpty
+                  //           ? 'No Item series Found'
+                  //           : 'Select Item series',
+                  //       fillColor: Colors.grey[200],
+                  //       suffixIcon: Padding(
+                  //         padding: const EdgeInsets.all(18.0),
+                  //         child: Icon(
+                  //           Icons.arrow_drop_down,
+                  //           color: Colors.black.withOpacity(0.6),
+                  //         ),
+                  //       ),
+                  //
+                  //       border: OutlineInputBorder(
+                  //           borderSide: BorderSide.none,
+                  //           borderRadius: BorderRadius.circular(9)),
+                  //       // hintText: 'Select State',
+                  //       filled: true,
+                  //       hintStyle: const TextStyle(
+                  //           fontWeight: FontWeight.bold, color: Colors.black),
+                  //       contentPadding:
+                  //           const EdgeInsets.only(left: 12, right: 12, top: 20),
+                  //       isCollapsed: true,
+                  //     ),
+                  //     options: itemsController.itemSeriesList,
+                  //     onChanged: (dynamic newValue) {
+                  //       itemsController.Item_Series.value = itemsController
+                  //           .itemSeriesMapData[newValue]
+                  //           .toString();
+                  //     },
+                  //   ),
+                  // ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
-                    child: TextDropdownFormField(
+                    child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        // enabled: false,
-                        labelText: itemsController.itemSeriesList.isEmpty
-                            ? 'No Item series Found'
-                            : 'Select Item series',
+                        labelText: 'Select Item Series',
                         fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
                         filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
                         contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
+                            EdgeInsets.only(left: 12, right: 12, top: 20),
                       ),
-                      options: itemsController.itemSeriesList,
-                      onChanged: (dynamic newValue) {
-                        itemsController.Item_Series.value = itemsController
-                            .itemSeriesMapData[newValue]
-                            .toString();
+                      value: (itemsController.itemSeriesList.isNotEmpty)
+                          ? itemsController.itemSeriesList[0]
+                          : "loading...", // You can set the initial value here
+                      onChanged: (newValue) {
+                        setState(() {
+                          itemsController.itemSeriesList.value =
+                              newValue as List<String>;
+                        });
                       },
+                      items: itemsController.itemSeriesList.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -160,40 +193,72 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                   const SizedBox(
                     height: 16,
                   ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 0),
+                  //   height: 60,
+                  //   child: TextDropdownFormField(
+                  //     decoration: InputDecoration(
+                  //       // enabled: false,
+                  //       labelText: itemsController.itemGroupList.isEmpty
+                  //           ? 'No Group Found'
+                  //           : 'Select Group',
+                  //       fillColor: Colors.grey[200],
+                  //       suffixIcon: Padding(
+                  //         padding: const EdgeInsets.all(18.0),
+                  //         child: Icon(
+                  //           Icons.arrow_drop_down,
+                  //           color: Colors.black.withOpacity(0.6),
+                  //         ),
+                  //       ),
+                  //
+                  //       border: OutlineInputBorder(
+                  //           borderSide: BorderSide.none,
+                  //           borderRadius: BorderRadius.circular(9)),
+                  //       // hintText: 'Select State',
+                  //       filled: true,
+                  //       hintStyle: const TextStyle(
+                  //           fontWeight: FontWeight.bold, color: Colors.black),
+                  //       contentPadding:
+                  //           const EdgeInsets.only(left: 12, right: 12, top: 20),
+                  //       isCollapsed: true,
+                  //     ),
+                  //     options: itemsController.itemGroupList,
+                  //     onChanged: (dynamic newValue) {
+                  //       itemsController.Item_Group_Code.value =
+                  //           itemsController.itemGroupMapData[newValue];
+                  //     },
+                  //   ),
+                  // ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
-                    child: TextDropdownFormField(
+                    child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        // enabled: false,
-                        labelText: itemsController.itemGroupList.isEmpty
-                            ? 'No Group Found'
-                            : 'Select Group',
+                        labelText: 'Select Group',
                         fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
                         filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
                         contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
+                            EdgeInsets.only(left: 12, right: 12, top: 20),
                       ),
-                      options: itemsController.itemGroupList,
-                      onChanged: (dynamic newValue) {
-                        itemsController.Item_Group_Code.value =
-                            itemsController.itemGroupMapData[newValue];
+                      value: (itemsController.itemGroupList.isNotEmpty)
+                          ? itemsController.itemGroupList[0]
+                          : "loading...", // You can set the initial value here
+                      onChanged: (newValue) {
+                        setState(() {
+                          itemsController.itemGroupList.value =
+                              newValue as List<String>;
+                        });
                       },
+                      items: itemsController.itemGroupList.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
                   CheckboxListTile(
@@ -260,44 +325,41 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                       },
                     ),
                   ),
+
                   const SizedBox(
                     height: 16,
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
-                    child: TextDropdownFormField(
+                    child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        // enabled: false,
-                        labelText: itemsController.PurchasingUoMList.isEmpty
-                            ? 'No Purchasing UOM Found'
-                            : 'Select Purchasing UOM',
+                        labelText: 'Select Purchasing UOM',
                         fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
                         filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
                         contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
+                            EdgeInsets.only(left: 12, right: 12, top: 20),
                       ),
-                      options: itemsController.PurchasingUoMList,
-                      onChanged: (dynamic newValue) {
-                        itemsController.Purchasing_UoM.value = itemsController
-                            .PurchasingUoMMapData[newValue!]
-                            .toString();
+                      value: (itemsController.PurchasingUoMList.isNotEmpty)
+                          ? itemsController.PurchasingUoMList[0]
+                          : "loading...", // You can set the initial value here
+                      onChanged: (newValue) {
+                        setState(() {
+                          itemsController.PurchasingUoMList.value =
+                              newValue as List<String>;
+                        });
                       },
+                      items:
+                          itemsController.PurchasingUoMList.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
                   const SizedBox(
@@ -346,40 +408,37 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
-                    child: TextDropdownFormField(
+                    child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        // enabled: false,
-                        labelText: itemsController.InventoryUoMList.isEmpty
-                            ? 'No Inventory UOM Found'
-                            : 'Select Inventory UOM',
+                        labelText: 'Select Inventory UOM',
                         fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
                         filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
                         contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
+                            EdgeInsets.only(left: 12, right: 12, top: 20),
                       ),
-                      options: itemsController.InventoryUoMList,
-                      onChanged: (dynamic newValue) {
-                        itemsController.Inventory_UoM.value = itemsController
-                            .InventoryUoMMapData[newValue!]
-                            .toString();
+                      value: (itemsController.InventoryUoMList.isNotEmpty)
+                          ? itemsController.InventoryUoMList[0]
+                          : "loading...", // You can set the initial value here
+                      onChanged: (newValue) {
+                        setState(() {
+                          itemsController.InventoryUoMList.value =
+                              newValue as List<String>;
+                        });
                       },
+                      items:
+                          itemsController.InventoryUoMList.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
+
                   const SizedBox(
                     height: 16,
                   ),
@@ -394,111 +453,175 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
-                    child: TextDropdownFormField(
+                    child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        // enabled: false,
                         labelText: 'Manage Item by',
                         fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
                         filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
                         contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
+                            EdgeInsets.only(left: 12, right: 12, top: 20),
                       ),
-                      options: manageItemBy,
+                      value: (manageItemBy.isNotEmpty)
+                          ? manageItemBy[0]
+                          : "loading...", // You can set the initial value here
                       onChanged: (dynamic newValue) {
-                        itemsController.Manage_Item_by.value =
-                            manageMap[newValue]!;
+                        setState(() {
+                          itemsController.Manage_Item_by.value =
+                              manageMap[newValue]!;
+                        });
                       },
+                      items: manageItemBy.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 0),
+                  //   height: 60,
+                  //   child: TextDropdownFormField(
+                  //     decoration: InputDecoration(
+                  //       // enabled: false,
+                  //       labelText: 'Management Method',
+                  //       fillColor: Colors.grey[200],
+                  //       suffixIcon: Padding(
+                  //         padding: const EdgeInsets.all(18.0),
+                  //         child: Icon(
+                  //           Icons.arrow_drop_down,
+                  //           color: Colors.black.withOpacity(0.6),
+                  //         ),
+                  //       ),
+                  //
+                  //       border: OutlineInputBorder(
+                  //           borderSide: BorderSide.none,
+                  //           borderRadius: BorderRadius.circular(9)),
+                  //       // hintText: 'Select State',
+                  //       filled: true,
+                  //       hintStyle: const TextStyle(
+                  //           fontWeight: FontWeight.bold, color: Colors.black),
+                  //       contentPadding:
+                  //           const EdgeInsets.only(left: 12, right: 12, top: 20),
+                  //       isCollapsed: true,
+                  //     ),
+                  //     options: manageMethod,
+                  //     onChanged: (dynamic newValue) {
+                  //       itemsController.Management_Method.value =
+                  //           manageMethodMap[newValue]!;
+                  //     },
+                  //   ),
+                  // ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 0),
+                    height: 60,
+                    child: DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        labelText: 'Manage Item by',
+                        fillColor: Colors.grey[200],
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
+                        contentPadding:
+                            EdgeInsets.only(left: 12, right: 12, top: 20),
+                      ),
+                      value: (manageMethodMap.isNotEmpty)
+                          ? manageMethodMap[0]
+                          : "loading...", // You can set the initial value here
+                      onChanged: (dynamic newValue) {
+                        setState(() {
+                          itemsController.Management_Method.value =
+                              manageMethodMap[newValue]!;
+                        });
+                      },
+                      items: manageMethod.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
                   const SizedBox(
                     height: 16,
                   ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 0),
+                  //   height: 60,
+                  //   child: TextDropdownFormField(
+                  //     decoration: InputDecoration(
+                  //       // enabled: false,
+                  //       labelText: 'Valuation Method',
+                  //       fillColor: Colors.grey[200],
+                  //       suffixIcon: Padding(
+                  //         padding: const EdgeInsets.all(18.0),
+                  //         child: Icon(
+                  //           Icons.arrow_drop_down,
+                  //           color: Colors.black.withOpacity(0.6),
+                  //         ),
+                  //       ),
+                  //
+                  //       border: OutlineInputBorder(
+                  //           borderSide: BorderSide.none,
+                  //           borderRadius: BorderRadius.circular(9)),
+                  //       // hintText: 'Select State',
+                  //       filled: true,
+                  //       hintStyle: const TextStyle(
+                  //           fontWeight: FontWeight.bold, color: Colors.black),
+                  //       contentPadding:
+                  //           const EdgeInsets.only(left: 12, right: 12, top: 20),
+                  //       isCollapsed: true,
+                  //     ),
+                  //     options: ValuationMethod,
+                  //     onChanged: (dynamic newValue) {
+                  //       itemsController.Valuation_Method.value =
+                  //           ValuationMap[newValue]!;
+                  //     },
+                  //   ),
+                  // ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
-                    child: TextDropdownFormField(
+                    child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        // enabled: false,
-                        labelText: 'Management Method',
+                        labelText: 'Valuation by',
                         fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
                         filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
                         contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
+                            EdgeInsets.only(left: 12, right: 12, top: 20),
                       ),
-                      options: manageMethod,
+                      value: (ValuationMethod.isNotEmpty)
+                          ? ValuationMethod[0]
+                          : "loading...", // You can set the initial value here
                       onChanged: (dynamic newValue) {
-                        itemsController.Management_Method.value =
-                            manageMethodMap[newValue]!;
+                        setState(() {
+                          itemsController.Valuation_Method.value =
+                              ValuationMap[newValue]!;
+                        });
                       },
+                      items: ValuationMethod.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 0),
-                    height: 60,
-                    child: TextDropdownFormField(
-                      decoration: InputDecoration(
-                        // enabled: false,
-                        labelText: 'Valuation Method',
-                        fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
 
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
-                        filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
-                        contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
-                      ),
-                      options: ValuationMethod,
-                      onChanged: (dynamic newValue) {
-                        itemsController.Valuation_Method.value =
-                            ValuationMap[newValue]!;
-                      },
-                    ),
-                  ),
                   const SizedBox(
                     height: 16,
                   ),
@@ -526,76 +649,141 @@ class _editRejectedItemsPageState extends State<editRejectedItemsPage> {
                   const SizedBox(
                     height: 16,
                   ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 0),
+                  //   height: 60,
+                  //   child: TextDropdownFormField(
+                  //     decoration: InputDecoration(
+                  //       // enabled: false,
+                  //       labelText: 'Procurement Method',
+                  //       fillColor: Colors.grey[200],
+                  //       suffixIcon: Padding(
+                  //         padding: const EdgeInsets.all(18.0),
+                  //         child: Icon(
+                  //           Icons.arrow_drop_down,
+                  //           color: Colors.black.withOpacity(0.6),
+                  //         ),
+                  //       ),
+                  //
+                  //       border: OutlineInputBorder(
+                  //           borderSide: BorderSide.none,
+                  //           borderRadius: BorderRadius.circular(9)),
+                  //       // hintText: 'Select State',
+                  //       filled: true,
+                  //       hintStyle: const TextStyle(
+                  //           fontWeight: FontWeight.bold, color: Colors.black),
+                  //       contentPadding:
+                  //           const EdgeInsets.only(left: 12, right: 12, top: 20),
+                  //       isCollapsed: true,
+                  //     ),
+                  //     options: procurementMethod,
+                  //     onChanged: (dynamic newValue) {
+                  //       itemsController.Procurement_Method.value =
+                  //           procurementMap[newValue]!;
+                  //     },
+                  //   ),
+                  // ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
-                    child: TextDropdownFormField(
+                    child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        // enabled: false,
                         labelText: 'Procurement Method',
                         fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
                         filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
                         contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
+                            EdgeInsets.only(left: 12, right: 12, top: 20),
                       ),
-                      options: procurementMethod,
+                      value: (procurementMethod.isNotEmpty)
+                          ? procurementMethod[0]
+                          : "loading...", // You can set the initial value here
                       onChanged: (dynamic newValue) {
-                        itemsController.Procurement_Method.value =
-                            procurementMap[newValue]!;
+                        setState(() {
+                          itemsController.Procurement_Method.value =
+                              procurementMap[newValue]!;
+                        });
                       },
+                      items: procurementMethod.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
+
                   const SizedBox(
                     height: 16,
                   ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(vertical: 0),
+                  //   height: 60,
+                  //   child: TextDropdownFormField(
+                  //     decoration: InputDecoration(
+                  //       // enabled: false,
+                  //       labelText: 'DG Type',
+                  //       fillColor: Colors.grey[200],
+                  //       suffixIcon: Padding(
+                  //         padding: const EdgeInsets.all(18.0),
+                  //         child: Icon(
+                  //           Icons.arrow_drop_down,
+                  //           color: Colors.black.withOpacity(0.6),
+                  //         ),
+                  //       ),
+                  //
+                  //       border: OutlineInputBorder(
+                  //           borderSide: BorderSide.none,
+                  //           borderRadius: BorderRadius.circular(9)),
+                  //       // hintText: 'Select State',
+                  //       filled: true,
+                  //       hintStyle: const TextStyle(
+                  //           fontWeight: FontWeight.bold, color: Colors.black),
+                  //       contentPadding:
+                  //           const EdgeInsets.only(left: 12, right: 12, top: 20),
+                  //       isCollapsed: true,
+                  //     ),
+                  //     options: dgMethod,
+                  //     onChanged: (dynamic newValue) {
+                  //       itemsController.DG_Type.value = dgMap[newValue]!;
+                  //     },
+                  //   ),
+                  // ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     height: 60,
-                    child: TextDropdownFormField(
+                    child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
-                        // enabled: false,
                         labelText: 'DG Type',
                         fillColor: Colors.grey[200],
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(9)),
-                        // hintText: 'Select State',
                         filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
                         contentPadding:
-                            const EdgeInsets.only(left: 12, right: 12, top: 20),
-                        isCollapsed: true,
+                            EdgeInsets.only(left: 12, right: 12, top: 20),
                       ),
-                      options: dgMethod,
+                      value: (dgMethod.isNotEmpty)
+                          ? dgMethod[0]
+                          : "loading...", // You can set the initial value here
                       onChanged: (dynamic newValue) {
-                        itemsController.DG_Type.value = dgMap[newValue]!;
+                        setState(() {
+                          itemsController.DG_Type.value = dgMap[newValue]!;
+                        });
                       },
+                      items: dgMethod.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
+
                   const SizedBox(
                     height: 16,
                   ),

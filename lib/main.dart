@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:io';
+
 import 'feature/splash/presentation/pages/splash.dart';
 import 'ui/colors/app_colors.dart';
 
@@ -36,4 +38,4 @@ class MyApp extends StatelessWidget {
       home: const SplashPage(),
     );
   }
-}
+} //1001  123

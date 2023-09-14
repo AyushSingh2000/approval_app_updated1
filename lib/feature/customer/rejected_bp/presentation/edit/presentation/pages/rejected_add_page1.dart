@@ -1,9 +1,7 @@
-import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:new_app/feature/customer/createCustomer/controller/customer_controller.dart';
 import 'package:new_app/feature/customer/rejected_bp/controller/rejected_bp_controller.dart';
 // import 'package:new_app/feature/customer/presentation/pages/rejected_add_page2.dart';
 import 'package:new_app/ui/Buttons/buttonBS.dart';
@@ -17,7 +15,8 @@ class EditRejectedCustomerPage extends StatefulWidget {
   EditRejectedCustomerPage({super.key});
 
   @override
-  State<EditRejectedCustomerPage> createState() => _EditRejectedCustomerPageState();
+  State<EditRejectedCustomerPage> createState() =>
+      _EditRejectedCustomerPageState();
 }
 
 class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
@@ -46,47 +45,50 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
 
   @override
   void initState() {
-    if(rc.GetBPDetailsList[0].CardName != null){
+    if (rc.GetBPDetailsList[0].CardName != null) {
       nameController.text = rc.GetBPDetailsList[0].CardName!;
     }
 
-
-    if(rc.GetBPDetailsList[0].Phone1 != null){
+    if (rc.GetBPDetailsList[0].Phone1 != null) {
       telephoneController.text = rc.GetBPDetailsList[0].Phone1!;
     }
-    if(rc.GetBPDetailsList[0].Phone2 != null){
+    if (rc.GetBPDetailsList[0].Phone2 != null) {
       numberController.text = rc.GetBPDetailsList[0].Phone2!;
     }
-    if(rc.GetBPDetailsList[0].E_Mail != null){
+    if (rc.GetBPDetailsList[0].E_Mail != null) {
       emailController.text = rc.GetBPDetailsList[0].E_Mail!;
     }
-    if(rc.GetBPDetailsList[0].IntrntSite != null){
+    if (rc.GetBPDetailsList[0].IntrntSite != null) {
       websiteController.text = rc.GetBPDetailsList[0].IntrntSite!;
     }
-    if(rc.GetBPDetailsList[0].IntrntSite != null){
+    if (rc.GetBPDetailsList[0].IntrntSite != null) {
       websiteController.text = rc.GetBPDetailsList[0].IntrntSite!;
     }
 
-    if(rc.GetBPDetailsList[0].GroupCode!=null){
+    if (rc.GetBPDetailsList[0].GroupCode != null) {
       print(customerController.BPGroupCodeList.value);
       customerController.BPGroupCodeMapData.value.forEach((key, value) {
-        if(value==rc.GetBPDetailsList[0].GroupCode){
+        if (value == rc.GetBPDetailsList[0].GroupCode) {
           customerController.Group.value = key;
           customerController.Group.refresh();
         }
       });
     }
 
-    if(rc.GetBPDetailsList[0].Currency != null){
+    if (rc.GetBPDetailsList[0].Currency != null) {
       customerController.Currencies.value = rc.GetBPDetailsList[0].Currency!;
     }
 
     print(rc.GetBPDetailsList[0].SalEmpNam);
     print(customerController.BPSaleEmployeesList.value);
-    if(rc.GetBPDetailsList[0].SalEmpNam != null){
-      customerController.SaleEmployees.value = rc.GetBPDetailsList[0].SalEmpNam!;
-      if(customerController.BPSaleEmployeesList.value.contains(rc.GetBPDetailsList[0].SalEmpNam!)==false){
-        customerController.BPSaleEmployeesList.value.add(rc.GetBPDetailsList[0].SalEmpNam!);
+    if (rc.GetBPDetailsList[0].SalEmpNam != null) {
+      customerController.SaleEmployees.value =
+          rc.GetBPDetailsList[0].SalEmpNam!;
+      if (customerController.BPSaleEmployeesList.value
+              .contains(rc.GetBPDetailsList[0].SalEmpNam!) ==
+          false) {
+        customerController.BPSaleEmployeesList.value
+            .add(rc.GetBPDetailsList[0].SalEmpNam!);
       }
     }
 
@@ -183,22 +185,24 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(9),
                       ),
-                      contentPadding: EdgeInsets.only(left: 12, right: 12, top: 20),
+                      contentPadding:
+                          EdgeInsets.only(left: 12, right: 12, top: 20),
                     ),
-                    value: customerController.Group.value, // You can set the initial value here
+                    value: customerController
+                        .Group.value, // You can set the initial value here
                     onChanged: (newValue) {
                       setState(() {
                         customerController.Group.value = newValue!;
                       });
                     },
-                    items: customerController.BPGroupCodeList.map((String value) {
+                    items:
+                        customerController.BPGroupCodeList.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
                       );
                     }).toList(),
                   ),
-
                 ), //group
 
                 const SizedBox(height: 16.0),
@@ -214,15 +218,18 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(9),
                       ),
-                      contentPadding: EdgeInsets.only(left: 12, right: 12, top: 20),
+                      contentPadding:
+                          EdgeInsets.only(left: 12, right: 12, top: 20),
                     ),
-                    value: customerController.Currencies.value, // You can set the initial value here
+                    value: customerController
+                        .Currencies.value, // You can set the initial value here
                     onChanged: (newValue) {
                       setState(() {
                         customerController.Currencies.value = newValue!;
                       });
                     },
-                    items: customerController.BPCurrenciesList.map((String value) {
+                    items:
+                        customerController.BPCurrenciesList.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -277,7 +284,6 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                 //   ),
                 // ),
 
-
                 // const SizedBox(height: 16.0),
                 //
                 // CustomTextField(
@@ -299,22 +305,24 @@ class _EditRejectedCustomerPageState extends State<EditRejectedCustomerPage> {
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(9),
                       ),
-                      contentPadding: EdgeInsets.only(left: 12, right: 12, top: 20),
+                      contentPadding:
+                          EdgeInsets.only(left: 12, right: 12, top: 20),
                     ),
-                    value: customerController.SaleEmployees.value, // You can set the initial value here
+                    value: customerController.SaleEmployees
+                        .value, // You can set the initial value here
                     onChanged: (newValue) {
                       setState(() {
                         customerController.SaleEmployees.value = newValue!;
                       });
                     },
-                    items: customerController.BPSaleEmployeesList.map((String value) {
+                    items: customerController.BPSaleEmployeesList.map(
+                        (String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
                       );
                     }).toList(),
                   ),
-
                 ),
                 const SizedBox(height: 16.0),
 
